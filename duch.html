@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>Duch na błoniach</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  html, body { margin:0; height:100%; background:#111; }
+  body { display:flex; align-items:center; justify-content:center;
+    font-family:"Comic Sans MS","Chalkboard SE",sans-serif; }
+  #wrap { position:relative; width:min(100vw, calc(100vh * 16 / 9)); aspect-ratio:16 / 9; }
+  #stage { width:100%; height:100%; display:block; background:#9fd3ff; }
+  .overlay { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center;
+    justify-content:center; gap:24px; text-align:center; color:#fff; background:rgba(0,0,0,.72); }
+  .overlay h1 { margin:0; font-size:clamp(40px,8vw,120px); color:#ffd23f; letter-spacing:2px;
+    -webkit-text-stroke:3px #000; text-shadow:6px 6px 0 #000; transform:rotate(-3deg); }
+  .overlay p { margin:0; font-size:clamp(16px,2vw,28px); }
+  .btn { font:inherit; font-weight:bold; font-size:clamp(20px,2.6vw,36px); padding:.4em 1.2em;
+    color:#000; background:#ffd23f; border:4px solid #000; border-radius:14px;
+    box-shadow:5px 5px 0 #000; cursor:pointer; }
+  .btn:focus-visible { outline:4px solid #fff; outline-offset:4px; }
+  [hidden] { display:none !important; }
+</style>
+</head>
+<body>
+<div id="wrap">
+<svg id="stage" viewBox="0 0 1600 900" aria-label="Bajka: Duch na błoniach">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7cc4ff"/><stop offset="1" stop-color="#dff3ff"/>
+    </linearGradient>
+    <linearGradient id="dusk" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a1230"/><stop offset="0.55" stop-color="#26305e"/><stop offset="1" stop-color="#7a4f6e"/>
+    </linearGradient>
+    <pattern id="milan" width="26" height="10" patternUnits="userSpaceOnUse">
+      <rect width="13" height="10" fill="#c8102e"/><rect x="13" width="13" height="10" fill="#141414"/>
+    </pattern>
+    <pattern id="juve" width="26" height="10" patternUnits="userSpaceOnUse">
+      <rect width="13" height="10" fill="#f4f4f2"/><rect x="13" width="13" height="10" fill="#141414"/>
+    </pattern>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <g id="world">
+    <!-- ================= BLONIA STADIONU, POZNY WIECZOR ================= -->
+    <g id="scNight">
+      <rect width="1600" height="900" fill="url(#dusk)"/>
+      <g fill="#f4f1d0" stroke="none">
+        <circle cx="120" cy="60" r="2"/><circle cx="300" cy="110" r="2.5"/><circle cx="520" cy="50" r="2"/><circle cx="700" cy="130" r="1.8"/>
+        <circle cx="880" cy="70" r="2.4"/><circle cx="1040" cy="40" r="2"/><circle cx="1180" cy="120" r="2"/><circle cx="1330" cy="60" r="2.2"/>
+        <circle cx="620" cy="200" r="1.6"/><circle cx="960" cy="190" r="1.6"/><circle cx="200" cy="210" r="1.8"/>
+        <path d="M1480 70 a52 52 0 1 0 40 92 a44 44 0 1 1 -40 -92 z"/>
+      </g>
+      <!-- blonia i horyzont -->
+      <rect y="520" width="1600" height="380" fill="#1f3a26"/>
+      <line x1="0" y1="520" x2="1600" y2="520" stroke="#0c160f" stroke-width="4"/>
+      <!-- kosciol po lewej -->
+      <g stroke="#141414" stroke-width="4" stroke-linejoin="round">
+        <rect x="120" y="400" width="230" height="130" fill="#b9b3c9"/>
+        <path d="M110 402 L235 330 L360 402 Z" fill="#4a4f66"/>
+        <rect x="60" y="300" width="80" height="230" fill="#c9c3d6"/>
+        <path d="M52 302 L100 190 L148 302 Z" fill="#3c4058"/>
+        <path d="M100 190 V150 M84 166 H116" stroke-width="5"/>
+        <rect x="86" y="330" width="28" height="40" rx="14" fill="#e8c86a"/>
+        <rect x="160" y="430" width="30" height="52" rx="15" fill="#e8c86a"/><rect x="220" y="430" width="30" height="52" rx="15" fill="#e8c86a"/>
+        <rect x="280" y="430" width="30" height="52" rx="15" fill="#e8c86a"/>
+        <rect x="84" y="460" width="32" height="70" rx="16" fill="#3a2a1a"/>
+      </g>
+      <!-- boisko pilkarskie na srodku -->
+      <g stroke="#e8e8e0" stroke-width="3" fill="none">
+        <polygon points="470,560 1130,560 1200,660 400,660" fill="#2d5a31" stroke="#141414" stroke-width="4"/>
+        <polygon points="490,568 1110,568 1172,652 428,652"/>
+        <line x1="800" y1="568" x2="800" y2="652"/>
+        <ellipse cx="800" cy="610" rx="60" ry="18"/>
+        <polygon points="455,590 520,590 530,630 440,630"/><polygon points="1080,590 1145,590 1160,630 1070,630"/>
+      </g>
+      <g stroke="#f4f4f2" stroke-width="5" fill="none" stroke-linejoin="round">
+        <path d="M436 632 V596 H452 V632"/><path d="M1162 632 V596 H1146 V632"/>
+      </g>
+      <!-- cmentarz po prawej -->
+      <g stroke="#141414" stroke-width="3" stroke-linejoin="round">
+        <path d="M1260 530 V470 M1290 530 V470 M1320 530 V470 M1350 530 V470 M1380 530 V470 M1410 530 V470 M1440 530 V470 M1470 530 V470 M1500 530 V470 M1530 530 V470 M1560 530 V470 M1590 530 V470 M1250 480 H1600" stroke="#6b6f7a" stroke-width="5"/>
+        <g fill="#0f1a12"><path d="M1300 470 Q1310 360 1320 470 Z"/><path d="M1540 470 Q1552 340 1564 470 Z"/></g>
+        <g fill="#8a8e9a">
+          <path d="M1340 530 V486 Q1355 470 1370 486 V530 Z"/><path d="M1420 530 V480 Q1440 462 1460 480 V530 Z"/><path d="M1500 530 V490 Q1512 478 1524 490 V530 Z"/>
+          <path d="M1392 530 V470 M1382 482 H1402" stroke="#8a8e9a" stroke-width="6"/>
+          <path d="M1480 530 V476 M1470 488 H1490" stroke="#8a8e9a" stroke-width="6"/>
+          <path d="M1570 530 V474 M1560 486 H1580" stroke="#8a8e9a" stroke-width="6"/>
+        </g>
+        <g id="znicze" stroke="none">
+          <circle cx="1352" cy="524" r="5" fill="#ff3b30"/><circle cx="1366" cy="524" r="5" fill="#ffb13b"/>
+          <circle cx="1434" cy="524" r="5" fill="#ff3b30"/><circle cx="1448" cy="524" r="5" fill="#ff3b30"/>
+          <circle cx="1510" cy="524" r="5" fill="#ffb13b"/><circle cx="1396" cy="526" r="5" fill="#ff3b30"/>
+          <circle cx="1576" cy="526" r="5" fill="#ffb13b"/>
+        </g>
+      </g>
+      <!-- sciezka przez blonia -->
+      <rect y="760" width="1600" height="70" fill="#4b4237"/>
+      <g fill="#2c4f33" stroke="#0c160f" stroke-width="3">
+        <path d="M80 740 q20-26 40 0 z"/><path d="M620 720 q16-22 32 0 z"/><path d="M1300 735 q20-24 40 0 z"/>
+        <path d="M300 880 q24-28 48 0 z"/><path d="M1000 870 q24-28 48 0 z"/>
+      </g>
+      <!-- DUCH -->
+      <g id="ghost" style="display:none; transform:translate(1400px,480px)">
+        <g id="ghostBob" filter="url(#glow)">
+          <path d="M-46 30 Q-50 -60 0 -64 Q50 -60 46 30 Q36 20 28 36 Q18 22 8 38 Q-2 22 -12 38 Q-22 22 -32 36 Q-40 20 -46 30 Z"
+            fill="#f4f8ff" stroke="#c9d6f2" stroke-width="3"/>
+          <path d="M-44 -6 Q-80 -20 -92 -2 M44 -6 Q80 -20 92 -2" fill="none" stroke="#f4f8ff" stroke-width="12" stroke-linecap="round"/>
+          <ellipse cx="-16" cy="-24" rx="8" ry="12" fill="#1a1f33"/><ellipse cx="16" cy="-24" rx="8" ry="12" fill="#1a1f33"/>
+          <ellipse cx="0" cy="4" rx="9" ry="12" fill="#1a1f33"/>
+        </g>
+      </g>
+      <g id="bikeFx"></g>
+    </g>
+
+    <!-- ================= SCENA 4: SKLEP "ALMA ZAMBSKI" (styl PRL/PGR) ================= -->
+    <g id="scShop" style="display:none">
+      <rect width="1600" height="900" fill="url(#sky)"/>
+      <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
+        <path d="M1480 70 a52 52 0 1 0 40 92 a44 44 0 1 1 -40 -92 z" fill="#f4f1d0"/>
+        <path d="M980 140 q8-42 58-36 q22-38 70-10 q44-8 46 32 q34 6 18 38 h-178 q-34-6-14-24z" fill="#fff"/>
+      </g>
+      <g stroke="#141414" stroke-width="5" fill="#3f6b33">
+        <circle cx="1250" cy="520" r="60"/><circle cx="1330" cy="500" r="72"/><circle cx="1420" cy="525" r="55"/>
+      </g>
+      <rect y="610" width="1600" height="290" fill="#8a7a5c"/>
+      <rect x="140" y="632" width="1040" height="26" fill="#a7a39a" stroke="#141414" stroke-width="4"/>
+      <path d="M240 632 V658 M400 632 V658 M560 632 V658 M720 632 V658 M880 632 V658 M1040 632 V658" stroke="#141414" stroke-width="3"/>
+      <line x1="0" y1="610" x2="1600" y2="610" stroke="#141414" stroke-width="5"/>
+      <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
+        <!-- budynek: plaski dach, odpadajacy tynk -->
+        <rect x="190" y="360" width="930" height="275" fill="#cfc6a8"/>
+        <rect x="170" y="340" width="970" height="28" fill="#8b8f96"/>
+        <g fill="#b3a98a" stroke="#8f8468" stroke-width="3">
+          <path d="M230 560 l40 -8 l18 22 l-30 14 z"/><path d="M1040 400 l50 6 l-6 30 l-40 -4 z"/><path d="M720 610 l40 -6 l10 20 l-44 4 z"/>
+        </g>
+        <path d="M1000 470 l14 30 l-10 24 M260 400 l-8 26 l12 20" fill="none" stroke="#8f8468" stroke-width="3"/>
+        <!-- szyld -->
+        <rect x="300" y="382" width="700" height="72" fill="#f4f1e6" stroke-width="6"/>
+        <text x="650" y="438" text-anchor="middle" font-family="'Arial Black', Impact, sans-serif" font-size="50" font-weight="900"
+          fill="#c81e1e" stroke="none" letter-spacing="3">ALMA ZAMBSKI</text>
+        <rect x="1010" y="392" width="70" height="52" fill="#1f5fae"/>
+        <text x="1045" y="430" text-anchor="middle" font-family="'Arial Black', sans-serif" font-size="30" fill="#fff" stroke="none">GS</text>
+        <!-- witryna z towarem -->
+        <rect x="240" y="474" width="480" height="140" fill="#2d3f55"/>
+        <g stroke-width="3">
+          <rect x="262" y="540" width="40" height="60" fill="#c9a24a"/><rect x="310" y="540" width="40" height="60" fill="#c9a24a"/>
+          <rect x="358" y="540" width="40" height="60" fill="#c9a24a"/>
+          <path d="M420 600 v-50 q0-12 10-16 v-14 h12 v14 q10 4 10 16 v50 z" fill="#3b6b2a"/>
+          <path d="M462 600 v-50 q0-12 10-16 v-14 h12 v14 q10 4 10 16 v50 z" fill="#3b6b2a"/>
+          <path d="M504 600 v-50 q0-12 10-16 v-14 h12 v14 q10 4 10 16 v50 z" fill="#3b6b2a"/>
+          <rect x="560" y="500" width="130" height="100" fill="#e8dcb8"/>
+        </g>
+        <text x="625" y="542" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#c81e1e" stroke="none">PIWO</text>
+        <text x="625" y="572" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#141414" stroke="none">OCET · CHLEB</text>
+        <path d="M240 520 H720 M480 474 V614" stroke-width="4"/>
+        <!-- drzwi z kratami -->
+        <rect x="860" y="474" width="130" height="161" fill="#6e5a3a"/>
+        <rect x="878" y="490" width="94" height="80" fill="#2d3f55"/>
+        <path d="M896 490 V570 M914 490 V570 M932 490 V570 M950 490 V570" stroke-width="3"/>
+        <rect x="890" y="580" width="70" height="26" fill="#fff" stroke-width="3"/>
+        <text x="925" y="599" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#1f7a2e" stroke="none">OTWARTE</text>
+        <circle cx="976" cy="560" r="6" fill="#d4a93a"/>
+        <!-- skrzynki po piwie i laweczka -->
+        <g fill="#c8a24a">
+          <rect x="1030" y="560" width="80" height="40"/><rect x="1030" y="600" width="80" height="40"/><rect x="1040" y="520" width="80" height="40"/>
+        </g>
+        <g fill="#3b6b2a" stroke-width="2">
+          <rect x="1048" y="508" width="10" height="16"/><rect x="1066" y="508" width="10" height="16"/><rect x="1084" y="508" width="10" height="16"/><rect x="1102" y="508" width="10" height="16"/>
+        </g>
+        <rect x="70" y="580" width="110" height="14" fill="#8a5a32"/>
+        <path d="M82 594 V640 M168 594 V640" stroke-width="8"/>
+      </g>
+      <rect width="1600" height="900" fill="#0a1230" opacity="0.62"/>
+      <rect x="240" y="474" width="480" height="140" fill="#ffd966" opacity="0.35"/>
+      <rect x="878" y="490" width="94" height="80" fill="#ffd966" opacity="0.3"/>
+      <g stroke="#141414" stroke-width="5">
+        <line x1="1040" y1="820" x2="1040" y2="330" stroke-width="12"/>
+        <path d="M1040 336 Q1040 300 1090 300 H1110" fill="none" stroke-width="8"/>
+        <path d="M1090 300 h44 l-10 22 h-24 z" fill="#3b3f45"/>
+      </g>
+      <circle cx="1112" cy="326" r="10" fill="#fff6c8"/>
+      <polygon points="1112,330 900,830 1330,830" fill="#ffd966" opacity="0.2"/>
+    </g>
+
+
+    <!-- ================= AKTORZY ================= -->
+    <!-- SKLADAK (przod w prawo), dol kol w 0,0 -->
+    <g id="bike" style="display:none; transform:translate(1900px,812px)">
+      <g transform="scale(-1,1)" stroke="#141414" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <g class="bw2" style="transform-origin:-80px -42px"><circle cx="-80" cy="-42" r="42" fill="none" stroke-width="10"/>
+          <path d="M-80 -80 V-4 M-118 -42 H-42 M-107 -69 L-53 -15 M-53 -69 L-107 -15" stroke="#9aa3ad" stroke-width="2"/></g>
+        <g class="bw2" style="transform-origin:80px -42px"><circle cx="80" cy="-42" r="42" fill="none" stroke-width="10"/>
+          <path d="M80 -80 V-4 M42 -42 H118 M53 -69 L107 -15 M107 -69 L53 -15" stroke="#9aa3ad" stroke-width="2"/></g>
+        <path d="M-80 -42 L0 -40 L-22 -112 M0 -40 L58 -118 L80 -42" fill="none" stroke-width="12"/>
+        <path d="M-80 -42 L0 -40 L-22 -112 M0 -40 L58 -118 L80 -42" fill="none" stroke="#c0392b" stroke-width="7"/>
+        <path d="M-24 -110 L-112 -104 M-100 -104 L-80 -42 M-60 -106 L-80 -42" fill="none" stroke="#9aa3ad" stroke-width="6"/>
+        <path d="M58 -118 L52 -170 M34 -172 H70" fill="none" stroke="#9aa3ad" stroke-width="7"/>
+        <circle cx="10" cy="-78" r="9" fill="#c0392b" stroke-width="3"/>
+        <g id="crank" style="transform-origin:0px -40px">
+          <circle cx="0" cy="-40" r="12" fill="#9aa3ad"/>
+          <path d="M0 -68 V-12" stroke-width="6"/><path d="M-12 -68 H12 M-12 -12 H12" stroke-width="7"/>
+        </g>
+      </g>
+      <text x="-56" y="-60" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#f4f4f2">WIGRY</text>
+      <!-- pasazer na bagazniku (odchyla sie do tylu) -->
+      <g id="rideS2" style="transform-origin:80px -108px"><g class="bob" style="transform-origin:80px -108px">
+        <g transform="translate(80,-108) scale(0.72)"><g stroke="#141414" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+        <rect x="-34" y="-20" width="30" height="20" rx="8" fill="#f4f4f2"/><rect x="4" y="-20" width="30" height="20" rx="8" fill="#f4f4f2"/>
+        <rect x="-30" y="-64" width="22" height="46" fill="#f4f4f2"/><rect x="8" y="-64" width="22" height="46" fill="#f4f4f2"/>
+        <rect x="-30" y="-122" width="22" height="60" fill="#e8b08a"/><rect x="8" y="-122" width="22" height="60" fill="#e8b08a"/>
+        <path d="M-50 -168 H50 L54 -112 H4 L0 -126 L-4 -112 H-54 Z" fill="#1c1c1c"/>
+        <path d="M-72 -252 Q-84 -210 -72 -176" fill="none" stroke-width="26"/><path d="M-72 -252 Q-84 -210 -72 -176" fill="none" stroke="#e8b08a" stroke-width="17"/>
+        <path d="M72 -252 Q84 -210 72 -176" fill="none" stroke-width="26"/><path d="M72 -252 Q84 -210 72 -176" fill="none" stroke="#e8b08a" stroke-width="17"/>
+        <circle cx="-72" cy="-170" r="11" fill="#e8b08a"/><circle cx="72" cy="-170" r="11" fill="#e8b08a"/>
+        <path d="M-50 -292 Q-80 -286 -86 -246 L-64 -236 L-54 -258 L-52 -164 H52 L54 -258 L64 -236 L86 -246 Q80 -286 50 -292 Q0 -300 -50 -292 Z" fill="url(#juve)"/>
+        <rect x="-12" y="-300" width="24" height="16" fill="#e8b08a"/>
+        <image href="glowa2.png" x="-66.5" y="-410" width="133" height="140"/>
+        <path d="M-24 -290 Q0 -276 24 -290" fill="none" stroke-width="5"/>
+        <g fill="#d9b24a" stroke="#141414" stroke-width="3"><circle cx="-54" cy="-384" r="28"/><circle cx="-26" cy="-404" r="30"/><circle cx="8" cy="-410" r="32"/><circle cx="40" cy="-396" r="30"/><circle cx="-66" cy="-356" r="18"/><circle cx="60" cy="-366" r="18"/><circle cx="-8" cy="-418" r="22"/></g>
+      </g></g>
+      </g></g>
+      <!-- kierowca skladaka -->
+      <g id="rideS1"><g class="bob" style="transform-origin:0px -40px">
+        <g transform="translate(-5,-26) scale(0.72)"><g stroke="#141414" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+        <rect x="-34" y="-20" width="30" height="20" rx="8" fill="#f4f4f2"/><rect x="4" y="-20" width="30" height="20" rx="8" fill="#f4f4f2"/>
+        <rect x="-30" y="-64" width="22" height="46" fill="#f4f4f2"/><rect x="8" y="-64" width="22" height="46" fill="#f4f4f2"/>
+        <rect x="-30" y="-122" width="22" height="60" fill="#e8b08a"/><rect x="8" y="-122" width="22" height="60" fill="#e8b08a"/>
+        <path d="M-50 -168 H50 L54 -112 H4 L0 -126 L-4 -112 H-54 Z" fill="#f4f4f2"/>
+        <path d="M-72 -252 Q-84 -210 -72 -176" fill="none" stroke-width="26"/><path d="M-72 -252 Q-84 -210 -72 -176" fill="none" stroke="#e8b08a" stroke-width="17"/>
+        <path d="M72 -252 Q84 -210 72 -176" fill="none" stroke-width="26"/><path d="M72 -252 Q84 -210 72 -176" fill="none" stroke="#e8b08a" stroke-width="17"/>
+        <circle cx="-72" cy="-170" r="11" fill="#e8b08a"/><circle cx="72" cy="-170" r="11" fill="#e8b08a"/>
+        <path d="M-50 -292 Q-80 -286 -86 -246 L-64 -236 L-54 -258 L-52 -164 H52 L54 -258 L64 -236 L86 -246 Q80 -286 50 -292 Q0 -300 -50 -292 Z" fill="url(#milan)"/>
+        <rect x="-12" y="-300" width="24" height="16" fill="#e8b08a"/>
+        <image href="glowa1.png" x="-65.0" y="-430" width="130" height="160"/>
+        <path d="M-24 -290 Q0 -276 24 -290" fill="none" stroke-width="5"/>
+        <g fill="#5a3a22" stroke="#141414" stroke-width="3"><circle cx="-52" cy="-400" r="30"/><circle cx="-24" cy="-422" r="34"/><circle cx="14" cy="-426" r="36"/><circle cx="48" cy="-408" r="32"/><circle cx="-66" cy="-368" r="20"/><circle cx="66" cy="-370" r="20"/><circle cx="-4" cy="-436" r="26"/><circle cx="34" cy="-432" r="22"/></g>
+      </g></g>
+      </g></g>
+    </g>
+
+    <!-- SAPERZY (obrazki, stopy w 0,0) -->
+    <g id="s2" style="display:none"><g class="bob" style="transform-origin:0px 0px">
+      <g stroke="#141414" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+        <rect x="-34" y="-20" width="30" height="20" rx="8" fill="#f4f4f2"/><rect x="4" y="-20" width="30" height="20" rx="8" fill="#f4f4f2"/>
+        <rect x="-30" y="-64" width="22" height="46" fill="#f4f4f2"/><rect x="8" y="-64" width="22" height="46" fill="#f4f4f2"/>
+        <rect x="-30" y="-122" width="22" height="60" fill="#e8b08a"/><rect x="8" y="-122" width="22" height="60" fill="#e8b08a"/>
+        <path d="M-50 -168 H50 L54 -112 H4 L0 -126 L-4 -112 H-54 Z" fill="#1c1c1c"/>
+        <path d="M-72 -252 Q-84 -210 -72 -176" fill="none" stroke-width="26"/><path d="M-72 -252 Q-84 -210 -72 -176" fill="none" stroke="#e8b08a" stroke-width="17"/>
+        <path d="M72 -252 Q84 -210 72 -176" fill="none" stroke-width="26"/><path d="M72 -252 Q84 -210 72 -176" fill="none" stroke="#e8b08a" stroke-width="17"/>
+        <circle cx="-72" cy="-170" r="11" fill="#e8b08a"/><circle cx="72" cy="-170" r="11" fill="#e8b08a"/>
+        <path d="M-50 -292 Q-80 -286 -86 -246 L-64 -236 L-54 -258 L-52 -164 H52 L54 -258 L64 -236 L86 -246 Q80 -286 50 -292 Q0 -300 -50 -292 Z" fill="url(#juve)"/>
+        <rect x="-12" y="-300" width="24" height="16" fill="#e8b08a"/>
+        <image href="glowa2.png" x="-66.5" y="-410" width="133" height="140"/>
+        <path d="M-24 -290 Q0 -276 24 -290" fill="none" stroke-width="5"/>
+        <g fill="#d9b24a" stroke="#141414" stroke-width="3"><circle cx="-54" cy="-384" r="28"/><circle cx="-26" cy="-404" r="30"/><circle cx="8" cy="-410" r="32"/><circle cx="40" cy="-396" r="30"/><circle cx="-66" cy="-356" r="18"/><circle cx="60" cy="-366" r="18"/><circle cx="-8" cy="-418" r="22"/></g>
+      </g>
+      <g class="can" style="display:none; transform-origin:55px -111px"><image href="tatra.png" x="40" y="-150" width="30" height="79"/></g>
+      <g class="cig" style="display:none" stroke-linecap="round">
+        <line x1="-18" y1="-292" x2="16" y2="-285" stroke="#141414" stroke-width="9"/>
+        <line x1="-18" y1="-292" x2="16" y2="-285" stroke="#f4f4f2" stroke-width="5"/>
+        <circle cx="16" cy="-285" r="4" fill="#ff5a1f"/>
+      </g>
+    </g></g>
+    <g id="s1" style="display:none"><g class="bob" style="transform-origin:0px 0px">
+      <g stroke="#141414" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+        <rect x="-34" y="-20" width="30" height="20" rx="8" fill="#f4f4f2"/><rect x="4" y="-20" width="30" height="20" rx="8" fill="#f4f4f2"/>
+        <rect x="-30" y="-64" width="22" height="46" fill="#f4f4f2"/><rect x="8" y="-64" width="22" height="46" fill="#f4f4f2"/>
+        <rect x="-30" y="-122" width="22" height="60" fill="#e8b08a"/><rect x="8" y="-122" width="22" height="60" fill="#e8b08a"/>
+        <path d="M-50 -168 H50 L54 -112 H4 L0 -126 L-4 -112 H-54 Z" fill="#f4f4f2"/>
+        <path d="M-72 -252 Q-84 -210 -72 -176" fill="none" stroke-width="26"/><path d="M-72 -252 Q-84 -210 -72 -176" fill="none" stroke="#e8b08a" stroke-width="17"/>
+        <path d="M72 -252 Q84 -210 72 -176" fill="none" stroke-width="26"/><path d="M72 -252 Q84 -210 72 -176" fill="none" stroke="#e8b08a" stroke-width="17"/>
+        <circle cx="-72" cy="-170" r="11" fill="#e8b08a"/><circle cx="72" cy="-170" r="11" fill="#e8b08a"/>
+        <path d="M-50 -292 Q-80 -286 -86 -246 L-64 -236 L-54 -258 L-52 -164 H52 L54 -258 L64 -236 L86 -246 Q80 -286 50 -292 Q0 -300 -50 -292 Z" fill="url(#milan)"/>
+        <rect x="-12" y="-300" width="24" height="16" fill="#e8b08a"/>
+        <image href="glowa1.png" x="-65.0" y="-430" width="130" height="160"/>
+        <path d="M-24 -290 Q0 -276 24 -290" fill="none" stroke-width="5"/>
+        <g fill="#5a3a22" stroke="#141414" stroke-width="3"><circle cx="-52" cy="-400" r="30"/><circle cx="-24" cy="-422" r="34"/><circle cx="14" cy="-426" r="36"/><circle cx="48" cy="-408" r="32"/><circle cx="-66" cy="-368" r="20"/><circle cx="66" cy="-370" r="20"/><circle cx="-4" cy="-436" r="26"/><circle cx="34" cy="-432" r="22"/></g>
+      </g>
+      <g class="can" style="display:none; transform-origin:-77px -65px"><image href="tatra.png" x="-92" y="-104" width="30" height="79"/></g>
+      <g class="cig" style="display:none" stroke-linecap="round">
+        <line x1="0" y1="-260" x2="32" y2="-252" stroke="#141414" stroke-width="9"/>
+        <line x1="0" y1="-260" x2="32" y2="-252" stroke="#f4f4f2" stroke-width="5"/>
+        <circle cx="32" cy="-252" r="4" fill="#ff5a1f"/>
+      </g>
+    </g></g>
+
+    <g id="fx"></g>
+    <g id="bubbles"></g>
+  </g>
+  <!-- plansza tytulowa -->
+  <g id="titleCard" style="display:none">
+    <rect width="1600" height="900" fill="#000"/>
+    <text id="titleTxt" x="800" y="470" text-anchor="middle" font-family="'Courier New', monospace" font-size="54" font-weight="700" fill="#f4f1d0"></text>
+  </g>
+  <rect id="flash" width="1600" height="900" fill="#fff" opacity="0" pointer-events="none"/>
+  <rect id="fade" width="1600" height="900" fill="#000" opacity="0" pointer-events="none"/>
+</svg>
+
+<div class="overlay" id="startScreen">
+  <h1>DUCH NA BŁONIACH</h1>
+  <p>odcinek 4</p>
+  <button class="btn" id="playBtn" autofocus>▶ Odtwórz</button>
+</div>
+<div class="overlay" id="endScreen" hidden>
+  <h1>KONIEC</h1>
+  <button class="btn" id="againBtn">↺ Od nowa</button>
+</div>
+</div>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const NS = "http://www.w3.org/2000/svg";
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+  // ---------- dzwiek (generowany, bez plikow) ----------
+  let actx = null;
+  function ac(){
+    if (!actx) actx = new (window.AudioContext || window.webkitAudioContext)();
+    if (actx.state === "suspended") actx.resume();
+    return actx;
+  }
+  function tone(freq, dur, type = "square", vol = 0.05, glideTo){
+    const a = ac(), t = a.currentTime, o = a.createOscillator(), g = a.createGain();
+    o.type = type; o.frequency.setValueAtTime(freq, t);
+    if (glideTo) o.frequency.exponentialRampToValueAtTime(glideTo, t + dur);
+    g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(a.destination); o.start(t); o.stop(t + dur + 0.02);
+  }
+  function noise(dur, { freq = 1000, q = 1, vol = 0.3, type = "bandpass", sweepTo } = {}){
+    const a = ac(), t = a.currentTime, len = Math.floor(a.sampleRate * dur);
+    const buf = a.createBuffer(1, len, a.sampleRate), d = buf.getChannelData(0);
+    for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+    const s = a.createBufferSource(); s.buffer = buf;
+    const f = a.createBiquadFilter(); f.type = type; f.Q.value = q; f.frequency.setValueAtTime(freq, t);
+    if (sweepTo) f.frequency.exponentialRampToValueAtTime(sweepTo, t + dur);
+    const g = a.createGain(); g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    s.connect(f); f.connect(g); g.connect(a.destination); s.start(t); s.stop(t + dur);
+  }
+  function engine(){
+    const a = ac(), o = a.createOscillator(), f = a.createBiquadFilter(), g = a.createGain();
+    o.type = "sawtooth"; o.frequency.value = 45; f.type = "lowpass"; f.frequency.value = 380; g.gain.value = 0.0001;
+    o.connect(f); f.connect(g); g.connect(a.destination); o.start();
+    return {
+      set(freq, vol, ramp = 0.3){ const t = a.currentTime; o.frequency.linearRampToValueAtTime(freq, t + ramp); g.gain.linearRampToValueAtTime(vol, t + ramp); },
+      stop(ramp = 0.4){ const t = a.currentTime; g.gain.linearRampToValueAtTime(0.0001, t + ramp); o.stop(t + ramp + 0.05); }
+    };
+  }
+  const sfx = {
+    beep(){ tone(1750, 0.07, "square", 0.04); },
+    dig(){ noise(0.18, { freq: 500, type: "lowpass", vol: 0.45 }); noise(0.1, { freq: 3000, q: 3, vol: 0.08 }); },
+    thud(){ tone(110, 0.3, "sine", 0.5, 40); noise(0.2, { freq: 300, type: "lowpass", vol: 0.35 }); },
+    clank(){ tone(620 + Math.random() * 200, 0.25, "triangle", 0.08, 480); noise(0.08, { freq: 4000, q: 2, vol: 0.12 }); },
+    door(){ noise(0.12, { freq: 600, type: "lowpass", vol: 0.4 }); tone(95, 0.12, "square", 0.08, 60); },
+    brake(){ noise(0.5, { freq: 1400, q: 1.5, vol: 0.14 }); },
+    screech(){ noise(1.6, { freq: 2700, q: 9, vol: 0.4, sweepTo: 1700 }); tone(1900, 1.5, "sawtooth", 0.025, 1250); },
+    spit(){ noise(0.16, { freq: 2500, q: 1.2, vol: 0.35, sweepTo: 900 }); },
+    ding(){ tone(1320, 0.5, "sine", 0.1); },
+    dial(){ tone(425, 0.9, "sine", 0.08); },
+    boom(){
+      noise(2.6, { freq: 900, type: "lowpass", vol: 0.9, sweepTo: 80 });
+      tone(90, 1.8, "sine", 0.7, 25); tone(55, 2.2, "sawtooth", 0.15, 20);
+    },
+    voice(pitch){ tone(pitch * (0.8 + Math.random() * 0.45), 0.07, "square", 0.045); }
+  };
+
+  // ---------- animacja ----------
+  const anim = (el, frames, opts) => el.animate(frames, Object.assign({ fill: "forwards" }, opts)).finished.catch(() => {});
+  const busT = (x, y = 494) => `translate(${x}px,${y}px)`;
+
+  function puff(x, y, { r = 26, dur = 1100, dx = 0, dy = -80, color = "#dcdcdc" } = {}){
+    const c = document.createElementNS(NS, "circle");
+    c.setAttribute("cx", x); c.setAttribute("cy", y); c.setAttribute("r", r);
+    c.setAttribute("fill", color); c.setAttribute("stroke", "#141414"); c.setAttribute("stroke-width", "4");
+    c.style.transformOrigin = `${x}px ${y}px`;
+    $("fx").append(c);
+    c.animate([{ transform: "translate(0,0) scale(.3)", opacity: 1 },
+               { transform: `translate(${dx}px,${dy}px) scale(1.6)`, opacity: 0 }],
+              { duration: dur, easing: "ease-out", fill: "forwards" })
+     .finished.then(() => c.remove()).catch(() => {});
+  }
+  // gruda ziemi lecaca po luku
+  function clod(x, y, dx, h){
+    const c = document.createElementNS(NS, "circle");
+    c.setAttribute("cx", x); c.setAttribute("cy", y); c.setAttribute("r", 9 + Math.random() * 8);
+    c.setAttribute("fill", "#6b5230"); c.setAttribute("stroke", "#141414"); c.setAttribute("stroke-width", "3");
+    $("fx").append(c);
+    c.animate([{ transform: "translate(0,0)" }, { transform: `translate(${dx / 2}px,${-h}px)` }, { transform: `translate(${dx}px,20px)`, opacity: 0.2 }],
+              { duration: 700, easing: "ease-out", fill: "forwards" })
+     .finished.then(() => c.remove()).catch(() => {});
+  }
+  function shake(power = 14, dur = 420){
+    return anim($("world"), [
+      { transform: "translate(0,0)" }, { transform: `translate(${-power}px,${power * .6}px)` }, { transform: `translate(${power}px,${-power * .5}px)` },
+      { transform: `translate(${-power * .6}px,${power * .3}px)` }, { transform: `translate(${power * .4}px,0)` }, { transform: "translate(0,0)" }], { duration: dur });
+  }
+  async function fadeTo(fn){
+    await anim($("fade"), [{ opacity: 0 }, { opacity: 1 }], { duration: 450 });
+    fn();
+    await sleep(150);
+    await anim($("fade"), [{ opacity: 1 }, { opacity: 0 }], { duration: 450 });
+  }
+  function scene(id){ ["scNight", "scShop"].forEach(s => $(s).style.display = s === id ? "" : "none"); }
+
+  // ---------- aktorzy ----------
+  // pozycja stop (x, y), skala; img = postac-obrazek (saperzy), head = wysokosc glowy nad stopami (do dymka)
+  const who = {
+    s1: { el: "rideS1", img: true, x: 0, y: 800, s: 1, head: 345, pitch: 170, vPitch: 0.7, vRate: 1.0 },
+    s2: { el: "rideS2", img: true, x: 0, y: 800, s: 1, head: 400, pitch: 210, vPitch: 0.95, vRate: 1.05 }
+  };
+
+  const actT = (w, x = w.x, y = w.y) => `translate(${x}px,${y}px) scale(${w.s})`;
+  function place(k, x, y = who[k].y){ const w = who[k]; w.x = x; w.y = y; $(w.el).style.transform = actT(w); $(w.el).style.display = ""; }
+  function hide(k){ $(who[k].el).style.display = "none"; }
+  // saper w busie = jego glowa w oknie
+  function inBus(k, on){ $(k === "s1" ? "busS1" : "busS2").style.display = on ? "" : "none"; if (on) hide(k); }
+
+  // chod: saperzy bujaja sie calym obrazkiem, Mirek macha konczynami
+  const gaits = {};
+  function gait(k, on, step = 0.4){
+    (gaits[k] || []).forEach(a => a.cancel()); gaits[k] = [];
+    if (!on) return;
+    const o = { duration: step * 1000, direction: "alternate", iterations: Infinity, easing: "ease-in-out" };
+    if (who[k].img){
+      gaits[k].push($(who[k].el).querySelector(".bob").animate(
+        [{ transform: "translateY(0) rotate(-3deg)" }, { transform: "translateY(-14px) rotate(3deg)" }], o));
+    } else {
+      const swing = (id, a) => $(id) && gaits[k].push($(id).animate([{ transform: `rotate(${a}deg)` }, { transform: `rotate(${-a}deg)` }], o));
+      swing("zLegR", -24);
+    }
+  }
+  async function walkTo(k, x, dur, step){
+    const w = who[k], from = actT(w);
+    gait(k, true, step);
+    await anim($(w.el), [{ transform: from }, { transform: actT(w, x) }], { duration: dur, easing: "linear" });
+    w.x = x; gait(k, false);
+    $(w.el).style.transform = actT(w);
+  }
+  async function hop(k, h = 60, dur = 380){
+    const w = who[k];
+    await anim($(w.el), [{ transform: actT(w) }, { transform: actT(w, w.x, w.y - h) }, { transform: actT(w) }], { duration: dur, easing: "ease-out" });
+  }
+
+  // ---------- dymki (jak w odc. 1) ----------
+  function makeBubble(tipX, tipY, lines, shift = 0){
+    const g = document.createElementNS(NS, "g");
+    const tail = document.createElementNS(NS, "path");
+    const rect = document.createElementNS(NS, "rect");
+    const patch = document.createElementNS(NS, "path");
+    const text = document.createElementNS(NS, "text");
+    text.setAttribute("font-size", "40"); text.setAttribute("font-weight", "700");
+    text.setAttribute("font-family", '"Comic Sans MS","Chalkboard SE",sans-serif'); text.setAttribute("fill", "#111");
+    g.append(tail, rect, patch, text);
+    g.style.transform = `translate(${tipX}px,${tipY}px) scale(0)`;
+    $("bubbles").append(g);
+
+    const spans = lines.map(() => { const t = document.createElementNS(NS, "tspan"); text.append(t); return t; });
+    let maxW = 0;
+    spans.forEach((s, i) => { s.textContent = lines[i]; maxW = Math.max(maxW, s.getComputedTextLength()); });
+    const lh = 50, padX = 34, padY = 26;
+    const W = maxW + padX * 2, H = lines.length * lh + padY * 2 - 10;
+    let left = Math.max(20, Math.min(1580 - W, tipX + shift - W / 2));
+    const bx = left - tipX, by = -38 - H;
+    const tb = Math.min(Math.max(0, bx + 34), bx + W - 54);
+    Object.entries({ x: bx, y: by, width: W, height: H, rx: 26, fill: "#fff", stroke: "#111", "stroke-width": 5 })
+      .forEach(([k, v]) => rect.setAttribute(k, v));
+    tail.setAttribute("d", `M${tb - 18} -46 L0 0 L${tb + 22} -46 Z`);
+    tail.setAttribute("fill", "#fff"); tail.setAttribute("stroke", "#111"); tail.setAttribute("stroke-width", "5");
+    patch.setAttribute("d", `M${tb - 13} -38 L${tb + 17} -38`); patch.setAttribute("stroke", "#fff"); patch.setAttribute("stroke-width", "7");
+    spans.forEach((s, i) => { s.setAttribute("x", bx + padX); s.setAttribute("y", by + padY + 34 + i * lh); s.textContent = ""; });
+    return { g, spans, lines, tipX, tipY };
+  }
+
+  // ---------- glos (synteza mowy przegladarki, fallback: bla-bla) ----------
+  const tts = window.speechSynthesis;
+  let plVoice = null;
+  function pickVoice(){
+    if (!tts) return;
+    const vs = tts.getVoices().filter(v => /^pl/i.test(v.lang));
+    plVoice = vs.find(v => /zosia|ewa|krzysztof|google/i.test(v.name)) || vs[0] || null;
+  }
+  if (tts){ pickVoice(); tts.addEventListener?.("voiceschanged", pickVoice); }
+  function unlockSpeech(){
+    if (!tts) return;
+    tts.cancel(); pickVoice();
+    const u = new SpeechSynthesisUtterance(" "); u.volume = 0; tts.speak(u);
+  }
+  // nagrane kwestie (kierowca): odtwarzane wolniej i bez zachowania wysokosci = bardzo niski, gruby glos
+  const CLIPS = {};
+
+  const DEEP = 0.55;
+  const clipEls = {};
+  function clipFor(text){
+    const src = CLIPS[text];
+    if (!src) return null;
+    if (!clipEls[src]){
+      const a = new Audio(src); a.preload = "auto";
+      a.preservesPitch = false; a.mozPreservesPitch = false; a.webkitPreservesPitch = false;
+      clipEls[src] = a;
+    }
+    return clipEls[src];
+  }
+  function unlockClips(){
+    Object.keys(CLIPS).forEach(t => { const a = clipFor(t); a.muted = true;
+      a.play().then(() => { a.pause(); a.currentTime = 0; a.muted = false; }).catch(() => { a.muted = false; }); });
+  }
+  function playClip(a){
+    return new Promise(res => {
+      a.currentTime = 0; a.playbackRate = DEEP;
+      a.preservesPitch = false; a.mozPreservesPitch = false; a.webkitPreservesPitch = false;
+      const guard = setTimeout(res, 8000);
+      a.onended = a.onerror = () => { clearTimeout(guard); res(); };
+      a.play().catch(() => { clearTimeout(guard); res(); });
+    });
+  }
+  function speak(text, w, { pitch, rate } = {}){
+    const clip = clipFor(text);
+    if (clip) return playClip(clip);
+    if (!tts || !plVoice) return null;
+    return new Promise(res => {
+      const u = new SpeechSynthesisUtterance(text);
+      u.voice = plVoice; u.lang = plVoice.lang;
+      u.pitch = pitch ?? w.vPitch; u.rate = rate ?? w.vRate;
+      const guard = setTimeout(res, 800 + text.length * 140);
+      u.onend = u.onerror = () => { clearTimeout(guard); res(); };
+      tts.speak(u);
+    });
+  }
+
+  // mowienie: saperzy podskakuja w rytm, rysowani ruszaja ustami
+  function talking(k, on){
+    const w = who[k];
+    if (w.img){
+      if (on) w._talk = $(w.el).querySelector(".bob").animate(
+        [{ transform: "translateY(0) scaleY(1)" }, { transform: "translateY(-8px) scaleY(1.02)" }],
+        { duration: 160, direction: "alternate", iterations: Infinity });
+      else if (w._talk){ w._talk.cancel(); w._talk = null; }
+      return;
+    }
+    clearInterval(w._talk);
+    let open = false;
+    if (on) w._talk = setInterval(() => {
+      open = !open;
+      $(w.mouthO).style.display = open ? "" : "none";
+      $(w.mouthC).style.display = open ? "none" : "";
+    }, 110);
+    else { $(w.mouthO).style.display = "none"; $(w.mouthC).style.display = ""; }
+  }
+
+  async function say(k, lines, shift = 0, { instant = false, pitch, rate } = {}){
+    const w = who[k], tx = w.x, ty = w.y - w.head;
+    const b = makeBubble(tx, ty, lines, shift);
+    await anim(b.g, [{ transform: `translate(${tx}px,${ty}px) scale(0)` }, { transform: `translate(${tx}px,${ty}px) scale(1)` }],
+               { duration: 200, easing: "cubic-bezier(.3,1.6,.6,1)" });
+    if (instant){ b.spans.forEach((s, i) => s.textContent = lines[i]); return b; }
+    talking(k, true);
+    const spoken = speak(lines.join(" "), w, { pitch, rate });
+    for (let i = 0; i < lines.length; i++){
+      for (const ch of lines[i]){
+        b.spans[i].textContent += ch;
+        if (ch !== " " && !spoken) sfx.voice(w.pitch);
+        await sleep(spoken ? 45 : 58);
+      }
+    }
+    if (spoken) await spoken;
+    talking(k, false);
+    return b;
+  }
+  async function unsay(b){
+    await anim(b.g, [{ transform: `translate(${b.tipX}px,${b.tipY}px) scale(1)` }, { transform: `translate(${b.tipX}px,${b.tipY}px) scale(0)` }], { duration: 150 });
+    b.g.remove();
+  }
+  async function line(k, lines, hold = 1600, shift = 0, opts){
+    const b = await say(k, lines, shift, opts);
+    await sleep(hold); await unsay(b); await sleep(250);
+  }
+
+  // ---------- rekwizyty ----------
+  let wheelAnims = [];
+  function spinWheels(dir, period = 0.5){
+    wheelAnims.forEach(a => a.cancel()); wheelAnims = [];
+    if (!dir) return;
+    document.querySelectorAll("#bus .bw").forEach(w => wheelAnims.push(
+      w.animate([{ transform: "rotate(0deg)" }, { transform: `rotate(${dir * 360}deg)` }],
+                { duration: period * 1000, iterations: Infinity })));
+  }
+  let busX = 1750;
+  async function busDrive(x, dur, easing = "cubic-bezier(.2,.7,.35,1)", y = 494){
+    const from = busT(busX, y); busX = x;
+    await anim($("bus"), [{ transform: from }, { transform: busT(x, y) }], { duration: dur, easing });
+  }
+  function exhaust(y = 494){ return setInterval(() => puff(busX + 600, y + 250, { r: 18, dur: 1000, dx: 50, dy: -40, color: "#9a9a9a" }), 140); }
+
+  // wykrywacz: pierscienie przy talerzu wykrywacza + pisk, coraz szybciej
+  async function detector(times){
+    const hx = who.s2.x + 86, hy = who.s2.y - 26;
+    for (let i = 0; i < times; i++){
+      sfx.beep();
+      const c = document.createElementNS(NS, "circle");
+      c.setAttribute("cx", hx); c.setAttribute("cy", hy); c.setAttribute("r", 20);
+      c.setAttribute("fill", "none"); c.setAttribute("stroke", "#ffd23f"); c.setAttribute("stroke-width", "6");
+      c.style.transformOrigin = `${hx}px ${hy}px`;
+      $("detFx").append(c);
+      c.animate([{ transform: "scale(.4)", opacity: 1 }, { transform: "scale(3)", opacity: 0 }], { duration: 600, fill: "forwards" })
+       .finished.then(() => c.remove()).catch(() => {});
+      await sleep(Math.max(90, 520 - i * 38));
+    }
+  }
+
+  // papierosy: czubek wzgledem stop postaci
+  const CIG_TIP = { s1: [32, -252], s2: [16, -285], m: [36, -270] };
+  let cigSmoke = null;
+  function smokeCigs(on, ks = ["s1", "s2"]){
+    clearInterval(cigSmoke);
+    ["s1", "s2", "m"].forEach(k => $(who[k].el).querySelector(".cig").style.display = on && ks.includes(k) ? "" : "none");
+    if (!on) return;
+    cigSmoke = setInterval(() => ks.forEach(k => {
+      const [dx, dy] = CIG_TIP[k];
+      puff(who[k].x + dx, who[k].y + dy - 6, { r: 7, dur: 1600, dx: 10 + Math.random() * 20, dy: -90, color: "#cfcfcf" });
+    }), 380);
+  }
+  function burp(){ const a = ac(), t = a.currentTime;
+    tone(95 + Math.random() * 30, 0.55, "sawtooth", 0.12, 55); noise(0.45, { freq: 260, q: 4, vol: 0.25 }); }
+  function gulp(){ tone(180, 0.09, "sine", 0.15, 90); }
+  // przesuniecie puszki do ust [dx, dy, obrot]: wieczko przy ustach, dno do gory
+  const SIP = { s1: [20, -212, 110], s2: [-40, -194, -110], m: [-21, -186, -110] };
+  async function drink(ks){
+    const up = k => `translate(${SIP[k][0]}px,${SIP[k][1]}px) rotate(${SIP[k][2]}deg)`;
+    const rest = "translate(0,0) rotate(0deg)";
+    await Promise.all(ks.map(k => anim($(who[k].el).querySelector(".can"), [{ transform: rest }, { transform: up(k) }], { duration: 450, easing: "ease-out" })));
+    for (let i = 0; i < 4; i++){ gulp(); await sleep(260); }
+    await Promise.all(ks.map(k => anim($(who[k].el).querySelector(".can"), [{ transform: up(k) }, { transform: rest }], { duration: 400 })));
+  }
+  function lighter(){ noise(0.06, { freq: 5000, q: 2, vol: 0.15 }); tone(300, 0.2, "sine", 0.02); }
+
+
+  // ---------- skladak ----------
+  let bikeX = 1900, bikeRaf = null;
+  const bikeT = x => `translate(${x}px,812px)`;
+  function setBike(x){
+    bikeX = x; $("bike").style.transform = bikeT(x);
+    who.s1.x = x - 5; who.s1.y = 812; who.s2.x = x + 80; who.s2.y = 812;
+  }
+  let pedalAnims = [];
+  function pedal(period){
+    pedalAnims.forEach(a => a.cancel()); pedalAnims = [];
+    if (!period) return;
+    pedalAnims.push($("crank").animate([{ transform: "rotate(0deg)" }, { transform: "rotate(360deg)" }], { duration: period * 1000, iterations: Infinity }));
+    document.querySelectorAll("#bike .bw2").forEach(w => pedalAnims.push(
+      w.animate([{ transform: "rotate(0deg)" }, { transform: "rotate(360deg)" }], { duration: period * 600, iterations: Infinity })));
+    pedalAnims.push($("rideS1").querySelector(".bob").animate([{ transform: "translateY(0)" }, { transform: "translateY(-6px)" }],
+      { duration: period * 500, direction: "alternate", iterations: Infinity }));
+  }
+  // jazda: plynny ruch klatka po klatce (pozycja potrzebna do ognia i dymkow)
+  function ride(x1, ms, ease = t => t, onFrame){
+    const x0 = bikeX, t0 = performance.now();
+    return new Promise(res => {
+      const step = now => {
+        const t = Math.min(1, (now - t0) / ms);
+        setBike(x0 + (x1 - x0) * ease(t));
+        if (onFrame) onFrame(t);
+        if (t < 1) bikeRaf = requestAnimationFrame(step); else res();
+      };
+      bikeRaf = requestAnimationFrame(step);
+    });
+  }
+  function flame(x, y){
+    const c = document.createElementNS(NS, "circle");
+    c.setAttribute("cx", x); c.setAttribute("cy", y); c.setAttribute("r", 10 + Math.random() * 12);
+    c.setAttribute("fill", ["#ffd23f", "#ff8a1f", "#e34b2b"][Math.floor(Math.random() * 3)]);
+    c.setAttribute("stroke", "#141414"); c.setAttribute("stroke-width", "3");
+    c.style.transformOrigin = `${x}px ${y}px`;
+    $("bikeFx").append(c);
+    c.animate([{ transform: "translate(0,0) scale(1)", opacity: 1 }, { transform: `translate(${120 + Math.random() * 120}px,${-30 - Math.random() * 50}px) scale(.2)`, opacity: 0 }],
+              { duration: 500, fill: "forwards" }).finished.then(() => c.remove()).catch(() => {});
+  }
+  function speedLine(){
+    const l = document.createElementNS(NS, "line"), y = 500 + Math.random() * 360, w = 80 + Math.random() * 160;
+    l.setAttribute("x1", bikeX + 200); l.setAttribute("y1", y); l.setAttribute("x2", bikeX + 200 + w); l.setAttribute("y2", y);
+    l.setAttribute("stroke", "#f4f4f2"); l.setAttribute("stroke-width", "4"); l.setAttribute("stroke-linecap", "round");
+    $("bikeFx").append(l);
+    l.animate([{ opacity: 0.9 }, { opacity: 0, transform: "translateX(200px)" }], { duration: 400, fill: "forwards" })
+     .finished.then(() => l.remove()).catch(() => {});
+  }
+  function creak(){ tone(900 + Math.random() * 200, 0.08, "triangle", 0.03, 700); }
+  function crickets(){
+    return setInterval(() => { for (let i = 0; i < 3; i++) setTimeout(() => tone(4300, 0.03, "sine", 0.02), i * 70); }, 900);
+  }
+  function ghostSound(){ const a = ac(), t = a.currentTime, o = a.createOscillator(), g = a.createGain(), l = a.createOscillator(), lg = a.createGain();
+    o.type = "sine"; o.frequency.setValueAtTime(420, t); o.frequency.linearRampToValueAtTime(260, t + 3.5);
+    l.frequency.value = 6; lg.gain.value = 18; l.connect(lg); lg.connect(o.frequency);
+    g.gain.setValueAtTime(0.0001, t); g.gain.linearRampToValueAtTime(0.12, t + 0.6); g.gain.linearRampToValueAtTime(0.0001, t + 4);
+    o.connect(g); g.connect(a.destination); o.start(t); l.start(t); o.stop(t + 4.1); l.stop(t + 4.1); }
+
+  async function typeTitle(text){
+    const el = $("titleTxt"); el.textContent = "";
+    for (const ch of text){ el.textContent += ch; if (ch !== " ") tone(1400, 0.02, "square", 0.02); await sleep(70); }
+  }
+
+  function reset(){
+    if (tts) tts.cancel();
+    cancelAnimationFrame(bikeRaf);
+    document.getAnimations().forEach(a => a.cancel());
+    pedalAnims = [];
+    Object.keys(gaits).forEach(k => gaits[k] = []);
+    Object.values(who).forEach(w => { clearInterval(w._talk); w._talk = null; });
+    $("bubbles").innerHTML = ""; $("fx").innerHTML = ""; $("bikeFx").innerHTML = "";
+    scene("scNight");
+    $("s1").style.display = "none"; $("s2").style.display = "none";
+    Object.assign(who.s1, { el: "rideS1", head: 345 }); Object.assign(who.s2, { el: "rideS2", head: 410 });
+    $("bike").style.display = "none"; setBike(1900);
+    $("rideS1").style.display = ""; $("rideS2").style.display = ""; $("rideS2").style.transform = "";
+    $("ghost").style.display = "none";
+    document.querySelectorAll(".cig, .can").forEach(e => e.style.display = "none");
+    $("titleCard").style.display = "none";
+    $("fade").style.opacity = 0; $("flash").style.opacity = 0;
+  }
+
+  async function play(){
+    reset(); ac();
+    $("startScreen").hidden = true; $("endScreen").hidden = true;
+
+    // plansza: "Na błoniach stadionu, 25 lat temu..."
+    $("titleCard").style.display = "";
+    await sleep(500);
+    const narr = speak("Na błoniach stadionu, dwadzieścia pięć lat temu…", { vPitch: 0.6, vRate: 0.85 });
+    await typeTitle("Na błoniach stadionu, 25 lat temu…");
+    if (narr) await narr;
+    await sleep(1200);
+    await anim($("titleCard"), [{ opacity: 1 }, { opacity: 0 }], { duration: 1200 });
+    $("titleCard").style.display = "none"; $("titleCard").style.opacity = 1;
+
+    // jada skladakiem przez blonia; w tle kosciol, boisko, cmentarz
+    const crk = crickets();
+    const flick = $("znicze").animate([{ opacity: 1 }, { opacity: 0.55 }], { duration: 300, direction: "alternate", iterations: Infinity });
+    $("bike").style.display = ""; setBike(1900);
+    pedal(0.9);
+    const squeak = setInterval(creak, 900);
+    await ride(980, 6500, t => t);
+    clearInterval(squeak);
+
+    // duch nad boiskiem: od cmentarza do kosciola
+    const g = $("ghost"); g.style.display = "";
+    const bob = $("ghostBob").animate([{ transform: "translateY(0) rotate(-4deg)" }, { transform: "translateY(-14px) rotate(4deg)" }],
+      { duration: 700, direction: "alternate", iterations: Infinity });
+    ghostSound();
+    const flight = anim(g, [
+      { transform: "translate(1420px,480px) scale(0.4)", opacity: 0 },
+      { transform: "translate(1300px,420px) scale(0.7)", opacity: 0.95, offset: 0.15 },
+      { transform: "translate(800px,360px) scale(0.9)", opacity: 0.95, offset: 0.55 },
+      { transform: "translate(260px,380px) scale(0.6)", opacity: 0.9, offset: 0.9 },
+      { transform: "translate(200px,420px) scale(0.3)", opacity: 0 }], { duration: 11000, easing: "linear" });
+    const slow = ride(840, 2500, t => 1 - (1 - t) * (1 - t));
+    await sleep(900);
+    pedal(0);
+    await line("s2", ["Zobacz,", "co tam jest?"], 700, 60);
+    await line("s1", ["O kurwa…", "duch!"], 600, -230);
+    await slow;
+    await line("s1", ["Spierdalamy!!!"], 200, 60, { pitch: 1.3, rate: 1.4 });
+
+    // ucieczka: ogien z kol i pedalow, pasazer wygiety od wiatru
+    pedal(0.12);
+    anim($("rideS2"), [{ transform: "rotate(0deg)" }, { transform: "rotate(38deg)" }], { duration: 500, easing: "ease-out" });
+    const roar = engine(); roar.set(90, 0.08, 0.3);
+    noise(2.6, { freq: 900, q: 0.8, vol: 0.3, sweepTo: 2400 });
+    await ride(-500, 2600, t => t * t, () => {
+      flame(bikeX - 80, 800); flame(bikeX + 80, 800); flame(bikeX, 772);
+      if (Math.random() < 0.6) speedLine();
+    });
+    roar.stop(0.3); pedal(0);
+    await flight;
+    bob.cancel(); flick.cancel(); clearInterval(crk);
+
+    // pod sklepem ALMA w nocy
+    await fadeTo(() => {
+      scene("scShop");
+      $("bikeFx").innerHTML = "";
+      $("rideS1").style.display = "none"; $("rideS2").style.display = "none"; $("rideS2").style.transform = "";
+      setBike(1330);
+      Object.assign(who.s1, { el: "s1", head: 440 }); Object.assign(who.s2, { el: "s2", head: 425 });
+      place("s1", 960, 800); place("s2", 1150, 800);
+    });
+    const hum = crickets();
+    // zdyszani
+    const pant = [$("s1"), $("s2")].map(e => e.querySelector(".bob").animate(
+      [{ transform: "translateY(0)" }, { transform: "translateY(-6px)" }], { duration: 300, direction: "alternate", iterations: Infinity }));
+    await sleep(1600);
+    pant.forEach(a => a.cancel());
+    await line("s1", ["Widziałeś to,", "kurwa?"], 800, -40);
+    await line("s2", ["Widziałem…", "ale nikt nam nie uwierzy."], 1800, 40);
+    await sleep(1200);
+    clearInterval(hum);
+    $("endScreen").hidden = false; $("againBtn").focus();
+  }
+
+  const start = () => { unlockSpeech(); play(); };
+  $("playBtn").addEventListener("click", start);
+  $("againBtn").addEventListener("click", start);
+</script>
+</body>
+</html>
