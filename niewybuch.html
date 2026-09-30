@@ -127,6 +127,21 @@
         <circle cx="1240" cy="505" r="44"/><circle cx="1290" cy="515" r="30"/>
       </g>
       <rect id="skyGlow" width="1600" height="700" fill="#ff7a1a" opacity="0"/>
+      <!-- zlomowisko w oddali (tylko w finale); przy wybuchu kawalki sie rozlatuja -->
+      <g id="farYard" style="display:none" stroke="#141414" stroke-width="3" stroke-linejoin="round">
+        <path class="piece" d="M1150 640 V612 H1450 V640 Z" fill="#8b9098"/>
+        <path class="piece" d="M1370 640 L1395 596 L1415 610 L1432 588 L1452 640 Z" fill="#7d8289"/>
+        <rect class="piece" x="1240" y="588" width="120" height="52" fill="#b7a47a"/>
+        <rect class="piece" x="1252" y="606" width="28" height="34" fill="#6e5a3a"/>
+        <rect class="piece" x="1300" y="604" width="44" height="22" fill="#2d3f55"/>
+        <path class="piece" d="M1232 588 L1300 568 L1368 588 Z" fill="#6d7178"/>
+        <g class="piece">
+          <rect x="1228" y="536" width="144" height="28" rx="3" fill="#fff"/>
+          <text x="1300" y="557" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="16"
+            fill="#d01616" stroke="none">SKUP ZŁOMU OBRYTE</text>
+          <path d="M1244 564 V570 M1356 564 V570" stroke-width="3"/>
+        </g>
+      </g>
       <!-- grzyb atomowy nad zlomowiskiem (w oddali) -->
       <g id="nuke" style="display:none; transform-origin:1300px 640px" stroke="#141414" stroke-width="5" stroke-linejoin="round">
         <ellipse cx="1300" cy="640" rx="230" ry="32" fill="#9c8663"/>
@@ -640,7 +655,7 @@
     ["mMouthO", "zMouthO"].forEach(id => $(id).style.display = "none");
     ["mMouthC", "zMouthC"].forEach(id => $(id).style.display = "");
     $("fade").style.opacity = 0; $("flash").style.opacity = 0;
-    $("nuke").style.display = "none"; $("capFall").style.display = "none";
+    $("nuke").style.display = "none"; $("capFall").style.display = "none"; $("farYard").style.display = "none";
   }
 
   async function play(){
@@ -810,19 +825,26 @@
 
     // ...BUM - z daleka: bus na drodze, w oddali grzyb atomowy nad zlomowiskiem
     await fadeTo(() => {
-      scene("scRoad"); hide("z"); $("bombY").style.display = "none";
+      scene("scRoad"); hide("z"); $("bombY").style.display = "none"; $("farYard").style.display = "";
       $("bus").style.display = ""; $("busDrv").style.display = "";
       busX = 1700; $("bus").style.transform = busT(busX, 474);
     });
     eng = engine(); eng.set(80, 0.1, 0.3);
     spinWheels(1, 0.18); smoke = exhaust(474);
     const drive = busDrive(-750, 9000, "linear", 474);
-    await sleep(2800);
+    await sleep(4400);   // bus mija budynek, dopiero wtedy wybuch
 
     // blysk bez dzwieku (swiatlo szybsze niz huk)
     anim($("flash"), [{ opacity: 1 }, { opacity: 0 }], { duration: 1200, easing: "ease-out" });
     anim($("skyGlow"), [{ opacity: 0 }, { opacity: 0.45, offset: 0.1 }, { opacity: 0.18 }], { duration: 5000 });
     $("nuke").style.display = "";
+    // budynek skupu rozlatuje sie na kawalki
+    document.querySelectorAll("#farYard .piece").forEach((el, i) => {
+      const dx = (i % 2 ? 1 : -1) * (80 + Math.random() * 260), dy = -(200 + Math.random() * 380), r = (Math.random() - 0.5) * 900;
+      el.style.transformBox = "fill-box"; el.style.transformOrigin = "center";
+      anim(el, [{ transform: "translate(0,0) rotate(0deg)", opacity: 1 }, { transform: `translate(${dx}px,${dy}px) rotate(${r}deg)`, opacity: 0 }],
+           { duration: 1600 + Math.random() * 600, easing: "cubic-bezier(.2,.8,.4,1)" });
+    });
     anim($("nuke"), [{ transform: "scale(0.05)" }, { transform: "scale(0.95)", offset: 0.4 }, { transform: "scale(1.35)" }], { duration: 3200, easing: "ease-out" });
     anim($("nukeGlow"), [{ opacity: 1 }, { opacity: 1, offset: 0.3 }, { opacity: 0 }], { duration: 4000 });
     await sleep(1300);
