@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>Mokre Pole</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  html, body { margin:0; height:100%; background:#111; }
+  body { display:flex; align-items:center; justify-content:center;
+    font-family:"Comic Sans MS","Chalkboard SE",sans-serif; }
+  #wrap { position:relative; width:min(100vw, calc(100vh * 16 / 9)); aspect-ratio:16 / 9; }
+  #stage { width:100%; height:100%; display:block; background:#9fd3ff; }
+  .overlay { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center;
+    justify-content:center; gap:24px; text-align:center; color:#fff; background:rgba(0,0,0,.72); }
+  .overlay h1 { margin:0; font-size:clamp(40px,8vw,120px); color:#ffd23f; letter-spacing:2px;
+    -webkit-text-stroke:3px #000; text-shadow:6px 6px 0 #000; transform:rotate(-3deg); }
+  .overlay p { margin:0; font-size:clamp(16px,2vw,28px); }
+  .btn { font:inherit; font-weight:bold; font-size:clamp(20px,2.6vw,36px); padding:.4em 1.2em;
+    color:#000; background:#ffd23f; border:4px solid #000; border-radius:14px;
+    box-shadow:5px 5px 0 #000; cursor:pointer; }
+  .btn:focus-visible { outline:4px solid #fff; outline-offset:4px; }
+  [hidden] { display:none !important; }
+</style>
+</head>
+<body>
+<div id="wrap">
+<svg id="stage" viewBox="0 0 1600 900" aria-label="Bajka: Mokre Pole">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8fbfe8"/><stop offset="1" stop-color="#e6f1fa"/>
+    </linearGradient>
+  </defs>
+
+  <g id="world">
+   <g id="cam">
+    <!-- pole ciagnie sie w lewo (panorama kamery) -->
+    <rect x="-1000" width="1000" height="580" fill="url(#sky)"/>
+    <rect x="-1000" y="545" width="1000" height="40" fill="#7fae52" stroke="#141414" stroke-width="4"/>
+    <rect x="-1000" y="580" width="1000" height="320" fill="#4a3624"/>
+    <g fill="none" stroke="#3a2a1a" stroke-width="7" stroke-linecap="round">
+      <path d="M-1000 650 H0 M-1000 700 H0 M-1000 760 H0 M-1000 830 H0"/>
+    </g>
+    <line x1="-1000" y1="580" x2="0" y2="580" stroke="#141414" stroke-width="5"/>
+    <!-- bardzo wysoki facet (jak Slenderman) -->
+    <g id="slender" transform="translate(-460,800)">
+      <g id="slSway" style="transform-origin:0px 0px" stroke="#141414" stroke-width="4" stroke-linejoin="round">
+        <rect x="-26" y="-380" width="20" height="380" fill="#111"/><rect x="6" y="-380" width="20" height="380" fill="#111"/>
+        <path d="M-40 -386 L-40 -660 Q0 -676 40 -660 L40 -386 Z" fill="#161616"/>
+        <path d="M-12 -662 L0 -600 L12 -662 Z" fill="#f4f4f2"/>
+        <path d="M-4 -650 L0 -560 L4 -650 Z" fill="#111"/>
+        <path d="M-38 -650 Q-70 -500 -66 -250" fill="none" stroke-width="18"/><path d="M-38 -650 Q-70 -500 -66 -250" fill="none" stroke="#161616" stroke-width="11"/>
+        <path d="M38 -650 Q70 -500 66 -250" fill="none" stroke-width="18"/><path d="M38 -650 Q70 -500 66 -250" fill="none" stroke="#161616" stroke-width="11"/>
+        <path d="M-70 -250 l-6 30 M-66 -250 l0 34 M-62 -250 l6 30 M70 -250 l6 30 M66 -250 l0 34 M62 -250 l-6 30" stroke="#f4f4f2" stroke-width="4"/>
+        <ellipse cx="0" cy="-712" rx="34" ry="46" fill="#f4f4f2"/>
+      </g>
+    </g>
+    <!-- ================= MOKRE POLE ================= -->
+    <g id="scField">
+      <rect width="1600" height="900" fill="url(#sky)"/>
+      <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
+        <path d="M180 140 q8-42 58-36 q22-38 70-10 q44-8 46 32 q34 6 18 38 h-178 q-34-6-14-24z" fill="#fff"/>
+        <path d="M1150 110 q10-34 50-28 q20-30 60-6 q36-4 36 28 q28 6 12 30 h-146 q-28-6-12-24z" fill="#fff"/>
+      </g>
+      <!-- wies w oddali -->
+      <g stroke="#141414" stroke-width="3" stroke-linejoin="round">
+        <rect x="250" y="510" width="160" height="40" fill="#b9b3a3"/><path d="M240 510 L330 482 L420 510 Z" fill="#6d7178"/>
+        <rect x="1300" y="505" width="110" height="45" fill="#e8e2d0"/><path d="M1290 505 L1355 474 L1420 505 Z" fill="#a8412e"/>
+        <rect x="1440" y="512" width="130" height="38" fill="#b9b3a3"/><path d="M1432 512 L1505 486 L1578 512 Z" fill="#6d7178"/>
+      </g>
+      <!-- bialy kosciol daleko na horyzoncie -->
+      <g stroke="#141414" stroke-width="2.5" stroke-linejoin="round">
+        <rect x="120" y="516" width="64" height="32" fill="#f4f4f2"/>
+        <path d="M116 518 L152 500 L188 518 Z" fill="#6d7178"/>
+        <rect x="100" y="478" width="22" height="70" fill="#f4f4f2"/>
+        <path d="M96 480 L111 448 L126 480 Z" fill="#4a5058"/>
+        <path d="M111 448 V432 M105 438 H117" stroke-width="2.5"/>
+        <rect x="107" y="490" width="8" height="12" rx="4" fill="#2d3f55" stroke-width="1.5"/>
+      </g>
+      <g stroke="#141414" stroke-width="4" fill="#4f7a3a">
+        <circle cx="520" cy="520" r="34"/><circle cx="560" cy="510" r="40"/><circle cx="1180" cy="518" r="36"/><circle cx="1230" cy="528" r="26"/>
+      </g>
+      <rect y="545" width="1600" height="40" fill="#7fae52" stroke="#141414" stroke-width="4"/>
+      <!-- zaorane, rozmokle pole -->
+      <rect y="580" width="1600" height="320" fill="#4a3624"/>
+      <line x1="0" y1="580" x2="1600" y2="580" stroke="#141414" stroke-width="5"/>
+      <g fill="none" stroke="#3a2a1a" stroke-width="7" stroke-linecap="round">
+        <path d="M0 610 Q400 600 800 612 T1600 606"/><path d="M0 650 Q400 640 800 654 T1600 646"/>
+        <path d="M0 700 Q400 688 800 704 T1600 694"/><path d="M0 760 Q400 746 800 764 T1600 752"/>
+        <path d="M0 830 Q400 816 800 836 T1600 822"/>
+      </g>
+      <g fill="none" stroke="#5e4630" stroke-width="4" stroke-linecap="round">
+        <path d="M0 628 Q400 618 800 630 T1600 624"/><path d="M0 674 Q400 664 800 678 T1600 670"/>
+        <path d="M0 728 Q400 716 800 732 T1600 722"/><path d="M0 794 Q400 780 800 798 T1600 786"/>
+      </g>
+      <g fill="#7f9fb8" stroke="#141414" stroke-width="3">
+        <ellipse cx="160" cy="720" rx="80" ry="14"/><ellipse cx="1400" cy="690" rx="70" ry="12"/><ellipse cx="620" cy="860" rx="110" ry="16"/>
+      </g>
+      <g id="detFx"></g>
+
+      <!-- KOPARKO-LADOWARKA CAT zakopana w blocie -->
+      <g transform="translate(150,0)">
+        <g id="catBody" style="transform-origin:720px 760px">
+          <g stroke="#141414" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+            <!-- ramie koparki (z tylu, po lewej) -->
+            <rect x="520" y="620" width="26" height="130" fill="#2b2b2b"/>
+            <g id="boom" style="transform-origin:560px 610px">
+              <path d="M560 610 L430 410" stroke-width="50"/><path d="M560 610 L430 410" stroke="#ffcd11" stroke-width="38"/>
+              <path d="M430 410 L340 690" stroke-width="40"/><path d="M430 410 L340 690" stroke="#ffcd11" stroke-width="28"/>
+              <path d="M520 560 L455 455" stroke="#9aa3ad" stroke-width="10"/>
+              <g transform="translate(495 510) rotate(-57)">
+                <rect x="-48" y="-15" width="96" height="30" fill="#141414" stroke="none"/>
+                <text x="0" y="10" text-anchor="middle" font-family="'Arial Black', Arial, sans-serif" font-size="24" font-weight="900"
+                  fill="#ffcd11" stroke="none">CAT</text>
+              </g>
+              <path d="M300 660 L372 668 L372 720 Q330 740 290 712 Z" fill="#ffcd11"/>
+              <path d="M292 712 L286 728 M308 722 L304 738 M326 728 L324 744 M344 728 L344 744" stroke-width="6"/>
+            </g>
+            <!-- rama -->
+            <rect x="550" y="590" width="560" height="100" rx="10" fill="#ffcd11"/>
+            <text x="900" y="660" font-family="'Arial Black', Arial, sans-serif" font-size="30" font-weight="900" fill="#141414" stroke="none">428F</text>
+            <!-- kabina -->
+            <rect x="610" y="366" width="232" height="28" rx="6" fill="#ffcd11"/>
+            <rect x="760" y="344" width="30" height="24" rx="6" fill="#ff7a1a" id="beacon"/>
+            <rect x="630" y="394" width="192" height="200" fill="#bfe3f5"/>
+            <g id="catOp">
+              <circle cx="706" cy="470" r="32" fill="#e7b08c"/>
+              <path d="M672 462 Q674 430 706 430 Q738 430 742 462 Q706 452 672 462 Z" fill="#c8302c"/>
+              <circle cx="696" cy="470" r="4" fill="#111" stroke="none"/><circle cx="716" cy="470" r="4" fill="#111" stroke="none"/>
+              <path d="M696 488 Q706 494 716 488" fill="none" stroke-width="4"/>
+              <rect x="676" y="502" width="60" height="70" rx="12" fill="#2f4a7a"/>
+            </g>
+            <path d="M630 394 V594 M726 394 V594 M822 394 V594" stroke-width="8"/>
+            <!-- maska i rura -->
+            <path d="M822 600 V520 Q830 505 850 505 H1060 Q1090 505 1095 540 L1100 600 Z" fill="#ffcd11"/>
+            <path d="M1060 520 V590 M1075 522 V590 M1045 520 V590" stroke-width="3"/>
+            <rect x="900" y="452" width="16" height="56" fill="#2b2b2b"/>
+            <text x="960" y="566" text-anchor="middle" font-family="'Arial Black', Arial, sans-serif" font-size="34" font-weight="900" fill="#141414" stroke="none">CAT</text>
+            <!-- ladowarka z przodu -->
+            <g id="loader" style="transform-origin:880px 600px">
+            <path d="M880 600 L1150 690" stroke-width="30"/><path d="M880 600 L1150 690" stroke="#ffcd11" stroke-width="20"/>
+            <path d="M1120 640 H1230 L1240 760 H1130 Q1110 700 1120 640 Z" fill="#ffcd11"/>
+            <path d="M1130 760 H1240" stroke-width="9"/>
+            </g>
+            <!-- kola -->
+            <g class="cw" style="transform-origin:720px 720px">
+              <circle cx="720" cy="720" r="102" fill="#1a1a1a"/>
+              <circle cx="720" cy="720" r="102" fill="none" stroke="#3b3b3b" stroke-width="16" stroke-dasharray="18 14"/>
+              <circle cx="720" cy="720" r="50" fill="#ffcd11"/><circle cx="720" cy="720" r="14" fill="#2b2b2b"/>
+              <path d="M720 676 V764 M676 720 H764" stroke-width="4"/>
+            </g>
+            <g class="cw" style="transform-origin:1010px 748px">
+              <circle cx="1010" cy="748" r="68" fill="#1a1a1a"/>
+              <circle cx="1010" cy="748" r="68" fill="none" stroke="#3b3b3b" stroke-width="12" stroke-dasharray="14 12"/>
+              <circle cx="1010" cy="748" r="32" fill="#ffcd11"/><circle cx="1010" cy="748" r="10" fill="#2b2b2b"/>
+              <path d="M1010 720 V776 M982 748 H1038" stroke-width="4"/>
+            </g>
+          </g>
+        </g>
+        <!-- bloto zakrywajace kola (po osie) -->
+        <path d="M430 768 Q560 712 700 742 Q820 708 900 748 Q1010 716 1110 752 Q1190 760 1250 800 V840 H400 Z"
+          fill="#2f2116" stroke="#141414" stroke-width="5" stroke-linejoin="round"/>
+        <g fill="#4a3624" stroke="none">
+          <ellipse cx="620" cy="770" rx="40" ry="8"/><ellipse cx="900" cy="772" rx="50" ry="8"/><ellipse cx="1120" cy="782" rx="36" ry="7"/>
+        </g>
+      </g>
+    </g>
+
+    <!-- ================= AKTORZY ================= -->
+    <!-- BUS (przod w lewo); dol kol na y=306 -->
+    <g id="bus" style="display:none; transform:translate(1750px,494px)">
+      <g id="busBody" stroke="#141414" stroke-width="5" stroke-linejoin="round">
+        <path d="M0 262 V150 Q4 110 40 100 L108 32 Q118 20 138 20 H560 Q574 20 574 34 V262 Z" fill="#1c1c1f"/>
+        <path d="M52 104 L116 42 H170 V112 H52 Z" fill="#9fcfee"/>
+        <rect x="184" y="42" width="96" height="70" rx="6" fill="#9fcfee"/>
+        <clipPath id="drvWin"><rect x="184" y="42" width="96" height="70" rx="6"/></clipPath>
+        <g id="busDrv" clip-path="url(#drvWin)">
+          <image href="kierowca_sweter.png" x="166" y="33" width="116" height="252"/>
+        </g>
+        <rect x="300" y="42" width="110" height="70" rx="6" fill="#9fcfee"/>
+        <rect x="430" y="42" width="120" height="70" rx="6" fill="#9fcfee"/>
+        <clipPath id="winS1"><rect x="300" y="42" width="110" height="70" rx="6"/></clipPath>
+        <clipPath id="winS2"><rect x="430" y="42" width="120" height="70" rx="6"/></clipPath>
+        <g id="busS1" clip-path="url(#winS1)" style="display:none">
+          <image href="saper1_sweter.png" x="293" y="28" width="141" height="231"/>
+        </g>
+        <g id="busS2" clip-path="url(#winS2)" style="display:none">
+          <image href="saper2_sweter.png" x="443" y="36" width="130" height="231"/>
+        </g>
+        <path d="M290 30 V258 M420 118 V258" stroke-width="4"/>
+        <text x="432" y="178" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="40"
+          fill="#fff" stroke="#d01616" stroke-width="2" paint-order="stroke">UNDERGROUND</text>
+        <text x="432" y="220" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="40"
+          fill="#fff" stroke="#d01616" stroke-width="2" paint-order="stroke">PASSION</text>
+        <g fill="#5a3a22" stroke="none" opacity="0.8">
+          <ellipse cx="60" cy="236" rx="30" ry="12"/><ellipse cx="330" cy="248" rx="40" ry="10"/>
+          <ellipse cx="540" cy="150" rx="16" ry="26"/><ellipse cx="250" cy="170" rx="14" ry="9"/>
+        </g>
+        <rect x="2" y="176" width="22" height="30" rx="4" fill="#ffe27a"/>
+        <rect x="-8" y="238" width="70" height="28" rx="6" fill="#9aa3ad"/>
+        <rect x="560" y="246" width="30" height="12" fill="#555"/>
+        <g class="bw" style="transform-origin:112px 262px"><circle cx="112" cy="262" r="44" fill="#1a1a1a"/><circle cx="112" cy="262" r="18" fill="#b8bec6"/><path d="M112 224 V300 M74 262 H150" stroke="#666"/></g>
+        <g class="bw" style="transform-origin:462px 262px"><circle cx="462" cy="262" r="44" fill="#1a1a1a"/><circle cx="462" cy="262" r="18" fill="#b8bec6"/><path d="M462 224 V300 M424 262 H500" stroke="#666"/></g>
+      </g>
+    </g>
+
+    <!-- SAPERZY (obrazki, stopy w 0,0) -->
+    <g id="s2" style="display:none"><g class="bob" style="transform-origin:0px 0px">
+      <image href="saper2_sweter.png" x="-107" y="-380" width="214" height="380"/>
+      <g class="muddy" style="display:none" fill="#3b2a1a" stroke="#141414" stroke-width="2">
+        <circle cx="-40" cy="-120" r="18"/><circle cx="30" cy="-200" r="15"/><circle cx="8" cy="-60" r="21"/>
+        <circle cx="-18" cy="-300" r="11"/><circle cx="46" cy="-90" r="12"/><circle cx="-60" cy="-230" r="10"/>
+        <circle cx="20" cy="-330" r="8"/><circle cx="-30" cy="-20" r="14"/>
+      </g>
+      <g class="can" style="display:none; transform-origin:55px -111px"><image href="tatra.png" x="40" y="-150" width="30" height="79"/></g>
+      <g class="cig" style="display:none" stroke-linecap="round">
+        <line x1="-18" y1="-292" x2="16" y2="-285" stroke="#141414" stroke-width="9"/>
+        <line x1="-18" y1="-292" x2="16" y2="-285" stroke="#f4f4f2" stroke-width="5"/>
+        <circle cx="16" cy="-285" r="4" fill="#ff5a1f"/>
+      </g>
+    </g></g>
+    <g id="s1" style="display:none"><g class="bob" style="transform-origin:0px 0px">
+      <image href="saper1_sweter.png" x="-116" y="-380" width="232" height="380"/>
+      <g class="muddy" style="display:none" fill="#3b2a1a" stroke="#141414" stroke-width="2">
+        <circle cx="-40" cy="-120" r="18"/><circle cx="30" cy="-200" r="15"/><circle cx="8" cy="-60" r="21"/>
+        <circle cx="-18" cy="-300" r="11"/><circle cx="46" cy="-90" r="12"/><circle cx="-60" cy="-230" r="10"/>
+        <circle cx="20" cy="-330" r="8"/><circle cx="-30" cy="-20" r="14"/>
+      </g>
+      <g class="can" style="display:none; transform-origin:-77px -65px"><image href="tatra.png" x="-92" y="-104" width="30" height="79"/></g>
+      <g class="cig" style="display:none" stroke-linecap="round">
+        <line x1="0" y1="-260" x2="32" y2="-252" stroke="#141414" stroke-width="9"/>
+        <line x1="0" y1="-260" x2="32" y2="-252" stroke="#f4f4f2" stroke-width="5"/>
+        <circle cx="32" cy="-252" r="4" fill="#ff5a1f"/>
+      </g>
+    </g></g>
+    <text id="phone" x="0" y="0" font-size="56" style="display:none">📱</text>
+
+    <!-- MIREK - kierowca (obrazek, stopy w 0,0) -->
+    <g id="mirek" style="display:none"><g class="bob" style="transform-origin:0px 0px">
+      <image href="kierowca_sweter.png" x="-87" y="-380" width="175" height="380"/>
+      <g id="camcorder" style="display:none" stroke="#141414" stroke-width="3" stroke-linejoin="round">
+        <rect x="26" y="-158" width="70" height="42" rx="8" fill="#2b2b2b"/>
+        <rect x="8" y="-150" width="22" height="26" rx="4" fill="#444"/>
+        <circle cx="8" cy="-137" r="10" fill="#6fa8dc"/>
+        <rect x="70" y="-176" width="30" height="20" rx="3" fill="#555"/>
+        <circle cx="86" cy="-148" r="5" fill="#ff2a2a" stroke="none"/>
+      </g>
+      <g class="muddy" style="display:none" fill="#3b2a1a" stroke="#141414" stroke-width="2">
+        <circle cx="-40" cy="-120" r="18"/><circle cx="30" cy="-200" r="15"/><circle cx="8" cy="-60" r="21"/>
+        <circle cx="-18" cy="-300" r="11"/><circle cx="46" cy="-90" r="12"/><circle cx="-60" cy="-230" r="10"/>
+        <circle cx="20" cy="-330" r="8"/><circle cx="-30" cy="-20" r="14"/>
+      </g>
+      <g class="can" style="display:none; transform-origin:53px -101px"><image href="tatra.png" x="38" y="-140" width="30" height="79"/></g>
+      <g class="cig" style="display:none" stroke-linecap="round">
+        <line x1="4" y1="-276" x2="36" y2="-270" stroke="#141414" stroke-width="9"/>
+        <line x1="4" y1="-276" x2="36" y2="-270" stroke="#f4f4f2" stroke-width="5"/>
+        <circle cx="36" cy="-270" r="4" fill="#ff5a1f"/>
+      </g>
+    </g></g>
+
+    <!-- UBIJACZ: komentuje i ubija noga ziemie (jak z filmu: jasna koszula, czapka, kalosze) -->
+    <g id="ubij" style="display:none">
+      <g id="uLean" style="transform-origin:0px 0px" stroke="#141414" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <g id="uLegL" style="transform-origin:-28px -165px">
+          <rect x="-48" y="-165" width="40" height="110" fill="#2d3a55"/>
+          <path d="M-54 -92 H-4 V-6 Q-4 0 -10 0 H-62 Q-68 0 -66 -8 Z" fill="#3b3f45"/>
+          <rect x="-54" y="-96" width="50" height="12" fill="#c9ccd1"/>
+        </g>
+        <g id="uLegR" style="transform-origin:28px -165px">
+          <rect x="8" y="-165" width="40" height="110" fill="#2d3a55"/>
+          <path d="M4 -92 H54 V-6 Q54 0 48 0 H-4 Q-10 0 -8 -8 Z" fill="#3b3f45"/>
+          <rect x="4" y="-96" width="50" height="12" fill="#c9ccd1"/>
+          <g class="uDirtLeg" style="display:none" fill="#3b2a1a" stroke="none">
+            <circle cx="20" cy="-110" r="9"/><circle cx="36" cy="-140" r="7"/><circle cx="30" cy="-90" r="6"/>
+          </g>
+        </g>
+        <!-- kieszenie spodni z wlozonymi dlonmi -->
+        <path d="M-66 -162 Q-56 -132 -36 -132 L-40 -162 Z" fill="#23304a"/>
+        <path d="M66 -162 Q56 -132 36 -132 L40 -162 Z" fill="#23304a"/>
+        <!-- jasny sweter z dlugim rekawem, rece w kieszeniach (lokcie na zewnatrz) -->
+        <g id="uArmPocketL">
+          <path d="M-72 -330 Q-124 -250 -52 -146" fill="none" stroke-width="40"/>
+          <path d="M-72 -330 Q-124 -250 -52 -146" fill="none" stroke="#e9e4d8" stroke-width="30"/>
+        </g>
+        <g id="uArmPocketR">
+          <path d="M72 -330 Q124 -250 52 -146" fill="none" stroke-width="40"/>
+          <path d="M72 -330 Q124 -250 52 -146" fill="none" stroke="#e9e4d8" stroke-width="30"/>
+        </g>
+        <path d="M-80 -340 Q-94 -160 -62 -150 H62 Q94 -160 80 -340 Q0 -364 -80 -340 Z" fill="#e9e4d8"/>
+        <path d="M-64 -158 H64" stroke="#cfc8b8" stroke-width="6"/>
+        <path d="M-80 -340 Q-118 -250 -58 -150" fill="none" stroke="#cfc8b8" stroke-width="3" opacity="0.6"/>
+        <ellipse cx="0" cy="-348" rx="30" ry="10" fill="#e9e4d8"/>
+        <g id="uArmsWave" style="display:none">
+          <g id="uWaveL" style="transform-origin:-70px -326px">
+            <path d="M-70 -326 Q-130 -360 -150 -430" fill="none" stroke-width="40"/>
+            <path d="M-70 -326 Q-130 -360 -150 -430" fill="none" stroke="#e9e4d8" stroke-width="30"/>
+            <circle cx="-152" cy="-442" r="18" fill="#e7b08c"/>
+          </g>
+          <g id="uWaveR" style="transform-origin:70px -326px">
+            <path d="M70 -326 Q130 -360 150 -430" fill="none" stroke-width="40"/>
+            <path d="M70 -326 Q130 -360 150 -430" fill="none" stroke="#e9e4d8" stroke-width="30"/>
+            <circle cx="152" cy="-442" r="18" fill="#e7b08c"/>
+          </g>
+        </g>
+        <g id="uArmPush" style="display:none">
+          <path d="M70 -326 Q140 -320 196 -292" fill="none" stroke-width="40"/>
+          <path d="M70 -326 Q140 -320 196 -292" fill="none" stroke="#e9e4d8" stroke-width="30"/>
+          <circle cx="206" cy="-288" r="18" fill="#e7b08c"/>
+        </g>
+        <rect x="-20" y="-372" width="40" height="24" fill="#e7b08c"/>
+        <circle cx="-66" cy="-412" r="15" fill="#e7b08c"/><circle cx="66" cy="-412" r="15" fill="#e7b08c"/>
+        <circle cx="0" cy="-410" r="70" fill="#e7b08c"/>
+        <g fill="#6b5a4a" stroke="none" opacity="0.5">
+          <circle cx="-40" cy="-364" r="2.4"/><circle cx="-24" cy="-354" r="2.4"/><circle cx="24" cy="-354" r="2.4"/>
+          <circle cx="40" cy="-364" r="2.4"/><circle cx="0" cy="-348" r="2.4"/><circle cx="-52" cy="-380" r="2.4"/><circle cx="52" cy="-380" r="2.4"/>
+        </g>
+        <path id="uBrowL" d="M-44 -440 L-12 -432" stroke="#3b2a1c" stroke-width="8"/>
+        <path id="uBrowR" d="M12 -432 L44 -440" stroke="#3b2a1c" stroke-width="8"/>
+        <circle cx="-26" cy="-416" r="7" fill="#111" stroke="none"/><circle cx="26" cy="-416" r="7" fill="#111" stroke="none"/>
+        <path d="M0 -408 q12 16 -4 22" fill="none" stroke-width="4"/>
+        <path id="uMouthC" d="M-20 -366 Q0 -358 20 -366" fill="none"/>
+        <ellipse id="uMouthO" cx="0" cy="-364" rx="16" ry="12" fill="#5a1414" style="display:none"/>
+        <path d="M-70 -436 Q-68 -494 0 -496 Q68 -494 72 -436 Q0 -456 -70 -436 Z" fill="#2356b0"/>
+        <path d="M-72 -440 Q0 -470 72 -440 Q60 -418 0 -424 Q-60 -418 -72 -440 Z" fill="#1a4290"/>
+        <g id="uDirt" style="display:none" fill="#3b2a1a" stroke="#141414" stroke-width="2">
+          <circle cx="-30" cy="-260" r="20"/><circle cx="40" cy="-200" r="16"/><circle cx="-10" cy="-410" r="14"/>
+          <circle cx="36" cy="-430" r="9"/><circle cx="-50" cy="-180" r="12"/><circle cx="10" cy="-300" r="10"/>
+        </g>
+      </g>
+    </g>
+    <!-- bloto, w ktore sie zapada -->
+    <path id="uSink" style="display:none" d="M200 902 V830 Q230 722 360 712 Q490 722 520 830 V902 Z" fill="#2f2116" stroke="#141414" stroke-width="5"/>
+
+    <g id="fx"></g>
+    <g id="bubbles"></g>
+   </g>
+    <!-- podglad z kamery Siketa: REC + licznik -->
+    <g id="rec" style="display:none" font-family="'Courier New', monospace" font-weight="700">
+      <path d="M40 90 V40 H90 M1510 40 H1560 V90 M1560 810 V860 H1510 M90 860 H40 V810" fill="none" stroke="#fff" stroke-width="6"/>
+      <circle id="recDot" cx="80" cy="120" r="14" fill="#ff2a2a"/>
+      <text id="recLabel" x="104" y="132" font-size="36" fill="#fff" stroke="#141414" stroke-width="1.5">REC</text>
+      <text id="recTime" x="1540" y="132" text-anchor="end" font-size="34" fill="#fff" stroke="#141414" stroke-width="1.5">00:00:00</text>
+    </g>
+    <!-- bloto na "kamerze" -->
+    <g id="splats" style="display:none" fill="#3b2a1a" stroke="#141414" stroke-width="4">
+      <g class="sp" style="transform-origin:180px 160px"><circle cx="180" cy="160" r="90"/><circle cx="270" cy="120" r="34"/><circle cx="110" cy="250" r="28"/></g>
+      <g class="sp" style="transform-origin:1400px 740px"><circle cx="1400" cy="740" r="110"/><circle cx="1290" cy="820" r="36"/><circle cx="1520" cy="640" r="30"/></g>
+      <g class="sp" style="transform-origin:1250px 180px"><circle cx="1250" cy="180" r="60"/><circle cx="1320" cy="250" r="22"/></g>
+    </g>
+  </g>
+  <rect id="flash" width="1600" height="900" fill="#fff" opacity="0" pointer-events="none"/>
+  <rect id="fade" width="1600" height="900" fill="#000" opacity="0" pointer-events="none"/>
+</svg>
+
+<div class="overlay" id="startScreen">
+  <h1>MOKRE POLE</h1>
+  <p>odcinek 3</p>
+  <button class="btn" id="playBtn" autofocus>▶ Odtwórz</button>
+</div>
+<div class="overlay" id="endScreen" hidden>
+  <h1>KONIEC</h1>
+  <button class="btn" id="againBtn">↺ Od nowa</button>
+</div>
+</div>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const NS = "http://www.w3.org/2000/svg";
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+  // ---------- dzwiek (generowany, bez plikow) ----------
+  let actx = null;
+  function ac(){
+    if (!actx) actx = new (window.AudioContext || window.webkitAudioContext)();
+    if (actx.state === "suspended") actx.resume();
+    return actx;
+  }
+  function tone(freq, dur, type = "square", vol = 0.05, glideTo){
+    const a = ac(), t = a.currentTime, o = a.createOscillator(), g = a.createGain();
+    o.type = type; o.frequency.setValueAtTime(freq, t);
+    if (glideTo) o.frequency.exponentialRampToValueAtTime(glideTo, t + dur);
+    g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(a.destination); o.start(t); o.stop(t + dur + 0.02);
+  }
+  function noise(dur, { freq = 1000, q = 1, vol = 0.3, type = "bandpass", sweepTo } = {}){
+    const a = ac(), t = a.currentTime, len = Math.floor(a.sampleRate * dur);
+    const buf = a.createBuffer(1, len, a.sampleRate), d = buf.getChannelData(0);
+    for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+    const s = a.createBufferSource(); s.buffer = buf;
+    const f = a.createBiquadFilter(); f.type = type; f.Q.value = q; f.frequency.setValueAtTime(freq, t);
+    if (sweepTo) f.frequency.exponentialRampToValueAtTime(sweepTo, t + dur);
+    const g = a.createGain(); g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    s.connect(f); f.connect(g); g.connect(a.destination); s.start(t); s.stop(t + dur);
+  }
+  function engine(){
+    const a = ac(), o = a.createOscillator(), f = a.createBiquadFilter(), g = a.createGain();
+    o.type = "sawtooth"; o.frequency.value = 45; f.type = "lowpass"; f.frequency.value = 380; g.gain.value = 0.0001;
+    o.connect(f); f.connect(g); g.connect(a.destination); o.start();
+    return {
+      set(freq, vol, ramp = 0.3){ const t = a.currentTime; o.frequency.linearRampToValueAtTime(freq, t + ramp); g.gain.linearRampToValueAtTime(vol, t + ramp); },
+      stop(ramp = 0.4){ const t = a.currentTime; g.gain.linearRampToValueAtTime(0.0001, t + ramp); o.stop(t + ramp + 0.05); }
+    };
+  }
+  const sfx = {
+    beep(){ tone(1750, 0.07, "square", 0.04); },
+    dig(){ noise(0.18, { freq: 500, type: "lowpass", vol: 0.45 }); noise(0.1, { freq: 3000, q: 3, vol: 0.08 }); },
+    thud(){ tone(110, 0.3, "sine", 0.5, 40); noise(0.2, { freq: 300, type: "lowpass", vol: 0.35 }); },
+    clank(){ tone(620 + Math.random() * 200, 0.25, "triangle", 0.08, 480); noise(0.08, { freq: 4000, q: 2, vol: 0.12 }); },
+    door(){ noise(0.12, { freq: 600, type: "lowpass", vol: 0.4 }); tone(95, 0.12, "square", 0.08, 60); },
+    brake(){ noise(0.5, { freq: 1400, q: 1.5, vol: 0.14 }); },
+    screech(){ noise(1.6, { freq: 2700, q: 9, vol: 0.4, sweepTo: 1700 }); tone(1900, 1.5, "sawtooth", 0.025, 1250); },
+    spit(){ noise(0.16, { freq: 2500, q: 1.2, vol: 0.35, sweepTo: 900 }); },
+    stomp(){ tone(150, 0.3, "sine", 0.55, 38); noise(0.14, { freq: 320, type: "lowpass", vol: 0.3 }); },
+    squelch(){ noise(0.35, { freq: 420, q: 3, vol: 0.4, sweepTo: 160 }); tone(90, 0.3, "sine", 0.3, 50); },
+    ding(){ tone(1320, 0.5, "sine", 0.1); },
+    dial(){ tone(425, 0.9, "sine", 0.08); },
+    boom(){
+      noise(2.6, { freq: 900, type: "lowpass", vol: 0.9, sweepTo: 80 });
+      tone(90, 1.8, "sine", 0.7, 25); tone(55, 2.2, "sawtooth", 0.15, 20);
+    },
+    voice(pitch){ tone(pitch * (0.8 + Math.random() * 0.45), 0.07, "square", 0.045); }
+  };
+
+  // ---------- animacja ----------
+  const anim = (el, frames, opts) => el.animate(frames, Object.assign({ fill: "forwards" }, opts)).finished.catch(() => {});
+  const busT = (x, y = 494) => `translate(${x}px,${y}px)`;
+
+  function puff(x, y, { r = 26, dur = 1100, dx = 0, dy = -80, color = "#dcdcdc" } = {}){
+    const c = document.createElementNS(NS, "circle");
+    c.setAttribute("cx", x); c.setAttribute("cy", y); c.setAttribute("r", r);
+    c.setAttribute("fill", color); c.setAttribute("stroke", "#141414"); c.setAttribute("stroke-width", "4");
+    c.style.transformOrigin = `${x}px ${y}px`;
+    $("fx").append(c);
+    c.animate([{ transform: "translate(0,0) scale(.3)", opacity: 1 },
+               { transform: `translate(${dx}px,${dy}px) scale(1.6)`, opacity: 0 }],
+              { duration: dur, easing: "ease-out", fill: "forwards" })
+     .finished.then(() => c.remove()).catch(() => {});
+  }
+  // gruda ziemi lecaca po luku
+  function clod(x, y, dx, h){
+    const c = document.createElementNS(NS, "circle");
+    c.setAttribute("cx", x); c.setAttribute("cy", y); c.setAttribute("r", 9 + Math.random() * 8);
+    c.setAttribute("fill", "#6b5230"); c.setAttribute("stroke", "#141414"); c.setAttribute("stroke-width", "3");
+    $("fx").append(c);
+    c.animate([{ transform: "translate(0,0)" }, { transform: `translate(${dx / 2}px,${-h}px)` }, { transform: `translate(${dx}px,20px)`, opacity: 0.2 }],
+              { duration: 700, easing: "ease-out", fill: "forwards" })
+     .finished.then(() => c.remove()).catch(() => {});
+  }
+  function shake(power = 14, dur = 420){
+    return anim($("world"), [
+      { transform: "translate(0,0)" }, { transform: `translate(${-power}px,${power * .6}px)` }, { transform: `translate(${power}px,${-power * .5}px)` },
+      { transform: `translate(${-power * .6}px,${power * .3}px)` }, { transform: `translate(${power * .4}px,0)` }, { transform: "translate(0,0)" }], { duration: dur });
+  }
+  async function fadeTo(fn){
+    await anim($("fade"), [{ opacity: 0 }, { opacity: 1 }], { duration: 450 });
+    fn();
+    await sleep(150);
+    await anim($("fade"), [{ opacity: 1 }, { opacity: 0 }], { duration: 450 });
+  }
+  function scene(id){ ["scField"].forEach(s => $(s).style.display = s === id ? "" : "none"); }
+
+  // ---------- aktorzy ----------
+  // pozycja stop (x, y), skala; img = postac-obrazek (saperzy), head = wysokosc glowy nad stopami (do dymka)
+  const who = {
+    s1: { el: "s1", img: true, x: -300, y: 800, s: 1, head: 385, pitch: 170, vPitch: 0.7, vRate: 1.0 },
+    s2: { el: "s2", img: true, x: -150, y: 800, s: 1, head: 385, pitch: 210, vPitch: 0.95, vRate: 1.05 },
+    m:  { el: "mirek", img: true, x: 0, y: 800, s: 1, head: 385, pitch: 85, vPitch: 0, vRate: 0.85 },
+    u:  { el: "ubij", x: 360, y: 800, s: 0.95, head: 470, pitch: 150, vPitch: 0.75, vRate: 1.1, mouthO: "uMouthO", mouthC: "uMouthC" }
+  };
+
+  const actT = (w, x = w.x, y = w.y) => `translate(${x}px,${y}px) scale(${w.s})`;
+  function place(k, x, y = who[k].y){ const w = who[k]; w.x = x; w.y = y; $(w.el).style.transform = actT(w); $(w.el).style.display = ""; }
+  function hide(k){ $(who[k].el).style.display = "none"; }
+  // saper w busie = jego glowa w oknie
+  function inBus(k, on){ $(k === "s1" ? "busS1" : "busS2").style.display = on ? "" : "none"; if (on) hide(k); }
+
+  // chod: saperzy bujaja sie calym obrazkiem, Mirek macha konczynami
+  const gaits = {};
+  function gait(k, on, step = 0.4){
+    (gaits[k] || []).forEach(a => a.cancel()); gaits[k] = [];
+    if (!on) return;
+    const o = { duration: step * 1000, direction: "alternate", iterations: Infinity, easing: "ease-in-out" };
+    if (who[k].img){
+      gaits[k].push($(who[k].el).querySelector(".bob").animate(
+        [{ transform: "translateY(0) rotate(-3deg)" }, { transform: "translateY(-14px) rotate(3deg)" }], o));
+    } else {
+      const swing = (id, a) => $(id) && gaits[k].push($(id).animate([{ transform: `rotate(${a}deg)` }, { transform: `rotate(${-a}deg)` }], o));
+      swing(k + "LegL", 24); swing(k + "LegR", -24);
+    }
+  }
+  async function walkTo(k, x, dur, step){
+    const w = who[k], from = actT(w);
+    gait(k, true, step);
+    await anim($(w.el), [{ transform: from }, { transform: actT(w, x) }], { duration: dur, easing: "linear" });
+    w.x = x; gait(k, false);
+    $(w.el).style.transform = actT(w);
+  }
+  async function hop(k, h = 60, dur = 380){
+    const w = who[k];
+    await anim($(w.el), [{ transform: actT(w) }, { transform: actT(w, w.x, w.y - h) }, { transform: actT(w) }], { duration: dur, easing: "ease-out" });
+  }
+
+  // ---------- dymki (jak w odc. 1) ----------
+  function makeBubble(tipX, tipY, lines, shift = 0){
+    const g = document.createElementNS(NS, "g");
+    const tail = document.createElementNS(NS, "path");
+    const rect = document.createElementNS(NS, "rect");
+    const patch = document.createElementNS(NS, "path");
+    const text = document.createElementNS(NS, "text");
+    text.setAttribute("font-size", "40"); text.setAttribute("font-weight", "700");
+    text.setAttribute("font-family", '"Comic Sans MS","Chalkboard SE",sans-serif'); text.setAttribute("fill", "#111");
+    g.append(tail, rect, patch, text);
+    g.style.transform = `translate(${tipX}px,${tipY}px) scale(0)`;
+    $("bubbles").append(g);
+
+    const spans = lines.map(() => { const t = document.createElementNS(NS, "tspan"); text.append(t); return t; });
+    let maxW = 0;
+    spans.forEach((s, i) => { s.textContent = lines[i]; maxW = Math.max(maxW, s.getComputedTextLength()); });
+    const lh = 50, padX = 34, padY = 26;
+    const W = maxW + padX * 2, H = lines.length * lh + padY * 2 - 10;
+    let left = Math.max(20, Math.min(1580 - W, tipX + shift - W / 2));
+    const bx = left - tipX, by = -38 - H;
+    const tb = Math.min(Math.max(0, bx + 34), bx + W - 54);
+    Object.entries({ x: bx, y: by, width: W, height: H, rx: 26, fill: "#fff", stroke: "#111", "stroke-width": 5 })
+      .forEach(([k, v]) => rect.setAttribute(k, v));
+    tail.setAttribute("d", `M${tb - 18} -46 L0 0 L${tb + 22} -46 Z`);
+    tail.setAttribute("fill", "#fff"); tail.setAttribute("stroke", "#111"); tail.setAttribute("stroke-width", "5");
+    patch.setAttribute("d", `M${tb - 13} -38 L${tb + 17} -38`); patch.setAttribute("stroke", "#fff"); patch.setAttribute("stroke-width", "7");
+    spans.forEach((s, i) => { s.setAttribute("x", bx + padX); s.setAttribute("y", by + padY + 34 + i * lh); s.textContent = ""; });
+    return { g, spans, lines, tipX, tipY };
+  }
+
+  // ---------- glos (synteza mowy przegladarki, fallback: bla-bla) ----------
+  const tts = window.speechSynthesis;
+  let plVoice = null;
+  function pickVoice(){
+    if (!tts) return;
+    const vs = tts.getVoices().filter(v => /^pl/i.test(v.lang));
+    plVoice = vs.find(v => /zosia|ewa|krzysztof|google/i.test(v.name)) || vs[0] || null;
+  }
+  if (tts){ pickVoice(); tts.addEventListener?.("voiceschanged", pickVoice); }
+  function unlockSpeech(){
+    if (!tts) return;
+    tts.cancel(); pickVoice();
+    const u = new SpeechSynthesisUtterance(" "); u.volume = 0; tts.speak(u);
+  }
+  // nagrane kwestie (kierowca): odtwarzane wolniej i bez zachowania wysokosci = bardzo niski, gruby glos
+  const CLIPS = {
+    "Co, zakopał się?": "glosy/kierowca5.m4a",
+    "Paweł, chodź, żeby mi nie wiało w mikrofon… ustań, żeby nie wiało.": "glosy/kierowca6.m4a",
+    "Kurde, nie mam karty pamięci.": "glosy/kierowca7.m4a",
+    "Widzisz, koło się zapada, siądzie znowu.": "glosy/kierowca8.m4a",
+    "Saper, wypierdalaj sprzed kamery!": "glosy/kierowca9.m4a"
+  };
+
+  const DEEP = 0.55;
+  const clipEls = {};
+  function clipFor(text){
+    const src = CLIPS[text];
+    if (!src) return null;
+    if (!clipEls[src]){
+      const a = new Audio(src); a.preload = "auto";
+      a.preservesPitch = false; a.mozPreservesPitch = false; a.webkitPreservesPitch = false;
+      clipEls[src] = a;
+    }
+    return clipEls[src];
+  }
+  function unlockClips(){
+    Object.keys(CLIPS).forEach(t => { const a = clipFor(t); a.muted = true;
+      a.play().then(() => { a.pause(); a.currentTime = 0; a.muted = false; }).catch(() => { a.muted = false; }); });
+  }
+  function playClip(a){
+    return new Promise(res => {
+      a.currentTime = 0; a.playbackRate = DEEP;
+      a.preservesPitch = false; a.mozPreservesPitch = false; a.webkitPreservesPitch = false;
+      const guard = setTimeout(res, 8000);
+      a.onended = a.onerror = () => { clearTimeout(guard); res(); };
+      a.play().catch(() => { clearTimeout(guard); res(); });
+    });
+  }
+  function speak(text, w, { pitch, rate } = {}){
+    const clip = clipFor(text);
+    if (clip) return playClip(clip);
+    if (!tts || !plVoice) return null;
+    return new Promise(res => {
+      const u = new SpeechSynthesisUtterance(text);
+      u.voice = plVoice; u.lang = plVoice.lang;
+      u.pitch = pitch ?? w.vPitch; u.rate = rate ?? w.vRate;
+      const guard = setTimeout(res, 800 + text.length * 140);
+      u.onend = u.onerror = () => { clearTimeout(guard); res(); };
+      tts.speak(u);
+    });
+  }
+
+  // mowienie: saperzy podskakuja w rytm, rysowani ruszaja ustami
+  function talking(k, on){
+    const w = who[k];
+    if (w.img){
+      if (on) w._talk = $(w.el).querySelector(".bob").animate(
+        [{ transform: "translateY(0) scaleY(1)" }, { transform: "translateY(-8px) scaleY(1.02)" }],
+        { duration: 160, direction: "alternate", iterations: Infinity });
+      else if (w._talk){ w._talk.cancel(); w._talk = null; }
+      return;
+    }
+    clearInterval(w._talk);
+    let open = false;
+    if (on) w._talk = setInterval(() => {
+      open = !open;
+      $(w.mouthO).style.display = open ? "" : "none";
+      $(w.mouthC).style.display = open ? "none" : "";
+    }, 110);
+    else { $(w.mouthO).style.display = "none"; $(w.mouthC).style.display = ""; }
+  }
+
+  async function say(k, lines, shift = 0, { instant = false, pitch, rate } = {}){
+    const w = who[k], tx = w.x, ty = w.y - w.head;
+    const b = makeBubble(tx, ty, lines, shift);
+    await anim(b.g, [{ transform: `translate(${tx}px,${ty}px) scale(0)` }, { transform: `translate(${tx}px,${ty}px) scale(1)` }],
+               { duration: 200, easing: "cubic-bezier(.3,1.6,.6,1)" });
+    if (instant){ b.spans.forEach((s, i) => s.textContent = lines[i]); return b; }
+    talking(k, true);
+    const spoken = speak(lines.join(" "), w, { pitch, rate });
+    for (let i = 0; i < lines.length; i++){
+      for (const ch of lines[i]){
+        b.spans[i].textContent += ch;
+        if (ch !== " " && !spoken) sfx.voice(w.pitch);
+        await sleep(spoken ? 45 : 58);
+      }
+    }
+    if (spoken) await spoken;
+    talking(k, false);
+    return b;
+  }
+  async function unsay(b){
+    await anim(b.g, [{ transform: `translate(${b.tipX}px,${b.tipY}px) scale(1)` }, { transform: `translate(${b.tipX}px,${b.tipY}px) scale(0)` }], { duration: 150 });
+    b.g.remove();
+  }
+  async function line(k, lines, hold = 1600, shift = 0, opts){
+    const b = await say(k, lines, shift, opts);
+    await sleep(hold); await unsay(b); await sleep(250);
+  }
+
+  // ---------- rekwizyty ----------
+  let wheelAnims = [];
+  function spinWheels(dir, period = 0.5){
+    wheelAnims.forEach(a => a.cancel()); wheelAnims = [];
+    if (!dir) return;
+    document.querySelectorAll("#bus .bw").forEach(w => wheelAnims.push(
+      w.animate([{ transform: "rotate(0deg)" }, { transform: `rotate(${dir * 360}deg)` }],
+                { duration: period * 1000, iterations: Infinity })));
+  }
+  let busX = 1750;
+  async function busDrive(x, dur, easing = "cubic-bezier(.2,.7,.35,1)", y = 494){
+    const from = busT(busX, y); busX = x;
+    await anim($("bus"), [{ transform: from }, { transform: busT(x, y) }], { duration: dur, easing });
+  }
+  function exhaust(y = 494){ return setInterval(() => puff(busX + 600, y + 250, { r: 18, dur: 1000, dx: 50, dy: -40, color: "#9a9a9a" }), 140); }
+
+  // wykrywacz: pierscienie przy talerzu wykrywacza + pisk, coraz szybciej
+  async function detector(times){
+    const hx = who.s2.x + 86, hy = who.s2.y - 26;
+    for (let i = 0; i < times; i++){
+      sfx.beep();
+      const c = document.createElementNS(NS, "circle");
+      c.setAttribute("cx", hx); c.setAttribute("cy", hy); c.setAttribute("r", 20);
+      c.setAttribute("fill", "none"); c.setAttribute("stroke", "#ffd23f"); c.setAttribute("stroke-width", "6");
+      c.style.transformOrigin = `${hx}px ${hy}px`;
+      $("detFx").append(c);
+      c.animate([{ transform: "scale(.4)", opacity: 1 }, { transform: "scale(3)", opacity: 0 }], { duration: 600, fill: "forwards" })
+       .finished.then(() => c.remove()).catch(() => {});
+      await sleep(Math.max(90, 520 - i * 38));
+    }
+  }
+
+  // papierosy: czubek wzgledem stop postaci
+  const CIG_TIP = { s1: [32, -252], s2: [16, -285], m: [36, -270] };
+  let cigSmoke = null;
+  function smokeCigs(on, ks = ["s1", "s2"]){
+    clearInterval(cigSmoke);
+    ["s1", "s2", "m"].forEach(k => $(who[k].el).querySelector(".cig").style.display = on && ks.includes(k) ? "" : "none");
+    if (!on) return;
+    cigSmoke = setInterval(() => ks.forEach(k => {
+      const [dx, dy] = CIG_TIP[k];
+      puff(who[k].x + dx, who[k].y + dy - 6, { r: 7, dur: 1600, dx: 10 + Math.random() * 20, dy: -90, color: "#cfcfcf" });
+    }), 380);
+  }
+  function burp(){ const a = ac(), t = a.currentTime;
+    tone(95 + Math.random() * 30, 0.55, "sawtooth", 0.12, 55); noise(0.45, { freq: 260, q: 4, vol: 0.25 }); }
+  function gulp(){ tone(180, 0.09, "sine", 0.15, 90); }
+  // przesuniecie puszki do ust [dx, dy, obrot]: wieczko przy ustach, dno do gory
+  const SIP = { s1: [20, -212, 110], s2: [-40, -194, -110], m: [-21, -186, -110] };
+  async function drink(ks){
+    const up = k => `translate(${SIP[k][0]}px,${SIP[k][1]}px) rotate(${SIP[k][2]}deg)`;
+    const rest = "translate(0,0) rotate(0deg)";
+    await Promise.all(ks.map(k => anim($(who[k].el).querySelector(".can"), [{ transform: rest }, { transform: up(k) }], { duration: 450, easing: "ease-out" })));
+    for (let i = 0; i < 4; i++){ gulp(); await sleep(260); }
+    await Promise.all(ks.map(k => anim($(who[k].el).querySelector(".can"), [{ transform: up(k) }, { transform: rest }], { duration: 400 })));
+  }
+  function lighter(){ noise(0.06, { freq: 5000, q: 2, vol: 0.15 }); tone(300, 0.2, "sine", 0.02); }
+
+
+  // ---------- koparka ----------
+  let catWheels = [];
+  function spinCat(period){
+    catWheels.forEach(a => a.cancel()); catWheels = [];
+    if (!period) return;
+    document.querySelectorAll("#scField .cw").forEach(w => catWheels.push(
+      w.animate([{ transform: "rotate(0deg)" }, { transform: "rotate(360deg)" }], { duration: period * 1000, iterations: Infinity })));
+  }
+  // bloto spod kol (tylne kolo pryska do tylu = w lewo)
+  function mudSpray(ms, strong = false){
+    const t = setInterval(() => {
+      for (let i = 0; i < (strong ? 4 : 2); i++){
+        clod(830 + Math.random() * 60, 700, -(180 + Math.random() * (strong ? 420 : 220)), 120 + Math.random() * 160);
+        if (strong) clod(1150 + Math.random() * 40, 720, 160 + Math.random() * 360, 120 + Math.random() * 160);
+      }
+    }, 90);
+    return sleep(ms).then(() => clearInterval(t));
+  }
+  function catSmoke(){ return setInterval(() => puff(1058, 450, { r: 16, dur: 1200, dx: -30, dy: -90, color: "#555" }), 180); }
+  async function catLift(cat){
+    cat.set(115, 0.18, 0.3);
+    await anim($("boom"), [{ transform: "rotate(0deg)" }, { transform: "rotate(-14deg)" }], { duration: 600, easing: "ease-in" });
+    await anim($("catBody"), [{ transform: "translate(0,0) rotate(0deg)" }, { transform: "translate(0,-44px) rotate(-3deg)" }], { duration: 700, easing: "ease-out" });
+    await sleep(350);
+    cat.set(70, 0.1, 0.3);
+    anim($("boom"), [{ transform: "rotate(-14deg)" }, { transform: "rotate(0deg)" }], { duration: 500 });
+    await anim($("catBody"), [{ transform: "translate(0,-44px) rotate(-3deg)" }, { transform: "translate(0,0) rotate(0deg)" }], { duration: 260, easing: "ease-in" });
+    sfx.squelch(); shake(8, 280);
+    puff(700, 770, { r: 26, color: "#3b2a1a", dx: -60, dy: -50 }); puff(1150, 780, { r: 26, color: "#3b2a1a", dx: 60, dy: -50 });
+  }
+
+  // ---------- kamera Siketa ----------
+  let recTimer = null, recBlink = null;
+  function recording(on){
+    clearInterval(recTimer); if (recBlink) recBlink.cancel();
+    $("recLabel").textContent = "REC"; $("recDot").style.display = "";
+    $("camcorder").style.display = on ? "" : "none"; $("rec").style.display = on ? "" : "none";
+    if (!on) return;
+    const t0 = Date.now();
+    recTimer = setInterval(() => {
+      const sec = Math.floor((Date.now() - t0) / 1000);
+      $("recTime").textContent = `00:${String(Math.floor(sec / 60)).padStart(2, "0")}:${String(sec % 60).padStart(2, "0")}`;
+    }, 250);
+    recBlink = $("recDot").animate([{ opacity: 1 }, { opacity: 0.1 }], { duration: 500, direction: "alternate", iterations: Infinity });
+  }
+
+  // ---------- wiatr ----------
+  function wind(ms){
+    noise(ms / 1000, { freq: 500, q: 0.7, vol: 0.35, sweepTo: 900 });
+    const t = setInterval(() => {
+      const l = document.createElementNS(NS, "path"), y = 150 + Math.random() * 600, w = 120 + Math.random() * 200;
+      l.setAttribute("d", `M0 ${y} q${w / 2} -18 ${w} 0`); l.setAttribute("fill", "none");
+      l.setAttribute("stroke", "#ffffff"); l.setAttribute("stroke-width", "5"); l.setAttribute("stroke-linecap", "round"); l.setAttribute("opacity", "0.8");
+      $("fx").append(l);
+      l.animate([{ transform: "translate(1700px,0)" }, { transform: `translate(${-w - 100}px,20px)` }], { duration: 700 + Math.random() * 300, fill: "forwards" })
+       .finished.then(() => l.remove()).catch(() => {});
+    }, 90);
+    return sleep(ms).then(() => clearInterval(t));
+  }
+
+  // ---------- ubijacz: tupie noga w ziemie ----------
+  async function stomp(big){
+    const leg = $("uLegR"), u = who.u;
+    await anim(leg, [{ transform: "rotate(0deg)" }, { transform: "rotate(-40deg)" }], { duration: 220, easing: "ease-out" });
+    await anim(leg, [{ transform: "rotate(-40deg)" }, { transform: "rotate(5deg)" }, { transform: "rotate(0deg)" }], { duration: 110, easing: "ease-in" });
+    sfx.stomp(); sfx.squelch();
+    puff(u.x + 40, u.y, { r: 16, dur: 700, dx: 50, dy: -40, color: "#3b2a1a" });
+    puff(u.x + 10, u.y, { r: 16, dur: 700, dx: -40, dy: -40, color: "#3b2a1a" });
+    if (big) shake(14, 380);
+  }
+
+  function reset(){
+    if (tts) tts.cancel();
+    document.getAnimations().forEach(a => a.cancel());
+    wheelAnims = []; catWheels = [];
+    Object.keys(gaits).forEach(k => gaits[k] = []);
+    Object.values(who).forEach(w => { clearInterval(w._talk); w._talk = null; });
+    $("bubbles").innerHTML = ""; $("fx").innerHTML = ""; $("detFx").innerHTML = "";
+    ["s1", "s2", "m"].forEach(hide);
+    Object.assign(who.u, { x: 360, y: 800, head: 470 }); place("u", 360, 800);
+    $("bus").style.display = "none"; busX = 1750; $("bus").style.transform = busT(busX);
+    $("busDrv").style.display = ""; inBus("s1", false); inBus("s2", false);
+    $("uSink").style.display = "none"; $("uDirt").style.display = "none";
+    document.querySelectorAll(".uDirtLeg, .muddy, .cig, .can").forEach(e => e.style.display = "none");
+    $("splats").style.display = "none"; recording(false);
+    $("uArmPush").style.display = "none"; $("uArmPocketR").style.display = "";
+    $("uArmsWave").style.display = "none"; $("uArmPocketL").style.display = "";
+    Object.assign(who.s2, { s: 1, y: 800, head: 385 }); $("cam").style.transform = "";
+    $("uMouthO").style.display = "none"; $("uMouthC").style.display = "";
+    $("fade").style.opacity = 0; $("flash").style.opacity = 0;
+  }
+
+  async function play(){
+    reset(); ac();
+    $("startScreen").hidden = true; $("endScreen").hidden = true;
+    const cat = engine(); cat.set(60, 0.08, 0.3);
+    const beacon = $("beacon").animate([{ fill: "#ff7a1a" }, { fill: "#ffe27a" }], { duration: 350, direction: "alternate", iterations: Infinity });
+    const smoke = catSmoke();
+
+    // 1. buksowanie w blocie, ubijacz tupie
+    await sleep(700);
+    cat.set(120, 0.2, 0.3); spinCat(0.25);
+    await mudSpray(1800);
+    spinCat(0); cat.set(60, 0.08, 0.4);
+    await stomp(); await stomp();
+    await line("u", ["Tu jest twardo, panie!", "Ja mówię, twardo!"], 700, 90);
+    await stomp();
+    document.querySelectorAll(".uDirtLeg").forEach(e => e.style.display = "");
+
+    // 2. podpiera sie lyzka
+    await catLift(cat);
+    await line("u", ["Łyżką go, łyżką!", "Podpieraj!"], 600, 90);
+    await stomp();
+    await catLift(cat);
+    await sleep(400);
+
+    // 3. przyjezdza ekipa
+    $("bus").style.display = ""; inBus("s1", true); inBus("s2", true);
+    let eng = engine(); eng.set(70, 0.09, 0.2);
+    spinWheels(-1, 0.45);
+    let ex = exhaust();
+    await busDrive(1330, 3000);
+    spinWheels(0); sfx.brake(); clearInterval(ex); eng.set(40, 0.04, 0.6);
+    await sleep(500);
+    sfx.door(); eng.stop(0.6);
+    $("busDrv").style.display = "none";
+    place("m", 1440, 800); await hop("m", 70, 420);
+    recording(true); tone(1200, 0.12, "sine", 0.08);
+    walkTo("m", 1250, 1300, 0.34);
+    inBus("s1", false); place("s1", 1440, 800); await hop("s1", 60, 380);
+    walkTo("s1", 1110, 1700, 0.34);
+    inBus("s2", false); place("s2", 1440, 800); await hop("s2", 60, 380);
+    await walkTo("s2", 980, 2200, 0.34);
+    await sleep(300);
+
+    await line("m", ["Co, zakopał się?"], 900, -40);
+    await line("u", ["A gdzie tam!", "Tu jest twardo jak beton!"], 400, 90);
+    // tupie tak mocno, ze sam sie zapada po kolana
+    await stomp(true);
+    sfx.squelch();
+    $("uSink").style.display = "";
+    await anim($("ubij"), [{ transform: actT(who.u) }, { transform: actT(who.u, who.u.x, who.u.y + 90) }], { duration: 600, easing: "ease-in" });
+    who.u.y += 90;
+    await sleep(900);
+
+    // wieje - Siket nagrywa telefonem i wola Pawla
+    const gust = wind(5200);
+    const lean = [ "m", "s1", "s2" ].map(k => $(who[k].el).querySelector(".bob").animate(
+      [{ transform: "rotate(0deg)" }, { transform: "rotate(-4deg)" }], { duration: 600, direction: "alternate", iterations: Infinity }));
+    await sleep(800);
+    await line("m", ["Paweł, chodź, żeby mi nie wiało w mikrofon…", "ustań, żeby nie wiało."], 500, -160);
+    lean[1].cancel();
+    await walkTo("s1", 1335, 1300, 0.34);
+    await hop("s1", 20, 250);
+    await gust;
+    lean.forEach(a => a.cancel());
+    await sleep(600);
+
+    // saper wlazi przed kamere (wielki, na pierwszym planie)
+    const s2x = who.s2.x;
+    Object.assign(who.s2, { s: 2.4, y: 1300, head: 380 }); place("s2", 1800, 1300);
+    await walkTo("s2", 900, 1500, 0.3);
+    await line("m", ["Saper, wypierdalaj", "sprzed kamery!"], 500, -200);
+    await walkTo("s2", 1900, 900, 0.25);
+    Object.assign(who.s2, { s: 1, y: 800, head: 385 }); place("s2", s2x, 800);
+    await sleep(500);
+
+    // kamera na chwile skreca w lewo - stoi tam trzymetrowy facet
+    const pan = x => `translate(${x}px,0)`;
+    await anim($("cam"), [{ transform: pan(0) }, { transform: pan(900) }], { duration: 1100, easing: "ease-in-out" });
+    tone(55, 2.4, "sine", 0.35); tone(58, 2.4, "sine", 0.2); noise(2.2, { freq: 300, q: 6, vol: 0.12 });
+    const slsw = $("slSway").animate([{ transform: "rotate(-1.5deg)" }, { transform: "rotate(1.5deg)" }], { duration: 900, direction: "alternate", iterations: Infinity });
+    await sleep(2200);
+    await anim($("cam"), [{ transform: pan(900) }, { transform: pan(0) }], { duration: 700, easing: "ease-in-out" });
+    slsw.cancel(); $("cam").style.transform = "";
+    await sleep(500);
+
+    // 5. Siket: brak karty pamieci
+    await sleep(400);
+    await line("m", ["Kurde,", "nie mam karty pamięci."], 700, -60);
+    clearInterval(recTimer); recBlink.cancel();
+    $("recLabel").textContent = "BRAK KARTY"; $("recDot").style.display = "none";
+    tone(440, 0.15, "square", 0.05); await sleep(180); tone(330, 0.3, "square", 0.05);
+    await anim($("rec"), [{ opacity: 1 }, { opacity: 0.2 }, { opacity: 1 }, { opacity: 0.2 }, { opacity: 1 }], { duration: 1400 });
+    recording(false); $("camcorder").style.display = "";
+    await sleep(400);
+
+    // 6. gaz - ale koparka zakopuje sie jeszcze glebiej
+    walkTo("s2", 1000, 900, 0.34);
+    cat.set(150, 0.24, 0.3); spinCat(0.1);
+    const dig = mudSpray(2400, true);
+    await anim($("catBody"), [{ transform: "translate(0,0) rotate(0deg)" }, { transform: "translate(0,95px) rotate(3deg)" }], { duration: 2400, easing: "ease-in" });
+    await dig;
+    sfx.squelch(); sfx.squelch();
+    spinCat(0); cat.set(55, 0.07, 0.6);
+    await sleep(600);
+    await line("m", ["Widzisz, koło się zapada,", "siądzie znowu."], 600, -120);
+    await line("s2", ["Ta, patrz, te koło", "się zaraz zajebie."], 900, 40);
+
+    // 7. ubijacz wylazi z blota, kopie w kolo i pcha koparke reka
+    sfx.squelch();
+    await anim($("ubij"), [{ transform: actT(who.u) }, { transform: actT(who.u, who.u.x, who.u.y - 90) }], { duration: 600, easing: "ease-out" });
+    who.u.y -= 90; $("uSink").style.display = "none";
+    // chodzi dookola koparki i tlumaczy operatorowi na migi (bez slow), machajac rekami
+    await walkTo("u", 1180, 2600, 0.4);
+    await sleep(300);
+    await walkTo("u", 780, 2000, 0.4);
+    ["uArmPocketL", "uArmPocketR"].forEach(id => $(id).style.display = "none");
+    $("uArmsWave").style.display = "";
+    const waveO = { duration: 260, direction: "alternate", iterations: Infinity, easing: "ease-in-out" };
+    const w1 = $("uWaveL").animate([{ transform: "rotate(-25deg)" }, { transform: "rotate(30deg)" }], waveO);
+    const w2 = $("uWaveR").animate([{ transform: "rotate(25deg)" }, { transform: "rotate(-30deg)" }], Object.assign({}, waveO, { delay: 130 }));
+    const nod = $("catOp").animate([{ transform: "translateY(0)" }, { transform: "translateY(8px)" }], { duration: 400, direction: "alternate", iterations: Infinity });
+    talking("u", true);
+    const mumble = setInterval(() => sfx.voice(150), 90);
+    for (let n = 0; n < 3; n++){
+      await anim($("uLean"), [{ transform: "rotate(0deg)" }, { transform: "rotate(6deg)" }, { transform: "rotate(-3deg)" }, { transform: "rotate(0deg)" }], { duration: 900 });
+    }
+    clearInterval(mumble); talking("u", false);
+    w1.cancel(); w2.cancel(); nod.cancel();
+    $("uArmsWave").style.display = "none";
+    ["uArmPocketL", "uArmPocketR"].forEach(id => $(id).style.display = "");
+    await walkTo("u", 700, 700, 0.4);
+    for (let n = 0; n < 2; n++){
+      await anim($("uLegR"), [{ transform: "rotate(0deg)" }, { transform: "rotate(25deg)" }], { duration: 200, easing: "ease-out" });
+      await anim($("uLegR"), [{ transform: "rotate(25deg)" }, { transform: "rotate(-55deg)" }], { duration: 120, easing: "ease-in" });
+      sfx.thud(); tone(70, 0.2, "sine", 0.4, 40); shake(6, 200);
+      await anim($("uLegR"), [{ transform: "rotate(-55deg)" }, { transform: "rotate(0deg)" }], { duration: 220 });
+      await sleep(250);
+    }
+    $("uArmPocketR").style.display = "none"; $("uArmPush").style.display = "";
+    for (let n = 0; n < 3; n++){
+      tone(110, 0.35, "sawtooth", 0.05, 80);
+      await anim($("uLean"), [{ transform: "rotate(0deg)" }, { transform: "rotate(9deg)" }, { transform: "rotate(4deg)" }], { duration: 650, easing: "ease-in-out" });
+      anim($("catBody"), [{ transform: "translate(0,95px) rotate(3deg)" }, { transform: "translate(6px,92px) rotate(2deg)" }, { transform: "translate(0,95px) rotate(3deg)" }], { duration: 300 });
+    }
+    await sleep(300);
+
+    // operator wyciaga daleko lyzki i podnosi koparke na lyzkach, ubijacz dyryguje
+    $("uArmPush").style.display = "none"; $("uArmPocketR").style.display = "";
+    await walkTo("u", 560, 900, 0.4);
+    await line("u", ["Wyciągnij łyżkę daleko!", "Dalej! Jeszcze dalej!"], 300, 90);
+    cat.set(110, 0.16, 0.3);
+    await anim($("boom"), [{ transform: "rotate(0deg)" }, { transform: "rotate(18deg)" }], { duration: 900, easing: "ease-in-out" });
+    await line("u", ["Teraz dociśnij!", "I przednią też!"], 300, 90);
+    cat.set(135, 0.2, 0.3);
+    const lift = Promise.all([
+      anim($("boom"), [{ transform: "rotate(18deg)" }, { transform: "rotate(-16deg)" }], { duration: 1200, easing: "ease-in" }),
+      anim($("loader"), [{ transform: "rotate(0deg)" }, { transform: "rotate(9deg)" }], { duration: 1200, easing: "ease-in" }),
+      anim($("catBody"), [{ transform: "translate(0,95px) rotate(3deg)" }, { transform: "translate(0,-40px) rotate(0deg)" }], { duration: 2600, easing: "ease-in-out", delay: 500 })
+    ]);
+    await line("u", ["Pomału, pomału!"], 200, 90, { rate: 0.9 });
+    await lift;
+    sfx.squelch();
+    await line("u", ["Stój! Stój!"], 400, 90, { pitch: 1.3, rate: 1.4 });
+    cat.set(70, 0.1, 0.3);
+    await sleep(500);
+    anim($("boom"), [{ transform: "rotate(-16deg)" }, { transform: "rotate(0deg)" }], { duration: 700 });
+    anim($("loader"), [{ transform: "rotate(9deg)" }, { transform: "rotate(0deg)" }], { duration: 700 });
+    await anim($("catBody"), [{ transform: "translate(0,-40px) rotate(0deg)" }, { transform: "translate(0,95px) rotate(3deg)" }], { duration: 500, easing: "ease-in" });
+    sfx.squelch(); shake(10, 300);
+    await sleep(400);
+
+    // 8. pelny gaz - koparka wyrywa sie z blota i ochlapuje wszystkich
+    cat.set(150, 0.24, 0.3); spinCat(0.1);
+    const spray = mudSpray(2200, true);
+    await sleep(700);
+    anim($("catBody"), [{ transform: "translate(0,95px) rotate(3deg)" }, { transform: "translate(60px,-60px) rotate(-4deg)", offset: 0.4 },
+                        { transform: "translate(110px,-20px) rotate(0deg)", offset: 0.7 }, { transform: "translate(170px,-24px) rotate(0deg)" }], { duration: 2200, easing: "ease-out" });
+    await sleep(500);
+    sfx.squelch(); sfx.squelch();
+    anim($("uLean"), [{ transform: "rotate(4deg)" }, { transform: "rotate(-6deg)" }, { transform: "rotate(0deg)" }], { duration: 500 });
+    $("uArmPush").style.display = "none"; $("uArmPocketR").style.display = "";
+    document.querySelectorAll(".muddy").forEach(e => e.style.display = "");
+    $("uDirt").style.display = "";
+    $("splats").style.display = "";
+    document.querySelectorAll("#splats .sp").forEach((e, k) =>
+      anim(e, [{ transform: "scale(0)" }, { transform: "scale(1.15)" }, { transform: "scale(1)" }], { duration: 300, delay: k * 120 }));
+    shake(10, 400);
+    await spray;
+    spinCat(0); cat.set(60, 0.08, 0.6);
+    await sleep(1200);
+    await line("u", ["Tak się dyryguje,", "kurwancka!"], 1500, 90);
+    await stomp();
+    await sleep(1400);
+    clearInterval(smoke); beacon.cancel(); cat.stop(0.6); recording(false);
+    $("endScreen").hidden = false; $("againBtn").focus();
+  }
+
+  const start = () => { unlockSpeech(); unlockClips(); play(); };
+  $("playBtn").addEventListener("click", start);
+  $("againBtn").addEventListener("click", start);
+</script>
+</body>
+</html>
