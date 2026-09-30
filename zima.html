@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>Zima na wsi</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  html, body { margin:0; height:100%; background:#111; }
+  body { display:flex; align-items:center; justify-content:center;
+    font-family:"Comic Sans MS","Chalkboard SE",sans-serif; }
+  #wrap { position:relative; width:min(100vw, calc(100vh * 16 / 9)); aspect-ratio:16 / 9; }
+  #stage { width:100%; height:100%; display:block; background:#9fd3ff; }
+  .overlay { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center;
+    justify-content:center; gap:24px; text-align:center; color:#fff; background:rgba(0,0,0,.72); }
+  .overlay h1 { margin:0; font-size:clamp(40px,8vw,120px); color:#ffd23f; letter-spacing:2px;
+    -webkit-text-stroke:3px #000; text-shadow:6px 6px 0 #000; transform:rotate(-3deg); }
+  .overlay p { margin:0; font-size:clamp(16px,2vw,28px); }
+  .btn { font:inherit; font-weight:bold; font-size:clamp(20px,2.6vw,36px); padding:.4em 1.2em;
+    color:#000; background:#ffd23f; border:4px solid #000; border-radius:14px;
+    box-shadow:5px 5px 0 #000; cursor:pointer; }
+  .btn:focus-visible { outline:4px solid #fff; outline-offset:4px; }
+  [hidden] { display:none !important; }
+</style>
+</head>
+<body>
+<div id="wrap">
+<svg id="stage" viewBox="0 0 1600 900" aria-label="Bajka: Zima na wsi">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7cc4ff"/><stop offset="1" stop-color="#dff3ff"/>
+    </linearGradient>
+    <linearGradient id="winterNight" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#070c22"/><stop offset="1" stop-color="#2a3a66"/>
+    </linearGradient>
+    <linearGradient id="fifaBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a2a6b"/><stop offset="1" stop-color="#0f7a3a"/>
+    </linearGradient>
+  </defs>
+
+  <g id="world">
+    <!-- ================= ULICA NA WSI, ZIMA, NOC ================= -->
+    <g id="scStreet">
+      <rect width="1600" height="900" fill="url(#winterNight)"/>
+      <g fill="#f4f1d0"><circle cx="120" cy="60" r="2"/><circle cx="420" cy="110" r="2.5"/><circle cx="760" cy="50" r="2"/><circle cx="1040" cy="90" r="2"/><circle cx="1300" cy="40" r="2.2"/>
+        <path d="M1480 70 a52 52 0 1 0 40 92 a44 44 0 1 1 -40 -92 z"/></g>
+      <g id="street">
+        <rect x="-200" y="640" width="7000" height="60" fill="#e8eef7"/>
+        <rect x="-200" y="700" width="7000" height="130" fill="#8fa3b8"/>
+        <path d="M-200 760 H6800" stroke="#b8c8d8" stroke-width="3" stroke-dasharray="80 60" opacity="0.7"/>
+        <path d="M-200 730 l120 -4 M-140 790 l140 6" stroke="#dbe6f2" stroke-width="4" opacity="0.8"/>
+        <path d="M60 730 l120 -4 M120 790 l140 6" stroke="#dbe6f2" stroke-width="4" opacity="0.8"/>
+        <path d="M320 730 l120 -4 M380 790 l140 6" stroke="#dbe6f2" stroke-width="4" opacity="0.8"/>
+        <path d="M580 730 l120 -4 M640 790 l140 6" stroke="#dbe6f2" stroke-width="4" opacity="0.8"/>
+        <path d="M840 730 l120 -4 M900 790 l140 6" stroke="#dbe6f2" stroke-width="4" opacity="0.8"/>
+        <path d="M1100 730 l120 -4 M1160 790 l140 6" stroke="#dbe6f2" stroke-width="4" opacity="0.8"/>
+        <path d="M1360 730 l120 -4 M1420 790 l140 6" stroke="#dbe6f2" stroke-width="4" opacity="0.8"/>
+        <path d="M1620 730 l120 -4 M1680 790 l140 6" stroke="#dbe6f2" stroke-width="4" opacity="0.8"/>
+        <path d="M1880 730 l120 -4 M1940 790 l140 6" stroke="#dbe6f2" stroke-width="4" opacity="0.8"/>
+        <path d="M2140 730 l120 -4 M2200 790 l140 6" stroke="#dbe6f2" stroke-width="4" opacity="0.8"/>
+        <path d="M2400 730 l120 -4 M2460 790 l140 6" stroke="#dbe6f2" stroke-width="4" opacity="0.8"/>
+        <path d="M2660 730 l120 -4 M2720 790 l140 6" stroke="#dbe6f2" stroke-width="4" opacity="0.8"/>
+        <path d="M2920 730 l120 -4 M2980 790 l140 6" stroke="#dbe6f2" stroke-width="4" opacity="0.8"/>
+        <path d="M3180 730 l120 -4 M3240 790 l140 6" stroke="#dbe6f2" stroke-width="4" opacity="0.8"/>
+        <path d="M3440 730 l120 -4 M3500 790 l140 6" stroke="#dbe6f2" stroke-width="4" opacity="0.8"/>
+        <path d="M3700 730 l120 -4 M3760 790 l140 6" stroke="#dbe6f2" stroke-width="4" opacity="0.8"/>
+        <path d="M3960 730 l120 -4 M4020 790 l140 6" stroke="#dbe6f2" stroke-width="4" opacity="0.8"/>
+        <path d="M4220 730 l120 -4 M4280 790 l140 6" stroke="#dbe6f2" stroke-width="4" opacity="0.8"/>
+        <path d="M4480 730 l120 -4 M4540 790 l140 6" stroke="#dbe6f2" stroke-width="4" opacity="0.8"/>
+        <path d="M4740 730 l120 -4 M4800 790 l140 6" stroke="#dbe6f2" stroke-width="4" opacity="0.8"/>
+        <path d="M5000 730 l120 -4 M5060 790 l140 6" stroke="#dbe6f2" stroke-width="4" opacity="0.8"/>
+        <path d="M5260 730 l120 -4 M5320 790 l140 6" stroke="#dbe6f2" stroke-width="4" opacity="0.8"/>
+        <path d="M5520 730 l120 -4 M5580 790 l140 6" stroke="#dbe6f2" stroke-width="4" opacity="0.8"/>
+        <path d="M5780 730 l120 -4 M5840 790 l140 6" stroke="#dbe6f2" stroke-width="4" opacity="0.8"/>
+        <path d="M6040 730 l120 -4 M6100 790 l140 6" stroke="#dbe6f2" stroke-width="4" opacity="0.8"/>
+        <path d="M6300 730 l120 -4 M6360 790 l140 6" stroke="#dbe6f2" stroke-width="4" opacity="0.8"/>
+        <path d="M6560 730 l120 -4 M6620 790 l140 6" stroke="#dbe6f2" stroke-width="4" opacity="0.8"/>
+        <rect x="-200" y="830" width="7000" height="70" fill="#e8eef7"/>
+        <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
+          <rect x="450" y="250" width="34" height="90" fill="#8c4a33"/>
+          <rect x="446" y="244" width="42" height="12" fill="#f4f8ff"/>
+          <rect x="200" y="400" width="360" height="240" fill="#d8c7a0"/>
+          <path d="M176 402 L380 290 L584 402 Z" fill="#4a5058"/>
+          <path d="M176 402 L380 290 L584 402 L560 390 L380 302 L200 390 Z" fill="#f4f8ff"/>
+          <rect x="240" y="460" width="80" height="70" fill="#1b2440"/>
+          <rect x="440" y="460" width="80" height="70" fill="#ffd966"/>
+          <path d="M280 460 V530 M240 495 H320 M480 460 V530 M440 495 H520" stroke-width="3"/>
+          <rect x="234" y="528" width="92" height="8" fill="#f4f8ff" stroke-width="3"/><rect x="434" y="528" width="92" height="8" fill="#f4f8ff" stroke-width="3"/>
+          <rect x="350" y="540" width="60" height="100" fill="#6e5a3a"/>
+          <path d="M170 640 H590" stroke="#f4f8ff" stroke-width="10"/>
+        </g>
+        <g class="chimney" data-x="467" data-y="244"></g>
+        <g stroke="#141414" stroke-width="5">
+          <line x1="680" y1="830" x2="680" y2="420" stroke-width="10"/>
+          <path d="M680 424 Q680 396 720 396" fill="none" stroke-width="7"/>
+          <path d="M710 396 h36 l-8 18 h-20 z" fill="#3b3f45"/>
+        </g>
+        <circle cx="728" cy="418" r="40" fill="#ffe9a0" opacity="0.35"/>
+        <circle cx="728" cy="418" r="9" fill="#fff6c8"/>
+        <polygon points="728,420 610,830 846,830" fill="#ffd966" opacity="0.14"/>
+        <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
+          <rect x="1070" y="260" width="34" height="90" fill="#8c4a33"/>
+          <rect x="1066" y="254" width="42" height="12" fill="#f4f8ff"/>
+          <rect x="820" y="400" width="360" height="240" fill="#c9d2d8"/>
+          <path d="M796 402 L1000 290 L1204 402 Z" fill="#7a3a2e"/>
+          <path d="M796 402 L1000 290 L1204 402 L1180 390 L1000 302 L820 390 Z" fill="#f4f8ff"/>
+          <rect x="860" y="460" width="80" height="70" fill="#ffd966"/>
+          <rect x="1060" y="460" width="80" height="70" fill="#1b2440"/>
+          <path d="M900 460 V530 M860 495 H940 M1100 460 V530 M1060 495 H1140" stroke-width="3"/>
+          <rect x="854" y="528" width="92" height="8" fill="#f4f8ff" stroke-width="3"/><rect x="1054" y="528" width="92" height="8" fill="#f4f8ff" stroke-width="3"/>
+          <rect x="970" y="540" width="60" height="100" fill="#6e5a3a"/>
+          <path d="M790 640 H1210" stroke="#f4f8ff" stroke-width="10"/>
+        </g>
+        <g class="chimney" data-x="1087" data-y="254"></g>
+        <g stroke="#141414" stroke-width="5">
+          <line x1="1300" y1="830" x2="1300" y2="420" stroke-width="10"/>
+          <path d="M1300 424 Q1300 396 1340 396" fill="none" stroke-width="7"/>
+          <path d="M1330 396 h36 l-8 18 h-20 z" fill="#3b3f45"/>
+        </g>
+        <circle cx="1348" cy="418" r="40" fill="#ffe9a0" opacity="0.35"/>
+        <circle cx="1348" cy="418" r="9" fill="#fff6c8"/>
+        <polygon points="1348,420 1230,830 1466,830" fill="#ffd966" opacity="0.14"/>
+        <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
+          <rect x="1690" y="270" width="34" height="90" fill="#8c4a33"/>
+          <rect x="1686" y="264" width="42" height="12" fill="#f4f8ff"/>
+          <rect x="1440" y="400" width="360" height="240" fill="#e0b8a0"/>
+          <path d="M1416 402 L1620 290 L1824 402 Z" fill="#4a5058"/>
+          <path d="M1416 402 L1620 290 L1824 402 L1800 390 L1620 302 L1440 390 Z" fill="#f4f8ff"/>
+          <rect x="1480" y="460" width="80" height="70" fill="#1b2440"/>
+          <rect id="winA" x="1680" y="460" width="80" height="70" fill="#1b2440"/>
+          <path d="M1520 460 V530 M1480 495 H1560 M1720 460 V530 M1680 495 H1760" stroke-width="3"/>
+          <rect x="1474" y="528" width="92" height="8" fill="#f4f8ff" stroke-width="3"/><rect x="1674" y="528" width="92" height="8" fill="#f4f8ff" stroke-width="3"/>
+          <rect x="1590" y="540" width="60" height="100" fill="#6e5a3a"/>
+          <path d="M1410 640 H1830" stroke="#f4f8ff" stroke-width="10"/>
+        </g>
+        <g class="chimney" data-x="1707" data-y="264"></g>
+        <g stroke="#141414" stroke-width="5">
+          <line x1="1920" y1="830" x2="1920" y2="420" stroke-width="10"/>
+          <path d="M1920 424 Q1920 396 1960 396" fill="none" stroke-width="7"/>
+          <path d="M1950 396 h36 l-8 18 h-20 z" fill="#3b3f45"/>
+        </g>
+        <circle cx="1968" cy="418" r="40" fill="#ffe9a0" opacity="0.35"/>
+        <circle cx="1968" cy="418" r="9" fill="#fff6c8"/>
+        <polygon points="1968,420 1850,830 2086,830" fill="#ffd966" opacity="0.14"/>
+        <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
+          <rect x="2310" y="250" width="34" height="90" fill="#8c4a33"/>
+          <rect x="2306" y="244" width="42" height="12" fill="#f4f8ff"/>
+          <rect x="2060" y="400" width="360" height="240" fill="#bfc9a8"/>
+          <path d="M2036 402 L2240 290 L2444 402 Z" fill="#7a3a2e"/>
+          <path d="M2036 402 L2240 290 L2444 402 L2420 390 L2240 302 L2060 390 Z" fill="#f4f8ff"/>
+          <rect x="2100" y="460" width="80" height="70" fill="#ffd966"/>
+          <rect x="2300" y="460" width="80" height="70" fill="#ffd966"/>
+          <path d="M2140 460 V530 M2100 495 H2180 M2340 460 V530 M2300 495 H2380" stroke-width="3"/>
+          <rect x="2094" y="528" width="92" height="8" fill="#f4f8ff" stroke-width="3"/><rect x="2294" y="528" width="92" height="8" fill="#f4f8ff" stroke-width="3"/>
+          <rect x="2210" y="540" width="60" height="100" fill="#6e5a3a"/>
+          <path d="M2030 640 H2450" stroke="#f4f8ff" stroke-width="10"/>
+        </g>
+        <g class="chimney" data-x="2327" data-y="244"></g>
+        <g stroke="#141414" stroke-width="5">
+          <line x1="2540" y1="830" x2="2540" y2="420" stroke-width="10"/>
+          <path d="M2540 424 Q2540 396 2580 396" fill="none" stroke-width="7"/>
+          <path d="M2570 396 h36 l-8 18 h-20 z" fill="#3b3f45"/>
+        </g>
+        <circle cx="2588" cy="418" r="40" fill="#ffe9a0" opacity="0.35"/>
+        <circle cx="2588" cy="418" r="9" fill="#fff6c8"/>
+        <polygon points="2588,420 2470,830 2706,830" fill="#ffd966" opacity="0.14"/>
+        <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
+          <rect x="2930" y="260" width="34" height="90" fill="#8c4a33"/>
+          <rect x="2926" y="254" width="42" height="12" fill="#f4f8ff"/>
+          <rect x="2680" y="400" width="360" height="240" fill="#d9c0c9"/>
+          <path d="M2656 402 L2860 290 L3064 402 Z" fill="#4a5058"/>
+          <path d="M2656 402 L2860 290 L3064 402 L3040 390 L2860 302 L2680 390 Z" fill="#f4f8ff"/>
+          <rect x="2720" y="460" width="80" height="70" fill="#ffd966"/>
+          <rect x="2920" y="460" width="80" height="70" fill="#ffd966"/>
+          <path d="M2760 460 V530 M2720 495 H2800 M2960 460 V530 M2920 495 H3000" stroke-width="3"/>
+          <rect x="2714" y="528" width="92" height="8" fill="#f4f8ff" stroke-width="3"/><rect x="2914" y="528" width="92" height="8" fill="#f4f8ff" stroke-width="3"/>
+          <rect x="2830" y="540" width="60" height="100" fill="#6e5a3a"/>
+          <path d="M2650 640 H3070" stroke="#f4f8ff" stroke-width="10"/>
+        </g>
+        <g class="chimney" data-x="2947" data-y="254"></g>
+        <g stroke="#141414" stroke-width="5">
+          <line x1="3160" y1="830" x2="3160" y2="420" stroke-width="10"/>
+          <path d="M3160 424 Q3160 396 3200 396" fill="none" stroke-width="7"/>
+          <path d="M3190 396 h36 l-8 18 h-20 z" fill="#3b3f45"/>
+        </g>
+        <circle cx="3208" cy="418" r="40" fill="#ffe9a0" opacity="0.35"/>
+        <circle cx="3208" cy="418" r="9" fill="#fff6c8"/>
+        <polygon points="3208,420 3090,830 3326,830" fill="#ffd966" opacity="0.14"/>
+        <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
+          <rect x="3550" y="270" width="34" height="90" fill="#8c4a33"/>
+          <rect x="3546" y="264" width="42" height="12" fill="#f4f8ff"/>
+          <rect x="3300" y="400" width="360" height="240" fill="#c9b89a"/>
+          <path d="M3276 402 L3480 290 L3684 402 Z" fill="#7a3a2e"/>
+          <path d="M3276 402 L3480 290 L3684 402 L3660 390 L3480 302 L3300 390 Z" fill="#f4f8ff"/>
+          <rect id="winB" x="3340" y="460" width="80" height="70" fill="#1b2440"/>
+          <rect x="3540" y="460" width="80" height="70" fill="#1b2440"/>
+          <path d="M3380 460 V530 M3340 495 H3420 M3580 460 V530 M3540 495 H3620" stroke-width="3"/>
+          <rect x="3334" y="528" width="92" height="8" fill="#f4f8ff" stroke-width="3"/><rect x="3534" y="528" width="92" height="8" fill="#f4f8ff" stroke-width="3"/>
+          <rect id="doorB" x="3450" y="540" width="60" height="100" fill="#6e5a3a"/>
+          <path d="M3270 640 H3690" stroke="#f4f8ff" stroke-width="10"/>
+        </g>
+        <g class="chimney" data-x="3567" data-y="264"></g>
+        <g stroke="#141414" stroke-width="5">
+          <line x1="3780" y1="830" x2="3780" y2="420" stroke-width="10"/>
+          <path d="M3780 424 Q3780 396 3820 396" fill="none" stroke-width="7"/>
+          <path d="M3810 396 h36 l-8 18 h-20 z" fill="#3b3f45"/>
+        </g>
+        <circle cx="3828" cy="418" r="40" fill="#ffe9a0" opacity="0.35"/>
+        <circle cx="3828" cy="418" r="9" fill="#fff6c8"/>
+        <polygon points="3828,420 3710,830 3946,830" fill="#ffd966" opacity="0.14"/>
+        <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
+          <rect x="4170" y="250" width="34" height="90" fill="#8c4a33"/>
+          <rect x="4166" y="244" width="42" height="12" fill="#f4f8ff"/>
+          <rect x="3920" y="400" width="360" height="240" fill="#d8c7a0"/>
+          <path d="M3896 402 L4100 290 L4304 402 Z" fill="#4a5058"/>
+          <path d="M3896 402 L4100 290 L4304 402 L4280 390 L4100 302 L3920 390 Z" fill="#f4f8ff"/>
+          <rect x="3960" y="460" width="80" height="70" fill="#1b2440"/>
+          <rect x="4160" y="460" width="80" height="70" fill="#1b2440"/>
+          <path d="M4000 460 V530 M3960 495 H4040 M4200 460 V530 M4160 495 H4240" stroke-width="3"/>
+          <rect x="3954" y="528" width="92" height="8" fill="#f4f8ff" stroke-width="3"/><rect x="4154" y="528" width="92" height="8" fill="#f4f8ff" stroke-width="3"/>
+          <rect x="4070" y="540" width="60" height="100" fill="#6e5a3a"/>
+          <path d="M3890 640 H4310" stroke="#f4f8ff" stroke-width="10"/>
+        </g>
+        <g class="chimney" data-x="4187" data-y="244"></g>
+        <g stroke="#141414" stroke-width="5">
+          <line x1="4400" y1="830" x2="4400" y2="420" stroke-width="10"/>
+          <path d="M4400 424 Q4400 396 4440 396" fill="none" stroke-width="7"/>
+          <path d="M4430 396 h36 l-8 18 h-20 z" fill="#3b3f45"/>
+        </g>
+        <circle cx="4448" cy="418" r="40" fill="#ffe9a0" opacity="0.35"/>
+        <circle cx="4448" cy="418" r="9" fill="#fff6c8"/>
+        <polygon points="4448,420 4330,830 4566,830" fill="#ffd966" opacity="0.14"/>
+        <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
+          <rect x="4790" y="260" width="34" height="90" fill="#8c4a33"/>
+          <rect x="4786" y="254" width="42" height="12" fill="#f4f8ff"/>
+          <rect x="4540" y="400" width="360" height="240" fill="#c9d2d8"/>
+          <path d="M4516 402 L4720 290 L4924 402 Z" fill="#7a3a2e"/>
+          <path d="M4516 402 L4720 290 L4924 402 L4900 390 L4720 302 L4540 390 Z" fill="#f4f8ff"/>
+          <rect x="4580" y="460" width="80" height="70" fill="#ffd966"/>
+          <rect x="4780" y="460" width="80" height="70" fill="#ffd966"/>
+          <path d="M4620 460 V530 M4580 495 H4660 M4820 460 V530 M4780 495 H4860" stroke-width="3"/>
+          <rect x="4574" y="528" width="92" height="8" fill="#f4f8ff" stroke-width="3"/><rect x="4774" y="528" width="92" height="8" fill="#f4f8ff" stroke-width="3"/>
+          <rect x="4690" y="540" width="60" height="100" fill="#6e5a3a"/>
+          <path d="M4510 640 H4930" stroke="#f4f8ff" stroke-width="10"/>
+        </g>
+        <g class="chimney" data-x="4807" data-y="254"></g>
+        <g stroke="#141414" stroke-width="5">
+          <line x1="5020" y1="830" x2="5020" y2="420" stroke-width="10"/>
+          <path d="M5020 424 Q5020 396 5060 396" fill="none" stroke-width="7"/>
+          <path d="M5050 396 h36 l-8 18 h-20 z" fill="#3b3f45"/>
+        </g>
+        <circle cx="5068" cy="418" r="40" fill="#ffe9a0" opacity="0.35"/>
+        <circle cx="5068" cy="418" r="9" fill="#fff6c8"/>
+        <polygon points="5068,420 4950,830 5186,830" fill="#ffd966" opacity="0.14"/>
+        <g id="barn" stroke="#141414" stroke-width="5" stroke-linejoin="round">
+          <rect x="5160" y="360" width="460" height="280" fill="#6b4a2a"/>
+          <path d="M5140 362 L5390 240 L5640 362 Z" fill="#4a5058"/>
+          <path d="M5140 362 L5390 240 L5640 362 L5620 352 L5390 250 L5160 352 Z" fill="#f4f8ff"/>
+          <path d="M5200 380 V640 M5260 380 V640 M5520 380 V640 M5580 380 V640" stroke="#4a331c" stroke-width="3"/>
+          <rect x="5310" y="440" width="160" height="200" fill="#0a0a10"/>
+        </g>
+        <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
+          <rect x="6030" y="250" width="34" height="90" fill="#8c4a33"/>
+          <rect x="6026" y="244" width="42" height="12" fill="#f4f8ff"/>
+          <rect x="5780" y="400" width="360" height="240" fill="#bfc9a8"/>
+          <path d="M5756 402 L5960 290 L6164 402 Z" fill="#7a3a2e"/>
+          <path d="M5756 402 L5960 290 L6164 402 L6140 390 L5960 302 L5780 390 Z" fill="#f4f8ff"/>
+          <rect x="5820" y="460" width="80" height="70" fill="#1b2440"/>
+          <rect x="6020" y="460" width="80" height="70" fill="#ffd966"/>
+          <path d="M5860 460 V530 M5820 495 H5900 M6060 460 V530 M6020 495 H6100" stroke-width="3"/>
+          <rect x="5814" y="528" width="92" height="8" fill="#f4f8ff" stroke-width="3"/><rect x="6014" y="528" width="92" height="8" fill="#f4f8ff" stroke-width="3"/>
+          <rect x="5930" y="540" width="60" height="100" fill="#6e5a3a"/>
+          <path d="M5750 640 H6170" stroke="#f4f8ff" stroke-width="10"/>
+        </g>
+        <g class="chimney" data-x="6047" data-y="244"></g>
+        <g stroke="#141414" stroke-width="5">
+          <line x1="6260" y1="830" x2="6260" y2="420" stroke-width="10"/>
+          <path d="M6260 424 Q6260 396 6300 396" fill="none" stroke-width="7"/>
+          <path d="M6290 396 h36 l-8 18 h-20 z" fill="#3b3f45"/>
+        </g>
+        <circle cx="6308" cy="418" r="40" fill="#ffe9a0" opacity="0.35"/>
+        <circle cx="6308" cy="418" r="9" fill="#fff6c8"/>
+        <polygon points="6308,420 6190,830 6426,830" fill="#ffd966" opacity="0.14"/>
+        <g id="streetFx"></g>
+      </g>
+    </g>
+
+    <!-- ================= SCENA 4: SKLEP "ALMA ZAMBSKI" (styl PRL/PGR) ================= -->
+    <g id="scShop" style="display:none">
+      <rect width="1600" height="900" fill="url(#sky)"/>
+      <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
+        <path d="M1480 70 a52 52 0 1 0 40 92 a44 44 0 1 1 -40 -92 z" fill="#f4f1d0"/>
+        <path d="M980 140 q8-42 58-36 q22-38 70-10 q44-8 46 32 q34 6 18 38 h-178 q-34-6-14-24z" fill="#fff"/>
+      </g>
+      <g stroke="#141414" stroke-width="5" fill="#3f6b33">
+        <circle cx="1250" cy="520" r="60"/><circle cx="1330" cy="500" r="72"/><circle cx="1420" cy="525" r="55"/>
+      </g>
+      <rect y="610" width="1600" height="290" fill="#8a7a5c"/>
+      <rect x="140" y="632" width="1040" height="26" fill="#a7a39a" stroke="#141414" stroke-width="4"/>
+      <path d="M240 632 V658 M400 632 V658 M560 632 V658 M720 632 V658 M880 632 V658 M1040 632 V658" stroke="#141414" stroke-width="3"/>
+      <line x1="0" y1="610" x2="1600" y2="610" stroke="#141414" stroke-width="5"/>
+      <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
+        <!-- budynek: plaski dach, odpadajacy tynk -->
+        <rect x="190" y="360" width="930" height="275" fill="#cfc6a8"/>
+        <rect x="170" y="340" width="970" height="28" fill="#8b8f96"/>
+        <g fill="#b3a98a" stroke="#8f8468" stroke-width="3">
+          <path d="M230 560 l40 -8 l18 22 l-30 14 z"/><path d="M1040 400 l50 6 l-6 30 l-40 -4 z"/><path d="M720 610 l40 -6 l10 20 l-44 4 z"/>
+        </g>
+        <path d="M1000 470 l14 30 l-10 24 M260 400 l-8 26 l12 20" fill="none" stroke="#8f8468" stroke-width="3"/>
+        <!-- szyld -->
+        <rect x="300" y="382" width="700" height="72" fill="#f4f1e6" stroke-width="6"/>
+        <text x="650" y="438" text-anchor="middle" font-family="'Arial Black', Impact, sans-serif" font-size="50" font-weight="900"
+          fill="#c81e1e" stroke="none" letter-spacing="3">ALMA ZAMBSKI</text>
+        <rect x="1010" y="392" width="70" height="52" fill="#1f5fae"/>
+        <text x="1045" y="430" text-anchor="middle" font-family="'Arial Black', sans-serif" font-size="30" fill="#fff" stroke="none">GS</text>
+        <!-- witryna z towarem -->
+        <rect x="240" y="474" width="480" height="140" fill="#2d3f55"/>
+        <g stroke-width="3">
+          <rect x="262" y="540" width="40" height="60" fill="#c9a24a"/><rect x="310" y="540" width="40" height="60" fill="#c9a24a"/>
+          <rect x="358" y="540" width="40" height="60" fill="#c9a24a"/>
+          <path d="M420 600 v-50 q0-12 10-16 v-14 h12 v14 q10 4 10 16 v50 z" fill="#3b6b2a"/>
+          <path d="M462 600 v-50 q0-12 10-16 v-14 h12 v14 q10 4 10 16 v50 z" fill="#3b6b2a"/>
+          <path d="M504 600 v-50 q0-12 10-16 v-14 h12 v14 q10 4 10 16 v50 z" fill="#3b6b2a"/>
+          <rect x="560" y="500" width="130" height="100" fill="#e8dcb8"/>
+        </g>
+        <text x="625" y="542" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#c81e1e" stroke="none">PIWO</text>
+        <text x="625" y="572" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#141414" stroke="none">OCET · CHLEB</text>
+        <path d="M240 520 H720 M480 474 V614" stroke-width="4"/>
+        <!-- drzwi z kratami -->
+        <rect x="860" y="474" width="130" height="161" fill="#6e5a3a"/>
+        <rect x="878" y="490" width="94" height="80" fill="#2d3f55"/>
+        <path d="M896 490 V570 M914 490 V570 M932 490 V570 M950 490 V570" stroke-width="3"/>
+        <rect x="890" y="580" width="70" height="26" fill="#fff" stroke-width="3"/>
+        <text x="925" y="599" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#1f7a2e" stroke="none">OTWARTE</text>
+        <circle cx="976" cy="560" r="6" fill="#d4a93a"/>
+        <!-- skrzynki po piwie i laweczka -->
+        <g fill="#c8a24a">
+          <rect x="1030" y="560" width="80" height="40"/><rect x="1030" y="600" width="80" height="40"/><rect x="1040" y="520" width="80" height="40"/>
+        </g>
+        <g fill="#3b6b2a" stroke-width="2">
+          <rect x="1048" y="508" width="10" height="16"/><rect x="1066" y="508" width="10" height="16"/><rect x="1084" y="508" width="10" height="16"/><rect x="1102" y="508" width="10" height="16"/>
+        </g>
+        <rect x="70" y="580" width="110" height="14" fill="#8a5a32"/>
+        <path d="M82 594 V640 M168 594 V640" stroke-width="8"/>
+      </g>
+      <rect y="610" width="1600" height="290" fill="#e8eef7"/>
+      <path d="M160 342 Q650 318 1150 342 L1150 332 Q650 306 160 332 Z" fill="#f4f8ff" stroke="#141414" stroke-width="4"/>
+      <path d="M1030 520 h90 v-10 h-90 z M60 578 h130 v-8 h-130 z" fill="#f4f8ff"/>
+      <rect width="1600" height="900" fill="#0a1230" opacity="0.6"/>
+      <rect x="240" y="474" width="480" height="140" fill="#ffd966" opacity="0.35"/>
+      <g stroke="#141414" stroke-width="5">
+        <line x1="1180" y1="820" x2="1180" y2="330" stroke-width="12"/>
+        <path d="M1180 336 Q1180 300 1230 300 H1250" fill="none" stroke-width="8"/>
+        <path d="M1230 300 h44 l-10 22 h-24 z" fill="#3b3f45"/>
+      </g>
+      <circle cx="1252" cy="326" r="10" fill="#fff6c8"/>
+      <polygon points="1252,330 1040,830 1470,830" fill="#ffd966" opacity="0.2"/>
+    </g>
+
+
+    <!-- ================= ZAMARZNIETA RZEKA ================= -->
+    <g id="scRiver" style="display:none">
+      <rect width="1600" height="900" fill="url(#winterNight)"/>
+      <path d="M1480 70 a52 52 0 1 0 40 92 a44 44 0 1 1 -40 -92 z" fill="#f4f1d0"/>
+      <rect y="540" width="1600" height="360" fill="#e8eef7"/>
+      <path d="M0 660 Q400 630 800 660 T1600 650 V820 Q1200 800 800 830 T0 820 Z" fill="#a9c8e0" stroke="#141414" stroke-width="5"/>
+      <g fill="none" stroke="#e8f4ff" stroke-width="4"><path d="M200 700 l60 20 l-20 30 M700 690 l40 30 l50 -10 M1200 720 l-30 30 l60 20"/></g>
+      <g fill="none" stroke="#6f93b0" stroke-width="3"><path d="M420 760 l30 -20 l40 10 M980 760 l20 30 M1380 690 l-40 20"/></g>
+      <g stroke="#141414" stroke-width="4" fill="#3a2a1a">
+        <path d="M60 640 l-20 -120 M60 640 l30 -110 M60 640 l-60 -80 M60 640 l80 -70" fill="none" stroke="#3a2a1a" stroke-width="6"/>
+        <path d="M1500 650 l-20 -130 M1500 650 l40 -110 M1500 650 l-70 -70 M1500 650 l90 -80" fill="none" stroke="#3a2a1a" stroke-width="6"/>
+        <path d="M820 640 l-10 -90 M820 640 l30 -80 M820 640 l-50 -60" fill="none" stroke="#3a2a1a" stroke-width="5"/>
+      </g>
+      <g fill="#f4f8ff"><ellipse cx="60" cy="560" rx="40" ry="10"/><ellipse cx="1500" cy="570" rx="46" ry="10"/><ellipse cx="820" cy="580" rx="30" ry="8"/></g>
+    </g>
+
+    <!-- ================= POKOJ (lata 2000) ================= -->
+    <g id="scRoom" style="display:none">
+      <rect width="1600" height="900" fill="#fbeea0"/>
+      <g stroke="#f0dc80" stroke-width="10" opacity="0.6"><path d="M100 0 V700 M300 0 V700 M500 0 V700 M700 0 V700 M900 0 V700 M1100 0 V700 M1300 0 V700 M1500 0 V700"/></g>
+      <rect y="700" width="1600" height="200" fill="#8a5a32" stroke="#141414" stroke-width="5"/>
+      <path d="M0 740 H1600 M0 790 H1600 M0 850 H1600" stroke="#6b4424" stroke-width="3"/>
+      <!-- dywan na scianie -->
+      <g stroke="#141414" stroke-width="5">
+        <rect x="80" y="120" width="420" height="300" fill="#9e2a2a"/>
+        <rect x="110" y="150" width="360" height="240" fill="none" stroke="#e8c86a" stroke-width="8"/>
+        <path d="M290 170 L380 270 L290 370 L200 270 Z" fill="#1f3a6b" stroke="#e8c86a" stroke-width="5"/>
+        <circle cx="290" cy="270" r="26" fill="#e8c86a"/>
+      </g>
+      <!-- okno z nocnym sniegiem -->
+      <g stroke="#141414" stroke-width="6">
+        <rect x="900" y="70" width="320" height="230" fill="#1b2440"/>
+        <path d="M1060 70 V300 M900 185 H1220" stroke-width="5"/>
+        <rect x="886" y="296" width="348" height="16" fill="#f4f4f2"/>
+        <g fill="#fff" stroke="none"><circle cx="940" cy="110" r="3"/><circle cx="1000" cy="170" r="3"/><circle cx="1110" cy="120" r="3"/><circle cx="1170" cy="250" r="3"/><circle cx="960" cy="260" r="3"/></g>
+      </g>
+      <!-- biurko, monitor CRT, komputer -->
+      <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
+        <rect x="840" y="520" width="480" height="30" fill="#6b4424"/><path d="M860 550 V700 M1300 550 V700" stroke-width="12"/>
+        <rect x="950" y="350" width="220" height="170" rx="14" fill="#e3dcc8"/>
+        <rect id="crtScreen" x="972" y="370" width="176" height="126" rx="8" fill="#20262e"/>
+        <rect x="1010" y="506" width="100" height="16" fill="#cfc7b0"/>
+        <rect x="1190" y="380" width="100" height="140" rx="6" fill="#e3dcc8"/><rect x="1206" y="400" width="68" height="10" fill="#9aa3ad"/>
+        <circle cx="1240" cy="480" r="8" fill="#3fbf5a" id="pcLed"/>
+        <rect x="960" y="512" width="160" height="10" rx="3" fill="#cfc7b0"/>
+      </g>
+      <!-- drzwi -->
+      <g stroke="#141414" stroke-width="5">
+        <rect x="-20" y="300" width="60" height="400" fill="#6e5a3a"/>
+      </g>
+    </g>
+
+    <!-- ================= AKTORZY ================= -->
+    <g id="zul1" style="display:none"><g class="fall" style="transform-origin:0px 0px"><g class="bob" style="transform-origin:0px 0px">
+      <g stroke="#141414" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <g class="legL" style="transform-origin:-26px -165px"><rect x="-48" y="-165" width="40" height="130" fill="#4a4a4a"/><rect x="-62" y="-38" width="58" height="38" rx="12" fill="#2a2018"/></g>
+        <g class="legR" style="transform-origin:26px -165px"><rect x="8" y="-165" width="40" height="130" fill="#4a4a4a"/><rect x="4" y="-38" width="58" height="38" rx="12" fill="#2a2018"/></g>
+        <g class="armL" style="transform-origin:-74px -320px"><path d="M-74 -320 Q-110 -250 -100 -180" fill="none" stroke-width="38"/><path d="M-74 -320 Q-110 -250 -100 -180" fill="none" stroke="#6b5a3a" stroke-width="28"/><circle cx="-100" cy="-170" r="16" fill="#e7a07a"/></g>
+        <path d="M-80 -340 Q-96 -130 -60 -118 H60 Q96 -130 80 -340 Q0 -366 -80 -340 Z" fill="#6b5a3a"/>
+        <path d="M-40 -320 V-130 M40 -320 V-130" stroke="#4a3e28" stroke-width="3"/><circle cx="0" cy="-280" r="5" fill="#2a2018"/><circle cx="0" cy="-230" r="5" fill="#2a2018"/>
+        <g class="armR" style="transform-origin:74px -320px"><path d="M74 -320 Q110 -250 100 -180" fill="none" stroke-width="38"/><path d="M74 -320 Q110 -250 100 -180" fill="none" stroke="#6b5a3a" stroke-width="28"/><circle cx="100" cy="-170" r="16" fill="#e7a07a"/><rect x="92" y="-236" width="18" height="56" rx="5" fill="#3f6b33" stroke-width="3"/><rect x="96" y="-252" width="10" height="18" fill="#3f6b33" stroke-width="3"/></g>
+        <rect x="-22" y="-372" width="44" height="26" fill="#e7a07a"/>
+        <circle cx="0" cy="-408" r="68" fill="#e7a07a"/>
+        <g fill="#5a4a40" stroke="none" opacity="0.6"><circle cx="-36" cy="-362" r="2.6"/><circle cx="-20" cy="-352" r="2.6"/><circle cx="20" cy="-352" r="2.6"/><circle cx="36" cy="-362" r="2.6"/><circle cx="0" cy="-348" r="2.6"/></g>
+        <circle cx="-24" cy="-420" r="7" fill="#111" stroke="none"/><circle cx="24" cy="-420" r="7" fill="#111" stroke="none"/>
+        <ellipse cx="0" cy="-396" rx="17" ry="20" fill="#d8574a"/>
+        <path id="zul1MouthC" d="M-18 -358 Q0 -364 18 -358" fill="none"/>
+        <ellipse id="zul1MouthO" cx="0" cy="-358" rx="16" ry="12" fill="#5a1414" style="display:none"/>
+        <path d="M-68 -430 Q-66 -500 0 -502 Q66 -500 68 -430 Q0 -450 -68 -430 Z" fill="#7d8289"/><rect x="-70" y="-440" width="140" height="18" rx="6" fill="#6b6f75"/>
+      </g>
+    </g></g></g>
+    <g id="chaser" style="display:none"><g class="fall" style="transform-origin:0px 0px"><g class="bob" style="transform-origin:0px 0px">
+      <g stroke="#141414" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <g class="legL" style="transform-origin:-26px -165px"><rect x="-48" y="-165" width="40" height="130" fill="#23304a"/><rect x="-62" y="-38" width="58" height="38" rx="12" fill="#2a2018"/></g>
+        <g class="legR" style="transform-origin:26px -165px"><rect x="8" y="-165" width="40" height="130" fill="#23304a"/><rect x="4" y="-38" width="58" height="38" rx="12" fill="#2a2018"/></g>
+        <g class="armL" style="transform-origin:-74px -320px"><path d="M-74 -320 Q-110 -250 -100 -180" fill="none" stroke-width="38"/><path d="M-74 -320 Q-110 -250 -100 -180" fill="none" stroke="#e7a07a" stroke-width="28"/><circle cx="-100" cy="-170" r="16" fill="#e7a07a"/></g>
+        <path d="M-80 -340 Q-96 -130 -60 -118 H60 Q96 -130 80 -340 Q0 -366 -80 -340 Z" fill="#e7a07a"/>
+        <path d="M-62 -330 Q-72 -140 -56 -122 H56 Q72 -140 62 -330 Q40 -300 30 -330 Q0 -300 -30 -330 Q-40 -300 -62 -330 Z" fill="#f4f4f2"/><path d="M-40 -352 Q-20 -372 0 -360 Q20 -372 40 -352 Q20 -348 0 -356 Q-20 -348 -40 -352 Z" fill="#3b2a1c"/>
+        <g class="armR" style="transform-origin:74px -320px"><path d="M74 -320 Q110 -250 100 -180" fill="none" stroke-width="38"/><path d="M74 -320 Q110 -250 100 -180" fill="none" stroke="#e7a07a" stroke-width="28"/><circle cx="100" cy="-170" r="16" fill="#e7a07a"/></g>
+        <rect x="-22" y="-372" width="44" height="26" fill="#e7a07a"/>
+        <circle cx="0" cy="-408" r="68" fill="#e7a07a"/>
+        <g fill="#5a4a40" stroke="none" opacity="0.6"><circle cx="-36" cy="-362" r="2.6"/><circle cx="-20" cy="-352" r="2.6"/><circle cx="20" cy="-352" r="2.6"/><circle cx="36" cy="-362" r="2.6"/><circle cx="0" cy="-348" r="2.6"/></g>
+        <circle cx="-24" cy="-420" r="7" fill="#111" stroke="none"/><circle cx="24" cy="-420" r="7" fill="#111" stroke="none"/>
+        <ellipse cx="0" cy="-396" rx="17" ry="20" fill="#e07a6a"/>
+        <path id="chaserMouthC" d="M-18 -358 Q0 -364 18 -358" fill="none"/>
+        <ellipse id="chaserMouthO" cx="0" cy="-358" rx="16" ry="12" fill="#5a1414" style="display:none"/>
+        <path d="M-66 -436 Q-40 -476 0 -472 Q40 -476 66 -436 Q50 -452 0 -454 Q-50 -452 -66 -436 Z" fill="#2a2018"/>
+      </g>
+    </g></g></g>
+    <g id="zul2" style="display:none"><g class="fall" style="transform-origin:0px 0px"><g class="bob" style="transform-origin:0px 0px">
+      <g stroke="#141414" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <g class="legL" style="transform-origin:-26px -165px"><rect x="-48" y="-165" width="40" height="130" fill="#1c1c1c"/><rect x="-62" y="-38" width="58" height="38" rx="12" fill="#2a2018"/></g>
+        <g class="legR" style="transform-origin:26px -165px"><rect x="8" y="-165" width="40" height="130" fill="#1c1c1c"/><rect x="4" y="-38" width="58" height="38" rx="12" fill="#2a2018"/></g>
+        <g class="armL" style="transform-origin:-74px -320px"><path d="M-74 -320 Q-110 -250 -100 -180" fill="none" stroke-width="38"/><path d="M-74 -320 Q-110 -250 -100 -180" fill="none" stroke="#2b2b30" stroke-width="28"/><circle cx="-100" cy="-170" r="16" fill="#c9a08a"/></g>
+        <path d="M-80 -340 Q-96 -130 -60 -118 H60 Q96 -130 80 -340 Q0 -366 -80 -340 Z" fill="#2b2b30"/>
+        
+        <g class="armR" style="transform-origin:74px -320px"><path d="M74 -320 Q110 -250 100 -180" fill="none" stroke-width="38"/><path d="M74 -320 Q110 -250 100 -180" fill="none" stroke="#2b2b30" stroke-width="28"/><circle cx="100" cy="-170" r="16" fill="#c9a08a"/><g transform="rotate(-150 100 -170)"><rect x="96" y="-300" width="12" height="140" fill="#8a5a32" stroke-width="3"/><path d="M84 -300 h44 l6 34 h-56 z" fill="#b8bec6" stroke-width="3"/></g></g>
+        <rect x="-22" y="-372" width="44" height="26" fill="#c9a08a"/>
+        <circle cx="0" cy="-408" r="68" fill="#c9a08a"/>
+        <g fill="#5a4a40" stroke="none" opacity="0.6"><circle cx="-36" cy="-362" r="2.6"/><circle cx="-20" cy="-352" r="2.6"/><circle cx="20" cy="-352" r="2.6"/><circle cx="36" cy="-362" r="2.6"/><circle cx="0" cy="-348" r="2.6"/></g>
+        <circle cx="-24" cy="-420" r="12" fill="#fff"/><circle cx="24" cy="-420" r="12" fill="#fff"/><circle cx="-22" cy="-418" r="5" fill="#111" stroke="none"/><circle cx="26" cy="-422" r="5" fill="#111" stroke="none"/>
+        <ellipse cx="0" cy="-396" rx="17" ry="20" fill="#d8574a"/>
+        <path id="zul2MouthC" d="M-18 -358 Q0 -364 18 -358" fill="none"/>
+        <ellipse id="zul2MouthO" cx="0" cy="-358" rx="16" ry="12" fill="#5a1414" style="display:none"/>
+        <path d="M-86 -380 Q-92 -510 0 -516 Q92 -510 86 -380 Q70 -470 0 -472 Q-70 -470 -86 -380 Z" fill="#1c1c22"/>
+      </g>
+    </g></g></g>
+    <g id="art" style="display:none"><g class="bob" style="transform-origin:0px 0px">
+      <g stroke="#141414" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+        <g class="legL" style="transform-origin:-24px -165px">
+          <path d="M-54 -168 H-2 L-6 -22 H-50 Z" fill="#3d5a80"/><path d="M-30 -150 V-40" stroke="#2f4868" stroke-width="3"/>
+          <path d="M-64 -26 Q-64 -2 -40 0 H0 V-26 Z" fill="#f4f4f2"/><path d="M-56 -14 H-8" stroke="#141414" stroke-width="5"/>
+        </g>
+        <g class="legR" style="transform-origin:24px -165px">
+          <path d="M2 -168 H54 L50 -22 H6 Z" fill="#3d5a80"/><path d="M30 -150 V-40" stroke="#2f4868" stroke-width="3"/>
+          <path d="M0 -26 V0 H40 Q64 -2 64 -26 Z" fill="#f4f4f2"/><path d="M8 -14 H56" stroke="#141414" stroke-width="5"/>
+        </g>
+        <g class="armL" style="transform-origin:-60px -290px">
+          <path d="M-60 -290 Q-92 -240 -82 -178" fill="none" stroke-width="40"/><path d="M-60 -290 Q-92 -240 -82 -178" fill="none" stroke="#ffd400" stroke-width="30"/>
+          <path d="M-54 -282 Q-84 -236 -76 -186 M-62 -284 Q-92 -238 -84 -186 M-70 -286 Q-100 -240 -92 -186" fill="none" stroke="#141414" stroke-width="3"/>
+          <circle cx="-82" cy="-168" r="14" fill="#e8b08a"/>
+        </g>
+        <path d="M-66 -300 Q-78 -220 -64 -150 Q0 -138 64 -150 Q78 -220 66 -300 Q0 -326 -66 -300 Z" fill="#ffd400"/>
+        <g stroke="none" fill="#141414"><ellipse cx="-30" cy="-262" rx="5" ry="9" transform="rotate(-30 -30 -262)"/><ellipse cx="-22" cy="-266" rx="5" ry="10"/><ellipse cx="-14" cy="-262" rx="5" ry="9" transform="rotate(30 -14 -262)"/></g>
+        <text x="-22" y="-238" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#141414" stroke="none">adidas</text>
+        <path d="M0 -300 V-150" stroke="#141414" stroke-width="3"/>
+        <path d="M-68 -250 Q0 -240 68 -250 M-70 -200 Q0 -190 70 -200" fill="none" stroke="#141414" stroke-width="2" opacity="0.35"/>
+        <path d="M-40 -296 Q-50 -270 -44 -250" fill="none" stroke="#fff" stroke-width="6" opacity="0.45"/>
+        <g class="armR" style="transform-origin:60px -290px">
+          <path d="M60 -290 Q92 -240 82 -178" fill="none" stroke-width="40"/><path d="M60 -290 Q92 -240 82 -178" fill="none" stroke="#ffd400" stroke-width="30"/>
+          <path d="M54 -282 Q84 -236 76 -186 M62 -284 Q92 -238 84 -186 M70 -286 Q100 -240 92 -186" fill="none" stroke="#141414" stroke-width="3"/>
+          <circle cx="82" cy="-168" r="14" fill="#e8b08a"/>
+          <g class="can" style="display:none"><image href="tatra.png" x="68" y="-222" width="28" height="74"/></g>
+        </g>
+        <path d="M-36 -316 Q0 -300 36 -316 L30 -296 Q0 -284 -30 -296 Z" fill="#141414"/>
+        <image href="glowa1.png" x="-65.0" y="-450" width="130" height="160"/>
+        <g fill="#5a3a22" stroke="#141414" stroke-width="3"><circle cx="-52" cy="-420" r="30"/><circle cx="-24" cy="-442" r="34"/><circle cx="14" cy="-446" r="36"/><circle cx="48" cy="-428" r="32"/><circle cx="-66" cy="-388" r="20"/><circle cx="66" cy="-390" r="20"/><circle cx="-4" cy="-456" r="26"/><circle cx="34" cy="-452" r="22"/></g>
+        <path class="gil" style="display:none" d="M0 -356 q5 16 0 26 q-7 -8 0 -26" fill="#9acd32" stroke="#5f8a1f" stroke-width="2"/>
+        <g class="cig" style="display:none" stroke-linecap="round">
+          <line x1="0" y1="-322" x2="30" y2="-316" stroke="#141414" stroke-width="9"/>
+          <line x1="0" y1="-322" x2="30" y2="-316" stroke="#f4f4f2" stroke-width="5"/>
+          <circle cx="30" cy="-316" r="4" fill="#ff5a1f"/>
+        </g>
+      </g>
+    </g></g>
+    <g id="rad" style="display:none"><g class="bob" style="transform-origin:0px 0px">
+      <g stroke="#141414" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+        <g class="legL" style="transform-origin:-24px -165px">
+          <path d="M-54 -168 H-2 L-6 -22 H-50 Z" fill="#3d5a80"/><path d="M-30 -150 V-40" stroke="#2f4868" stroke-width="3"/>
+          <path d="M-64 -26 Q-64 -2 -40 0 H0 V-26 Z" fill="#f4f4f2"/><path d="M-56 -14 H-8" stroke="#12a3a3" stroke-width="5"/>
+        </g>
+        <g class="legR" style="transform-origin:24px -165px">
+          <path d="M2 -168 H54 L50 -22 H6 Z" fill="#3d5a80"/><path d="M30 -150 V-40" stroke="#2f4868" stroke-width="3"/>
+          <path d="M0 -26 V0 H40 Q64 -2 64 -26 Z" fill="#f4f4f2"/><path d="M8 -14 H56" stroke="#12a3a3" stroke-width="5"/>
+        </g>
+        <g class="armL" style="transform-origin:-60px -290px">
+          <path d="M-60 -290 Q-92 -240 -82 -178" fill="none" stroke-width="40"/><path d="M-60 -290 Q-92 -240 -82 -178" fill="none" stroke="#1f2a5c" stroke-width="30"/>
+          
+          <circle cx="-82" cy="-168" r="14" fill="#e8b08a"/>
+        </g>
+        <path d="M-66 -300 Q-78 -220 -64 -150 Q0 -138 64 -150 Q78 -220 66 -300 Q0 -326 -66 -300 Z" fill="#12a3a3"/>
+        <path d="M-66 -300 Q0 -326 66 -300 L68 -250 Q0 -236 -68 -250 Z" fill="#1f2a5c"/>
+        <path d="M-44 -206 Q-30 -178 8 -196 Q36 -210 58 -234 Q34 -206 4 -186 Q-34 -168 -44 -206 Z" fill="#f4f4f2" stroke-width="3"/>
+        <text x="-50" y="-262" font-family="'Arial Black', Arial, sans-serif" font-size="14" font-weight="900" fill="#f4f4f2" stroke="none">NIKE</text>
+        <path d="M-68 -250 Q0 -240 68 -250 M-70 -200 Q0 -190 70 -200" fill="none" stroke="#141414" stroke-width="2" opacity="0.35"/>
+        <path d="M-40 -296 Q-50 -270 -44 -250" fill="none" stroke="#fff" stroke-width="6" opacity="0.45"/>
+        <g class="armR" style="transform-origin:60px -290px">
+          <path d="M60 -290 Q92 -240 82 -178" fill="none" stroke-width="40"/><path d="M60 -290 Q92 -240 82 -178" fill="none" stroke="#1f2a5c" stroke-width="30"/>
+          
+          <circle cx="82" cy="-168" r="14" fill="#e8b08a"/>
+          <g class="can" style="display:none"><image href="tatra.png" x="68" y="-222" width="28" height="74"/></g>
+        </g>
+        <path d="M-36 -316 Q0 -300 36 -316 L30 -296 Q0 -284 -30 -296 Z" fill="#1f2a5c"/>
+        <image href="glowa2.png" x="-63.5" y="-430" width="127" height="140"/>
+        <g fill="#d9b24a" stroke="#141414" stroke-width="3"><circle cx="-54" cy="-404" r="28"/><circle cx="-26" cy="-424" r="30"/><circle cx="8" cy="-430" r="32"/><circle cx="40" cy="-416" r="30"/><circle cx="-66" cy="-376" r="18"/><circle cx="60" cy="-386" r="18"/><circle cx="-8" cy="-438" r="22"/></g>
+        <path class="gil" style="display:none" d="M22 -350 q5 16 0 26 q-7 -8 0 -26" fill="#9acd32" stroke="#5f8a1f" stroke-width="2"/>
+        <g class="cig" style="display:none" stroke-linecap="round">
+          <line x1="16" y1="-322" x2="46" y2="-316" stroke="#141414" stroke-width="9"/>
+          <line x1="16" y1="-322" x2="46" y2="-316" stroke="#f4f4f2" stroke-width="5"/>
+          <circle cx="46" cy="-316" r="4" fill="#ff5a1f"/>
+        </g>
+      </g>
+    </g></g>
+    <g id="sik" style="display:none"><g class="bob" style="transform-origin:0px 0px">
+      <g stroke="#141414" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+        <g class="legL" style="transform-origin:-24px -165px">
+          <path d="M-54 -168 H-2 L-6 -22 H-50 Z" fill="#3d5a80"/><path d="M-30 -150 V-40" stroke="#2f4868" stroke-width="3"/>
+          <path d="M-64 -26 Q-64 -2 -40 0 H0 V-26 Z" fill="#f4f4f2"/><path d="M-56 -14 H-8" stroke="#d22630" stroke-width="5"/>
+        </g>
+        <g class="legR" style="transform-origin:24px -165px">
+          <path d="M2 -168 H54 L50 -22 H6 Z" fill="#3d5a80"/><path d="M30 -150 V-40" stroke="#2f4868" stroke-width="3"/>
+          <path d="M0 -26 V0 H40 Q64 -2 64 -26 Z" fill="#f4f4f2"/><path d="M8 -14 H56" stroke="#d22630" stroke-width="5"/>
+        </g>
+        <g class="armL" style="transform-origin:-60px -290px">
+          <path d="M-60 -290 Q-92 -240 -82 -178" fill="none" stroke-width="40"/><path d="M-60 -290 Q-92 -240 -82 -178" fill="none" stroke="#d22630" stroke-width="30"/>
+          
+          <circle cx="-82" cy="-168" r="14" fill="#e8b08a"/>
+        </g>
+        <path d="M-66 -300 Q-78 -220 -64 -150 Q0 -138 64 -150 Q78 -220 66 -300 Q0 -326 -66 -300 Z" fill="#1f2a5c"/>
+        <path d="M-66 -300 L-68 -262 Q0 -250 68 -262 L66 -300 Q0 -326 -66 -300 Z" fill="#d22630"/>
+        <path d="M-68 -258 Q0 -246 68 -258" fill="none" stroke="#f4f4f2" stroke-width="7"/>
+        <text x="0" y="-206" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="22" font-weight="700" fill="#f4f4f2" stroke="none">Reebok</text>
+        <path d="M-30 -190 l20 -8 l20 8 l20 -8" fill="none" stroke="#d22630" stroke-width="4"/>
+        <path d="M-68 -250 Q0 -240 68 -250 M-70 -200 Q0 -190 70 -200" fill="none" stroke="#141414" stroke-width="2" opacity="0.35"/>
+        <path d="M-40 -296 Q-50 -270 -44 -250" fill="none" stroke="#fff" stroke-width="6" opacity="0.45"/>
+        <g class="armR" style="transform-origin:60px -290px">
+          <path d="M60 -290 Q92 -240 82 -178" fill="none" stroke-width="40"/><path d="M60 -290 Q92 -240 82 -178" fill="none" stroke="#d22630" stroke-width="30"/>
+          
+          <circle cx="82" cy="-168" r="14" fill="#e8b08a"/>
+          <g class="can" style="display:none"><image href="tatra.png" x="68" y="-222" width="28" height="74"/></g>
+        </g>
+        <path d="M-36 -316 Q0 -300 36 -316 L30 -296 Q0 -284 -30 -296 Z" fill="#f4f4f2"/>
+        <image href="glowa3.png" x="-67.0" y="-435" width="134" height="145"/>
+        <g fill="#3b2a1c" stroke="#141414" stroke-width="3"><circle cx="-54" cy="-405" r="24"/><circle cx="-26" cy="-423" r="28"/><circle cx="6" cy="-427" r="30"/><circle cx="38" cy="-417" r="26"/><circle cx="-64" cy="-383" r="16"/><circle cx="58" cy="-391" r="16"/></g>
+        <path class="gil" style="display:none" d="M-12 -347 q5 16 0 26 q-7 -8 0 -26" fill="#9acd32" stroke="#5f8a1f" stroke-width="2"/>
+        <g class="cig" style="display:none" stroke-linecap="round">
+          <line x1="-8" y1="-319" x2="22" y2="-313" stroke="#141414" stroke-width="9"/>
+          <line x1="-8" y1="-319" x2="22" y2="-313" stroke="#f4f4f2" stroke-width="5"/>
+          <circle cx="22" cy="-313" r="4" fill="#ff5a1f"/>
+        </g>
+      </g>
+    </g></g>
+
+    <!-- sniezka -->
+    <circle id="snowball" style="display:none" cx="0" cy="0" r="16" fill="#fff" stroke="#141414" stroke-width="4"/>
+    <g id="fx"></g>
+    <g id="bubbles"></g>
+  </g>
+  <!-- padajacy snieg -->
+  <g id="snow" pointer-events="none">
+    <circle class="flake" cx="1175" cy="-59" r="2" fill="#fff" opacity="0.8"/>
+    <circle class="flake" cx="1561" cy="-633" r="2" fill="#fff" opacity="0.6"/>
+    <circle class="flake" cx="298" cy="-222" r="5" fill="#fff" opacity="0.8"/>
+    <circle class="flake" cx="1555" cy="-148" r="3" fill="#fff" opacity="0.8"/>
+    <circle class="flake" cx="1577" cy="-878" r="3" fill="#fff" opacity="0.8"/>
+    <circle class="flake" cx="405" cy="-153" r="4" fill="#fff" opacity="0.9"/>
+    <circle class="flake" cx="1104" cy="-202" r="2" fill="#fff" opacity="0.6"/>
+    <circle class="flake" cx="1153" cy="-334" r="3" fill="#fff" opacity="0.9"/>
+    <circle class="flake" cx="1249" cy="-198" r="2" fill="#fff" opacity="0.8"/>
+    <circle class="flake" cx="687" cy="-805" r="3" fill="#fff" opacity="0.8"/>
+    <circle class="flake" cx="512" cy="-445" r="2" fill="#fff" opacity="0.6"/>
+    <circle class="flake" cx="1435" cy="-250" r="3" fill="#fff" opacity="0.6"/>
+    <circle class="flake" cx="93" cy="-298" r="3" fill="#fff" opacity="0.9"/>
+    <circle class="flake" cx="738" cy="-402" r="3" fill="#fff" opacity="0.9"/>
+    <circle class="flake" cx="1179" cy="-240" r="5" fill="#fff" opacity="0.6"/>
+    <circle class="flake" cx="1297" cy="-530" r="3" fill="#fff" opacity="0.9"/>
+    <circle class="flake" cx="880" cy="-589" r="3" fill="#fff" opacity="0.9"/>
+    <circle class="flake" cx="244" cy="-809" r="5" fill="#fff" opacity="0.9"/>
+    <circle class="flake" cx="1075" cy="-697" r="2" fill="#fff" opacity="0.9"/>
+    <circle class="flake" cx="1357" cy="-626" r="3" fill="#fff" opacity="0.9"/>
+    <circle class="flake" cx="401" cy="-512" r="4" fill="#fff" opacity="0.6"/>
+    <circle class="flake" cx="282" cy="-289" r="3" fill="#fff" opacity="0.9"/>
+    <circle class="flake" cx="1069" cy="-888" r="3" fill="#fff" opacity="0.6"/>
+    <circle class="flake" cx="34" cy="-237" r="3" fill="#fff" opacity="0.9"/>
+    <circle class="flake" cx="1374" cy="-265" r="5" fill="#fff" opacity="0.8"/>
+    <circle class="flake" cx="767" cy="-514" r="5" fill="#fff" opacity="0.8"/>
+    <circle class="flake" cx="592" cy="-771" r="4" fill="#fff" opacity="0.6"/>
+    <circle class="flake" cx="379" cy="-467" r="5" fill="#fff" opacity="0.9"/>
+    <circle class="flake" cx="814" cy="-802" r="4" fill="#fff" opacity="0.6"/>
+    <circle class="flake" cx="182" cy="-283" r="4" fill="#fff" opacity="0.8"/>
+    <circle class="flake" cx="778" cy="-85" r="2" fill="#fff" opacity="0.9"/>
+    <circle class="flake" cx="873" cy="-418" r="3" fill="#fff" opacity="0.9"/>
+    <circle class="flake" cx="837" cy="-813" r="3" fill="#fff" opacity="0.9"/>
+    <circle class="flake" cx="1393" cy="-628" r="4" fill="#fff" opacity="0.8"/>
+    <circle class="flake" cx="1479" cy="-98" r="3" fill="#fff" opacity="0.6"/>
+    <circle class="flake" cx="44" cy="-350" r="2" fill="#fff" opacity="0.8"/>
+    <circle class="flake" cx="1207" cy="-79" r="3" fill="#fff" opacity="0.6"/>
+    <circle class="flake" cx="524" cy="-386" r="4" fill="#fff" opacity="0.8"/>
+    <circle class="flake" cx="1058" cy="-640" r="4" fill="#fff" opacity="0.8"/>
+    <circle class="flake" cx="1253" cy="-403" r="3" fill="#fff" opacity="0.9"/>
+    <circle class="flake" cx="972" cy="-228" r="4" fill="#fff" opacity="0.8"/>
+    <circle class="flake" cx="291" cy="-162" r="4" fill="#fff" opacity="0.8"/>
+    <circle class="flake" cx="626" cy="-251" r="4" fill="#fff" opacity="0.8"/>
+    <circle class="flake" cx="750" cy="-225" r="3" fill="#fff" opacity="0.9"/>
+    <circle class="flake" cx="770" cy="-189" r="5" fill="#fff" opacity="0.8"/>
+    <circle class="flake" cx="655" cy="-239" r="4" fill="#fff" opacity="0.8"/>
+    <circle class="flake" cx="1493" cy="-88" r="3" fill="#fff" opacity="0.8"/>
+    <circle class="flake" cx="1146" cy="-894" r="5" fill="#fff" opacity="0.8"/>
+    <circle class="flake" cx="116" cy="-714" r="2" fill="#fff" opacity="0.9"/>
+    <circle class="flake" cx="1584" cy="-317" r="2" fill="#fff" opacity="0.9"/>
+    <circle class="flake" cx="1471" cy="-521" r="3" fill="#fff" opacity="0.8"/>
+    <circle class="flake" cx="1207" cy="-837" r="3" fill="#fff" opacity="0.6"/>
+    <circle class="flake" cx="551" cy="-272" r="2" fill="#fff" opacity="0.8"/>
+    <circle class="flake" cx="1074" cy="-397" r="2" fill="#fff" opacity="0.8"/>
+    <circle class="flake" cx="475" cy="-798" r="3" fill="#fff" opacity="0.8"/>
+    <circle class="flake" cx="296" cy="-203" r="3" fill="#fff" opacity="0.9"/>
+    <circle class="flake" cx="651" cy="-753" r="2" fill="#fff" opacity="0.9"/>
+    <circle class="flake" cx="1368" cy="-801" r="2" fill="#fff" opacity="0.6"/>
+    <circle class="flake" cx="1322" cy="-411" r="4" fill="#fff" opacity="0.9"/>
+    <circle class="flake" cx="141" cy="-256" r="2" fill="#fff" opacity="0.9"/>
+    <circle class="flake" cx="1129" cy="-770" r="5" fill="#fff" opacity="0.6"/>
+    <circle class="flake" cx="329" cy="-268" r="3" fill="#fff" opacity="0.9"/>
+    <circle class="flake" cx="925" cy="-389" r="2" fill="#fff" opacity="0.9"/>
+    <circle class="flake" cx="280" cy="-63" r="3" fill="#fff" opacity="0.8"/>
+    <circle class="flake" cx="981" cy="-103" r="4" fill="#fff" opacity="0.8"/>
+    <circle class="flake" cx="1143" cy="-617" r="4" fill="#fff" opacity="0.9"/>
+    <circle class="flake" cx="1186" cy="-835" r="3" fill="#fff" opacity="0.8"/>
+    <circle class="flake" cx="585" cy="-532" r="2" fill="#fff" opacity="0.6"/>
+    <circle class="flake" cx="1028" cy="-22" r="3" fill="#fff" opacity="0.8"/>
+    <circle class="flake" cx="561" cy="-416" r="4" fill="#fff" opacity="0.8"/>
+  </g>
+  <!-- zblizenie na monitor: FIFA 06 -->
+  <g id="fifaUI" style="display:none">
+    <rect width="1600" height="900" fill="#1a140c"/>
+    <rect x="260" y="60" width="1080" height="780" rx="60" fill="#e3dcc8" stroke="#141414" stroke-width="8"/>
+    <rect x="330" y="120" width="940" height="620" rx="30" fill="#000" stroke="#141414" stroke-width="6"/>
+    <g id="fifaScreen" opacity="0">
+      <rect x="330" y="120" width="940" height="620" rx="30" fill="url(#fifaBg)"/>
+      <g stroke="#f4f4f2" stroke-width="4" fill="none" opacity="0.35">
+        <rect x="380" y="430" width="840" height="270"/><line x1="800" y1="430" x2="800" y2="700"/><circle cx="800" cy="565" r="70"/>
+      </g>
+      <text id="fifaLogo" x="800" y="330" text-anchor="middle" font-family="'Arial Black', Impact, sans-serif" font-style="italic" font-size="150" font-weight="900"
+        fill="#f4f4f2" stroke="#0a2a6b" stroke-width="6" paint-order="stroke">FIFA 06</text>
+      <text id="pressStart" x="800" y="470" text-anchor="middle" font-family="Arial, sans-serif" font-size="40" font-weight="700" fill="#ffd400">PRESS START</text>
+    </g>
+    <rect x="720" y="770" width="160" height="20" rx="6" fill="#cfc7b0" stroke="#141414" stroke-width="4"/>
+    <circle cx="1240" cy="790" r="10" fill="#3fbf5a"/>
+  </g>
+  <rect id="flash" width="1600" height="900" fill="#fff" opacity="0" pointer-events="none"/>
+  <rect id="fade" width="1600" height="900" fill="#000" opacity="0" pointer-events="none"/>
+</svg>
+
+<div class="overlay" id="startScreen">
+  <h1>ZIMA NA WSI</h1>
+  <p>odcinek 6</p>
+  <button class="btn" id="playBtn" autofocus>▶ Odtwórz</button>
+</div>
+<div class="overlay" id="endScreen" hidden>
+  <h1>KONIEC</h1>
+  <button class="btn" id="againBtn">↺ Od nowa</button>
+</div>
+</div>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const NS = "http://www.w3.org/2000/svg";
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+  // ---------- dzwiek (generowany, bez plikow) ----------
+  let actx = null;
+  function ac(){
+    if (!actx) actx = new (window.AudioContext || window.webkitAudioContext)();
+    if (actx.state === "suspended") actx.resume();
+    return actx;
+  }
+  function tone(freq, dur, type = "square", vol = 0.05, glideTo){
+    const a = ac(), t = a.currentTime, o = a.createOscillator(), g = a.createGain();
+    o.type = type; o.frequency.setValueAtTime(freq, t);
+    if (glideTo) o.frequency.exponentialRampToValueAtTime(glideTo, t + dur);
+    g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(a.destination); o.start(t); o.stop(t + dur + 0.02);
+  }
+  function noise(dur, { freq = 1000, q = 1, vol = 0.3, type = "bandpass", sweepTo } = {}){
+    const a = ac(), t = a.currentTime, len = Math.floor(a.sampleRate * dur);
+    const buf = a.createBuffer(1, len, a.sampleRate), d = buf.getChannelData(0);
+    for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+    const s = a.createBufferSource(); s.buffer = buf;
+    const f = a.createBiquadFilter(); f.type = type; f.Q.value = q; f.frequency.setValueAtTime(freq, t);
+    if (sweepTo) f.frequency.exponentialRampToValueAtTime(sweepTo, t + dur);
+    const g = a.createGain(); g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    s.connect(f); f.connect(g); g.connect(a.destination); s.start(t); s.stop(t + dur);
+  }
+  function engine(){
+    const a = ac(), o = a.createOscillator(), f = a.createBiquadFilter(), g = a.createGain();
+    o.type = "sawtooth"; o.frequency.value = 45; f.type = "lowpass"; f.frequency.value = 380; g.gain.value = 0.0001;
+    o.connect(f); f.connect(g); g.connect(a.destination); o.start();
+    return {
+      set(freq, vol, ramp = 0.3){ const t = a.currentTime; o.frequency.linearRampToValueAtTime(freq, t + ramp); g.gain.linearRampToValueAtTime(vol, t + ramp); },
+      stop(ramp = 0.4){ const t = a.currentTime; g.gain.linearRampToValueAtTime(0.0001, t + ramp); o.stop(t + ramp + 0.05); }
+    };
+  }
+  const sfx = {
+    beep(){ tone(1750, 0.07, "square", 0.04); },
+    dig(){ noise(0.18, { freq: 500, type: "lowpass", vol: 0.45 }); noise(0.1, { freq: 3000, q: 3, vol: 0.08 }); },
+    thud(){ tone(110, 0.3, "sine", 0.5, 40); noise(0.2, { freq: 300, type: "lowpass", vol: 0.35 }); },
+    clank(){ tone(620 + Math.random() * 200, 0.25, "triangle", 0.08, 480); noise(0.08, { freq: 4000, q: 2, vol: 0.12 }); },
+    door(){ noise(0.12, { freq: 600, type: "lowpass", vol: 0.4 }); tone(95, 0.12, "square", 0.08, 60); },
+    brake(){ noise(0.5, { freq: 1400, q: 1.5, vol: 0.14 }); },
+    screech(){ noise(1.6, { freq: 2700, q: 9, vol: 0.4, sweepTo: 1700 }); tone(1900, 1.5, "sawtooth", 0.025, 1250); },
+    spit(){ noise(0.16, { freq: 2500, q: 1.2, vol: 0.35, sweepTo: 900 }); },
+    ding(){ tone(1320, 0.5, "sine", 0.1); },
+    dial(){ tone(425, 0.9, "sine", 0.08); },
+    boom(){
+      noise(2.6, { freq: 900, type: "lowpass", vol: 0.9, sweepTo: 80 });
+      tone(90, 1.8, "sine", 0.7, 25); tone(55, 2.2, "sawtooth", 0.15, 20);
+    },
+    voice(pitch){ tone(pitch * (0.8 + Math.random() * 0.45), 0.07, "square", 0.045); }
+  };
+
+  // ---------- animacja ----------
+  const anim = (el, frames, opts) => el.animate(frames, Object.assign({ fill: "forwards" }, opts)).finished.catch(() => {});
+  const busT = (x, y = 494) => `translate(${x}px,${y}px)`;
+
+  function puff(x, y, { r = 26, dur = 1100, dx = 0, dy = -80, color = "#dcdcdc" } = {}){
+    const c = document.createElementNS(NS, "circle");
+    c.setAttribute("cx", x); c.setAttribute("cy", y); c.setAttribute("r", r);
+    c.setAttribute("fill", color); c.setAttribute("stroke", "#141414"); c.setAttribute("stroke-width", "4");
+    c.style.transformOrigin = `${x}px ${y}px`;
+    $("fx").append(c);
+    c.animate([{ transform: "translate(0,0) scale(.3)", opacity: 1 },
+               { transform: `translate(${dx}px,${dy}px) scale(1.6)`, opacity: 0 }],
+              { duration: dur, easing: "ease-out", fill: "forwards" })
+     .finished.then(() => c.remove()).catch(() => {});
+  }
+  // gruda ziemi lecaca po luku
+  function clod(x, y, dx, h){
+    const c = document.createElementNS(NS, "circle");
+    c.setAttribute("cx", x); c.setAttribute("cy", y); c.setAttribute("r", 9 + Math.random() * 8);
+    c.setAttribute("fill", "#6b5230"); c.setAttribute("stroke", "#141414"); c.setAttribute("stroke-width", "3");
+    $("fx").append(c);
+    c.animate([{ transform: "translate(0,0)" }, { transform: `translate(${dx / 2}px,${-h}px)` }, { transform: `translate(${dx}px,20px)`, opacity: 0.2 }],
+              { duration: 700, easing: "ease-out", fill: "forwards" })
+     .finished.then(() => c.remove()).catch(() => {});
+  }
+  function shake(power = 14, dur = 420){
+    return anim($("world"), [
+      { transform: "translate(0,0)" }, { transform: `translate(${-power}px,${power * .6}px)` }, { transform: `translate(${power}px,${-power * .5}px)` },
+      { transform: `translate(${-power * .6}px,${power * .3}px)` }, { transform: `translate(${power * .4}px,0)` }, { transform: "translate(0,0)" }], { duration: dur });
+  }
+  async function fadeTo(fn){
+    await anim($("fade"), [{ opacity: 0 }, { opacity: 1 }], { duration: 450 });
+    fn();
+    await sleep(150);
+    await anim($("fade"), [{ opacity: 1 }, { opacity: 0 }], { duration: 450 });
+  }
+  function scene(id){ ["scStreet", "scShop", "scRiver", "scRoom"].forEach(s => $(s).style.display = s === id ? "" : "none"); }
+
+  // ---------- aktorzy ----------
+  // pozycja stop (x, y), skala; img = postac-obrazek (saperzy), head = wysokosc glowy nad stopami (do dymka)
+  const who = {
+    a:  { el: "art", img: true, x: 0, y: 800, s: 0.9, head: 430, pitch: 170, vPitch: 0.7, vRate: 1.0 },
+    r:  { el: "rad", img: true, x: 0, y: 800, s: 0.9, head: 420, pitch: 210, vPitch: 0.95, vRate: 1.05 },
+    s:  { el: "sik", img: true, x: 0, y: 800, s: 0.9, head: 425, pitch: 85, vPitch: 0, vRate: 0.85 },
+    z1: { el: "zul1", x: 1700, y: 800, s: 0.85, head: 430, pitch: 120, vPitch: 0.4, vRate: 0.7, mouthO: "zul1MouthO", mouthC: "zul1MouthC" },
+    c:  { el: "chaser", x: 0, y: 800, s: 0.9, head: 430, pitch: 140, vPitch: 0.5, vRate: 1.3, mouthO: "chaserMouthO", mouthC: "chaserMouthC" },
+    z2: { el: "zul2", x: 0, y: 800, s: 0.9, head: 480, pitch: 100, vPitch: 0.3, vRate: 1.2, mouthO: "zul2MouthO", mouthC: "zul2MouthC" }
+  };
+
+  const actT = (w, x = w.x, y = w.y) => `translate(${x}px,${y}px) scale(${w.s})`;
+  function place(k, x, y = who[k].y){ const w = who[k]; w.x = x; w.y = y; $(w.el).getAnimations().forEach(a => a.cancel()); $(w.el).style.transform = actT(w); $(w.el).style.display = ""; }
+  function hide(k){ $(who[k].el).style.display = "none"; }
+  // saper w busie = jego glowa w oknie
+  function inBus(k, on){ $(k === "s1" ? "busS1" : "busS2").style.display = on ? "" : "none"; if (on) hide(k); }
+
+  // chod: saperzy bujaja sie calym obrazkiem, Mirek macha konczynami
+  const gaits = {};
+  function gait(k, on, step = 0.4){
+    (gaits[k] || []).forEach(a => a.cancel()); gaits[k] = [];
+    if (!on) return;
+    const o = { duration: step * 1000, direction: "alternate", iterations: Infinity, easing: "ease-in-out" };
+    if (who[k].img){
+      gaits[k].push($(who[k].el).querySelector(".bob").animate(
+        [{ transform: "translateY(0) rotate(-3deg)" }, { transform: "translateY(-14px) rotate(3deg)" }], o));
+    } else {
+      const swing = (id, a) => $(id) && gaits[k].push($(id).animate([{ transform: `rotate(${a}deg)` }, { transform: `rotate(${-a}deg)` }], o));
+      swing("zLegR", -24);
+    }
+  }
+  async function walkTo(k, x, dur, step){
+    const w = who[k], from = actT(w);
+    gait(k, true, step);
+    await anim($(w.el), [{ transform: from }, { transform: actT(w, x) }], { duration: dur, easing: "linear" });
+    w.x = x; gait(k, false);
+    $(w.el).style.transform = actT(w);
+  }
+  async function hop(k, h = 60, dur = 380){
+    const w = who[k];
+    await anim($(w.el), [{ transform: actT(w) }, { transform: actT(w, w.x, w.y - h) }, { transform: actT(w) }], { duration: dur, easing: "ease-out" });
+  }
+
+  // ---------- dymki (jak w odc. 1) ----------
+  function makeBubble(tipX, tipY, lines, shift = 0){
+    const g = document.createElementNS(NS, "g");
+    const tail = document.createElementNS(NS, "path");
+    const rect = document.createElementNS(NS, "rect");
+    const patch = document.createElementNS(NS, "path");
+    const text = document.createElementNS(NS, "text");
+    text.setAttribute("font-size", "40"); text.setAttribute("font-weight", "700");
+    text.setAttribute("font-family", '"Comic Sans MS","Chalkboard SE",sans-serif'); text.setAttribute("fill", "#111");
+    g.append(tail, rect, patch, text);
+    g.style.transform = `translate(${tipX}px,${tipY}px) scale(0)`;
+    $("bubbles").append(g);
+
+    const spans = lines.map(() => { const t = document.createElementNS(NS, "tspan"); text.append(t); return t; });
+    let maxW = 0;
+    spans.forEach((s, i) => { s.textContent = lines[i]; maxW = Math.max(maxW, s.getComputedTextLength()); });
+    const lh = 50, padX = 34, padY = 26;
+    const W = maxW + padX * 2, H = lines.length * lh + padY * 2 - 10;
+    let left = Math.max(20, Math.min(1580 - W, tipX + shift - W / 2));
+    const bx = left - tipX, by = -38 - H;
+    const tb = Math.min(Math.max(0, bx + 34), bx + W - 54);
+    Object.entries({ x: bx, y: by, width: W, height: H, rx: 26, fill: "#fff", stroke: "#111", "stroke-width": 5 })
+      .forEach(([k, v]) => rect.setAttribute(k, v));
+    tail.setAttribute("d", `M${tb - 18} -46 L0 0 L${tb + 22} -46 Z`);
+    tail.setAttribute("fill", "#fff"); tail.setAttribute("stroke", "#111"); tail.setAttribute("stroke-width", "5");
+    patch.setAttribute("d", `M${tb - 13} -38 L${tb + 17} -38`); patch.setAttribute("stroke", "#fff"); patch.setAttribute("stroke-width", "7");
+    spans.forEach((s, i) => { s.setAttribute("x", bx + padX); s.setAttribute("y", by + padY + 34 + i * lh); s.textContent = ""; });
+    return { g, spans, lines, tipX, tipY };
+  }
+
+  // ---------- glos (synteza mowy przegladarki, fallback: bla-bla) ----------
+  const tts = window.speechSynthesis;
+  let plVoice = null;
+  function pickVoice(){
+    if (!tts) return;
+    const vs = tts.getVoices().filter(v => /^pl/i.test(v.lang));
+    plVoice = vs.find(v => /zosia|ewa|krzysztof|google/i.test(v.name)) || vs[0] || null;
+  }
+  if (tts){ pickVoice(); tts.addEventListener?.("voiceschanged", pickVoice); }
+  function unlockSpeech(){
+    if (!tts) return;
+    tts.cancel(); pickVoice();
+    const u = new SpeechSynthesisUtterance(" "); u.volume = 0; tts.speak(u);
+  }
+  // nagrane kwestie (kierowca): odtwarzane wolniej i bez zachowania wysokosci = bardzo niski, gruby glos
+  const CLIPS = {
+    "Co ty, pojebało cię? Jeszcze będzie na nas.": "glosy/kierowca12.m4a"
+  };
+
+  const DEEP = 0.55;
+  const clipEls = {};
+  function clipFor(text){
+    const src = CLIPS[text];
+    if (!src) return null;
+    if (!clipEls[src]){
+      const a = new Audio(src); a.preload = "auto";
+      a.preservesPitch = false; a.mozPreservesPitch = false; a.webkitPreservesPitch = false;
+      clipEls[src] = a;
+    }
+    return clipEls[src];
+  }
+  function unlockClips(){
+    Object.keys(CLIPS).forEach(t => { const a = clipFor(t); a.muted = true;
+      a.play().then(() => { a.pause(); a.currentTime = 0; a.muted = false; }).catch(() => { a.muted = false; }); });
+  }
+  function playClip(a){
+    return new Promise(res => {
+      a.currentTime = 0; a.playbackRate = DEEP;
+      a.preservesPitch = false; a.mozPreservesPitch = false; a.webkitPreservesPitch = false;
+      const guard = setTimeout(res, 8000);
+      a.onended = a.onerror = () => { clearTimeout(guard); res(); };
+      a.play().catch(() => { clearTimeout(guard); res(); });
+    });
+  }
+  function speak(text, w, { pitch, rate } = {}){
+    const clip = clipFor(text);
+    if (clip) return playClip(clip);
+    if (!tts || !plVoice) return null;
+    return new Promise(res => {
+      const u = new SpeechSynthesisUtterance(text);
+      u.voice = plVoice; u.lang = plVoice.lang;
+      u.pitch = pitch ?? w.vPitch; u.rate = rate ?? w.vRate;
+      const guard = setTimeout(res, 800 + text.length * 140);
+      u.onend = u.onerror = () => { clearTimeout(guard); res(); };
+      tts.speak(u);
+    });
+  }
+
+  // mowienie: saperzy podskakuja w rytm, rysowani ruszaja ustami
+  function talking(k, on){
+    const w = who[k];
+    if (w.img){
+      if (on) w._talk = $(w.el).querySelector(".bob").animate(
+        [{ transform: "translateY(0) scaleY(1)" }, { transform: "translateY(-8px) scaleY(1.02)" }],
+        { duration: 160, direction: "alternate", iterations: Infinity });
+      else if (w._talk){ w._talk.cancel(); w._talk = null; }
+      return;
+    }
+    clearInterval(w._talk);
+    let open = false;
+    if (on) w._talk = setInterval(() => {
+      open = !open;
+      $(w.mouthO).style.display = open ? "" : "none";
+      $(w.mouthC).style.display = open ? "none" : "";
+    }, 110);
+    else { $(w.mouthO).style.display = "none"; $(w.mouthC).style.display = ""; }
+  }
+
+  async function say(k, lines, shift = 0, { instant = false, pitch, rate } = {}){
+    const w = who[k], tx = w.x, ty = w.y - w.head;
+    const b = makeBubble(tx, ty, lines, shift);
+    await anim(b.g, [{ transform: `translate(${tx}px,${ty}px) scale(0)` }, { transform: `translate(${tx}px,${ty}px) scale(1)` }],
+               { duration: 200, easing: "cubic-bezier(.3,1.6,.6,1)" });
+    if (instant){ b.spans.forEach((s, i) => s.textContent = lines[i]); return b; }
+    talking(k, true);
+    const spoken = speak(lines.join(" "), w, { pitch, rate });
+    for (let i = 0; i < lines.length; i++){
+      for (const ch of lines[i]){
+        b.spans[i].textContent += ch;
+        if (ch !== " " && !spoken) sfx.voice(w.pitch);
+        await sleep(spoken ? 45 : 58);
+      }
+    }
+    if (spoken) await spoken;
+    talking(k, false);
+    return b;
+  }
+  async function unsay(b){
+    await anim(b.g, [{ transform: `translate(${b.tipX}px,${b.tipY}px) scale(1)` }, { transform: `translate(${b.tipX}px,${b.tipY}px) scale(0)` }], { duration: 150 });
+    b.g.remove();
+  }
+  async function line(k, lines, hold = 1600, shift = 0, opts){
+    const b = await say(k, lines, shift, opts);
+    await sleep(hold); await unsay(b); await sleep(250);
+  }
+
+  // ---------- rekwizyty ----------
+  let wheelAnims = [];
+  function spinWheels(dir, period = 0.5){
+    wheelAnims.forEach(a => a.cancel()); wheelAnims = [];
+    if (!dir) return;
+    document.querySelectorAll("#bus .bw").forEach(w => wheelAnims.push(
+      w.animate([{ transform: "rotate(0deg)" }, { transform: `rotate(${dir * 360}deg)` }],
+                { duration: period * 1000, iterations: Infinity })));
+  }
+  let busX = 1750;
+  async function busDrive(x, dur, easing = "cubic-bezier(.2,.7,.35,1)", y = 494){
+    const from = busT(busX, y); busX = x;
+    await anim($("bus"), [{ transform: from }, { transform: busT(x, y) }], { duration: dur, easing });
+  }
+  function exhaust(y = 494){ return setInterval(() => puff(busX + 600, y + 250, { r: 18, dur: 1000, dx: 50, dy: -40, color: "#9a9a9a" }), 140); }
+
+  // wykrywacz: pierscienie przy talerzu wykrywacza + pisk, coraz szybciej
+  async function detector(times){
+    const hx = who.s2.x + 86, hy = who.s2.y - 26;
+    for (let i = 0; i < times; i++){
+      sfx.beep();
+      const c = document.createElementNS(NS, "circle");
+      c.setAttribute("cx", hx); c.setAttribute("cy", hy); c.setAttribute("r", 20);
+      c.setAttribute("fill", "none"); c.setAttribute("stroke", "#ffd23f"); c.setAttribute("stroke-width", "6");
+      c.style.transformOrigin = `${hx}px ${hy}px`;
+      $("detFx").append(c);
+      c.animate([{ transform: "scale(.4)", opacity: 1 }, { transform: "scale(3)", opacity: 0 }], { duration: 600, fill: "forwards" })
+       .finished.then(() => c.remove()).catch(() => {});
+      await sleep(Math.max(90, 520 - i * 38));
+    }
+  }
+
+  // papierosy: czubek wzgledem stop postaci
+  const CIG_TIP = { s1: [32, -252], s2: [16, -285], m: [36, -270] };
+  let cigSmoke = null;
+  function smokeCigs(on, ks = ["s1", "s2"]){
+    clearInterval(cigSmoke);
+    ["s1", "s2", "m"].forEach(k => $(who[k].el).querySelector(".cig").style.display = on && ks.includes(k) ? "" : "none");
+    if (!on) return;
+    cigSmoke = setInterval(() => ks.forEach(k => {
+      const [dx, dy] = CIG_TIP[k];
+      puff(who[k].x + dx, who[k].y + dy - 6, { r: 7, dur: 1600, dx: 10 + Math.random() * 20, dy: -90, color: "#cfcfcf" });
+    }), 380);
+  }
+  function burp(){ const a = ac(), t = a.currentTime;
+    tone(95 + Math.random() * 30, 0.55, "sawtooth", 0.12, 55); noise(0.45, { freq: 260, q: 4, vol: 0.25 }); }
+  function gulp(){ tone(180, 0.09, "sine", 0.15, 90); }
+  // przesuniecie puszki do ust [dx, dy, obrot]: wieczko przy ustach, dno do gory
+  const SIP = { s1: [20, -212, 110], s2: [-40, -194, -110], m: [-21, -186, -110] };
+  async function drink(ks){
+    const up = k => `translate(${SIP[k][0]}px,${SIP[k][1]}px) rotate(${SIP[k][2]}deg)`;
+    const rest = "translate(0,0) rotate(0deg)";
+    await Promise.all(ks.map(k => anim($(who[k].el).querySelector(".can"), [{ transform: rest }, { transform: up(k) }], { duration: 450, easing: "ease-out" })));
+    for (let i = 0; i < 4; i++){ gulp(); await sleep(260); }
+    await Promise.all(ks.map(k => anim($(who[k].el).querySelector(".can"), [{ transform: up(k) }, { transform: rest }], { duration: 400 })));
+  }
+  function lighter(){ noise(0.06, { freq: 5000, q: 2, vol: 0.15 }); tone(300, 0.2, "sine", 0.02); }
+
+
+  // ---------- kamera: przewijanie ulicy ----------
+  let camX = 0, camRaf = null;
+  function setCam(x){ camX = x; $("street").style.transform = `translateX(${-x}px)`; }
+  function panTo(x1, ms, ease = t => t, onFrame){
+    const x0 = camX, t0 = performance.now();
+    return new Promise(res => {
+      const step = now => {
+        const t = Math.min(1, (now - t0) / ms);
+        setCam(x0 + (x1 - x0) * ease(t)); if (onFrame) onFrame(t);
+        if (t < 1) camRaf = requestAnimationFrame(step); else res();
+      };
+      camRaf = requestAnimationFrame(step);
+    });
+  }
+  // dym z kominow
+  let chimneyT = null;
+  function chimneys(on){
+    clearInterval(chimneyT); if (!on) return;
+    chimneyT = setInterval(() => document.querySelectorAll("#street .chimney").forEach(c => {
+      const x = +c.dataset.x, y = +c.dataset.y;
+      if (x - camX < -100 || x - camX > 1700) return;
+      const p = document.createElementNS(NS, "circle");
+      p.setAttribute("cx", x); p.setAttribute("cy", y); p.setAttribute("r", 14); p.setAttribute("fill", "#9aa3b8"); p.setAttribute("opacity", "0.7");
+      p.style.transformOrigin = `${x}px ${y}px`;
+      $("streetFx").append(p);
+      p.animate([{ transform: "translate(0,0) scale(.5)", opacity: 0.7 }, { transform: "translate(-40px,-140px) scale(2)", opacity: 0 }], { duration: 2600, fill: "forwards" })
+       .finished.then(() => p.remove()).catch(() => {});
+    }), 500);
+  }
+  // snieg
+  let snowAnims = [];
+  function snowfall(on){
+    snowAnims.forEach(a => a.cancel()); snowAnims = [];
+    $("snow").style.display = on ? "" : "none";
+    if (!on) return;
+    document.querySelectorAll("#snow .flake").forEach(f => snowAnims.push(f.animate(
+      [{ transform: "translate(0,0)" }, { transform: `translate(${Math.random() * 120 - 60}px,1000px)` }],
+      { duration: 6000 + Math.random() * 6000, iterations: Infinity, delay: -Math.random() * 8000 })));
+  }
+
+  // ---------- chod / bieg (nogi i rece) ----------
+  const TRIO = ["a", "r", "s"];
+  let legAnims = {};
+  function legs(k, mode){
+    (legAnims[k] || []).forEach(a => a.cancel()); legAnims[k] = [];
+    if (!mode) return;
+    const el = $(who[k].el), fast = mode === "run";
+    const o = { duration: fast ? 170 : 380, direction: "alternate", iterations: Infinity, easing: "ease-in-out" };
+    const sw = (sel, a) => el.querySelectorAll(sel).forEach(e => legAnims[k].push(e.animate([{ transform: `rotate(${a}deg)` }, { transform: `rotate(${-a}deg)` }], o)));
+    sw(".legL", fast ? 40 : 20); sw(".legR", fast ? -40 : -20); sw(".armL", fast ? -45 : -15); sw(".armR", fast ? 45 : 15);
+    if (fast) legAnims[k].push(el.querySelector(".bob").animate([{ transform: "translateY(0) rotate(8deg)" }, { transform: "translateY(-16px) rotate(8deg)" }], o));
+  }
+  async function walkIn(k, x, ms){
+    const w = who[k], from = actT(w);
+    legs(k, "walk");
+    await anim($(w.el), [{ transform: from }, { transform: actT(w, x) }], { duration: ms, easing: "linear" });
+    w.x = x; legs(k, null); $(w.el).getAnimations().forEach(a => a.cancel()); $(w.el).style.transform = actT(w);
+  }
+  function flameAt(x, y){
+    const c = document.createElementNS(NS, "circle");
+    c.setAttribute("cx", x); c.setAttribute("cy", y); c.setAttribute("r", 10 + Math.random() * 12);
+    c.setAttribute("fill", ["#ffd23f", "#ff8a1f", "#e34b2b"][Math.floor(Math.random() * 3)]);
+    c.setAttribute("stroke", "#141414"); c.setAttribute("stroke-width", "3");
+    c.style.transformOrigin = `${x}px ${y}px`;
+    $("fx").append(c);
+    c.animate([{ transform: "translate(0,0) scale(1)", opacity: 1 }, { transform: `translate(${-120 - Math.random() * 140}px,${-20 - Math.random() * 60}px) scale(.2)`, opacity: 0 }],
+              { duration: 480, fill: "forwards" }).finished.then(() => c.remove()).catch(() => {});
+  }
+  // dluzsza ucieczka: ulica leci, ogien spod butow, smiech
+  async function runAway(dist, ms, extra){
+    TRIO.forEach(k => legs(k, "run"));
+    const whoosh = engine(); whoosh.set(70, 0.05, 0.3);
+    noise(ms / 1000, { freq: 900, q: 0.8, vol: 0.2, sweepTo: 2000 });
+    const laughs = (async () => {
+      await sleep(500);
+      for (const k of ["r", "a", "s"]){
+        const b = await say(k, ["Ha ha ha!"], 0, { instant: true }); speak("Ha ha ha!", who[k], { rate: 1.4 });
+        await sleep(900); unsay(b); await sleep(200);
+      }
+    })();
+    await panTo(camX + dist, ms, t => t, t => {
+      TRIO.forEach(k => { if (Math.random() < 0.7) flameAt(who[k].x - 20 + Math.random() * 40, who[k].y - 6); });
+      if (extra) extra(t);
+    });
+    await laughs;
+    whoosh.stop(0.4);
+    TRIO.forEach(k => legs(k, null));
+  }
+  async function walkCam(dist, ms){
+    TRIO.forEach(k => legs(k, "walk"));
+    const crunch = setInterval(() => noise(0.08, { freq: 2500, q: 1, vol: 0.06 }), 190);
+    await panTo(camX + dist, ms);
+    clearInterval(crunch); TRIO.forEach(k => legs(k, null));
+  }
+  // sniezka w okno (okno w ulicy: pozycja ekranu = x - camX)
+  async function throwAt(k, winId){
+    const w = who[k], win = $(winId);
+    const tx = +win.getAttribute("x") + 40 - camX, ty = +win.getAttribute("y") + 35;
+    await anim($(w.el).querySelector(".bob"), [{ transform: "translateY(0)" }, { transform: "translateY(30px) scaleY(.9)" }, { transform: "translateY(0)" }], { duration: 700 });
+    noise(0.2, { freq: 3000, q: 1, vol: 0.1 });
+    const sb = $("snowball"); sb.style.display = "";
+    const x0 = w.x + 70, y0 = w.y - 200;
+    await anim(sb, [{ transform: `translate(${x0}px,${y0}px)` }, { transform: `translate(${(x0 + tx) / 2}px,${Math.min(y0, ty) - 160}px)`, offset: 0.5 },
+                    { transform: `translate(${tx}px,${ty}px)` }], { duration: 700, easing: "linear" });
+    sb.style.display = "none";
+    noise(0.25, { freq: 3500, q: 2, vol: 0.4 }); tone(900, 0.2, "triangle", 0.1, 400);
+    for (let i = 0; i < 8; i++) puff(tx + Math.random() * 30 - 15, ty, { r: 10, dur: 700, dx: Math.random() * 120 - 60, dy: Math.random() * 60 - 50, color: "#fff" });
+    await sleep(500);
+    win.setAttribute("fill", "#ffd966");
+    tone(200, 0.3, "square", 0.04); await sleep(300);
+  }
+  function trioAt(xs){ TRIO.forEach((k, i) => place(k, xs[i], 800)); }
+
+  function reset(){
+    if (tts) tts.cancel();
+    cancelAnimationFrame(camRaf);
+    document.getAnimations().forEach(a => a.cancel());
+    legAnims = {}; snowAnims = [];
+    Object.keys(gaits).forEach(k => gaits[k] = []);
+    Object.values(who).forEach(w => { clearInterval(w._talk); w._talk = null; });
+    $("bubbles").innerHTML = ""; $("fx").innerHTML = ""; $("streetFx").innerHTML = "";
+    scene("scStreet"); setCam(0);
+    Object.keys(who).forEach(k => $(who[k].el).style.display = "none");
+    ["winA", "winB"].forEach(id => $(id).setAttribute("fill", "#1b2440"));
+    document.querySelectorAll(".gil, .cig, .can").forEach(e => e.style.display = "none");
+    $("snowball").style.display = "none"; $("fifaUI").style.display = "none"; $("fifaScreen").style.opacity = 0;
+    $("crtScreen").setAttribute("fill", "#20262e");
+    $("fade").style.opacity = 0; $("flash").style.opacity = 0;
+    clearInterval(chimneyT);
+  }
+
+  async function play(){
+    reset(); ac();
+    $("startScreen").hidden = true; $("endScreen").hidden = true;
+    snowfall(true); chimneys(true);
+    const wind = setInterval(() => noise(2.5, { freq: 400, q: 0.6, vol: 0.05, sweepTo: 700 }), 2400);
+
+    // ===== idą przez wieś =====
+    trioAt([-500, -330, -160]);
+    await Promise.all([walkIn("a", 360, 3000), walkIn("r", 530, 3000), walkIn("s", 700, 3000)]);
+    await walkCam(700, 3200);
+
+    // sniezka w okno nr 1
+    await throwAt("a", "winA");
+    await runAway(1600, 4200);
+
+    // ===== zul =====
+    place("z1", 1750, 800);
+    const zs = $("zul1").querySelector(".bob").animate([{ transform: "rotate(-9deg)" }, { transform: "rotate(9deg)" }], { duration: 900, direction: "alternate", iterations: Infinity, easing: "ease-in-out" });
+    legs("z1", "walk");
+    await anim($("zul1"), [{ transform: actT(who.z1) }, { transform: actT(who.z1, 1250) }], { duration: 3000, easing: "ease-in-out" });
+    who.z1.x = 1250; legs("z1", null);
+    await line("r", ["Patrzta,", "jak mu zajebię."], 400, -40);
+    await walkIn("r", 760, 900);
+    legs("z1", "walk");
+    await anim($("zul1"), [{ transform: actT(who.z1) }, { transform: actT(who.z1, 1080) }], { duration: 1200, easing: "ease-in-out" });
+    who.z1.x = 1080; legs("z1", null); zs.cancel();
+    // przewraca sie do tylu, na tyl glowy
+    await anim($("zul1").querySelector(".fall"), [{ transform: "rotate(0deg)" }, { transform: "rotate(20deg)", offset: 0.4 }, { transform: "rotate(92deg)" }], { duration: 900, easing: "ease-in" });
+    sfx.thud(); tone(60, 0.3, "sine", 0.4, 30); shake(10, 300);
+    const blood = document.createElementNS(NS, "ellipse");
+    blood.setAttribute("cx", 1080 + 360 * 0.85 + camX); blood.setAttribute("cy", 806); blood.setAttribute("rx", 60); blood.setAttribute("ry", 14);
+    blood.setAttribute("fill", "#b01818"); blood.setAttribute("stroke", "#141414"); blood.setAttribute("stroke-width", "3");
+    blood.style.transformOrigin = `${1080 + 360 * 0.85 + camX}px 806px`;
+    $("streetFx").append(blood);
+    anim(blood, [{ transform: "scale(0.1)" }, { transform: "scale(1)" }], { duration: 2400 });
+    await sleep(1400);
+    await line("a", ["O kurwa…", "nie żyje."], 500, -60);
+    await line("r", ["Dzwonimy", "po karetkę?"], 400, -40);
+    await line("s", ["Co ty, pojebało cię?", "Jeszcze będzie na nas."], 600, 40);
+    await sleep(500);
+    // zul wstaje i odchodzi
+    await anim($("zul1").querySelector(".fall"), [{ transform: "rotate(92deg)" }, { transform: "rotate(0deg)" }], { duration: 900, easing: "ease-out" });
+    const zs2 = $("zul1").querySelector(".bob").animate([{ transform: "rotate(-9deg)" }, { transform: "rotate(9deg)" }], { duration: 900, direction: "alternate", iterations: Infinity });
+    legs("z1", "walk");
+    await anim($("zul1"), [{ transform: actT(who.z1) }, { transform: actT(who.z1, 1900) }], { duration: 3200, easing: "ease-in" });
+    zs2.cancel(); legs("z1", null); hide("z1");
+    await line("r", ["Kurwa, dobrze,", "że mu nie zajebałem."], 800, -40);
+    await walkIn("r", 530, 700);
+
+    // ===== okno nr 2 i poscig =====
+    await walkCam(600, 2400);                                   // camX 2900
+    await Promise.all([walkIn("a", 760, 1200), walkIn("r", 920, 1200), walkIn("s", 1080, 1200)]);
+    await throwAt("a", "winB");
+    // ktos wybiega z domu
+    const door = $("doorB"); door.setAttribute("fill", "#ffd966");
+    const cx0 = +door.getAttribute("x") + 30 - camX;
+    place("c", cx0, 800);
+    legs("c", "run");
+    const shout = (async () => { await sleep(300); await line("c", ["Gówniarze jebane,", "ja wam dam!!!"], 600, 60, { pitch: 0.6, rate: 1.4 }); })();
+    await runAway(1600, 5200, t => {
+      // prawie ich dogania, potem odpada
+      const x = t < 0.6 ? cx0 + (690 - cx0) * (t / 0.6) : 690 - (t - 0.6) / 0.4 * 900;
+      who.c.x = x; $("chaser").style.transform = actT(who.c);
+    });
+    legs("c", null); hide("c"); door.setAttribute("fill", "#6e5a3a");
+    await shout;
+
+    // ===== zul z siekiera spod stodoly =====
+    await walkCam(500, 2200);                                  // camX 5000
+    const barnX = 200 + 8 * 620 + 230 - camX;
+    place("z2", barnX, 700);
+    $("zul2").style.opacity = 0.25;
+    await sleep(900);
+    anim($("zul2"), [{ opacity: 0.25 }, { opacity: 1 }], { duration: 400 });
+    $("zul2").style.opacity = 1;
+    await line("z2", ["AAAAAAA!!!"], 100, 60, { pitch: 0.3, rate: 1.2 });
+    legs("z2", "run");
+    await Promise.all(TRIO.map(k => hop(k, 60, 300)));
+    const z2y0 = 700;
+    await runAway(1200, 3600, t => {
+      const x = barnX + t * 520, y = z2y0 + Math.min(1, t * 3) * 100;
+      who.z2.x = x; who.z2.y = y; $("zul2").style.transform = actT(who.z2);
+      if (t > 0.55 && !who.z2._fell){
+        who.z2._fell = true; legs("z2", null);
+        anim($("zul2").querySelector(".fall"), [{ transform: "rotate(0deg)" }, { transform: "rotate(-95deg)" }], { duration: 400, easing: "ease-in" })
+          .then(() => { sfx.thud(); shake(8, 250); });
+      }
+    });
+    who.z2._fell = false;
+    await sleep(600);
+
+    // ===== pod sklepem ALMA =====
+    await fadeTo(() => { hide("z2"); chimneys(false); scene("scShop"); trioAt([700, 880, 1060]); });
+    await sleep(900);
+    await line("a", ["Kurwa, jak my", "do domu wrócimy?"], 1200, -40);
+
+    // ===== po zamarznietej rzece, po krzakach =====
+    await fadeTo(() => { scene("scRiver"); trioAt([-450, -300, -150]); });
+    const slip = async k => { await anim($(who[k].el).querySelector(".bob"), [{ transform: "rotate(0deg)" }, { transform: "rotate(-14deg)" }, { transform: "rotate(10deg)" }, { transform: "rotate(0deg)" }], { duration: 700 }); };
+    const crossing = Promise.all([walkIn("a", 1700, 7000), walkIn("r", 1850, 7000), walkIn("s", 2000, 7000)]);
+    await sleep(2200); slip("r"); tone(300, 0.4, "triangle", 0.06, 120);
+    await sleep(1800); noise(0.4, { freq: 1500, q: 3, vol: 0.2 }); slip("a"); slip("s");
+    await crossing;
+
+    // ===== w domu: gile, Tatra, fajki, FIFA 06 =====
+    snowfall(false); clearInterval(wind);
+    await fadeTo(() => { scene("scRoom"); trioAt([-450, -300, -150]); document.querySelectorAll(".gil").forEach(e => e.style.display = ""); });
+    sfx.door();
+    await Promise.all([walkIn("a", 420, 2600), walkIn("r", 620, 2600), walkIn("s", 820, 2600)]);
+    const shiver = TRIO.map(k => $(who[k].el).querySelector(".bob").animate([{ transform: "translateX(-3px)" }, { transform: "translateX(3px)" }], { duration: 60, direction: "alternate", iterations: 30 }));
+    await sleep(1400);
+    // Tatra
+    for (const k of TRIO){ $(who[k].el).querySelector(".can").style.display = ""; noise(0.25, { freq: 4000, q: 1, vol: 0.25, sweepTo: 1500 }); await sleep(450); }
+    await sleep(400);
+    // papierosy
+    for (const k of TRIO){ noise(0.06, { freq: 5000, q: 2, vol: 0.15 }); $(who[k].el).querySelector(".cig").style.display = ""; await sleep(350); }
+    const smoke = setInterval(() => TRIO.forEach(k => puff(who[k].x + 30 * 0.9, who[k].y - 400, { r: 9, dur: 1600, dx: 20, dy: -90, color: "#cfcfcf" })), 420);
+    await sleep(1200);
+    // wlaczaja komputer
+    tone(1000, 0.08, "square", 0.05); $("crtScreen").setAttribute("fill", "#cfe6ff");
+    await sleep(900);
+    clearInterval(smoke);
+    const fu = $("fifaUI"); fu.style.display = "";
+    await anim(fu, [{ opacity: 0 }, { opacity: 1 }], { duration: 500 });
+    tone(80, 0.3, "sine", 0.2);
+    await sleep(500);
+    await anim($("fifaScreen"), [{ opacity: 0 }, { opacity: 1 }], { duration: 900 });
+    [[262, 330, 392], [294, 370, 440], [330, 415, 494], [392, 494, 587]].forEach((ch, i) => setTimeout(() => ch.forEach(f => tone(f, 0.5, "sawtooth", 0.03)), i * 380));
+    anim($("fifaLogo"), [{ transform: "scale(0.6)", opacity: 0 }, { transform: "scale(1.08)", opacity: 1 }, { transform: "scale(1)" }], { duration: 900 });
+    $("fifaLogo").style.transformOrigin = "800px 300px";
+    const blink = $("pressStart").animate([{ opacity: 1 }, { opacity: 0 }], { duration: 500, direction: "alternate", iterations: Infinity });
+    await sleep(3500);
+    blink.cancel();
+    $("endScreen").hidden = false; $("againBtn").focus();
+  }
+
+  const start = () => { unlockSpeech(); unlockClips(); play(); };
+  $("playBtn").addEventListener("click", start);
+  $("againBtn").addEventListener("click", start);
+</script>
+</body>
+</html>
