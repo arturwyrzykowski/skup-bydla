@@ -401,12 +401,39 @@
   }
 
   const who = {
-    f: { tip: [500, 330], pitch: 150, mouthO: "fMouthO", mouthC: "fMouthC" },
-    d: { tip: null,       pitch: 270, mouthO: "dMouthO", mouthC: "dMouthC" }
+    f: { tip: [500, 330], pitch: 150, mouthO: "fMouthO", mouthC: "fMouthC", vPitch: 0.55, vRate: 0.95 },
+    d: { tip: null,       pitch: 270, mouthO: "dMouthO", mouthC: "dMouthC", vPitch: 1.45, vRate: 1.15 }
   };
   let driverX = 990;
 
-  async function say(k, lines, shift = 0, { instant = false } = {}){
+  // ---------- glos (synteza mowy przegladarki, fallback: bla-bla) ----------
+  const tts = window.speechSynthesis;
+  let plVoice = null;
+  function pickVoice(){
+    if (!tts) return;
+    const vs = tts.getVoices().filter(v => /^pl/i.test(v.lang));
+    plVoice = vs.find(v => /zosia|ewa|krzysztof|google/i.test(v.name)) || vs[0] || null;
+  }
+  if (tts){ pickVoice(); tts.addEventListener?.("voiceschanged", pickVoice); }
+  // iOS/Safari: pierwsze speak() musi pasc w gescie klikniecia
+  function unlockSpeech(){
+    if (!tts) return;
+    tts.cancel(); pickVoice();
+    const u = new SpeechSynthesisUtterance(" "); u.volume = 0; tts.speak(u);
+  }
+  function speak(text, w, { pitch, rate } = {}){
+    if (!tts || !plVoice) return null;
+    return new Promise(res => {
+      const u = new SpeechSynthesisUtterance(text);
+      u.voice = plVoice; u.lang = plVoice.lang;
+      u.pitch = pitch ?? w.vPitch; u.rate = rate ?? w.vRate;
+      const guard = setTimeout(res, 800 + text.length * 140);
+      u.onend = u.onerror = () => { clearTimeout(guard); res(); };
+      tts.speak(u);
+    });
+  }
+
+  async function say(k, lines, shift = 0, { instant = false, pitch, rate } = {}){
     const w = who[k], [tx, ty] = k === "d" ? [driverX, 410] : w.tip;
     const b = makeBubble(tx, ty, lines, shift);
     await anim(b.g, [{ transform: `translate(${tx}px,${ty}px) scale(0)` }, { transform: `translate(${tx}px,${ty}px) scale(1)` }],
@@ -418,13 +445,15 @@
       $(w.mouthO).style.display = open ? "" : "none";
       $(w.mouthC).style.display = open ? "none" : "";
     }, 110);
+    const spoken = speak(lines.join(" "), w, { pitch, rate });
     for (let i = 0; i < lines.length; i++){
       for (const ch of lines[i]){
         b.spans[i].textContent += ch;
-        if (ch !== " ") sfx.voice(w.pitch);
-        await sleep(58);
+        if (ch !== " " && !spoken) sfx.voice(w.pitch);
+        await sleep(spoken ? 45 : 58);
       }
     }
+    if (spoken) await spoken;
     clearInterval(talk);
     $(w.mouthO).style.display = "none"; $(w.mouthC).style.display = "";
     return b;
@@ -436,6 +465,7 @@
 
   let tractorSmoke = null;
   function reset(){
+    if (tts) tts.cancel();
     document.getAnimations().forEach(a => a.cancel());
     wheelAnims = []; walkAnims = [];
     clearInterval(tractorSmoke);
@@ -492,7 +522,7 @@
     $("fArmDown").style.display = "none"; $("fArmUp").style.display = "";
     $("fFace").style.fill = "#f08a70";
     anim($("fArmUp"), [{ transform: "translateY(40px)" }, { transform: "translateY(-18px)" }, { transform: "translateY(0)" }], { duration: 300 });
-    const b3 = await say("f", ["Spierdalaj mi stąd,", "ale już!"], -190);
+    const b3 = await say("f", ["Spierdalaj mi stąd,", "ale już!"], -190, { pitch: 0.4, rate: 1.2 });
     await sleep(350);
     await stomp(true);
     await sleep(300);
@@ -529,8 +559,9 @@
     $("endScreen").hidden = false; $("againBtn").focus();
   }
 
-  $("playBtn").addEventListener("click", play);
-  $("againBtn").addEventListener("click", play);
+  const start = () => { unlockSpeech(); play(); };
+  $("playBtn").addEventListener("click", start);
+  $("againBtn").addEventListener("click", start);
 </script>
 </body>
 </html>
