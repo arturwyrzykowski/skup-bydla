@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>Skup Bydła</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  html, body { margin:0; height:100%; background:#111; }
+  body { display:flex; align-items:center; justify-content:center;
+    font-family:"Comic Sans MS","Chalkboard SE",sans-serif; }
+  #wrap { position:relative; width:min(100vw, calc(100vh * 16 / 9)); aspect-ratio:16 / 9; }
+  #stage { width:100%; height:100%; display:block; background:#9fd3ff; }
+  .overlay { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center;
+    justify-content:center; gap:24px; text-align:center; color:#fff; background:rgba(0,0,0,.72); }
+  .overlay h1 { margin:0; font-size:clamp(40px,8vw,120px); color:#ffd23f; letter-spacing:2px;
+    -webkit-text-stroke:3px #000; text-shadow:6px 6px 0 #000; transform:rotate(-3deg); }
+  .overlay p { margin:0; font-size:clamp(16px,2vw,28px); }
+  .btn { font:inherit; font-weight:bold; font-size:clamp(20px,2.6vw,36px); padding:.4em 1.2em;
+    color:#000; background:#ffd23f; border:4px solid #000; border-radius:14px;
+    box-shadow:5px 5px 0 #000; cursor:pointer; }
+  .btn:focus-visible { outline:4px solid #fff; outline-offset:4px; }
+  [hidden] { display:none !important; }
+</style>
+</head>
+<body>
+<div id="wrap">
+<svg id="stage" viewBox="0 0 1600 900" aria-label="Bajka: Skup Bydła">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7cc4ff"/><stop offset="1" stop-color="#dff3ff"/>
+    </linearGradient>
+  </defs>
+
+  <g id="world">
+    <!-- niebo, slonce, chmury -->
+    <rect width="1600" height="900" fill="url(#sky)"/>
+    <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
+      <circle cx="1460" cy="115" r="58" fill="#ffe14d"/>
+      <path d="M170 150 q8-42 58-36 q22-38 70-10 q44-8 46 32 q34 6 18 38 h-178 q-34-6-14-24z" fill="#fff"/>
+      <path d="M820 95 q10-34 50-28 q20-30 60-6 q36-4 36 28 q28 6 12 30 h-146 q-28-6-12-24z" fill="#fff"/>
+    </g>
+
+    <!-- pola i drzewa na horyzoncie -->
+    <rect y="555" width="1600" height="70" fill="#d8c25e"/>
+    <g stroke="#141414" stroke-width="5" fill="#3f6b33">
+      <circle cx="610" cy="548" r="34"/><circle cx="660" cy="540" r="42"/><circle cx="960" cy="545" r="38"/>
+      <circle cx="1010" cy="552" r="28"/><circle cx="1110" cy="540" r="40"/>
+    </g>
+
+    <!-- podworko -->
+    <rect y="610" width="1600" height="290" fill="#8a7650"/>
+    <line x1="0" y1="610" x2="1600" y2="610" stroke="#141414" stroke-width="5"/>
+    <g fill="#6f9b4a" stroke="#141414" stroke-width="4">
+      <path d="M40 860 q30-30 60 0 z"/><path d="M700 700 q25-26 50 0 z"/><path d="M1300 880 q30-30 60 0 z"/>
+      <path d="M330 720 q22-22 44 0 z"/>
+    </g>
+    <ellipse cx="700" cy="850" rx="120" ry="22" fill="#5c4a2d" stroke="#141414" stroke-width="4"/>
+
+    <!-- stodola / obora -->
+    <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
+      <rect x="60" y="340" width="470" height="290" fill="#9e3f2c"/>
+      <g stroke="#7a2d1f" stroke-width="3">
+        <line x1="100" y1="345" x2="100" y2="628"/><line x1="140" y1="345" x2="140" y2="628"/>
+        <line x1="180" y1="345" x2="180" y2="628"/><line x1="410" y1="345" x2="410" y2="628"/>
+        <line x1="450" y1="345" x2="450" y2="628"/><line x1="490" y1="345" x2="490" y2="628"/>
+      </g>
+      <polygon points="30,350 295,165 560,350" fill="#6d7178"/>
+      <g stroke="#565a60" stroke-width="3" fill="none">
+        <path d="M90 308 L295 175 L500 308"/><path d="M150 266 L295 185 L440 266"/>
+      </g>
+      <rect x="200" y="430" width="190" height="200" fill="#6e2b1e"/>
+      <path d="M205 435 L385 625 M385 435 L205 625" stroke="#e9e2d0" stroke-width="9"/>
+      <rect x="415" y="395" width="80" height="60" fill="#2d3f55"/>
+      <rect x="236" y="250" width="118" height="56" fill="#2d3f55"/>
+      <rect x="0" y="560" width="120" height="72" rx="22" fill="#e3c35a"/>
+      <path d="M20 580 h80 M20 600 h80" stroke="#c7a53f" stroke-width="3"/>
+    </g>
+
+    <!-- Ursus C330 -->
+    <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
+      <rect x="686" y="440" width="12" height="70" fill="#4a4f57"/>
+      <path d="M612 508 H772 V568 H612 Z" fill="#c8302c"/>
+      <rect x="598" y="512" width="18" height="52" fill="#9aa3ad"/>
+      <text x="690" y="548" font-family="Arial Black, Arial, sans-serif" font-size="22" font-weight="900" fill="#fff" stroke="none" text-anchor="middle">URSUS</text>
+      <path d="M760 475 L790 470 L800 500" fill="none"/>
+      <ellipse cx="786" cy="468" rx="22" ry="7" fill="#333"/>
+      <path d="M830 470 h40 v14 h-40 z" fill="#333"/>
+      <path d="M740 568 Q742 470 822 470 Q902 470 905 560" fill="#c8302c"/>
+      <circle cx="822" cy="560" r="76" fill="#1a1a1a"/><circle cx="822" cy="560" r="38" fill="#c8302c"/>
+      <circle cx="652" cy="600" r="38" fill="#1a1a1a"/><circle cx="652" cy="600" r="17" fill="#c8302c"/>
+    </g>
+
+    <!-- kombajn Bizon -->
+    <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
+      <path d="M1480 410 L1595 355" stroke-width="22" stroke="#141414"/>
+      <path d="M1480 410 L1595 355" stroke-width="13" stroke="#d12f28"/>
+      <rect x="1230" y="400" width="290" height="200" fill="#d12f28"/>
+      <rect x="1260" y="360" width="230" height="44" fill="#e6534a"/>
+      <rect x="1175" y="325" width="115" height="100" rx="8" fill="#d12f28"/>
+      <rect x="1188" y="338" width="90" height="62" rx="6" fill="#bfe3f5"/>
+      <text x="1378" y="522" font-family="Arial Black, Arial, sans-serif" font-style="italic" font-size="54" font-weight="900" fill="#fff" stroke="none" text-anchor="middle">BIZON</text>
+      <rect x="1055" y="590" width="200" height="40" fill="#9c231e"/>
+      <circle cx="1150" cy="555" r="56" fill="none" stroke-width="7"/>
+      <path d="M1150 499 V611 M1094 555 H1206 M1110 515 L1190 595 M1190 515 L1110 595" stroke-width="5"/>
+      <circle cx="1310" cy="600" r="66" fill="#1a1a1a"/><circle cx="1310" cy="600" r="26" fill="#e3c35a"/>
+      <circle cx="1480" cy="618" r="44" fill="#1a1a1a"/><circle cx="1480" cy="618" r="17" fill="#e3c35a"/>
+    </g>
+
+    <!-- TIR: SKUP BYDLA (przod w lewo) -->
+    <g id="truck" style="transform:translate(1750px,448px)">
+      <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
+        <rect x="222" y="20" width="16" height="190" fill="#9aa3ad"/>
+        <rect x="240" y="60" width="580" height="235" rx="8" fill="#cdd3da"/>
+        <rect x="260" y="84" width="280" height="12" rx="6" fill="#39414d"/>
+        <rect x="260" y="110" width="280" height="12" rx="6" fill="#39414d"/>
+        <rect x="560" y="76" width="112" height="74" rx="10" fill="#39414d"/>
+        <g id="cow">
+          <path d="M582 96 q-14 -18 -4 -26 M648 96 q14 -18 4 -26" fill="none" stroke-width="6"/>
+          <ellipse cx="615" cy="118" rx="36" ry="30" fill="#7a4a2a"/>
+          <path d="M598 98 q18 -10 34 2 q-6 16 -20 14 q-12 -2 -14 -16z" fill="#f4f1ea" stroke="none"/>
+          <circle cx="601" cy="112" r="5" fill="#111" stroke="none"/><circle cx="629" cy="112" r="5" fill="#111" stroke="none"/>
+          <ellipse cx="615" cy="134" rx="21" ry="12" fill="#e8a0a0"/>
+          <circle cx="608" cy="134" r="3" fill="#111" stroke="none"/><circle cx="622" cy="134" r="3" fill="#111" stroke="none"/>
+        </g>
+        <text x="490" y="222" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="68" font-weight="900" fill="#d01616" stroke="#fff" stroke-width="4" paint-order="stroke">SKUP BYDŁA</text>
+        <text x="490" y="268" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="700" fill="#141414" stroke="none">tel. 600 BYK BYK · gotówka od ręki</text>
+        <rect x="0" y="292" width="830" height="20" fill="#2b2f36"/>
+        <path d="M8 300 L8 150 Q10 70 60 50 L210 40 Q228 42 228 70 L228 300 Z" fill="#f4f4f2"/>
+        <path d="M8 230 H228 V252 H8 Z" fill="#1f5fae" stroke="none"/>
+        <path d="M20 150 Q24 90 62 70 L92 66 L92 150 Z" fill="#9fcfee"/>
+        <rect x="8" y="170" width="30" height="55" fill="#c3c7cc"/>
+        <rect x="6" y="258" width="26" height="18" rx="4" fill="#ffe27a"/>
+        <rect x="0" y="282" width="44" height="22" fill="#9aa3ad"/>
+        <path d="M22 92 L-12 96 L-12 118" fill="none"/>
+        <rect x="-22" y="104" width="16" height="36" rx="4" fill="#333"/>
+        <g id="drvCab">
+          <circle cx="163" cy="118" r="30" fill="#f0b48e"/>
+          <rect x="140" y="106" width="21" height="13" rx="4" fill="#111" stroke="none"/>
+          <rect x="166" y="106" width="21" height="13" rx="4" fill="#111" stroke="none"/>
+        </g>
+        <g id="cabDoor" style="transform-origin:110px 170px">
+          <path d="M110 62 H214 V288 H110 Z M122 76 V156 H204 V76 Z" fill="#f4f4f2" fill-rule="evenodd"/>
+          <rect x="110" y="230" width="104" height="22" fill="#1f5fae" stroke="none"/>
+          <rect x="122" y="76" width="82" height="80" rx="8" fill="#9fcfee" fill-opacity="0.4"/>
+          <rect x="190" y="172" width="16" height="7" rx="3" fill="#777"/>
+        </g>
+        <g class="tw" style="transform-origin:70px 310px"><circle cx="70" cy="310" r="44" fill="#1a1a1a"/><circle cx="70" cy="310" r="18" fill="#b8bec6"/><path d="M70 272 V348 M32 310 H108" stroke="#666"/></g>
+        <g class="tw" style="transform-origin:185px 310px"><circle cx="185" cy="310" r="44" fill="#1a1a1a"/><circle cx="185" cy="310" r="18" fill="#b8bec6"/><path d="M185 272 V348 M147 310 H223" stroke="#666"/></g>
+        <g class="tw" style="transform-origin:640px 310px"><circle cx="640" cy="310" r="44" fill="#1a1a1a"/><circle cx="640" cy="310" r="18" fill="#b8bec6"/><path d="M640 272 V348 M602 310 H678" stroke="#666"/></g>
+        <g class="tw" style="transform-origin:745px 310px"><circle cx="745" cy="310" r="44" fill="#1a1a1a"/><circle cx="745" cy="310" r="18" fill="#b8bec6"/><path d="M745 272 V348 M707 310 H783" stroke="#666"/></g>
+      </g>
+    </g>
+
+    <!-- ROLNIK z widlami -->
+    <g id="farmer" transform="translate(470,800) scale(0.9)">
+      <g stroke="#141414" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <rect x="-48" y="-165" width="40" height="128" fill="#2f4a7a"/>
+        <rect x="-62" y="-48" width="56" height="48" rx="10" fill="#1c1c1c"/>
+        <g id="fLegR" style="transform-origin:26px -165px">
+          <rect x="8" y="-165" width="40" height="128" fill="#2f4a7a"/>
+          <rect x="4" y="-48" width="60" height="48" rx="10" fill="#1c1c1c"/>
+        </g>
+        <path d="M-80 -345 Q-80 -370 -55 -372 H55 Q80 -370 80 -345 V-165 Q80 -150 65 -150 H-65 Q-80 -150 -80 -165 Z" fill="#56613f"/>
+        <g stroke="#3f4a2e" stroke-width="3">
+          <line x1="-77" y1="-310" x2="77" y2="-310"/><line x1="-77" y1="-270" x2="77" y2="-270"/>
+          <line x1="-77" y1="-230" x2="77" y2="-230"/><line x1="-77" y1="-190" x2="77" y2="-190"/>
+          <line x1="0" y1="-368" x2="0" y2="-152"/>
+        </g>
+        <path d="M-72 -335 Q-112 -270 -104 -178" fill="none" stroke-width="40"/>
+        <path d="M-72 -335 Q-112 -270 -104 -178" fill="none" stroke="#56613f" stroke-width="30"/>
+        <circle cx="-104" cy="-168" r="17" fill="#f1b690"/>
+
+        <g id="fArmDown">
+          <line x1="112" y1="-40" x2="102" y2="-432" stroke-width="20"/>
+          <line x1="112" y1="-40" x2="102" y2="-432" stroke="#a0773f" stroke-width="12"/>
+          <path d="M84 -48 Q112 -64 142 -48" fill="none" stroke-width="12"/>
+          <path d="M88 -48 L86 -2 M104 -54 L103 -2 M121 -54 L122 -2 M138 -48 L140 -2" fill="none" stroke-width="11"/>
+          <path d="M84 -48 Q112 -64 142 -48" fill="none" stroke="#8b949e" stroke-width="6"/>
+          <path d="M88 -48 L86 -2 M104 -54 L103 -2 M121 -54 L122 -2 M138 -48 L140 -2" fill="none" stroke="#8b949e" stroke-width="5"/>
+          <path d="M70 -335 Q110 -380 104 -415" fill="none" stroke-width="40"/>
+          <path d="M70 -335 Q110 -380 104 -415" fill="none" stroke="#56613f" stroke-width="30"/>
+          <circle cx="103" cy="-420" r="17" fill="#f1b690"/>
+        </g>
+        <g id="fArmUp" style="display:none">
+          <line x1="108" y1="-330" x2="108" y2="-715" stroke-width="20"/>
+          <line x1="108" y1="-330" x2="108" y2="-715" stroke="#a0773f" stroke-width="12"/>
+          <path d="M78 -712 Q108 -728 138 -712" fill="none" stroke-width="12"/>
+          <path d="M82 -712 L80 -790 M98 -718 L97 -792 M118 -718 L119 -792 M134 -712 L136 -790" fill="none" stroke-width="11"/>
+          <path d="M78 -712 Q108 -728 138 -712" fill="none" stroke="#8b949e" stroke-width="6"/>
+          <path d="M82 -712 L80 -790 M98 -718 L97 -792 M118 -718 L119 -792 M134 -712 L136 -790" fill="none" stroke="#8b949e" stroke-width="5"/>
+          <path d="M70 -335 Q122 -420 108 -520" fill="none" stroke-width="40"/>
+          <path d="M70 -335 Q122 -420 108 -520" fill="none" stroke="#56613f" stroke-width="30"/>
+          <circle cx="108" cy="-526" r="17" fill="#f1b690"/>
+        </g>
+
+        <rect x="-25" y="-352" width="50" height="22" fill="#f1b690"/>
+        <circle cx="-76" cy="-400" r="16" fill="#f1b690"/><circle cx="76" cy="-400" r="16" fill="#f1b690"/>
+        <circle id="fFace" cx="0" cy="-400" r="76" fill="#f1b690"/>
+        <g fill="#7d6452" stroke="none" opacity="0.55">
+          <circle cx="-44" cy="-352" r="2.4"/><circle cx="-30" cy="-340" r="2.4"/><circle cx="-14" cy="-334" r="2.4"/>
+          <circle cx="14" cy="-334" r="2.4"/><circle cx="30" cy="-340" r="2.4"/><circle cx="44" cy="-352" r="2.4"/>
+          <circle cx="-54" cy="-366" r="2.4"/><circle cx="54" cy="-366" r="2.4"/><circle cx="0" cy="-330" r="2.4"/>
+        </g>
+        <path id="fBrowL" d="M-46 -442 L-12 -432" stroke="#3b2a1c" stroke-width="9"/>
+        <path id="fBrowR" d="M12 -432 L46 -442" stroke="#3b2a1c" stroke-width="9"/>
+        <circle cx="-28" cy="-418" r="8" fill="#111" stroke="none"/><circle cx="28" cy="-418" r="8" fill="#111" stroke="none"/>
+        <ellipse cx="0" cy="-392" rx="16" ry="20" fill="#e27f6e"/>
+        <path d="M-50 -362 Q-24 -384 0 -370 Q24 -384 50 -362 Q24 -357 0 -364 Q-24 -357 -50 -362 Z" fill="#5a3b22"/>
+        <path id="fMouthC" d="M-18 -346 Q0 -340 18 -346" fill="none"/>
+        <ellipse id="fMouthO" cx="0" cy="-344" rx="17" ry="13" fill="#5a1414" style="display:none"/>
+        <path d="M-80 -438 Q-72 -506 2 -507 Q74 -506 84 -446 Q0 -468 -80 -438 Z" fill="#6b6e73"/>
+        <path d="M-10 -450 Q55 -467 120 -440 Q60 -428 -10 -436 Z" fill="#55585c"/>
+      </g>
+    </g>
+
+    <!-- KIEROWCA TIRa (dres, lancuch, okulary) -->
+    <g id="driver" style="display:none">
+      <g stroke="#141414" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <g id="dLegL" style="transform-origin:-30px -150px">
+          <rect x="-50" y="-150" width="40" height="118" fill="#1c1c22"/>
+          <line x1="-43" y1="-146" x2="-43" y2="-38" stroke="#fff"/>
+          <rect x="-66" y="-36" width="60" height="36" rx="14" fill="#fff"/>
+        </g>
+        <g id="dLegR" style="transform-origin:30px -150px">
+          <rect x="10" y="-150" width="40" height="118" fill="#1c1c22"/>
+          <line x1="43" y1="-146" x2="43" y2="-38" stroke="#fff"/>
+          <rect x="6" y="-36" width="60" height="36" rx="14" fill="#fff"/>
+        </g>
+        <g id="dArmL" style="transform-origin:-82px -300px">
+          <path d="M-82 -300 Q-114 -240 -106 -172" fill="none" stroke-width="38"/>
+          <path d="M-82 -300 Q-114 -240 -106 -172" fill="none" stroke="#1c1c22" stroke-width="28"/>
+          <path d="M-94 -292 Q-122 -238 -116 -176" fill="none" stroke="#fff" stroke-width="4"/>
+          <circle cx="-106" cy="-164" r="16" fill="#f0b48e"/>
+        </g>
+        <g id="dArmR" style="transform-origin:82px -300px">
+          <path d="M82 -300 Q114 -240 106 -172" fill="none" stroke-width="38"/>
+          <path d="M82 -300 Q114 -240 106 -172" fill="none" stroke="#1c1c22" stroke-width="28"/>
+          <path d="M94 -292 Q122 -238 116 -176" fill="none" stroke="#fff" stroke-width="4"/>
+          <circle cx="106" cy="-164" r="16" fill="#f0b48e"/>
+        </g>
+        <ellipse cx="0" cy="-222" rx="100" ry="115" fill="#1c1c22"/>
+        <line x1="0" y1="-330" x2="0" y2="-112" stroke="#fff" stroke-width="3"/>
+        <path d="M-38 -318 Q0 -266 38 -318" fill="none" stroke="#e8c030" stroke-width="8"/>
+        <rect x="-22" y="-332" width="44" height="18" fill="#f0b48e"/>
+        <circle cx="-66" cy="-384" r="14" fill="#f0b48e"/><circle cx="66" cy="-384" r="14" fill="#f0b48e"/>
+        <circle id="dFace" cx="0" cy="-380" r="66" fill="#f0b48e"/>
+        <path d="M-32 -430 Q-12 -441 10 -433" fill="none" stroke="#fff" stroke-width="5" opacity="0.7"/>
+        <rect x="-54" y="-404" width="44" height="26" rx="8" fill="#111"/>
+        <rect x="10" y="-404" width="44" height="26" rx="8" fill="#111"/>
+        <line x1="-10" y1="-394" x2="10" y2="-394"/>
+        <path d="M0 -384 q9 12 -4 17" fill="none" stroke-width="4"/>
+        <path id="dMouthC" d="M-20 -352 Q0 -346 20 -352" fill="none"/>
+        <ellipse id="dMouthO" cx="0" cy="-350" rx="18" ry="12" fill="#5a1414" style="display:none"/>
+        <path d="M-40 -326 Q0 -306 40 -326" fill="none" stroke-width="4"/>
+        <g fill="#7d6452" stroke="none" opacity="0.5">
+          <circle cx="-34" cy="-338" r="2.3"/><circle cx="-18" cy="-332" r="2.3"/><circle cx="18" cy="-332" r="2.3"/>
+          <circle cx="34" cy="-338" r="2.3"/><circle cx="0" cy="-328" r="2.3"/>
+        </g>
+      </g>
+    </g>
+
+    <g id="fx"></g>
+    <g id="bubbles"></g>
+  </g>
+</svg>
+
+<div class="overlay" id="startScreen">
+  <h1>SKUP BYDŁA</h1>
+  <p>odcinek 1</p>
+  <button class="btn" id="playBtn" autofocus>▶ Odtwórz</button>
+</div>
+<div class="overlay" id="endScreen" hidden>
+  <h1>KONIEC</h1>
+  <button class="btn" id="againBtn">↺ Od nowa</button>
+</div>
+</div>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const NS = "http://www.w3.org/2000/svg";
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+  // ---------- dzwiek (generowany, bez plikow) ----------
+  let actx = null;
+  function ac(){
+    if (!actx) actx = new (window.AudioContext || window.webkitAudioContext)();
+    if (actx.state === "suspended") actx.resume();
+    return actx;
+  }
+  function tone(freq, dur, type = "square", vol = 0.05, glideTo){
+    const a = ac(), t = a.currentTime, o = a.createOscillator(), g = a.createGain();
+    o.type = type; o.frequency.setValueAtTime(freq, t);
+    if (glideTo) o.frequency.exponentialRampToValueAtTime(glideTo, t + dur);
+    g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(a.destination); o.start(t); o.stop(t + dur + 0.02);
+  }
+  function noise(dur, { freq = 1000, q = 1, vol = 0.3, type = "bandpass", sweepTo } = {}){
+    const a = ac(), t = a.currentTime, len = Math.floor(a.sampleRate * dur);
+    const buf = a.createBuffer(1, len, a.sampleRate), d = buf.getChannelData(0);
+    for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+    const s = a.createBufferSource(); s.buffer = buf;
+    const f = a.createBiquadFilter(); f.type = type; f.Q.value = q; f.frequency.setValueAtTime(freq, t);
+    if (sweepTo) f.frequency.exponentialRampToValueAtTime(sweepTo, t + dur);
+    const g = a.createGain(); g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    s.connect(f); f.connect(g); g.connect(a.destination); s.start(t); s.stop(t + dur);
+  }
+  function engine(){
+    const a = ac(), o = a.createOscillator(), f = a.createBiquadFilter(), g = a.createGain();
+    o.type = "sawtooth"; o.frequency.value = 45; f.type = "lowpass"; f.frequency.value = 380; g.gain.value = 0.0001;
+    o.connect(f); f.connect(g); g.connect(a.destination); o.start();
+    return {
+      set(freq, vol, ramp = 0.3){ const t = a.currentTime; o.frequency.linearRampToValueAtTime(freq, t + ramp); g.gain.linearRampToValueAtTime(vol, t + ramp); },
+      stop(ramp = 0.4){ const t = a.currentTime; g.gain.linearRampToValueAtTime(0.0001, t + ramp); o.stop(t + ramp + 0.05); }
+    };
+  }
+  const sfx = {
+    stomp(){ tone(150, 0.3, "sine", 0.55, 38); noise(0.14, { freq: 320, type: "lowpass", vol: 0.3 }); },
+    door(){ noise(0.12, { freq: 600, type: "lowpass", vol: 0.4 }); tone(95, 0.12, "square", 0.08, 60); },
+    brake(){ noise(0.5, { freq: 1400, q: 1.5, vol: 0.14 }); },
+    screech(){ noise(1.6, { freq: 2700, q: 9, vol: 0.4, sweepTo: 1700 }); tone(1900, 1.5, "sawtooth", 0.025, 1250); },
+    horn(){ tone(415, 0.5, "square", 0.05); tone(523, 0.5, "square", 0.04); },
+    moo(){ tone(170, 1.0, "sawtooth", 0.06, 105); },
+    voice(pitch){ tone(pitch * (0.8 + Math.random() * 0.45), 0.07, "square", 0.045); }
+  };
+
+  // ---------- animacja ----------
+  const anim = (el, frames, opts) => el.animate(frames, Object.assign({ fill: "forwards" }, opts)).finished.catch(() => {});
+  const truckT = x => `translate(${x}px,448px)`;
+  const drvT = (x, y) => `translate(${x}px,${y}px) scale(0.85)`;
+
+  function puff(x, y, { r = 26, dur = 1100, dx = 0, dy = -80, color = "#dcdcdc" } = {}){
+    const c = document.createElementNS(NS, "circle");
+    c.setAttribute("cx", x); c.setAttribute("cy", y); c.setAttribute("r", r);
+    c.setAttribute("fill", color); c.setAttribute("stroke", "#141414"); c.setAttribute("stroke-width", "4");
+    c.style.transformOrigin = `${x}px ${y}px`;
+    $("fx").append(c);
+    c.animate([{ transform: "translate(0,0) scale(.3)", opacity: 1 },
+               { transform: `translate(${dx}px,${dy}px) scale(1.6)`, opacity: 0 }],
+              { duration: dur, easing: "ease-out", fill: "forwards" })
+     .finished.then(() => c.remove()).catch(() => {});
+  }
+
+  let wheelAnims = [];
+  function spinWheels(dir, period = 0.5){
+    wheelAnims.forEach(a => a.cancel()); wheelAnims = [];
+    if (!dir) return;
+    document.querySelectorAll("#truck .tw").forEach(w => wheelAnims.push(
+      w.animate([{ transform: "rotate(0deg)" }, { transform: `rotate(${dir * 360}deg)` }],
+                { duration: period * 1000, iterations: Infinity })));
+  }
+
+  let walkAnims = [];
+  function walk(on, step = 0.45){
+    walkAnims.forEach(a => a.cancel()); walkAnims = [];
+    if (!on) return;
+    const o = { duration: step * 1000, direction: "alternate", iterations: Infinity, easing: "ease-in-out" };
+    const swing = (id, a) => walkAnims.push($(id).animate([{ transform: `rotate(${a}deg)` }, { transform: `rotate(${-a}deg)` }], o));
+    swing("dLegL", 24); swing("dLegR", -24); swing("dArmL", -20); swing("dArmR", 20);
+  }
+
+  async function stomp(big){
+    const leg = $("fLegR");
+    await anim(leg, [{ transform: "rotate(0deg)" }, { transform: "rotate(-38deg)" }], { duration: 230, easing: "ease-out" });
+    await anim(leg, [{ transform: "rotate(-38deg)" }, { transform: "rotate(5deg)" }, { transform: "rotate(0deg)" }], { duration: 120, easing: "ease-in" });
+    sfx.stomp();
+    puff(510, 800, { r: 16, dur: 700, dx: 40, dy: -30, color: "#b09a6c" });
+    puff(490, 800, { r: 16, dur: 700, dx: -40, dy: -30, color: "#b09a6c" });
+    if (big) anim($("world"), [
+      { transform: "translate(0,0)" }, { transform: "translate(-14px,8px)" }, { transform: "translate(12px,-6px)" },
+      { transform: "translate(-8px,4px)" }, { transform: "translate(0,0)" }], { duration: 380 });
+  }
+
+  // dymek: czubek ogonka w (tipX, tipY), linie tekstu, przesuniecie w bok
+  function makeBubble(tipX, tipY, lines, shift = 0){
+    const g = document.createElementNS(NS, "g");
+    const tail = document.createElementNS(NS, "path");
+    const rect = document.createElementNS(NS, "rect");
+    const patch = document.createElementNS(NS, "path");
+    const text = document.createElementNS(NS, "text");
+    text.setAttribute("font-size", "40"); text.setAttribute("font-weight", "700");
+    text.setAttribute("font-family", '"Comic Sans MS","Chalkboard SE",sans-serif'); text.setAttribute("fill", "#111");
+    g.append(tail, rect, patch, text);
+    g.style.transform = `translate(${tipX}px,${tipY}px) scale(0)`;
+    $("bubbles").append(g);
+
+    const spans = lines.map(() => { const t = document.createElementNS(NS, "tspan"); text.append(t); return t; });
+    let maxW = 0;
+    spans.forEach((s, i) => { s.textContent = lines[i]; maxW = Math.max(maxW, s.getComputedTextLength()); });
+    const lh = 50, padX = 34, padY = 26;
+    const W = maxW + padX * 2, H = lines.length * lh + padY * 2 - 10;
+    let left = Math.max(20, Math.min(1580 - W, tipX + shift - W / 2));
+    const bx = left - tipX, by = -38 - H;
+    const tb = Math.min(Math.max(0, bx + 34), bx + W - 54);
+    Object.entries({ x: bx, y: by, width: W, height: H, rx: 26, fill: "#fff", stroke: "#111", "stroke-width": 5 })
+      .forEach(([k, v]) => rect.setAttribute(k, v));
+    tail.setAttribute("d", `M${tb - 18} -46 L0 0 L${tb + 22} -46 Z`);
+    tail.setAttribute("fill", "#fff"); tail.setAttribute("stroke", "#111"); tail.setAttribute("stroke-width", "5");
+    patch.setAttribute("d", `M${tb - 13} -38 L${tb + 17} -38`); patch.setAttribute("stroke", "#fff"); patch.setAttribute("stroke-width", "7");
+    spans.forEach((s, i) => { s.setAttribute("x", bx + padX); s.setAttribute("y", by + padY + 34 + i * lh); s.textContent = ""; });
+    return { g, spans, lines, tipX, tipY };
+  }
+
+  const who = {
+    f: { tip: [500, 330], pitch: 150, mouthO: "fMouthO", mouthC: "fMouthC" },
+    d: { tip: null,       pitch: 270, mouthO: "dMouthO", mouthC: "dMouthC" }
+  };
+  let driverX = 990;
+
+  async function say(k, lines, shift = 0, { instant = false } = {}){
+    const w = who[k], [tx, ty] = k === "d" ? [driverX, 410] : w.tip;
+    const b = makeBubble(tx, ty, lines, shift);
+    await anim(b.g, [{ transform: `translate(${tx}px,${ty}px) scale(0)` }, { transform: `translate(${tx}px,${ty}px) scale(1)` }],
+               { duration: 200, easing: "cubic-bezier(.3,1.6,.6,1)" });
+    if (instant){ b.spans.forEach((s, i) => s.textContent = lines[i]); return b; }
+    let open = false;
+    const talk = setInterval(() => {
+      open = !open;
+      $(w.mouthO).style.display = open ? "" : "none";
+      $(w.mouthC).style.display = open ? "none" : "";
+    }, 110);
+    for (let i = 0; i < lines.length; i++){
+      for (const ch of lines[i]){
+        b.spans[i].textContent += ch;
+        if (ch !== " ") sfx.voice(w.pitch);
+        await sleep(58);
+      }
+    }
+    clearInterval(talk);
+    $(w.mouthO).style.display = "none"; $(w.mouthC).style.display = "";
+    return b;
+  }
+  async function unsay(b){
+    await anim(b.g, [{ transform: `translate(${b.tipX}px,${b.tipY}px) scale(1)` }, { transform: `translate(${b.tipX}px,${b.tipY}px) scale(0)` }], { duration: 150 });
+    b.g.remove();
+  }
+
+  let tractorSmoke = null;
+  function reset(){
+    document.getAnimations().forEach(a => a.cancel());
+    wheelAnims = []; walkAnims = [];
+    clearInterval(tractorSmoke);
+    $("bubbles").innerHTML = ""; $("fx").innerHTML = "";
+    $("truck").style.transform = truckT(1750);
+    $("cabDoor").style.transform = "";
+    $("drvCab").style.display = "";
+    driverX = 990;
+    $("driver").style.display = "none"; $("driver").style.transform = drvT(driverX, 800);
+    $("fArmDown").style.display = ""; $("fArmUp").style.display = "none";
+    $("fFace").style.fill = "";
+    ["fMouthO", "dMouthO"].forEach(id => $(id).style.display = "none");
+    ["fMouthC", "dMouthC"].forEach(id => $(id).style.display = "");
+  }
+
+  async function play(){
+    reset(); ac();
+    $("startScreen").hidden = true; $("endScreen").hidden = true;
+    tractorSmoke = setInterval(() => puff(692, 440, { r: 14, dur: 1400, dx: -30, dy: -70, color: "#9a9a9a" }), 700);
+
+    // rolnik oparty o widly, tupie z nudow
+    await sleep(600); await stomp();
+    await sleep(700);
+
+    // wjazd TIRa
+    const eng = engine(); eng.set(72, 0.09, 0.2);
+    spinWheels(-1, 0.45);
+    const arrive = anim($("truck"), [{ transform: truckT(1750) }, { transform: truckT(860) }], { duration: 4200, easing: "cubic-bezier(.2,.7,.35,1)" });
+    await sleep(1600); stomp();
+    await arrive;
+    spinWheels(0); sfx.brake(); eng.set(40, 0.04, 0.6);
+    await sleep(400); sfx.moo();
+    await sleep(900);
+
+    // kierowca wysiada
+    sfx.door();
+    await anim($("cabDoor"), [{ transform: "scaleX(1)" }, { transform: "scaleX(0.12)" }], { duration: 250 });
+    $("drvCab").style.display = "none";
+    $("driver").style.display = "";
+    await anim($("driver"), [{ transform: drvT(1010, 740) }, { transform: drvT(1000, 700) }, { transform: drvT(990, 800) }], { duration: 450, easing: "ease-in" });
+    eng.stop(0.6);
+    walk(true, 0.42);
+    await anim($("driver"), [{ transform: drvT(990, 800) }, { transform: drvT(820, 800) }], { duration: 1700, easing: "linear" });
+    driverX = 820; walk(false);
+    await sleep(500);
+
+    // rozmowa
+    const b1 = await say("f", ["Panie, dasz mi", "dobrą cenę?"]);
+    await sleep(1600); await unsay(b1); await sleep(300);
+    const b2 = await say("d", ["Dam, ale jebnę cię", "na kilogramach."], 90);
+    await sleep(2200); await unsay(b2); await sleep(300);
+
+    // rolnik podnosi widly
+    $("fArmDown").style.display = "none"; $("fArmUp").style.display = "";
+    $("fFace").style.fill = "#f08a70";
+    anim($("fArmUp"), [{ transform: "translateY(40px)" }, { transform: "translateY(-18px)" }, { transform: "translateY(0)" }], { duration: 300 });
+    const b3 = await say("f", ["Spierdalaj mi stąd,", "ale już!"], -190);
+    await sleep(350);
+    await stomp(true);
+    await sleep(300);
+    await unsay(b3);
+
+    // kierowca w nogi
+    const b4 = await say("d", ["!!!"], 0, { instant: true });
+    await anim($("driver"), [{ transform: drvT(820, 800) }, { transform: drvT(820, 730) }, { transform: drvT(820, 800) }], { duration: 320 });
+    unsay(b4);
+    walk(true, 0.2);
+    await anim($("driver"), [{ transform: drvT(820, 800) }, { transform: drvT(1000, 800) }], { duration: 650, easing: "ease-in" });
+    walk(false);
+    $("driver").style.display = "none"; $("drvCab").style.display = "";
+    sfx.door();
+    await anim($("cabDoor"), [{ transform: "scaleX(0.12)" }, { transform: "scaleX(1)" }], { duration: 200 });
+
+    // pisk opon i odjazd
+    const eng2 = engine(); eng2.set(100, 0.12, 0.2);
+    sfx.screech(); spinWheels(1, 0.1);
+    const smoke = setInterval(() => {
+      [930, 1045, 1500, 1605].forEach(x => puff(x + Math.random() * 30, 795, { r: 28, dur: 1300, dx: -60 - Math.random() * 60, dy: -60 - Math.random() * 40 }));
+    }, 110);
+    await sleep(450);
+    sfx.horn();
+    await anim($("truck"), [{ transform: truckT(860) }, { transform: truckT(2050) }], { duration: 2000, easing: "cubic-bezier(.5,0,.8,.4)" });
+    clearInterval(smoke); eng2.stop(0.3); spinWheels(0);
+
+    // rolnik opuszcza widly
+    await sleep(600);
+    $("fArmUp").style.display = "none"; $("fArmDown").style.display = ""; $("fFace").style.fill = "";
+    await stomp();
+    await sleep(1400);
+    clearInterval(tractorSmoke);
+    $("endScreen").hidden = false; $("againBtn").focus();
+  }
+
+  $("playBtn").addEventListener("click", play);
+  $("againBtn").addEventListener("click", play);
+</script>
+</body>
+</html>
