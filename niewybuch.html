@@ -435,6 +435,7 @@
 </div>
 </div>
 
+<script src="intro.js"></script>
 <script>
   const $ = id => document.getElementById(id);
   const NS = "http://www.w3.org/2000/svg";
@@ -911,6 +912,7 @@
   async function play(){
     reset(); ac();
     $("startScreen").hidden = true; $("endScreen").hidden = true;
+    await ziomkiIntro("NIEWYBUCH", 2);
 
     // ===== 1. LAS: saperzy wchodza, wykrywacz piszczy =====
     place("s1", -330); place("s2", -150);

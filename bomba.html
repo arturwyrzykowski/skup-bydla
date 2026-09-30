@@ -445,6 +445,7 @@
 </div>
 </div>
 
+<script src="intro.js"></script>
 <script>
   const $ = id => document.getElementById(id);
   const NS = "http://www.w3.org/2000/svg";
@@ -850,6 +851,7 @@
   async function play(){
     reset(); ac();
     $("startScreen").hidden = true; $("endScreen").hidden = true;
+    await ziomkiIntro("W PANI DOMU JEST BOMBA", 5);
 
     // ===== 1. budowa: stara koparka kopie fundament =====
     place("r", 1000, 800); place("m", 1300, 800);

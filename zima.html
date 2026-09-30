@@ -690,6 +690,7 @@
 </div>
 </div>
 
+<script src="intro.js"></script>
 <script>
   const $ = id => document.getElementById(id);
   const NS = "http://www.w3.org/2000/svg";
@@ -1156,6 +1157,7 @@
   async function play(){
     reset(); ac();
     $("startScreen").hidden = true; $("endScreen").hidden = true;
+    await ziomkiIntro("ZIMA NA WSI", 6);
     snowfall(true); chimneys(true);
     const wind = setInterval(() => noise(2.5, { freq: 400, q: 0.6, vol: 0.05, sweepTo: 700 }), 2400);
 

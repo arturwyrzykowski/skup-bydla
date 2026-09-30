@@ -362,6 +362,7 @@
 </div>
 </div>
 
+<script src="intro.js"></script>
 <script>
   const $ = id => document.getElementById(id);
   const NS = "http://www.w3.org/2000/svg";
@@ -793,6 +794,7 @@
   async function play(){
     reset(); ac();
     $("startScreen").hidden = true; $("endScreen").hidden = true;
+    await ziomkiIntro("MOKRE POLE", 3);
     const cat = engine(); cat.set(60, 0.08, 0.3);
     const beacon = $("beacon").animate([{ fill: "#ff7a1a" }, { fill: "#ffe27a" }], { duration: 350, direction: "alternate", iterations: Infinity });
     const smoke = catSmoke();
