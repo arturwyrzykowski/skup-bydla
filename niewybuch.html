@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>Niewybuch</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  html, body { margin:0; height:100%; background:#111; }
+  body { display:flex; align-items:center; justify-content:center;
+    font-family:"Comic Sans MS","Chalkboard SE",sans-serif; }
+  #wrap { position:relative; width:min(100vw, calc(100vh * 16 / 9)); aspect-ratio:16 / 9; }
+  #stage { width:100%; height:100%; display:block; background:#9fd3ff; }
+  .overlay { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center;
+    justify-content:center; gap:24px; text-align:center; color:#fff; background:rgba(0,0,0,.72); }
+  .overlay h1 { margin:0; font-size:clamp(40px,8vw,120px); color:#ffd23f; letter-spacing:2px;
+    -webkit-text-stroke:3px #000; text-shadow:6px 6px 0 #000; transform:rotate(-3deg); }
+  .overlay p { margin:0; font-size:clamp(16px,2vw,28px); }
+  .btn { font:inherit; font-weight:bold; font-size:clamp(20px,2.6vw,36px); padding:.4em 1.2em;
+    color:#000; background:#ffd23f; border:4px solid #000; border-radius:14px;
+    box-shadow:5px 5px 0 #000; cursor:pointer; }
+  .btn:focus-visible { outline:4px solid #fff; outline-offset:4px; }
+  [hidden] { display:none !important; }
+</style>
+</head>
+<body>
+<div id="wrap">
+<svg id="stage" viewBox="0 0 1600 900" aria-label="Bajka: Niewybuch">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7cc4ff"/><stop offset="1" stop-color="#dff3ff"/>
+    </linearGradient>
+    <clipPath id="pitClip"><rect x="0" y="0" width="1600" height="742"/></clipPath>
+
+    <!-- bomba lotnicza (srodek w 0,0, nos w lewo) -->
+    <g id="bombShape" stroke="#141414" stroke-width="5" stroke-linejoin="round">
+      <path d="M150 -40 L232 -22 L232 22 L150 40 Z" fill="#6a3f24"/>
+      <rect x="214" y="-72" width="34" height="144" rx="4" fill="#6a3f24"/>
+      <path d="M-175 0 Q-175 -60 -95 -62 H112 Q152 -62 152 0 Q152 62 112 62 H-95 Q-175 60 -175 0 Z" fill="#7b4a2b"/>
+      <path d="M-70 -60 V60 M70 -61 V61" stroke="#a0612f" stroke-width="7"/>
+      <g fill="#a0612f" stroke="none">
+        <circle cx="-120" cy="-20" r="12"/><circle cx="-20" cy="30" r="16"/><circle cx="110" cy="-30" r="10"/>
+        <circle cx="30" cy="-35" r="7"/><circle cx="-140" cy="25" r="8"/>
+      </g>
+      <text x="0" y="14" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="40"
+        fill="#c9b458" stroke="none" opacity="0.7">250</text>
+    </g>
+
+    <!-- granat F1 "cytrynka" -->
+    <g id="granatShape" stroke="#141414" stroke-width="4" stroke-linejoin="round">
+      <path d="M6 -40 Q34 -34 30 8" fill="none" stroke-width="7"/>
+      <path d="M6 -40 Q34 -34 30 8" fill="none" stroke="#9aa3ad" stroke-width="3"/>
+      <rect x="-9" y="-50" width="18" height="18" rx="3" fill="#9aa3ad"/>
+      <circle cx="-20" cy="-46" r="10" fill="none" stroke-width="4"/>
+      <ellipse cx="0" cy="0" rx="28" ry="34" fill="#5d6b35"/>
+      <path d="M-27 -10 H27 M-27 12 H27 M-10 -33 V33 M10 -33 V33" stroke="#3c4722" stroke-width="3"/>
+    </g>
+  </defs>
+
+  <g id="world">
+    <!-- ================= SCENA 1: LAS Z OKOPEM ================= -->
+    <g id="scForest">
+      <rect width="1600" height="900" fill="url(#sky)"/>
+      <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
+        <path d="M1180 120 q8-42 58-36 q22-38 70-10 q44-8 46 32 q34 6 18 38 h-178 q-34-6-14-24z" fill="#fff"/>
+      </g>
+      <!-- sosny w tle -->
+      <g stroke="#141414" stroke-width="4" stroke-linejoin="round">
+        <g fill="#6b4a2a">
+          <rect x="72" y="420" width="22" height="200"/><rect x="262" y="400" width="24" height="220"/>
+          <rect x="470" y="430" width="20" height="190"/><rect x="1150" y="410" width="22" height="210"/>
+          <rect x="1340" y="400" width="24" height="220"/><rect x="1500" y="430" width="20" height="190"/>
+          <rect x="690" y="440" width="18" height="180"/><rect x="960" y="430" width="20" height="190"/>
+        </g>
+        <g fill="#2f5a2a">
+          <path d="M83 200 L10 330 H156 Z M83 270 L0 430 H166 Z"/>
+          <path d="M274 170 L190 310 H358 Z M274 250 L178 420 H370 Z"/>
+          <path d="M480 220 L410 340 H550 Z M480 290 L400 440 H560 Z"/>
+          <path d="M699 250 L636 360 H762 Z M699 310 L626 450 H772 Z"/>
+          <path d="M970 230 L900 350 H1040 Z M970 300 L890 440 H1050 Z"/>
+          <path d="M1161 190 L1080 320 H1242 Z M1161 260 L1068 420 H1254 Z"/>
+          <path d="M1352 170 L1266 310 H1438 Z M1352 250 L1254 410 H1450 Z"/>
+          <path d="M1510 220 L1440 340 H1580 Z M1510 290 L1430 440 H1590 Z"/>
+        </g>
+      </g>
+      <!-- sciolka -->
+      <rect y="610" width="1600" height="290" fill="#7a6242"/>
+      <line x1="0" y1="610" x2="1600" y2="610" stroke="#141414" stroke-width="5"/>
+      <g fill="#5f8a3e" stroke="#141414" stroke-width="4">
+        <path d="M60 860 q30-30 60 0 z"/><path d="M1380 700 q25-26 50 0 z"/><path d="M260 690 q22-22 44 0 z"/>
+        <path d="M1460 870 q30-30 60 0 z"/>
+      </g>
+      <g stroke="#5a4630" stroke-width="3" fill="none">
+        <path d="M150 760 l20 -6 M420 830 l18 4 M1250 820 l-16 -6 M1500 760 l14 6 M700 860 l20 -4"/>
+      </g>
+      <!-- okop (duzy dol) -->
+      <path d="M560 740 Q820 650 1080 740 Z" fill="#8f7550" stroke="#141414" stroke-width="5"/>
+      <ellipse cx="820" cy="742" rx="250" ry="60" fill="#3b2a18" stroke="#141414" stroke-width="5"/>
+      <ellipse cx="820" cy="752" rx="190" ry="38" fill="#24190d"/>
+      <!-- bomba i granat wychodza z dolu (przyciete do krawedzi dolu) -->
+      <g clip-path="url(#pitClip)">
+        <use id="bombF" href="#bombShape" style="transform:translate(820px,980px) rotate(-90deg)"/>
+        <use id="granF" href="#granatShape" style="transform:translate(900px,820px)"/>
+      </g>
+      <!-- szpadel -->
+      <g transform="translate(1040,512)">
+        <g id="shovel" style="transform-origin:0px 0px; display:none">
+          <line x1="0" y1="0" x2="-40" y2="220" stroke="#141414" stroke-width="16" stroke-linecap="round"/>
+          <line x1="0" y1="0" x2="-40" y2="220" stroke="#b08850" stroke-width="9" stroke-linecap="round"/>
+          <path d="M-22 -4 H22" stroke="#141414" stroke-width="14" stroke-linecap="round"/>
+          <path d="M-60 214 L-20 222 L-30 290 Q-52 300 -72 282 Z" fill="#9aa3ad" stroke="#141414" stroke-width="5" stroke-linejoin="round"/>
+        </g>
+      </g>
+      <g id="detFx"></g>
+    </g>
+
+    <!-- ================= SCENA 2: DROGA ================= -->
+    <g id="scRoad" style="display:none">
+      <rect width="1600" height="900" fill="url(#sky)"/>
+      <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
+        <circle cx="1460" cy="115" r="58" fill="#ffe14d"/>
+        <path d="M200 150 q8-42 58-36 q22-38 70-10 q44-8 46 32 q34 6 18 38 h-178 q-34-6-14-24z" fill="#fff"/>
+      </g>
+      <rect y="520" width="1600" height="100" fill="#d8c25e"/>
+      <rect y="600" width="1600" height="100" fill="#8fbf5a"/>
+      <g stroke="#141414" stroke-width="5" fill="#3f6b33">
+        <circle cx="140" cy="512" r="40"/><circle cx="190" cy="500" r="48"/><circle cx="880" cy="508" r="38"/>
+        <circle cx="1240" cy="505" r="44"/><circle cx="1290" cy="515" r="30"/>
+      </g>
+      <rect y="690" width="1600" height="140" fill="#4a4d52" stroke="#141414" stroke-width="5"/>
+      <path d="M0 762 H1600" stroke="#f4f4f2" stroke-width="8" stroke-dasharray="60 50"/>
+      <rect y="830" width="1600" height="70" fill="#8fbf5a"/>
+      <!-- tablica miejscowosci -->
+      <g stroke="#141414" stroke-width="5">
+        <line x1="640" y1="700" x2="640" y2="520" stroke-width="10"/>
+        <rect x="520" y="430" width="240" height="96" fill="#fff" stroke-width="6"/>
+        <rect x="532" y="442" width="216" height="72" fill="none" stroke-width="4"/>
+        <text x="640" y="496" text-anchor="middle" font-family="Arial, sans-serif" font-size="44" font-weight="700"
+          fill="#141414" stroke="none">OBRYTE</text>
+      </g>
+    </g>
+
+    <!-- ================= SCENA 3: ZLOMOWISKO ================= -->
+    <g id="scYard" style="display:none">
+      <rect width="1600" height="900" fill="url(#sky)"/>
+      <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
+        <circle cx="1460" cy="115" r="58" fill="#ffe14d"/>
+      </g>
+      <!-- plot z blachy -->
+      <g stroke="#141414" stroke-width="4">
+        <rect x="0" y="470" width="1600" height="150" fill="#8b9098"/>
+        <path d="M40 470 V620 M120 470 V620 M200 470 V620 M280 470 V620 M360 470 V620 M440 470 V620 M520 470 V620 M600 470 V620
+                 M680 470 V620 M760 470 V620 M840 470 V620 M920 470 V620 M1000 470 V620 M1080 470 V620 M1160 470 V620
+                 M1240 470 V620 M1320 470 V620 M1400 470 V620 M1480 470 V620 M1560 470 V620" stroke="#6e737a" stroke-width="4"/>
+      </g>
+      <!-- haldy zlomu -->
+      <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
+        <path d="M900 620 L990 470 L1060 520 L1130 430 L1230 540 L1300 500 L1400 620 Z" fill="#7d8289"/>
+        <path d="M1020 500 L1110 490 M1150 470 L1200 520 M960 560 L1060 540" stroke="#4f5358" stroke-width="8"/>
+        <path d="M1050 600 Q1060 540 1130 540 H1230 Q1270 540 1280 600 Z" fill="#8a4b2b"/>
+        <circle cx="1440" cy="590" r="40" fill="#1a1a1a"/><circle cx="1440" cy="590" r="16" fill="#7d8289"/>
+        <circle cx="1510" cy="600" r="34" fill="#1a1a1a"/><circle cx="1510" cy="600" r="13" fill="#7d8289"/>
+      </g>
+      <rect y="610" width="1600" height="290" fill="#8a7a5c"/>
+      <line x1="0" y1="610" x2="1600" y2="610" stroke="#141414" stroke-width="5"/>
+      <g fill="#6b5d44" stroke="none">
+        <ellipse cx="300" cy="850" rx="90" ry="14"/><ellipse cx="1200" cy="860" rx="120" ry="16"/>
+      </g>
+      <!-- budka z szyldem -->
+      <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
+        <rect x="40" y="400" width="420" height="230" fill="#b7a47a"/>
+        <rect x="80" y="470" width="110" height="160" fill="#6e5a3a"/>
+        <rect x="260" y="470" width="150" height="90" fill="#2d3f55"/>
+        <path d="M20 400 L250 340 L480 400 Z" fill="#6d7178"/>
+        <rect x="20" y="250" width="460" height="92" rx="6" fill="#fff" stroke-width="6"/>
+        <text x="250" y="312" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="50"
+          fill="#d01616" stroke="none">SKUP ZŁOMU OBRYTE</text>
+        <line x1="60" y1="342" x2="60" y2="360" stroke-width="8"/><line x1="440" y1="342" x2="440" y2="360" stroke-width="8"/>
+      </g>
+      <!-- waga -->
+      <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
+        <rect x="780" y="590" width="14" height="200" fill="#4a4f57"/>
+        <rect x="740" y="540" width="130" height="62" rx="8" fill="#2b2f36"/>
+        <text id="scaleTxt" x="805" y="584" text-anchor="middle" font-family="'Courier New', monospace" font-size="34"
+          font-weight="700" fill="#ff3b30" stroke="none">0 kg</text>
+        <rect x="500" y="782" width="280" height="20" fill="#9aa3ad"/>
+      </g>
+      <use id="bombY" href="#bombShape" style="display:none; transform:translate(640px,730px) scale(0.8)"/>
+    </g>
+
+    <!-- ================= AKTORZY ================= -->
+    <!-- BUS (przod w lewo); dol kol na y=306 -->
+    <g id="bus" style="display:none; transform:translate(1750px,494px)">
+      <g id="busBody" stroke="#141414" stroke-width="5" stroke-linejoin="round">
+        <path d="M0 262 V150 Q4 110 40 100 L108 32 Q118 20 138 20 H560 Q574 20 574 34 V262 Z" fill="#eef0f2"/>
+        <path d="M52 104 L116 42 H170 V112 H52 Z" fill="#9fcfee"/>
+        <rect x="184" y="42" width="96" height="70" rx="6" fill="#9fcfee"/>
+        <g id="busDrv">
+          <circle cx="232" cy="92" r="28" fill="#f0b48e"/>
+          <path d="M204 84 Q206 56 232 56 Q258 56 262 84 Q232 76 204 84 Z" fill="#d12f28"/>
+          <path d="M218 104 Q232 96 248 104" fill="none" stroke="#6b4a2a" stroke-width="7"/>
+          <circle cx="224" cy="88" r="4" fill="#111" stroke="none"/><circle cx="242" cy="88" r="4" fill="#111" stroke="none"/>
+        </g>
+        <rect x="300" y="42" width="110" height="70" rx="6" fill="#9fcfee"/>
+        <rect x="430" y="42" width="120" height="70" rx="6" fill="#9fcfee"/>
+        <path d="M290 30 V258 M420 118 V258" stroke-width="4"/>
+        <text x="430" y="186" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="40"
+          fill="#1f5fae" stroke="none">MIREK-TRANS</text>
+        <text x="430" y="222" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700"
+          fill="#141414" stroke="none">przeprowadzki · złom · wszystko</text>
+        <g fill="#9b5a2c" stroke="none" opacity="0.85">
+          <ellipse cx="60" cy="236" rx="30" ry="12"/><ellipse cx="330" cy="248" rx="40" ry="10"/>
+          <ellipse cx="540" cy="150" rx="16" ry="26"/><ellipse cx="250" cy="170" rx="14" ry="9"/>
+        </g>
+        <rect x="2" y="176" width="22" height="30" rx="4" fill="#ffe27a"/>
+        <rect x="-8" y="238" width="70" height="28" rx="6" fill="#9aa3ad"/>
+        <rect x="560" y="246" width="30" height="12" fill="#555"/>
+        <g class="bw" style="transform-origin:112px 262px"><circle cx="112" cy="262" r="44" fill="#1a1a1a"/><circle cx="112" cy="262" r="18" fill="#b8bec6"/><path d="M112 224 V300 M74 262 H150" stroke="#666"/></g>
+        <g class="bw" style="transform-origin:462px 262px"><circle cx="462" cy="262" r="44" fill="#1a1a1a"/><circle cx="462" cy="262" r="18" fill="#b8bec6"/><path d="M462 224 V300 M424 262 H500" stroke="#666"/></g>
+      </g>
+    </g>
+
+    <!-- SAPERZY (obrazki, stopy w 0,0) -->
+    <g id="s2" style="display:none"><g class="bob" style="transform-origin:0px 0px">
+      <image href="saper2.png" x="-107" y="-380" width="214" height="380"/>
+    </g></g>
+    <g id="s1" style="display:none"><g class="bob" style="transform-origin:0px 0px">
+      <image href="saper1.png" x="-116" y="-380" width="232" height="380"/>
+    </g></g>
+    <text id="phone" x="0" y="0" font-size="56" style="display:none">📱</text>
+
+    <!-- MIREK (dres, czapka tylem, wasy) -->
+    <g id="mirek" style="display:none">
+      <g stroke="#141414" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <g id="mLegL" style="transform-origin:-30px -150px">
+          <rect x="-50" y="-150" width="40" height="118" fill="#2a4fa0"/>
+          <line x1="-43" y1="-146" x2="-43" y2="-38" stroke="#fff"/>
+          <rect x="-66" y="-36" width="60" height="36" rx="14" fill="#fff"/>
+        </g>
+        <g id="mLegR" style="transform-origin:30px -150px">
+          <rect x="10" y="-150" width="40" height="118" fill="#2a4fa0"/>
+          <line x1="43" y1="-146" x2="43" y2="-38" stroke="#fff"/>
+          <rect x="6" y="-36" width="60" height="36" rx="14" fill="#fff"/>
+        </g>
+        <g id="mArmL" style="transform-origin:-82px -300px">
+          <path d="M-82 -300 Q-114 -240 -106 -172" fill="none" stroke-width="38"/>
+          <path d="M-82 -300 Q-114 -240 -106 -172" fill="none" stroke="#2a4fa0" stroke-width="28"/>
+          <path d="M-94 -292 Q-122 -238 -116 -176" fill="none" stroke="#fff" stroke-width="4"/>
+          <circle cx="-106" cy="-164" r="16" fill="#f0b48e"/>
+        </g>
+        <g id="mArmR" style="transform-origin:82px -300px">
+          <path d="M82 -300 Q114 -240 106 -172" fill="none" stroke-width="38"/>
+          <path d="M82 -300 Q114 -240 106 -172" fill="none" stroke="#2a4fa0" stroke-width="28"/>
+          <path d="M94 -292 Q122 -238 116 -176" fill="none" stroke="#fff" stroke-width="4"/>
+          <circle cx="106" cy="-164" r="16" fill="#f0b48e"/>
+        </g>
+        <ellipse cx="0" cy="-222" rx="100" ry="115" fill="#2a4fa0"/>
+        <line x1="0" y1="-330" x2="0" y2="-112" stroke="#fff" stroke-width="3"/>
+        <rect x="-22" y="-332" width="44" height="18" fill="#f0b48e"/>
+        <circle cx="-66" cy="-384" r="14" fill="#f0b48e"/><circle cx="66" cy="-384" r="14" fill="#f0b48e"/>
+        <circle cx="0" cy="-380" r="66" fill="#f0b48e"/>
+        <path d="M-66 -398 Q-64 -460 0 -462 Q64 -460 68 -398 Q0 -418 -66 -398 Z" fill="#d12f28"/>
+        <path d="M52 -410 Q92 -412 106 -398 Q82 -390 52 -398 Z" fill="#a82420"/>
+        <path d="M-40 -420 L-12 -412 M12 -412 L40 -420" stroke="#3b2a1c" stroke-width="7"/>
+        <circle cx="-24" cy="-396" r="7" fill="#111" stroke="none"/><circle cx="24" cy="-396" r="7" fill="#111" stroke="none"/>
+        <path d="M0 -388 q10 14 -4 20" fill="none" stroke-width="4"/>
+        <path d="M-40 -356 Q-20 -374 0 -362 Q20 -374 40 -356 Q20 -352 0 -358 Q-20 -352 -40 -356 Z" fill="#6b4a2a"/>
+        <path id="mMouthC" d="M-16 -340 Q0 -334 16 -340" fill="none"/>
+        <ellipse id="mMouthO" cx="0" cy="-338" rx="15" ry="11" fill="#5a1414" style="display:none"/>
+      </g>
+    </g>
+
+    <!-- ZLOMIARZ (ogrodniczki, kraciasta koszula, kaszkiet, pet) -->
+    <g id="zlom" style="display:none">
+      <g stroke="#141414" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <rect x="-52" y="-160" width="42" height="124" fill="#37558a"/>
+        <rect x="-66" y="-44" width="60" height="44" rx="10" fill="#2a2018"/>
+        <g id="zLegR" style="transform-origin:31px -160px">
+          <rect x="10" y="-160" width="42" height="124" fill="#37558a"/>
+          <rect x="6" y="-44" width="64" height="44" rx="10" fill="#2a2018"/>
+        </g>
+        <path d="M-78 -330 Q-120 -260 -110 -180" fill="none" stroke-width="40"/>
+        <path d="M-78 -330 Q-120 -260 -110 -180" fill="none" stroke="#b23a2e" stroke-width="30"/>
+        <circle cx="-110" cy="-170" r="17" fill="#eab08c"/>
+        <path d="M78 -330 Q120 -260 110 -180" fill="none" stroke-width="40"/>
+        <path d="M78 -330 Q120 -260 110 -180" fill="none" stroke="#b23a2e" stroke-width="30"/>
+        <circle cx="110" cy="-170" r="17" fill="#eab08c"/>
+        <path d="M-84 -330 Q-96 -150 -58 -150 H58 Q96 -150 84 -330 Q0 -352 -84 -330 Z" fill="#b23a2e"/>
+        <path d="M-60 -250 Q-70 -150 -52 -150 H52 Q70 -150 60 -250 Z" fill="#37558a"/>
+        <path d="M-50 -250 L-40 -335 M50 -250 L40 -335" stroke="#37558a" stroke-width="12"/>
+        <rect x="-26" y="-230" width="52" height="36" fill="#2f4a78"/>
+        <rect x="-22" y="-348" width="44" height="18" fill="#eab08c"/>
+        <circle cx="-70" cy="-392" r="15" fill="#eab08c"/><circle cx="70" cy="-392" r="15" fill="#eab08c"/>
+        <circle id="zFace" cx="0" cy="-390" r="72" fill="#eab08c"/>
+        <g fill="#7d6452" stroke="none" opacity="0.55">
+          <circle cx="-40" cy="-344" r="2.4"/><circle cx="-24" cy="-334" r="2.4"/><circle cx="24" cy="-334" r="2.4"/>
+          <circle cx="40" cy="-344" r="2.4"/><circle cx="0" cy="-328" r="2.4"/><circle cx="-52" cy="-360" r="2.4"/>
+          <circle cx="52" cy="-360" r="2.4"/>
+        </g>
+        <path d="M-46 -428 L-12 -418 M12 -418 L46 -428" stroke="#3b2a1c" stroke-width="10"/>
+        <circle cx="-26" cy="-404" r="8" fill="#111" stroke="none"/><circle cx="26" cy="-404" r="8" fill="#111" stroke="none"/>
+        <ellipse cx="0" cy="-380" rx="18" ry="22" fill="#d9705f"/>
+        <path id="zMouthC" d="M-20 -344 Q0 -338 20 -344" fill="none"/>
+        <ellipse id="zMouthO" cx="0" cy="-342" rx="17" ry="13" fill="#5a1414" style="display:none"/>
+        <g id="zCig"><line x1="18" y1="-342" x2="54" y2="-336" stroke-width="10"/><line x1="18" y1="-342" x2="54" y2="-336" stroke="#f4f4f2" stroke-width="5"/></g>
+        <path id="zBurn" d="M-60 -440 L-50 -490 L-34 -446 L-20 -500 L-6 -448 L10 -505 L22 -448 L38 -496 L50 -444 L64 -484 L66 -430 Z"
+          fill="#1a1a1a" style="display:none"/>
+        <g id="zCap" style="transform-origin:0px -440px">
+          <path d="M-74 -426 Q-72 -484 0 -486 Q72 -484 78 -426 Q0 -446 -74 -426 Z" fill="#5a4a3a"/>
+          <path d="M30 -434 Q86 -440 112 -422 Q80 -414 40 -424 Z" fill="#473a2d"/>
+        </g>
+      </g>
+    </g>
+
+    <g id="fx"></g>
+    <g id="bubbles"></g>
+  </g>
+  <rect id="flash" width="1600" height="900" fill="#fff" opacity="0" pointer-events="none"/>
+  <rect id="fade" width="1600" height="900" fill="#000" opacity="0" pointer-events="none"/>
+</svg>
+
+<div class="overlay" id="startScreen">
+  <h1>NIEWYBUCH</h1>
+  <p>odcinek 2</p>
+  <button class="btn" id="playBtn" autofocus>▶ Odtwórz</button>
+</div>
+<div class="overlay" id="endScreen" hidden>
+  <h1>KONIEC</h1>
+  <button class="btn" id="againBtn">↺ Od nowa</button>
+</div>
+</div>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const NS = "http://www.w3.org/2000/svg";
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+  // ---------- dzwiek (generowany, bez plikow) ----------
+  let actx = null;
+  function ac(){
+    if (!actx) actx = new (window.AudioContext || window.webkitAudioContext)();
+    if (actx.state === "suspended") actx.resume();
+    return actx;
+  }
+  function tone(freq, dur, type = "square", vol = 0.05, glideTo){
+    const a = ac(), t = a.currentTime, o = a.createOscillator(), g = a.createGain();
+    o.type = type; o.frequency.setValueAtTime(freq, t);
+    if (glideTo) o.frequency.exponentialRampToValueAtTime(glideTo, t + dur);
+    g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(a.destination); o.start(t); o.stop(t + dur + 0.02);
+  }
+  function noise(dur, { freq = 1000, q = 1, vol = 0.3, type = "bandpass", sweepTo } = {}){
+    const a = ac(), t = a.currentTime, len = Math.floor(a.sampleRate * dur);
+    const buf = a.createBuffer(1, len, a.sampleRate), d = buf.getChannelData(0);
+    for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+    const s = a.createBufferSource(); s.buffer = buf;
+    const f = a.createBiquadFilter(); f.type = type; f.Q.value = q; f.frequency.setValueAtTime(freq, t);
+    if (sweepTo) f.frequency.exponentialRampToValueAtTime(sweepTo, t + dur);
+    const g = a.createGain(); g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    s.connect(f); f.connect(g); g.connect(a.destination); s.start(t); s.stop(t + dur);
+  }
+  function engine(){
+    const a = ac(), o = a.createOscillator(), f = a.createBiquadFilter(), g = a.createGain();
+    o.type = "sawtooth"; o.frequency.value = 45; f.type = "lowpass"; f.frequency.value = 380; g.gain.value = 0.0001;
+    o.connect(f); f.connect(g); g.connect(a.destination); o.start();
+    return {
+      set(freq, vol, ramp = 0.3){ const t = a.currentTime; o.frequency.linearRampToValueAtTime(freq, t + ramp); g.gain.linearRampToValueAtTime(vol, t + ramp); },
+      stop(ramp = 0.4){ const t = a.currentTime; g.gain.linearRampToValueAtTime(0.0001, t + ramp); o.stop(t + ramp + 0.05); }
+    };
+  }
+  const sfx = {
+    beep(){ tone(1750, 0.07, "square", 0.04); },
+    dig(){ noise(0.18, { freq: 500, type: "lowpass", vol: 0.45 }); noise(0.1, { freq: 3000, q: 3, vol: 0.08 }); },
+    thud(){ tone(110, 0.3, "sine", 0.5, 40); noise(0.2, { freq: 300, type: "lowpass", vol: 0.35 }); },
+    clank(){ tone(620 + Math.random() * 200, 0.25, "triangle", 0.08, 480); noise(0.08, { freq: 4000, q: 2, vol: 0.12 }); },
+    door(){ noise(0.12, { freq: 600, type: "lowpass", vol: 0.4 }); tone(95, 0.12, "square", 0.08, 60); },
+    brake(){ noise(0.5, { freq: 1400, q: 1.5, vol: 0.14 }); },
+    ding(){ tone(1320, 0.5, "sine", 0.1); },
+    dial(){ tone(425, 0.9, "sine", 0.08); },
+    boom(){
+      noise(2.6, { freq: 900, type: "lowpass", vol: 0.9, sweepTo: 80 });
+      tone(90, 1.8, "sine", 0.7, 25); tone(55, 2.2, "sawtooth", 0.15, 20);
+    },
+    voice(pitch){ tone(pitch * (0.8 + Math.random() * 0.45), 0.07, "square", 0.045); }
+  };
+
+  // ---------- animacja ----------
+  const anim = (el, frames, opts) => el.animate(frames, Object.assign({ fill: "forwards" }, opts)).finished.catch(() => {});
+  const busT = (x, y = 494) => `translate(${x}px,${y}px)`;
+
+  function puff(x, y, { r = 26, dur = 1100, dx = 0, dy = -80, color = "#dcdcdc" } = {}){
+    const c = document.createElementNS(NS, "circle");
+    c.setAttribute("cx", x); c.setAttribute("cy", y); c.setAttribute("r", r);
+    c.setAttribute("fill", color); c.setAttribute("stroke", "#141414"); c.setAttribute("stroke-width", "4");
+    c.style.transformOrigin = `${x}px ${y}px`;
+    $("fx").append(c);
+    c.animate([{ transform: "translate(0,0) scale(.3)", opacity: 1 },
+               { transform: `translate(${dx}px,${dy}px) scale(1.6)`, opacity: 0 }],
+              { duration: dur, easing: "ease-out", fill: "forwards" })
+     .finished.then(() => c.remove()).catch(() => {});
+  }
+  // gruda ziemi lecaca po luku
+  function clod(x, y, dx, h){
+    const c = document.createElementNS(NS, "circle");
+    c.setAttribute("cx", x); c.setAttribute("cy", y); c.setAttribute("r", 9 + Math.random() * 8);
+    c.setAttribute("fill", "#6b5230"); c.setAttribute("stroke", "#141414"); c.setAttribute("stroke-width", "3");
+    $("fx").append(c);
+    c.animate([{ transform: "translate(0,0)" }, { transform: `translate(${dx / 2}px,${-h}px)` }, { transform: `translate(${dx}px,20px)`, opacity: 0.2 }],
+              { duration: 700, easing: "ease-out", fill: "forwards" })
+     .finished.then(() => c.remove()).catch(() => {});
+  }
+  function shake(power = 14, dur = 420){
+    return anim($("world"), [
+      { transform: "translate(0,0)" }, { transform: `translate(${-power}px,${power * .6}px)` }, { transform: `translate(${power}px,${-power * .5}px)` },
+      { transform: `translate(${-power * .6}px,${power * .3}px)` }, { transform: `translate(${power * .4}px,0)` }, { transform: "translate(0,0)" }], { duration: dur });
+  }
+  async function fadeTo(fn){
+    await anim($("fade"), [{ opacity: 0 }, { opacity: 1 }], { duration: 450 });
+    fn();
+    await sleep(150);
+    await anim($("fade"), [{ opacity: 1 }, { opacity: 0 }], { duration: 450 });
+  }
+  function scene(id){ ["scForest", "scRoad", "scYard"].forEach(s => $(s).style.display = s === id ? "" : "none"); }
+
+  // ---------- aktorzy ----------
+  // pozycja stop (x, y), skala; img = postac-obrazek (saperzy), head = wysokosc glowy nad stopami (do dymka)
+  const who = {
+    s1: { el: "s1", img: true, x: -300, y: 800, s: 1, head: 385, pitch: 170, vPitch: 0.7, vRate: 1.0 },
+    s2: { el: "s2", img: true, x: -150, y: 800, s: 1, head: 385, pitch: 210, vPitch: 0.95, vRate: 1.05 },
+    m:  { el: "mirek", x: 0, y: 800, s: 0.8, head: 375, pitch: 260, vPitch: 1.4, vRate: 1.15, mouthO: "mMouthO", mouthC: "mMouthC" },
+    z:  { el: "zlom", x: 330, y: 800, s: 0.85, head: 420, pitch: 130, vPitch: 0.45, vRate: 0.9, mouthO: "zMouthO", mouthC: "zMouthC" }
+  };
+  const actT = (w, x = w.x, y = w.y) => `translate(${x}px,${y}px) scale(${w.s})`;
+  function place(k, x, y = who[k].y){ const w = who[k]; w.x = x; w.y = y; $(w.el).style.transform = actT(w); $(w.el).style.display = ""; }
+  function hide(k){ $(who[k].el).style.display = "none"; }
+
+  // chod: saperzy bujaja sie calym obrazkiem, Mirek macha konczynami
+  const gaits = {};
+  function gait(k, on, step = 0.4){
+    (gaits[k] || []).forEach(a => a.cancel()); gaits[k] = [];
+    if (!on) return;
+    const o = { duration: step * 1000, direction: "alternate", iterations: Infinity, easing: "ease-in-out" };
+    if (who[k].img){
+      gaits[k].push($(who[k].el).querySelector(".bob").animate(
+        [{ transform: "translateY(0) rotate(-3deg)" }, { transform: "translateY(-14px) rotate(3deg)" }], o));
+    } else {
+      const p = k === "m" ? "m" : "z";
+      const swing = (id, a) => $(id) && gaits[k].push($(id).animate([{ transform: `rotate(${a}deg)` }, { transform: `rotate(${-a}deg)` }], o));
+      swing(p + "LegL", 24); swing(p + "LegR", -24); swing(p + "ArmL", -20); swing(p + "ArmR", 20);
+    }
+  }
+  async function walkTo(k, x, dur, step){
+    const w = who[k], from = actT(w);
+    gait(k, true, step);
+    await anim($(w.el), [{ transform: from }, { transform: actT(w, x) }], { duration: dur, easing: "linear" });
+    w.x = x; gait(k, false);
+    $(w.el).style.transform = actT(w);
+  }
+  async function hop(k, h = 60, dur = 380){
+    const w = who[k];
+    await anim($(w.el), [{ transform: actT(w) }, { transform: actT(w, w.x, w.y - h) }, { transform: actT(w) }], { duration: dur, easing: "ease-out" });
+  }
+
+  // ---------- dymki (jak w odc. 1) ----------
+  function makeBubble(tipX, tipY, lines, shift = 0){
+    const g = document.createElementNS(NS, "g");
+    const tail = document.createElementNS(NS, "path");
+    const rect = document.createElementNS(NS, "rect");
+    const patch = document.createElementNS(NS, "path");
+    const text = document.createElementNS(NS, "text");
+    text.setAttribute("font-size", "40"); text.setAttribute("font-weight", "700");
+    text.setAttribute("font-family", '"Comic Sans MS","Chalkboard SE",sans-serif'); text.setAttribute("fill", "#111");
+    g.append(tail, rect, patch, text);
+    g.style.transform = `translate(${tipX}px,${tipY}px) scale(0)`;
+    $("bubbles").append(g);
+
+    const spans = lines.map(() => { const t = document.createElementNS(NS, "tspan"); text.append(t); return t; });
+    let maxW = 0;
+    spans.forEach((s, i) => { s.textContent = lines[i]; maxW = Math.max(maxW, s.getComputedTextLength()); });
+    const lh = 50, padX = 34, padY = 26;
+    const W = maxW + padX * 2, H = lines.length * lh + padY * 2 - 10;
+    let left = Math.max(20, Math.min(1580 - W, tipX + shift - W / 2));
+    const bx = left - tipX, by = -38 - H;
+    const tb = Math.min(Math.max(0, bx + 34), bx + W - 54);
+    Object.entries({ x: bx, y: by, width: W, height: H, rx: 26, fill: "#fff", stroke: "#111", "stroke-width": 5 })
+      .forEach(([k, v]) => rect.setAttribute(k, v));
+    tail.setAttribute("d", `M${tb - 18} -46 L0 0 L${tb + 22} -46 Z`);
+    tail.setAttribute("fill", "#fff"); tail.setAttribute("stroke", "#111"); tail.setAttribute("stroke-width", "5");
+    patch.setAttribute("d", `M${tb - 13} -38 L${tb + 17} -38`); patch.setAttribute("stroke", "#fff"); patch.setAttribute("stroke-width", "7");
+    spans.forEach((s, i) => { s.setAttribute("x", bx + padX); s.setAttribute("y", by + padY + 34 + i * lh); s.textContent = ""; });
+    return { g, spans, lines, tipX, tipY };
+  }
+
+  // ---------- glos (synteza mowy przegladarki, fallback: bla-bla) ----------
+  const tts = window.speechSynthesis;
+  let plVoice = null;
+  function pickVoice(){
+    if (!tts) return;
+    const vs = tts.getVoices().filter(v => /^pl/i.test(v.lang));
+    plVoice = vs.find(v => /zosia|ewa|krzysztof|google/i.test(v.name)) || vs[0] || null;
+  }
+  if (tts){ pickVoice(); tts.addEventListener?.("voiceschanged", pickVoice); }
+  function unlockSpeech(){
+    if (!tts) return;
+    tts.cancel(); pickVoice();
+    const u = new SpeechSynthesisUtterance(" "); u.volume = 0; tts.speak(u);
+  }
+  function speak(text, w, { pitch, rate } = {}){
+    if (!tts || !plVoice) return null;
+    return new Promise(res => {
+      const u = new SpeechSynthesisUtterance(text);
+      u.voice = plVoice; u.lang = plVoice.lang;
+      u.pitch = pitch ?? w.vPitch; u.rate = rate ?? w.vRate;
+      const guard = setTimeout(res, 800 + text.length * 140);
+      u.onend = u.onerror = () => { clearTimeout(guard); res(); };
+      tts.speak(u);
+    });
+  }
+
+  // mowienie: saperzy podskakuja w rytm, rysowani ruszaja ustami
+  function talking(k, on){
+    const w = who[k];
+    if (w.img){
+      if (on) w._talk = $(w.el).querySelector(".bob").animate(
+        [{ transform: "translateY(0) scaleY(1)" }, { transform: "translateY(-8px) scaleY(1.02)" }],
+        { duration: 160, direction: "alternate", iterations: Infinity });
+      else if (w._talk){ w._talk.cancel(); w._talk = null; }
+      return;
+    }
+    clearInterval(w._talk);
+    let open = false;
+    if (on) w._talk = setInterval(() => {
+      open = !open;
+      $(w.mouthO).style.display = open ? "" : "none";
+      $(w.mouthC).style.display = open ? "none" : "";
+    }, 110);
+    else { $(w.mouthO).style.display = "none"; $(w.mouthC).style.display = ""; }
+  }
+
+  async function say(k, lines, shift = 0, { instant = false, pitch, rate } = {}){
+    const w = who[k], tx = w.x, ty = w.y - w.head;
+    const b = makeBubble(tx, ty, lines, shift);
+    await anim(b.g, [{ transform: `translate(${tx}px,${ty}px) scale(0)` }, { transform: `translate(${tx}px,${ty}px) scale(1)` }],
+               { duration: 200, easing: "cubic-bezier(.3,1.6,.6,1)" });
+    if (instant){ b.spans.forEach((s, i) => s.textContent = lines[i]); return b; }
+    talking(k, true);
+    const spoken = speak(lines.join(" "), w, { pitch, rate });
+    for (let i = 0; i < lines.length; i++){
+      for (const ch of lines[i]){
+        b.spans[i].textContent += ch;
+        if (ch !== " " && !spoken) sfx.voice(w.pitch);
+        await sleep(spoken ? 45 : 58);
+      }
+    }
+    if (spoken) await spoken;
+    talking(k, false);
+    return b;
+  }
+  async function unsay(b){
+    await anim(b.g, [{ transform: `translate(${b.tipX}px,${b.tipY}px) scale(1)` }, { transform: `translate(${b.tipX}px,${b.tipY}px) scale(0)` }], { duration: 150 });
+    b.g.remove();
+  }
+  async function line(k, lines, hold = 1600, shift = 0, opts){
+    const b = await say(k, lines, shift, opts);
+    await sleep(hold); await unsay(b); await sleep(250);
+  }
+
+  // ---------- rekwizyty ----------
+  let wheelAnims = [];
+  function spinWheels(dir, period = 0.5){
+    wheelAnims.forEach(a => a.cancel()); wheelAnims = [];
+    if (!dir) return;
+    document.querySelectorAll("#bus .bw").forEach(w => wheelAnims.push(
+      w.animate([{ transform: "rotate(0deg)" }, { transform: `rotate(${dir * 360}deg)` }],
+                { duration: period * 1000, iterations: Infinity })));
+  }
+  let busX = 1750;
+  async function busDrive(x, dur, easing = "cubic-bezier(.2,.7,.35,1)", y = 494){
+    const from = busT(busX, y); busX = x;
+    await anim($("bus"), [{ transform: from }, { transform: busT(x, y) }], { duration: dur, easing });
+  }
+  function exhaust(y = 494){ return setInterval(() => puff(busX + 600, y + 250, { r: 18, dur: 1000, dx: 50, dy: -40, color: "#9a9a9a" }), 140); }
+
+  // wykrywacz: pierscienie przy talerzu wykrywacza + pisk, coraz szybciej
+  async function detector(times){
+    const hx = who.s2.x + 86, hy = who.s2.y - 26;
+    for (let i = 0; i < times; i++){
+      sfx.beep();
+      const c = document.createElementNS(NS, "circle");
+      c.setAttribute("cx", hx); c.setAttribute("cy", hy); c.setAttribute("r", 20);
+      c.setAttribute("fill", "none"); c.setAttribute("stroke", "#ffd23f"); c.setAttribute("stroke-width", "6");
+      c.style.transformOrigin = `${hx}px ${hy}px`;
+      $("detFx").append(c);
+      c.animate([{ transform: "scale(.4)", opacity: 1 }, { transform: "scale(3)", opacity: 0 }], { duration: 600, fill: "forwards" })
+       .finished.then(() => c.remove()).catch(() => {});
+      await sleep(Math.max(90, 520 - i * 38));
+    }
+  }
+
+  function reset(){
+    if (tts) tts.cancel();
+    document.getAnimations().forEach(a => a.cancel());
+    wheelAnims = [];
+    Object.keys(gaits).forEach(k => gaits[k] = []);
+    Object.values(who).forEach(w => { clearInterval(w._talk); w._talk = null; });
+    $("bubbles").innerHTML = ""; $("fx").innerHTML = ""; $("detFx").innerHTML = "";
+    scene("scForest");
+    ["s1", "s2", "m", "z"].forEach(hide);
+    Object.assign(who.s1, { x: -300, y: 800 }); Object.assign(who.s2, { x: -150, y: 800 });
+    $("bus").style.display = "none"; busX = 1750; $("bus").style.transform = busT(busX);
+    $("busDrv").style.display = "";
+    $("bombF").style.transform = "translate(820px,980px) rotate(-90deg)"; $("bombF").style.display = "";
+    $("granF").style.transform = "translate(900px,820px)"; $("granF").style.display = "";
+    $("bombY").style.display = "none";
+    $("shovel").style.display = "none";
+    $("phone").style.display = "none";
+    $("scaleTxt").textContent = "0 kg";
+    $("zFace").style.fill = ""; $("zBurn").style.display = "none"; $("zCig").style.display = "";
+    $("zCap").style.transform = "";
+    ["mMouthO", "zMouthO"].forEach(id => $(id).style.display = "none");
+    ["mMouthC", "zMouthC"].forEach(id => $(id).style.display = "");
+    $("fade").style.opacity = 0; $("flash").style.opacity = 0;
+  }
+
+  async function play(){
+    reset(); ac();
+    $("startScreen").hidden = true; $("endScreen").hidden = true;
+
+    // ===== 1. LAS: saperzy wchodza, wykrywacz piszczy =====
+    place("s1", -330); place("s2", -150);
+    await sleep(500);
+    walkTo("s1", 250, 3600, 0.38);
+    await walkTo("s2", 520, 3600, 0.38);
+    await sleep(300);
+    // omiatanie wykrywaczem
+    const sweep = $("s2").querySelector(".bob").animate(
+      [{ transform: "rotate(-4deg)" }, { transform: "rotate(4deg)" }],
+      { duration: 500, direction: "alternate", iterations: Infinity, easing: "ease-in-out" });
+    await detector(12);
+    sweep.cancel();
+    await hop("s2", 50);
+    await line("s2", ["Ty, pika", "jak pojebane!"], 1400);
+    await line("s1", ["Kopiemy. Tylko", "delikatnie, kurwa."], 1400, 60);
+
+    // ===== 2. KOPANIE =====
+    await walkTo("s1", 1140, 2600, 0.36);
+    $("shovel").style.display = "";
+    for (let i = 0; i < 6; i++){
+      await anim($("shovel"), [{ transform: "rotate(0deg) translateY(0)" }, { transform: "rotate(12deg) translateY(26px)" }], { duration: 260, easing: "ease-in" });
+      sfx.dig();
+      anim($("s1").querySelector(".bob"), [{ transform: "translateY(0)" }, { transform: "translateY(10px) rotate(-3deg)" }, { transform: "translateY(0)" }], { duration: 400 });
+      await anim($("shovel"), [{ transform: "rotate(12deg) translateY(26px)" }, { transform: "rotate(-18deg) translateY(-10px)" }], { duration: 300, easing: "ease-out" });
+      for (let j = 0; j < 3; j++) clod(990 + Math.random() * 30, 730, 160 + Math.random() * 140, 160 + Math.random() * 100);
+      await anim($("shovel"), [{ transform: "rotate(-18deg) translateY(-10px)" }, { transform: "rotate(0deg) translateY(0)" }], { duration: 220 });
+    }
+    // brzdek - szpadel trafia w metal
+    await anim($("shovel"), [{ transform: "rotate(0deg) translateY(0)" }, { transform: "rotate(12deg) translateY(26px)" }], { duration: 260, easing: "ease-in" });
+    sfx.clank();
+    await anim($("shovel"), [{ transform: "rotate(12deg) translateY(26px)" }, { transform: "rotate(8deg) translateY(10px)" }, { transform: "rotate(12deg) translateY(26px)" }], { duration: 200 });
+    await sleep(500);
+    $("shovel").style.display = "none";
+
+    // bomba wyjezdza z dolu
+    shake(6, 300);
+    await anim($("bombF"), [
+      { transform: "translate(820px,980px) rotate(-90deg)" },
+      { transform: "translate(820px,640px) rotate(-80deg)", offset: 0.6 },
+      { transform: "translate(820px,600px) rotate(-10deg)", offset: 0.85 },
+      { transform: "translate(820px,682px) rotate(0deg) scale(0.85)" }], { duration: 2600, easing: "ease-in-out" });
+    sfx.thud(); shake(12, 380);
+    puff(700, 730, { r: 24, color: "#8f7550", dx: -40, dy: -40 }); puff(940, 730, { r: 24, color: "#8f7550", dx: 40, dy: -40 });
+    await sleep(500);
+    await line("s1", ["O ja pierdolę…", "ale sztuka!"], 1400, 40);
+
+    // granat wyskakuje
+    await anim($("granF"), [
+      { transform: "translate(900px,820px) rotate(0deg)" },
+      { transform: "translate(960px,560px) rotate(200deg)", offset: 0.5 },
+      { transform: "translate(1015px,690px) rotate(360deg)" }], { duration: 900, easing: "ease-out" });
+    sfx.clank();
+    await hop("s2", 40);
+    await line("s2", ["I granat", "gratis!"], 1300);
+
+    // telefon do Mirka
+    const ph = $("phone");
+    ph.setAttribute("x", who.s2.x + 40); ph.setAttribute("y", who.s2.y - 300); ph.style.display = "";
+    sfx.dial(); await sleep(1100); sfx.dial(); await sleep(1100);
+    await line("s2", ["Mirek, podjeżdżaj busem,", "mamy towar."], 1300, 120);
+    ph.style.display = "none";
+
+    // ===== 3. BUS =====
+    $("bus").style.display = ""; busX = 1750; $("bus").style.transform = busT(busX);
+    let eng = engine(); eng.set(70, 0.09, 0.2);
+    spinWheels(-1, 0.45);
+    let smoke = exhaust();
+    await busDrive(1270, 3200);
+    spinWheels(0); sfx.brake(); clearInterval(smoke); eng.set(40, 0.04, 0.6);
+    await sleep(700);
+    sfx.door();
+    $("busDrv").style.display = "none";
+    place("m", 1340, 800);
+    await hop("m", 70, 420);
+    eng.stop(0.6);
+    await line("m", ["Ładować! Jedziemy", "na złom do Obrytego."], 1500, -120);
+
+    // zaladunek
+    anim($("bombF"), [{ transform: "translate(820px,682px) rotate(0deg) scale(0.85)" },
+                      { transform: "translate(1150px,520px) rotate(-8deg) scale(0.8)", offset: 0.6 },
+                      { transform: "translate(1480px,640px) rotate(0deg) scale(0.4)", opacity: 0 }], { duration: 1800, easing: "ease-in-out" });
+    await anim($("granF"), [{ transform: "translate(1015px,690px)" }, { transform: "translate(1300px,520px) rotate(300deg)", offset: 0.6 },
+                            { transform: "translate(1470px,650px) rotate(400deg) scale(0.5)", opacity: 0 }], { duration: 1500, easing: "ease-in-out" });
+    sfx.clank(); await sleep(300); sfx.clank();
+    walkTo("s2", 1500, 2300, 0.3);
+    walkTo("m", 1300, 600, 0.3);
+    await walkTo("s1", 1500, 1200, 0.3);
+    hide("s1"); sfx.door();
+    await sleep(1100);
+    hide("s2"); hide("m"); $("busDrv").style.display = ""; sfx.door();
+    await sleep(400);
+
+    eng = engine(); eng.set(95, 0.12, 0.2);
+    spinWheels(1, 0.14);
+    smoke = exhaust();
+    await busDrive(-750, 2600, "cubic-bezier(.5,0,.8,.4)");
+    clearInterval(smoke); spinWheels(0); eng.stop(0.3);
+
+    // ===== 4. DROGA DO OBRYTEGO =====
+    await fadeTo(() => { scene("scRoad"); busX = 1700; $("bus").style.transform = busT(busX, 474); });
+    eng = engine(); eng.set(80, 0.1, 0.3);
+    spinWheels(1, 0.18);
+    smoke = exhaust(474);
+    const bounce = $("busBody").animate(
+      [{ transform: "translateY(0) rotate(0deg)" }, { transform: "translateY(-16px) rotate(-1.5deg)" }, { transform: "translateY(0) rotate(0deg)" }],
+      { duration: 520, iterations: Infinity });
+    const clanks = setInterval(() => sfx.clank(), 520);
+    await busDrive(-700, 6500, "linear", 474);
+    clearInterval(clanks); bounce.cancel(); clearInterval(smoke); spinWheels(0); eng.stop(0.3);
+
+    // ===== 5. ZLOMOWISKO =====
+    await fadeTo(() => {
+      scene("scYard"); busX = 1750; $("bus").style.transform = busT(busX);
+      place("z", 330, 800);
+    });
+    eng = engine(); eng.set(70, 0.09, 0.2);
+    spinWheels(-1, 0.45); smoke = exhaust();
+    await busDrive(880, 3000);
+    spinWheels(0); sfx.brake(); clearInterval(smoke); eng.set(40, 0.04, 0.6);
+    await sleep(600);
+    sfx.door(); $("busDrv").style.display = "none";
+    place("m", 1000, 800);
+    await hop("m", 70, 420);
+    eng.stop(0.6);
+
+    // bomba laduje na wadze
+    const bY = $("bombY"); bY.style.display = "";
+    await anim(bY, [{ transform: "translate(1100px,640px) scale(0.3)", opacity: 0 },
+                    { transform: "translate(880px,460px) rotate(-12deg) scale(0.8)", opacity: 1, offset: 0.5 },
+                    { transform: "translate(640px,730px) scale(0.8)" }], { duration: 1300, easing: "ease-in-out" });
+    sfx.thud(); shake(8, 300);
+    for (let kg = 0; kg <= 200; kg += 10){ $("scaleTxt").textContent = kg + " kg"; sfx.voice(900); await sleep(60); }
+    sfx.ding();
+    await sleep(400);
+
+    await line("z", ["Dwieście kilo.", "Stówa i spadajcie."], 1500, 60);
+    await line("m", ["Panie,", "to zabytek!"], 1200);
+    await line("z", ["To idź pan", "do muzeum."], 1500, 60);
+
+    // Mirek wraca do busa, odjazd
+    await walkTo("m", 960, 400, 0.3);
+    hide("m"); sfx.door(); $("busDrv").style.display = "";
+    await sleep(300);
+    eng = engine(); eng.set(95, 0.12, 0.2);
+    spinWheels(1, 0.14); smoke = exhaust();
+    await busDrive(-750, 2600, "cubic-bezier(.5,0,.8,.4)");
+    clearInterval(smoke); spinWheels(0); eng.stop(0.3);
+    $("bus").style.display = "none";
+
+    // zlomiarz kopie bombe...
+    await sleep(500);
+    await walkTo("z", 440, 1200, 0.4);
+    await anim($("zLegR"), [{ transform: "rotate(0deg)" }, { transform: "rotate(30deg)" }], { duration: 250, easing: "ease-out" });
+    await anim($("zLegR"), [{ transform: "rotate(30deg)" }, { transform: "rotate(-45deg)" }], { duration: 140, easing: "ease-in" });
+    sfx.clank();
+    await anim($("zLegR"), [{ transform: "rotate(-45deg)" }, { transform: "rotate(0deg)" }], { duration: 250 });
+    const hm = await say("z", ["Hm?"], 60, { instant: true });
+    await sleep(1100); await unsay(hm);
+
+    // ...BUM
+    sfx.boom();
+    $("bombY").style.display = "none";
+    anim($("flash"), [{ opacity: 1 }, { opacity: 0 }], { duration: 900, easing: "ease-out" });
+    // kula ognia: warstwy rosna i gasna
+    [["#6d6d6d", 330, 2600], ["#e34b2b", 260, 1700], ["#ff8a1f", 190, 1400], ["#ffd23f", 120, 1100]].forEach(([col, r, dur]) => {
+      const c = document.createElementNS(NS, "circle");
+      c.setAttribute("cx", 640); c.setAttribute("cy", 690); c.setAttribute("r", r);
+      c.setAttribute("fill", col); c.setAttribute("stroke", "#141414"); c.setAttribute("stroke-width", "6");
+      c.style.transformOrigin = "640px 690px";
+      $("fx").append(c);
+      c.animate([{ transform: "scale(.1)", opacity: 1 }, { transform: "scale(1)", opacity: 1, offset: 0.35 },
+                 { transform: "scale(1.15) translateY(-40px)", opacity: 0 }], { duration: dur, easing: "ease-out", fill: "forwards" })
+       .finished.then(() => c.remove()).catch(() => {});
+    });
+    for (let i = 0; i < 16; i++){
+      const a = Math.random() * Math.PI * 2, d = 120 + Math.random() * 260;
+      puff(640 + Math.random() * 60 - 30, 720, { r: 40 + Math.random() * 40, dur: 1600 + Math.random() * 800,
+        dx: Math.cos(a) * d, dy: -Math.abs(Math.sin(a)) * d - 60, color: ["#ffd23f", "#ff8a1f", "#e34b2b", "#6d6d6d"][i % 4] });
+    }
+    shake(26, 900);
+    $("zFace").style.fill = "#3a3a3a"; $("zBurn").style.display = ""; $("zCig").style.display = "none";
+    anim($("zCap"), [{ transform: "translate(0,0) rotate(0deg)" }, { transform: "translate(120px,-1100px) rotate(900deg)" }], { duration: 1800, easing: "ease-out" });
+    await sleep(2200);
+    const kh = await say("z", ["Khe… khe…"], 60, { pitch: 0.3, rate: 0.8 });
+    await sleep(1200); await unsay(kh);
+    await sleep(700);
+    $("endScreen").hidden = false; $("againBtn").focus();
+  }
+
+  const start = () => { unlockSpeech(); play(); };
+  $("playBtn").addEventListener("click", start);
+  $("againBtn").addEventListener("click", start);
+</script>
+</body>
+</html>
