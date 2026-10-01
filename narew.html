@@ -472,7 +472,7 @@
 </div>
 </div>
 
-<script src="intro.js"></script>
+<script src="intro2.js"></script>
 <script>
   const $ = id => document.getElementById(id);
   const NS = "http://www.w3.org/2000/svg";
@@ -1228,10 +1228,11 @@
     reset(); ac();
     $("startScreen").hidden = true; $("endScreen").hidden = true;
     const h = location.hash;
-    if (!h){ await ziomkiIntro("SKUTEROWY TEST ZAUFANIA", 11); }
+    if (!h){ await ziomkiIntro2("SKUTEROWY TEST ZAUFANIA", 11, 3, 1); }
     if (!h || h === "#plaza") await beach();
     if (!h || h === "#plaza" || h === "#las") await ride();
     await cabin();
+    await ziomkiOutro();
     $("endScreen").hidden = false; $("againBtn").focus();
   }
 

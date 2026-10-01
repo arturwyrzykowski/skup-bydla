@@ -288,6 +288,43 @@
     await wait(8 * beat * 1000 + 300);
   }
 
+
+  // ================= ZAKONCZENIE: dyskoteka z disco polo =================
+  window.ziomkiOutro = async function(){
+    const stage = document.getElementById("stage");
+    const g = document.createElementNS(NS, "g"); stage.appendChild(g);
+    const cols = ["#ff3c8a", "#ffd23f", "#3cc8ff", "#7cff5a", "#b45aff"];
+    let rr = ""; for (let i = 0; i < 20; i++){ const a0 = i * Math.PI / 10, a1 = a0 + Math.PI / 20;
+      rr += `<polygon points="800,120 ${800 + 1800 * Math.cos(a0)},${120 + 1800 * Math.sin(a0)} ${800 + 1800 * Math.cos(a1)},${120 + 1800 * Math.sin(a1)}" fill="${cols[i % 5]}" opacity="0.22"/>`; }
+    let ball = ""; for (let y = -3; y <= 3; y++) for (let x = -3; x <= 3; x++) if (x * x + y * y <= 10) ball += `<rect x="${800 + x * 17 - 8}" y="${120 + y * 17 - 8}" width="15" height="15" fill="${(x + y) % 2 ? "#dfe3e8" : "#9aa3ad"}"/>`;
+    const busts = CH.map((c, i) => bust(c, 400 + i * 400, 520, 0.55, "d" + i)).join("");
+    g.innerHTML = `<rect width="1600" height="900" fill="#0b0618"/>
+      <g class="rays" style="transform-origin:800px 120px">${rr}</g>
+      <rect y="760" width="1600" height="140" fill="#1a1030"/>
+      ${[0, 1, 2, 3, 4, 5, 6, 7].map(i => `<rect class="tile" x="${i * 200}" y="760" width="200" height="140" fill="${cols[i % 5]}" opacity="0.15"/>`).join("")}
+      <path d="M800 0 V70" stroke="#ccc" stroke-width="4"/>
+      <g class="ball" style="transform-origin:800px 120px"><circle cx="800" cy="120" r="62" fill="#b8bec6" stroke="#141414" stroke-width="5"/>${ball}</g>
+      <g class="dancers">${busts}</g>
+      <g class="kon" style="transform-origin:800px 330px"><text x="800" y="380" text-anchor="middle" font-family="${IMPACT}" font-size="190" fill="#ff3c8a" stroke="#000" stroke-width="10" paint-order="stroke" letter-spacing="8">KONIEC</text></g>
+      <g class="zl" style="transform-origin:800px 840px">${logo(800, 870, 110)}</g>`;
+    const rays = g.querySelector(".rays"), kon = g.querySelector(".kon"), zl = g.querySelector(".zl");
+    const a = ctx(), b = 60 / 128, T = a.currentTime + 0.1, dur = 16 * b;
+    MUSIC[2](T, dur);
+    lead(T + dur, N(57), 0.9, { type: "sawtooth", vol: 0.05, vib: 6 }); lead(T + dur, N(64), 0.9, { type: "sawtooth", vol: 0.04 }); lead(T + dur, N(69), 0.9, { type: "square", vol: 0.03 }); crash(T + dur);
+    A(g, [{ opacity: 0 }, { opacity: 1 }], { duration: 300 });
+    rays.animate([{ transform: "rotate(0deg)" }, { transform: "rotate(360deg)" }], { duration: 9000, iterations: Infinity });
+    g.querySelector(".ball").animate([{ transform: "rotate(0deg)" }, { transform: "rotate(360deg)" }], { duration: 3000, iterations: Infinity });
+    g.querySelectorAll(".tile").forEach((t, i) => t.animate([{ opacity: 0.08 }, { opacity: 0.6 }], { duration: b * 1000, direction: "alternate", iterations: Infinity, delay: (i % 2) * b * 1000 }));
+    g.querySelectorAll(".bust").forEach((d, i) => d.animate([{ transform: "translateY(0) rotate(-6deg)" }, { transform: "translateY(-34px) rotate(6deg)" }], { duration: b * 1000, direction: "alternate", iterations: Infinity, easing: "ease-in-out", delay: i * b * 330 }));
+    A(kon, [{ transform: "scale(0) rotate(-20deg)" }, { transform: "scale(1.15) rotate(4deg)" }, { transform: "scale(1) rotate(0deg)" }], { duration: 500 });
+    kon.animate([{ transform: "scale(1)" }, { transform: "scale(1.08)" }], { duration: b * 500, direction: "alternate", iterations: Infinity, delay: 500 });
+    A(zl, [{ transform: "translateY(200px)" }, { transform: "translateY(0)" }], { duration: 500, delay: b * 4000, easing: "ease-out" });
+    await wait(dur * 1000 + 1200);
+    await g.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 500, fill: "forwards" }).finished.catch(() => {});
+    g.getAnimations({ subtree: true }).forEach(x => x.cancel());
+    g.remove();
+  };
+
   window.ziomkiIntro2 = async function(title, num, variant = 1, music = 1){
     const stage = document.getElementById("stage");
     const g = document.createElementNS(NS, "g"); stage.appendChild(g);
