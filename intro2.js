@@ -123,6 +123,7 @@
       [0, 1, 3, 4, 4.25, 4.5, 4.75].forEach(x => osc(T + x * b, 0.5, 70, 50, "sine", 0.7));
       crash(T + 4 * b); for (let x = 0; x < 9; x++) snare(T + 6 * b + x * b / 6); boom(T + 7.5 * b); }
   };
+  window.ziomkiMusic = MUSIC;
   window.ziomkiMusicNames = { 1: "Hip-hop z gitarą", 2: "Disco polo", 3: "8-bit (Pegasus)", 4: "Punk rock", 5: "Techno / rave", 6: "Trap", 7: "Fanfara superbohaterów" };
 
   // ---------- grafika ----------
