@@ -80,10 +80,10 @@
       <div class="tx"><h3>${t}</h3><p>${d}</p></div></a>`;
   document.getElementById("s2").innerHTML = EPS.filter(e => e[0] >= 11).reverse().map(card).join("");
   document.getElementById("s1").innerHTML = EPS.filter(e => e[0] <= 10).map(card).join("");
-  const top = EPS[EPS.length - 1];
-  document.getElementById("hero").innerHTML = `<img src="miniatury/${top[1]}.jpg" alt="">
-    <div class="info"><span class="tag">NAJNOWSZY ODCINEK · ${top[0]}</span><h1>${top[2]}</h1><p>${top[3]}</p>
-    <a class="btn" href="${top[1]}.html" autofocus>▶ Oglądaj</a></div>`;
+  const latest = EPS[EPS.length - 1];
+  document.getElementById("hero").innerHTML = `<img src="miniatury/${latest[1]}.jpg" alt="">
+    <div class="info"><span class="tag">NAJNOWSZY ODCINEK · ${latest[0]}</span><h1>${latest[2]}</h1><p>${latest[3]}</p>
+    <a class="btn" href="${latest[1]}.html" autofocus>▶ Oglądaj</a></div>`;
   document.querySelector(".hero .btn").focus();
 </script>
 </body>
