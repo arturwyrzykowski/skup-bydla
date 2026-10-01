@@ -76,10 +76,11 @@
     [12, "nogi", "Potężny trening nóg", "Zaplecze Sklepu u Sławka, atlas między skrzynkami Tatry i powrót na kolanach."],
     [13, "bizon", "Naprawa Bizona", "Urwany wałek w kombajnie, spawanie na stole, sakramencki błysk i rolnik: trzeba wyjąć silnik."],
     [14, "smugi", "Na smugach", "Piwko pod Bizonem, przyjazd Punto WWL SYKET, liść, bagażnik i powrót do domu: we trzech, kurwa, kozaki."],
-    [15, "rzasnik", "Podryw w Rząśniku", "Pablo i Triwet jadą Hondą na podryw. Czarne BMW, trzech napakowanych i ucieczka w bloki. Morał: trzeba szybko biegać."]
+    [15, "rzasnik", "Podryw w Rząśniku", "Pablo i Triwet jadą Hondą na podryw. Czarne BMW, trzech napakowanych i ucieczka w bloki. Morał: trzeba szybko biegać."],
+    [17, "biwak", "Biwak", "Andrzej i Triwet jadą Ogarem z dziurawym bakiem na biwak ósmej be — przez trzy wsie i pola, dolewając po drodze. W nocy Ogar odpala się sam."]
   ];
   const card = ([n, f, t, d]) => `<a class="card" href="${f}.html">
-      <div class="th"><img src="miniatury/${f}.jpg" alt="" loading="lazy"><span class="nr">Odc. ${n}</span>${n === EPS.length ? '<span class="new">NOWOŚĆ</span>' : ''}<span class="play">▶</span></div>
+      <div class="th"><img src="miniatury/${f}.jpg" alt="" loading="lazy"><span class="nr">Odc. ${n}</span>${n === EPS[EPS.length - 1][0] ? '<span class="new">NOWOŚĆ</span>' : ''}<span class="play">▶</span></div>
       <div class="tx"><h3>${t}</h3><p>${d}</p></div></a>`;
   document.getElementById("s2").innerHTML = EPS.filter(e => e[0] >= 11).reverse().map(card).join("");
   document.getElementById("s1").innerHTML = EPS.filter(e => e[0] <= 10).map(card).join("");
