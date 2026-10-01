@@ -50,11 +50,16 @@
       <circle cx="651.3" cy="326.5" r="12" fill="#e8e4d8" stroke="#555" stroke-width="2"/>
       <!-- spawarka -->
       <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
-        <rect x="1040" y="780" width="110" height="80" rx="8" fill="#2f7a3a"/><rect x="1050" y="790" width="90" height="22" fill="#f4f4f2"/>
-        <text x="1095" y="807" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="13" fill="#141414" stroke="none">SPAWARKA</text>
-        <circle cx="1095" cy="836" r="16" fill="#dfe3e8"/><path id="knob" d="M1095 836 L1095 822" stroke-width="5" style="transform-origin:1095px 836px; transform:rotate(-60deg)"/>
+        <rect x="650" y="780" width="110" height="80" rx="8" fill="#2f7a3a"/><rect x="660" y="790" width="90" height="22" fill="#f4f4f2"/>
+        <text x="705" y="807" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="13" fill="#141414" stroke="none">SPAWARKA</text>
+        <circle cx="705" cy="836" r="16" fill="#dfe3e8"/><path id="knob" d="M705 836 L705 822" stroke-width="5" style="transform-origin:705px 836px; transform:rotate(-60deg)"/>
       </g>
       <path id="cable" d="" fill="none" stroke="#141414" stroke-width="7"/>
+    </g>
+    <g id="shaft" style="display:none" stroke="#141414" stroke-width="4">
+      <g id="shL"><rect x="-90" y="-11" width="90" height="22" rx="4" fill="#8a9096"/><path d="M-90 -4 H0" stroke="#dfe3e8" stroke-width="3"/><path d="M-90 -11 v22 M-80 -11 v22 M-70 -11 v22" stroke-width="3"/></g>
+      <g id="shR"><rect x="0" y="-11" width="96" height="22" rx="4" fill="#8a9096"/><path d="M0 -4 H96" stroke="#dfe3e8" stroke-width="3"/><path d="M96 -11 v22 M86 -11 v22 M76 -11 v22" stroke-width="3"/></g>
+      <rect id="seam" x="-6" y="-13" width="12" height="26" fill="#3a3a3a" style="display:none"/>
     </g>
     <!-- SYN ROLNIKA (czapka z daszkiem), na tarasie -->
     <g id="syn" style="display:none"><g class="bob" style="transform-origin:0px 0px">
@@ -287,11 +292,6 @@
         <rect class="tl" x="52" y="0" width="14" height="120" fill="#6b4424" style="transform-origin:59px 0px"/><rect class="tl" x="86" y="0" width="14" height="120" fill="#7a5230" style="transform-origin:93px 0px"/></g>
       <rect id="tTop" x="-115" y="-18" width="230" height="22" fill="#a8763e"/>
     </g>
-    <g id="shaft" style="display:none" stroke="#141414" stroke-width="4">
-      <g id="shL"><rect x="-90" y="-11" width="90" height="22" rx="4" fill="#8a9096"/><path d="M-90 -4 H0" stroke="#dfe3e8" stroke-width="3"/><path d="M-90 -11 v22 M-80 -11 v22 M-70 -11 v22" stroke-width="3"/></g>
-      <g id="shR"><rect x="0" y="-11" width="96" height="22" rx="4" fill="#8a9096"/><path d="M0 -4 H96" stroke="#dfe3e8" stroke-width="3"/><path d="M96 -11 v22 M86 -11 v22 M76 -11 v22" stroke-width="3"/></g>
-      <rect id="seam" x="-6" y="-13" width="12" height="26" fill="#3a3a3a" style="display:none"/>
-    </g>
     <g id="holder" style="display:none" stroke="#141414" stroke-linecap="round">
       <path id="hBody" d="" stroke-width="12" stroke="#c81e1e"/><path id="hRod" d="" stroke-width="4" stroke="#9aa3ad"/>
     </g>
@@ -417,14 +417,14 @@
   // ---------- aktorzy ----------
   // pozycja stop (x, y), skala; img = postac-obrazek (saperzy), head = wysokosc glowy nad stopami (do dymka)
   const who = {
-    a: { el: "aSt", img: true, x: 0, y: 0, s: 1, head: 300, pitch: 170, vPitch: 0.8, vRate: 1.5 },
-    r: { el: "rSt", img: true, x: 0, y: 0, s: 1, head: 300, pitch: 210, vPitch: 0.95, vRate: 1.5 },
-    s: { el: "sSt", img: true, x: 0, y: 0, s: 1, head: 300, pitch: 90, vPitch: 0.2, vRate: 1.45 },
-    u: { el: "ubij", x: 0, y: 0, s: 1, head: 300, pitch: 150, vPitch: 0.55, vRate: 1.4, mouthO: "uMouthO", mouthC: "uMouthC" },
-    y: { el: "syn", x: 0, y: 0, s: 1, head: 300, pitch: 230, vPitch: 1.2, vRate: 1.5, mouthO: "synMouthO", mouthC: "synMouthC" },
-    z: { el: "zlom", img: true, x: 0, y: 0, s: 1, head: 200, pitch: 120, vPitch: 0.3, vRate: 1.2 },
-    f: { el: "gruby", x: 0, y: 0, s: 1, head: 260, pitch: 330, vPitch: 1.7, vRate: 1.65, mouthO: "fMO", mouthC: "fMC" },
-    c: { el: "chudy", x: 0, y: 0, s: 1, head: 420, pitch: 100, vPitch: 0.45, vRate: 1.45, mouthO: "cMO", mouthC: "cMC" }
+    a: { el: "aSt", img: true, x: 0, y: 0, s: 1, head: 300, pitch: 170, vPitch: 0.8, vRate: 1.2 },
+    r: { el: "rSt", img: true, x: 0, y: 0, s: 1, head: 300, pitch: 210, vPitch: 0.95, vRate: 1.2 },
+    s: { el: "sSt", img: true, x: 0, y: 0, s: 1, head: 300, pitch: 90, vPitch: 0.2, vRate: 1.15 },
+    u: { el: "ubij", x: 0, y: 0, s: 1, head: 300, pitch: 150, vPitch: 0.55, vRate: 1.1, mouthO: "uMouthO", mouthC: "uMouthC" },
+    y: { el: "syn", x: 0, y: 0, s: 1, head: 300, pitch: 230, vPitch: 1.2, vRate: 1.2, mouthO: "synMouthO", mouthC: "synMouthC" },
+    z: { el: "zlom", img: true, x: 0, y: 0, s: 1, head: 200, pitch: 120, vPitch: 0.3, vRate: 1.0 },
+    f: { el: "gruby", x: 0, y: 0, s: 1, head: 260, pitch: 330, vPitch: 1.7, vRate: 1.3, mouthO: "fMO", mouthC: "fMC" },
+    c: { el: "chudy", x: 0, y: 0, s: 1, head: 420, pitch: 100, vPitch: 0.45, vRate: 1.15, mouthO: "cMO", mouthC: "cMC" }
   };
 
   const actT = (w, x = w.x, y = w.y) => `translate(${x}px,${y}px) scale(${w.s})`;
@@ -801,13 +801,13 @@
   const Q = {};
   function pl(id, x, y, s, f = 1, r = 0){ Q[id] = { x, y, s, f, r }; const e = $(id); e.style.display = ""; e.style.transform = `translate(${x}px,${y}px) rotate(${r}deg) scale(${f * s},${s})`; }
   function sp(k, id, head){ const q = Q[id] || P[id]; Object.assign(who[k], { el: id, x: q.x, y: q.y, head: head * q.s }); }
-  const F = (k, id, head, lines, hold = 150, shift = 0, o) => { sp(k, id, head); return L(k, lines, hold, shift, o); };
-  const U = (lines, hold = 150) => F("u", "ubij", 470, lines, hold, -60);
+  const F = (k, id, head, lines, hold = 350, shift = 0, o) => { sp(k, id, head); return L(k, lines, hold, shift, o); };
+  const U = (lines, hold = 350) => F("u", "ubij", 470, lines, hold, -60);
 
   // ---------- spawanie ----------
   const crackle = () => { noise(0.05, { freq: 3000 + Math.random() * 3000, q: 1, vol: 0.25 }); if (Math.random() < 0.3) tone(60, 0.05, "sawtooth", 0.05); };
   function holderAt(x0, y0, x1, y1){ $("holder").style.display = ""; $("hBody").setAttribute("d", `M${x0} ${y0} L${x0 + (x1 - x0) * 0.55} ${y0 + (y1 - y0) * 0.55}`); $("hRod").setAttribute("d", `M${x0 + (x1 - x0) * 0.55} ${y0 + (y1 - y0) * 0.55} L${x1} ${y1}`);
-    $("cable").setAttribute("d", `M1060 800 Q${(x0 + 1060) / 2} 900 ${x0} ${y0}`); }
+    $("cable").setAttribute("d", `M680 800 Q${(x0 + 680) / 2} 900 ${x0} ${y0}`); }
   async function weld(x, y, ms, big = 1){
     const t0 = performance.now(), arc = $("arc");
     arc.setAttribute("cx", x); arc.setAttribute("cy", y);
@@ -873,93 +873,107 @@
     await tween(400, k => tableAt(1050 - 140 * k, (884 - 290 * 0.62 - 150) + (760 - (884 - 290 * 0.62 - 150)) * k));
     thud();
     await F("r", "rSt", 470, "Stół jest!", 100);
-    // walek na stol
-    clank(); shaftAt(905, 738);
+    // urwany walek w kombajnie - wisi
+    shaftAt(905, 600); $("shR").style.transform = "rotate(55deg)";
     await sleep(300);
 
     // Triwet nagrywa na YT
-    await walk("rSt", 1110, 400);
+    await walk("rSt", 1150, 400);
     await armTo("rSt", -150, 250);
     const ph = $("phone"); ph.style.display = ""; ph.style.transform = `translate(${P.rSt.x - 30}px,${884 - 360 * 0.62}px)`;
     const recB = $("recD").animate([{ opacity: 1 }, { opacity: 0.1 }], { duration: 400, direction: "alternate", iterations: Infinity });
-    await F("r", "rSt", 470, ["Siema, dzisiaj spawamy bizona,", "łapka w górę!"], 100, -40);
+    await F("r", "rSt", 470, ["Siema, dzisiaj spawamy bizona,", "łapka w górę!"], 200, -40);
     // gruby sie wkurwia
     fat(1); $("gruby").querySelector(".bob").animate([{ transform: "translateY(0)" }, { transform: "translateY(-30px)" }, { transform: "translateY(0)" }], { duration: 220, iterations: 3 });
-    await F("f", "gruby", 400, ["Wypierdalaj mnie z tym,", "bo kopa zajebię!"], 100, 60);
+    await F("f", "gruby", 400, ["Wypierdalaj mnie z tym,", "bo kopa zajebię!"], 200, 60);
     await anim($("fLegR"), [{ transform: "rotate(0deg)" }, { transform: "rotate(-60deg)" }, { transform: "rotate(0deg)" }], { duration: 350 });
     thud(); fat(0);
-    await walk("rSt", 1170, 300);
+    await walk("rSt", 1190, 300);
     // pijany zlomiarz majaczy
-    await F("z", "zlom", 120, ["Brrhm… szszprychy…", "mmmuha… blblbl…"], 150, 120);
+    await F("z", "zlom", 120, ["Brrhm… szszprychy…", "mmmuha… blblbl…"], 300, 120);
     await U("Mówię wam, trzeba wyjąć silnik.");
 
-    // ===== Andrzej spawa =====
-    const mk = $("wmask"); mk.style.display = ""; mk.style.transform = `translate(${P.aSt.x + 4}px,${884 - 373 * 0.62}px) scale(0.62)`;
-    await armTo("aSt", -70, 250);
-    holderAt(806, 720, 900, 740);
+    // ===== Andrzej wchodzi na stol i spawa kombajn =====
+    await walk("aSt", 845, 500);
+    grunt(1);
+    await tween(450, k => { P.aSt.y = 884 - 142 * k - 40 * Math.sin(k * Math.PI); draw("aSt"); });
+    P.aSt.y = 742; draw("aSt"); clank();
+    await armTo("aSt", -80, 250);
+    await anim($("shR"), [{ transform: "rotate(55deg)" }, { transform: "rotate(0deg)" }], { duration: 400 });
+    $("shR").style.transform = "rotate(0deg)"; clank();
+    const mk = $("wmask"); mk.style.display = ""; mk.style.transform = `translate(${P.aSt.x + 4}px,${742 - 373 * 0.62}px) scale(0.62)`;
+    holderAt(P.aSt.x + 95, 590, 902, 602);
     $("seam").style.display = "";
-    await weld(902, 740, 2600);
+    await weld(902, 602, 2600);
     mk.style.display = "none"; $("holder").style.display = "none"; $("cable").setAttribute("d", "");
     armTo("aSt", 0, 200);
-    await F("a", "aSt", 470, "Gotowe. Trzyma jak marzenie.");
-    // podnosi walek... i walek sie urywa
-    await armTo("aSt", -60, 200);
-    await tween(500, k => shaftAt(905, 738 - 70 * k));
-    tone(140, 0.8, "sawtooth", 0.04, 110);
-    await sleep(900);
-    tone(900, 0.06, "square", 0.06); pow("TRZASK!", 905, 560, { size: 70, col: "#fff", hold: 400 });
+    await F("a", "aSt", 470, "Gotowe. Trzyma jak marzenie.", 200);
+    await sleep(1400);
+    tone(140, 0.9, "sawtooth", 0.04, 110);
+    await anim($("shR"), [{ transform: "rotate(0deg)" }, { transform: "rotate(4deg)" }, { transform: "rotate(-2deg)" }, { transform: "rotate(6deg)" }], { duration: 900 });
+    tone(900, 0.06, "square", 0.06); pow("TRZASK!", 905, 470, { size: 70, col: "#fff", hold: 400 });
     $("seam").style.display = "none";
-    await Promise.all([
-      anim($("shL"), [{ transform: "translate(0,0) rotate(0deg)" }, { transform: "translate(-40px,140px) rotate(-40deg)" }], { duration: 420, easing: "ease-in" }),
-      anim($("shR"), [{ transform: "translate(0,0) rotate(0deg)" }, { transform: "translate(50px,140px) rotate(35deg)" }], { duration: 420, easing: "ease-in" })]);
-    clank(); setTimeout(clank, 90); shake(6, 200);
-    armTo("aSt", 0, 200);
-    await F("s", "sSt", 470, "Ale żeś, kurwa, przyspawał.", 250);
+    await anim($("shR"), [{ transform: "translate(0,0) rotate(6deg)" }, { transform: "translate(40px,270px) rotate(85deg)" }], { duration: 450, easing: "ease-in" });
+    $("shR").style.transform = "translate(40px,270px) rotate(85deg)";
+    clank(); setTimeout(clank, 90); shake(6, 200); bits(950, 870, 6, { color: "#c9b88a", spread: 80, up: 40, size: 6 });
+    await F("s", "sSt", 470, "Ale żeś, kurwa, przyspawał.", 400);
     await U("Mówiłem. Trzeba wyjąć silnik.");
+    // Andrzej zeskakuje
+    await tween(450, k => { P.aSt.x = 845 - 115 * k; P.aSt.y = 742 + 142 * k - 50 * Math.sin(k * Math.PI); draw("aSt"); });
+    P.aSt.y = 884; draw("aSt"); thud();
 
-    // ===== chudy podkreca prad =====
-    $("shL").getAnimations().forEach(a => a.cancel()); $("shR").getAnimations().forEach(a => a.cancel());
-    shaftAt(905, 738); $("seam").style.display = "";
-    await F("c", "chudy", 640, ["Prądu za mało.", "Dajcie, podkręcę na maksa."], 100);
+    // ===== chudy podkreca prad i trzyma walek =====
+    await F("c", "chudy", 640, ["Prądu za mało.", "Dajcie, podkręcę na maksa."], 200);
+    const c0 = Q.chudy.x;
+    const cw = $("chudy").querySelector(".bob").animate([{ transform: "translateY(0)" }, { transform: "translateY(-10px)" }], { duration: 180, direction: "alternate", iterations: Infinity });
+    await tween(1500, k => pl("chudy", c0 + (790 - c0) * k, 862, 0.6, -1));
     await anim($("knob"), [{ transform: "rotate(-60deg)" }, { transform: "rotate(80deg)" }], { duration: 500 });
     $("knob").style.transform = "rotate(80deg)"; tone(200, 0.5, "sawtooth", 0.05, 600);
+    await tween(900, k => pl("chudy", 790 + 300 * k, 862, 0.6, -1));
+    cw.cancel();
+    await anim($("shR"), [{ transform: "translate(40px,270px) rotate(85deg)" }, { transform: "translate(0,0) rotate(0deg)" }], { duration: 500 });
+    $("shR").style.transform = ""; clank();
+    $("cArm").style.transform = "rotate(-80deg)";
+    await F("c", "chudy", 640, "Trzymam!", 200);
 
-    // ===== gruby spawa bez maski =====
-    await F("f", "gruby", 400, "Dawaj, ja to zrobię!");
-    await Promise.all([walk("aSt", 660, 500), walk("sSt", 520, 500)]); P.aSt.f = 1; draw("aSt");
+    // ===== gruby wchodzi na stol i spawa bez maski =====
+    await F("f", "gruby", 400, "Dawaj, ja to zrobię!", 200);
     const g0 = Q.gruby.x;
     $("gruby").querySelector(".bob").animate([{ transform: "translateY(0)" }, { transform: "translateY(-14px)" }], { duration: 160, direction: "alternate", iterations: 10 });
-    await tween(1600, k => pl("gruby", g0 + (790 - g0) * k, 886, 0.62, 1));
-    $("fArmR").style.transform = "rotate(-40deg)";
-    holderAt(870, 790, 902, 744);
-    await F("f", "gruby", 400, "To jest sakramencki błysk!", 50);
-    // mega blysk
-    const big = weld(902, 744, 2200, 2.4);
+    await tween(1600, k => pl("gruby", g0 + (860 - g0) * k, 886, 0.62, 1));
+    // wdrapuje sie z wysilkiem, stol skrzypi
+    for (let i = 0; i < 2; i++){ grunt(1.3); await tween(300, k => pl("gruby", 860, 886 - 40 * Math.sin(k * Math.PI), 0.62, 1)); }
+    grunt(1.3); tone(160, 0.6, "sawtooth", 0.05, 90);
+    await tween(500, k => pl("gruby", 860, 886 - 144 * k - 30 * Math.sin(k * Math.PI), 0.62, 1));
+    pl("gruby", 860, 742, 0.62, 1);
+    $("fArmR").style.transform = "rotate(-60deg)";
+    holderAt(860 + 110, 600, 902, 602);
+    await F("f", "gruby", 400, "To jest sakramencki błysk!", 100);
+    const big = weld(902, 602, 2200, 2.4);
     await sleep(1500);
     $("flash").setAttribute("fill", "#fff");
     await big;
     $("holder").style.display = "none"; $("cable").setAttribute("d", "");
     await anim($("flash"), [{ opacity: 1 }, { opacity: 1, offset: 0.4 }, { opacity: 0 }], { duration: 1800 });
     $("fEyes").style.display = "none"; $("fEyesX").style.display = "";
-    await F("f", "gruby", 400, "Nic nie widzę! Kurwa, nic nie widzę!", 100);
-    await U("A mówiłem, trzeba wyjąć silnik.");
-    // gruby po omacku opiera sie o stol -> stol sie zalamuje
     $("fArmL").style.transform = "rotate(90deg)"; $("fArmR").style.transform = "rotate(-90deg)";
-    const gx = Q.gruby.x;
-    await tween(900, k => pl("gruby", gx + 60 * k + Math.sin(k * 12) * 8, 886, 0.62, 1));
-    tone(160, 0.6, "sawtooth", 0.05, 90);
-    await sleep(400);
+    await F("f", "gruby", 400, "Nic nie widzę! Kurwa, nic nie widzę!", 200);
+    await U("A mówiłem, trzeba wyjąć silnik.");
+    // drepcze po stole -> stol sie zalamuje pod ciezarem
+    for (let i = 0; i < 3; i++){ tone(150 - i * 20, 0.3, "sawtooth", 0.05, 90); await tween(250, k => pl("gruby", 860 + Math.sin(k * Math.PI) * 14 * (i % 2 ? -1 : 1), 742 + 6 * Math.sin(k * Math.PI), 0.62, 1)); }
     const legsT = [...document.querySelectorAll("#tLegs .tl")];
-    pow("KRACH!", 910, 600, { size: 110, col: "#ffb13b" });
-    thud(); clank(); shake(14, 400);
+    pow("KRACH!", 910, 520, { size: 110, col: "#ffb13b" });
+    thud(); clank(); shake(16, 450);
+    $("cArm").style.transform = "";
     await Promise.all([
       ...legsT.map((l, i) => anim(l, [{ transform: "rotate(0deg)" }, { transform: `rotate(${i < 2 ? 70 : -70}deg)` }], { duration: 300, easing: "ease-in" })),
       anim($("tTop"), [{ transform: "translate(0,0) rotate(0deg)" }, { transform: "translate(0,100px) rotate(6deg)" }], { duration: 300, easing: "ease-in" }),
-      tween(300, k => { shaftAt(905, 738 + 128 * k, 6 * k); pl("gruby", gx + 60, 886 + 20 * k, 0.62, 1); })
+      anim($("shR"), [{ transform: "translate(0,0) rotate(0deg)" }, { transform: "translate(40px,270px) rotate(85deg)" }], { duration: 400, easing: "ease-in" }),
+      tween(320, k => pl("gruby", 860, 742 + 160 * k * k, 0.62, 1))
     ]);
-    bits(910, 870, 10, { color: "#a8763e", spread: 180, up: 120, size: 8 });
+    bits(910, 870, 12, { color: "#a8763e", spread: 180, up: 120, size: 8 });
     $("fArmL").style.transform = ""; $("fArmR").style.transform = "";
-    await sleep(500);
+    await sleep(600);
     await U(["No to teraz to już na pewno", "trzeba wyjąć silnik."], 200);
     await F("y", "syn", 490, ["Na chuj wam ten bizon,", "i tak nie pojedzie."], 150, 120);
     $("zlom").querySelector(".bob").animate([{ transform: "rotate(0deg)" }, { transform: "rotate(-14deg)" }, { transform: "rotate(0deg)" }], { duration: 700 });
