@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Intro – próby</title>
+<style>
+  html, body { margin: 0; background: #000; color: #fff; font-family: "Comic Sans MS", "Chalkboard SE", sans-serif; }
+  #wrap { max-width: 1600px; margin: 0 auto; }
+  svg { display: block; width: 100%; height: auto; background: #111; }
+  .bar { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; padding: 18px; }
+  button { font: inherit; font-size: 26px; font-weight: 700; padding: 14px 28px; border: 5px solid #000; border-radius: 14px; background: #ffd23f; color: #000; cursor: pointer; }
+  button:focus { outline: 5px solid #fff; }
+  p { text-align: center; margin: 0 0 18px; opacity: 0.8; }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <svg id="stage" viewBox="0 0 1600 900"><rect width="1600" height="900" fill="#111"/>
+    <text id="hint" x="800" y="460" text-anchor="middle" font-size="56" fill="#fff" font-family="'Comic Sans MS',sans-serif">Wybierz wersję poniżej ↓</text></svg>
+  <div class="bar">
+    <button data-v="1" autofocus>Wersja 1: skośne kadry</button>
+    <button data-v="2">Wersja 2: strona komiksu</button>
+    <button data-v="3">Wersja 3: paski pop-art</button>
+  </div>
+  <p>Przyciski działają też z klawiatury: Tab i Enter</p>
+</div>
+<script src="intro2.js"></script>
+<script>
+  let busy = false;
+  document.querySelectorAll("button").forEach(b => b.addEventListener("click", async () => {
+    if (busy) return; busy = true;
+    document.getElementById("hint").style.display = "none";
+    await ziomkiIntro2("SKUTEROWY TEST ZAUFANIA", 11, +b.dataset.v);
+    document.getElementById("hint").style.display = ""; busy = false; b.focus();
+  }));
+</script>
+</body>
+</html>
