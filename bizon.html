@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Naprawa Bizona</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  html, body { margin:0; height:100%; background:#111; }
+  body { display:flex; align-items:center; justify-content:center;
+    font-family:"Comic Sans MS","Chalkboard SE",sans-serif; }
+  #wrap { position:relative; width:min(100vw, calc(100vh * 16 / 9)); aspect-ratio:16 / 9; }
+  #stage { width:100%; height:100%; display:block; background:#9fd3ff; }
+  .overlay { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center;
+    justify-content:center; gap:24px; text-align:center; color:#fff; background:rgba(0,0,0,.72); }
+  .overlay h1 { margin:0; font-size:clamp(40px,8vw,120px); color:#ffd23f; letter-spacing:2px;
+    -webkit-text-stroke:3px #000; text-shadow:6px 6px 0 #000; transform:rotate(-3deg); }
+  .overlay p { margin:0; font-size:clamp(16px,2vw,28px); }
+  .btn { font:inherit; font-weight:bold; font-size:clamp(20px,2.6vw,36px); padding:.4em 1.2em;
+    color:#000; background:#ffd23f; border:4px solid #000; border-radius:14px;
+    box-shadow:5px 5px 0 #000; cursor:pointer; }
+  .btn:focus-visible { outline:4px solid #fff; outline-offset:4px; }
+  [hidden] { display:none !important; }
+</style>
+</head>
+<body>
+<div id="wrap">
+<svg id="stage" viewBox="0 0 1600 900" aria-label="Bajka: Naprawa Bizona">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6fb8ff"/><stop offset="1" stop-color="#dff3ff"/></linearGradient>
+    <pattern id="milan" width="28" height="20" patternUnits="userSpaceOnUse"><rect width="14" height="20" fill="#c8102e"/><rect x="14" width="14" height="20" fill="#141414"/></pattern>
+    <pattern id="juve" width="28" height="20" patternUnits="userSpaceOnUse"><rect width="14" height="20" fill="#f4f4f2"/><rect x="14" width="14" height="20" fill="#141414"/></pattern>
+    <filter id="sepia"><feColorMatrix type="matrix" values="0.45 0.6 0.15 0 0  0.38 0.55 0.13 0 0  0.28 0.42 0.1 0 0  0 0 0 1 0"/></filter>
+    <linearGradient id="dusk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a2a6e"/><stop offset="0.55" stop-color="#e8674a"/><stop offset="1" stop-color="#ffc46b"/></linearGradient>
+  </defs>
+  <g id="world">
+   <g id="cam" style="transform-origin:0px 0px">
+    <g id="scYard">
+      <rect width="1600" height="900" fill="url(#sky)"/>
+      <g fill="#fff" stroke="#141414" stroke-width="4" opacity="0.9"><path d="M120 120 q30 -50 80 -20 q40 -40 90 0 q50 -10 50 40 q10 40 -40 40 h-160 q-40 -20 -20 -60 z"/><path d="M1200 80 q20 -30 60 -10 q30 -30 60 0 q40 0 30 30 h-140 q-30 -10 -10 -20 z"/></g>
+      <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
+        <rect x="1250" y="300" width="350" height="420" fill="#a8452e"/><path d="M1230 304 L1425 190 L1620 304 Z" fill="#6b2a1e"/>
+        <path d="M1300 420 h220 v300 h-220 z" fill="#7a3020"/><path d="M1300 420 L1520 720 M1520 420 L1300 720" stroke="#f4f4f2" stroke-width="10"/>
+        <circle cx="70" cy="520" r="120" fill="#4f7a3a"/><circle cx="190" cy="560" r="100" fill="#3f6a3a"/>
+      </g>
+      <rect y="640" width="1600" height="260" fill="#9a8a62"/>
+      <path d="M0 650 Q400 630 800 650 T1600 646 V700 H0 Z" fill="#7fae52"/>
+      <g fill="#7a6a48" opacity="0.5"><ellipse cx="0" cy="720" rx="20" ry="6"/><ellipse cx="197" cy="773" rx="30" ry="6"/><ellipse cx="394" cy="826" rx="40" ry="6"/><ellipse cx="591" cy="879" rx="20" ry="6"/><ellipse cx="788" cy="772" rx="30" ry="6"/><ellipse cx="985" cy="825" rx="40" ry="6"/><ellipse cx="1182" cy="878" rx="20" ry="6"/><ellipse cx="1379" cy="771" rx="30" ry="6"/><ellipse cx="1576" cy="824" rx="40" ry="6"/><ellipse cx="173" cy="877" rx="20" ry="6"/><ellipse cx="370" cy="770" rx="30" ry="6"/><ellipse cx="567" cy="823" rx="40" ry="6"/><ellipse cx="764" cy="876" rx="20" ry="6"/><ellipse cx="961" cy="769" rx="30" ry="6"/><ellipse cx="1158" cy="822" rx="40" ry="6"/><ellipse cx="1355" cy="875" rx="20" ry="6"/><ellipse cx="1552" cy="768" rx="30" ry="6"/><ellipse cx="149" cy="821" rx="40" ry="6"/><ellipse cx="346" cy="874" rx="20" ry="6"/><ellipse cx="543" cy="767" rx="30" ry="6"/><ellipse cx="740" cy="820" rx="40" ry="6"/><ellipse cx="937" cy="873" rx="20" ry="6"/><ellipse cx="1134" cy="766" rx="30" ry="6"/><ellipse cx="1331" cy="819" rx="40" ry="6"/><ellipse cx="1528" cy="872" rx="20" ry="6"/><ellipse cx="125" cy="765" rx="30" ry="6"/></g>
+      <image href="bizon.png" x="180" y="209.5" width="1250" height="566.5"/>
+      <circle cx="651.3" cy="326.5" r="12" fill="#e8e4d8" stroke="#555" stroke-width="2"/>
+      <!-- spawarka -->
+      <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
+        <rect x="1040" y="780" width="110" height="80" rx="8" fill="#2f7a3a"/><rect x="1050" y="790" width="90" height="22" fill="#f4f4f2"/>
+        <text x="1095" y="807" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="13" fill="#141414" stroke="none">SPAWARKA</text>
+        <circle cx="1095" cy="836" r="16" fill="#dfe3e8"/><path id="knob" d="M1095 836 L1095 822" stroke-width="5" style="transform-origin:1095px 836px; transform:rotate(-60deg)"/>
+      </g>
+      <path id="cable" d="" fill="none" stroke="#141414" stroke-width="7"/>
+    </g>
+    <!-- SYN ROLNIKA (czapka z daszkiem), na tarasie -->
+    <g id="syn" style="display:none"><g class="bob" style="transform-origin:0px 0px">
+      <g stroke="#141414" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <rect x="-48" y="-165" width="40" height="128" fill="#3d5a80"/><rect x="8" y="-165" width="40" height="128" fill="#3d5a80"/>
+        <rect x="-62" y="-40" width="58" height="40" rx="12" fill="#f4f4f2"/><rect x="4" y="-40" width="58" height="40" rx="12" fill="#f4f4f2"/>
+        <path d="M-74 -330 Q-110 -250 -100 -180" fill="none" stroke-width="38"/><path d="M-74 -330 Q-110 -250 -100 -180" fill="none" stroke="#7d8289" stroke-width="28"/>
+        <circle cx="-100" cy="-170" r="16" fill="#eab08c"/>
+        <g id="synArm" style="transform-origin:74px -330px">
+          <path d="M74 -330 Q110 -250 100 -180" fill="none" stroke-width="38"/><path d="M74 -330 Q110 -250 100 -180" fill="none" stroke="#7d8289" stroke-width="28"/>
+          <circle cx="100" cy="-170" r="16" fill="#eab08c"/>
+        </g>
+        <path d="M-80 -340 Q-94 -160 -58 -150 H58 Q94 -160 80 -340 Q0 -364 -80 -340 Z" fill="#7d8289"/>
+        <path d="M-40 -330 Q0 -300 40 -330" fill="none" stroke-width="4"/><path d="M-20 -250 H20 L26 -196 H-26 Z" fill="#6b6f75" stroke-width="3"/>
+        <rect x="-20" y="-370" width="40" height="24" fill="#eab08c"/>
+        <circle cx="-64" cy="-406" r="14" fill="#eab08c"/><circle cx="64" cy="-406" r="14" fill="#eab08c"/>
+        <circle cx="0" cy="-404" r="64" fill="#eab08c"/>
+        <path d="M-40 -424 L-12 -418 M12 -418 L40 -424" stroke="#3b2a1c" stroke-width="7"/>
+        <circle cx="-24" cy="-402" r="7" fill="#111" stroke="none"/><circle cx="24" cy="-402" r="7" fill="#111" stroke="none"/>
+        <path d="M0 -394 q10 14 -4 20" fill="none" stroke-width="4"/>
+        <path id="synMouthC" d="M-16 -358 Q0 -362 16 -358" fill="none"/>
+        <ellipse id="synMouthO" cx="0" cy="-356" rx="14" ry="11" fill="#5a1414" style="display:none"/>
+        <g stroke-linecap="round">
+          <line x1="10" y1="-358" x2="58" y2="-348" stroke="#141414" stroke-width="12"/>
+          <line x1="10" y1="-358" x2="58" y2="-348" stroke="#f4f4f2" stroke-width="7"/>
+          <circle cx="58" cy="-348" r="6" fill="#ff5a1f" stroke="none"/>
+        </g>
+        <path d="M-66 -430 Q-64 -488 0 -490 Q64 -488 66 -430 Q0 -448 -66 -430 Z" fill="#c81e1e"/>
+        <path d="M-68 -434 Q0 -462 68 -434 Q56 -412 0 -418 Q-56 -412 -68 -434 Z" fill="#9e1414"/>
+      </g>
+    </g></g>
+    <!-- UBIJACZ: komentuje i ubija noga ziemie (jak z filmu: jasna koszula, czapka, kalosze) -->
+    <g id="ubij" style="display:none">
+      <g id="uLean" style="transform-origin:0px 0px" stroke="#141414" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <g id="uLegL" style="transform-origin:-28px -165px">
+          <rect x="-48" y="-165" width="40" height="110" fill="#2d3a55"/>
+          <path d="M-54 -92 H-4 V-6 Q-4 0 -10 0 H-62 Q-68 0 -66 -8 Z" fill="#3b3f45"/>
+          <rect x="-54" y="-96" width="50" height="12" fill="#c9ccd1"/>
+        </g>
+        <g id="uLegR" style="transform-origin:28px -165px">
+          <rect x="8" y="-165" width="40" height="110" fill="#2d3a55"/>
+          <path d="M4 -92 H54 V-6 Q54 0 48 0 H-4 Q-10 0 -8 -8 Z" fill="#3b3f45"/>
+          <rect x="4" y="-96" width="50" height="12" fill="#c9ccd1"/>
+          <g class="uDirtLeg" style="display:none" fill="#3b2a1a" stroke="none">
+            <circle cx="20" cy="-110" r="9"/><circle cx="36" cy="-140" r="7"/><circle cx="30" cy="-90" r="6"/>
+          </g>
+        </g>
+        <!-- kieszenie spodni z wlozonymi dlonmi -->
+        <path d="M-66 -162 Q-56 -132 -36 -132 L-40 -162 Z" fill="#23304a"/>
+        <path d="M66 -162 Q56 -132 36 -132 L40 -162 Z" fill="#23304a"/>
+        <!-- jasny sweter z dlugim rekawem, rece w kieszeniach (lokcie na zewnatrz) -->
+        <g id="uArmPocketL">
+          <path d="M-72 -330 Q-124 -250 -52 -146" fill="none" stroke-width="40"/>
+          <path d="M-72 -330 Q-124 -250 -52 -146" fill="none" stroke="#e9e4d8" stroke-width="30"/>
+        </g>
+        <g id="uArmPocketR">
+          <path d="M72 -330 Q124 -250 52 -146" fill="none" stroke-width="40"/>
+          <path d="M72 -330 Q124 -250 52 -146" fill="none" stroke="#e9e4d8" stroke-width="30"/>
+        </g>
+        <path d="M-80 -340 Q-94 -160 -62 -150 H62 Q94 -160 80 -340 Q0 -364 -80 -340 Z" fill="#e9e4d8"/>
+        <path d="M-64 -158 H64" stroke="#cfc8b8" stroke-width="6"/>
+        <path d="M-80 -340 Q-118 -250 -58 -150" fill="none" stroke="#cfc8b8" stroke-width="3" opacity="0.6"/>
+        <ellipse cx="0" cy="-348" rx="30" ry="10" fill="#e9e4d8"/>
+        <g id="uArmsWave" style="display:none">
+          <g id="uWaveL" style="transform-origin:-70px -326px">
+            <path d="M-70 -326 Q-130 -360 -150 -430" fill="none" stroke-width="40"/>
+            <path d="M-70 -326 Q-130 -360 -150 -430" fill="none" stroke="#e9e4d8" stroke-width="30"/>
+            <circle cx="-152" cy="-442" r="18" fill="#e7b08c"/>
+          </g>
+          <g id="uWaveR" style="transform-origin:70px -326px">
+            <path d="M70 -326 Q130 -360 150 -430" fill="none" stroke-width="40"/>
+            <path d="M70 -326 Q130 -360 150 -430" fill="none" stroke="#e9e4d8" stroke-width="30"/>
+            <circle cx="152" cy="-442" r="18" fill="#e7b08c"/>
+          </g>
+        </g>
+        <g id="uArmPush" style="display:none">
+          <path d="M70 -326 Q140 -320 196 -292" fill="none" stroke-width="40"/>
+          <path d="M70 -326 Q140 -320 196 -292" fill="none" stroke="#e9e4d8" stroke-width="30"/>
+          <circle cx="206" cy="-288" r="18" fill="#e7b08c"/>
+        </g>
+        <rect x="-20" y="-372" width="40" height="24" fill="#e7b08c"/>
+        <circle cx="-66" cy="-412" r="15" fill="#e7b08c"/><circle cx="66" cy="-412" r="15" fill="#e7b08c"/>
+        <circle cx="0" cy="-410" r="70" fill="#e7b08c"/>
+        <g fill="#6b5a4a" stroke="none" opacity="0.5">
+          <circle cx="-40" cy="-364" r="2.4"/><circle cx="-24" cy="-354" r="2.4"/><circle cx="24" cy="-354" r="2.4"/>
+          <circle cx="40" cy="-364" r="2.4"/><circle cx="0" cy="-348" r="2.4"/><circle cx="-52" cy="-380" r="2.4"/><circle cx="52" cy="-380" r="2.4"/>
+        </g>
+        <path id="uBrowL" d="M-44 -440 L-12 -432" stroke="#3b2a1c" stroke-width="8"/>
+        <path id="uBrowR" d="M12 -432 L44 -440" stroke="#3b2a1c" stroke-width="8"/>
+        <circle cx="-26" cy="-416" r="7" fill="#111" stroke="none"/><circle cx="26" cy="-416" r="7" fill="#111" stroke="none"/>
+        <path d="M0 -408 q12 16 -4 22" fill="none" stroke-width="4"/>
+        <path id="uMouthC" d="M-20 -366 Q0 -358 20 -366" fill="none"/>
+        <ellipse id="uMouthO" cx="0" cy="-364" rx="16" ry="12" fill="#5a1414" style="display:none"/>
+        <path d="M-70 -436 Q-68 -494 0 -496 Q68 -494 72 -436 Q0 -456 -70 -436 Z" fill="#2356b0"/>
+        <path d="M-72 -440 Q0 -470 72 -440 Q60 -418 0 -424 Q-60 -418 -72 -440 Z" fill="#1a4290"/>
+        <g id="uDirt" style="display:none" fill="#3b2a1a" stroke="#141414" stroke-width="2">
+          <circle cx="-30" cy="-260" r="20"/><circle cx="40" cy="-200" r="16"/><circle cx="-10" cy="-410" r="14"/>
+          <circle cx="36" cy="-430" r="9"/><circle cx="-50" cy="-180" r="12"/><circle cx="10" cy="-300" r="10"/>
+        </g>
+      </g>
+    </g>
+    <!-- ZLOMIARZ: gora z obrazka (od pasa w gore), nogi rysowane, piwo Tatra z obrazka; stopy w 0,0 -->
+    <g id="zlom" style="display:none"><g class="bob" style="transform-origin:0px 0px">
+      <g stroke="#141414" stroke-width="4" stroke-linejoin="round">
+        <rect x="-50" y="-146" width="100" height="34" rx="6" fill="#4b6fa5"/>
+        <rect x="-46" y="-130" width="40" height="100" fill="#4b6fa5"/>
+        <rect x="-60" y="-34" width="56" height="34" rx="10" fill="#3a2a1c"/>
+        <g id="zLegR" style="transform-origin:25px -130px">
+          <rect x="4" y="-130" width="40" height="100" fill="#4b6fa5"/>
+          <rect x="2" y="-34" width="60" height="34" rx="10" fill="#3a2a1c"/>
+        </g>
+        <!-- puszka Tatry w dloni -->
+        <image id="beer" href="tatra.png" x="115" y="-150" width="51" height="134"/>
+      </g>
+      <image href="zlomiarz.png" x="-64" y="-387" width="223" height="262"/>
+    </g></g>
+
+    <g id="chudy" style="display:none"><g class="bob" style="transform-origin:0px 0px">
+      <g stroke="#141414" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M-14 -330 L-18 -24" stroke-width="30"/><path d="M-14 -330 L-18 -24" stroke="#2f7a4a" stroke-width="22"/><path d="M-20 -320 L-24 -30" stroke="#fff" stroke-width="3"/>
+        <path d="M14 -330 L18 -24" stroke-width="30"/><path d="M14 -330 L18 -24" stroke="#2f7a4a" stroke-width="22"/><path d="M20 -320 L24 -30" stroke="#fff" stroke-width="3"/>
+        <path d="M-44 -24 Q-44 0 -20 0 H0 V-24 Z" fill="#f4f4f2"/><path d="M0 -24 V0 H34 Q50 0 48 -24 Z" fill="#f4f4f2"/>
+        <path d="M-38 -490 L-56 -300" stroke-width="26"/><path d="M-38 -490 L-56 -300" stroke="#2f7a4a" stroke-width="18"/><circle cx="-57" cy="-292" r="12" fill="#eab08c"/>
+        <rect x="-40" y="-500" width="80" height="180" rx="14" fill="#2f7a4a"/>
+        <path d="M0 -498 V-322" stroke="#fff" stroke-width="3"/><path d="M-40 -470 L-40 -330 M40 -470 L40 -330" stroke="#fff" stroke-width="3"/>
+        <g id="cArm" style="transform-origin:38px -490px"><path d="M38 -490 L56 -300" stroke-width="26"/><path d="M38 -490 L56 -300" stroke="#2f7a4a" stroke-width="18"/><circle cx="57" cy="-292" r="12" fill="#eab08c"/></g>
+        <rect x="-9" y="-566" width="18" height="70" fill="#eab08c"/><circle cx="4" cy="-528" r="7" fill="#eab08c"/>
+        <ellipse cx="0" cy="-604" rx="36" ry="46" fill="#eab08c"/>
+        <circle cx="-34" cy="-604" r="9" fill="#eab08c"/>
+        <path d="M18 -612 Q66 -596 30 -582" fill="#eab08c"/>
+        <circle cx="-8" cy="-618" r="5" fill="#111" stroke="none"/><circle cx="16" cy="-618" r="5" fill="#111" stroke="none"/>
+        <path id="cMC" d="M-6 -572 Q8 -568 20 -574" fill="none"/>
+        <ellipse id="cMO" cx="8" cy="-572" rx="9" ry="8" fill="#5a1414" style="display:none"/>
+        <path d="M-38 -630 Q-36 -690 0 -692 Q36 -690 38 -630 Z" fill="#8a1e2a"/><rect x="-40" y="-642" width="80" height="16" rx="6" fill="#6a1420"/>
+        <circle cx="0" cy="-700" r="14" fill="#f4f4f2"/>
+      </g>
+    </g></g>
+    <g id="gruby" style="display:none"><g class="bob" style="transform-origin:0px 0px">
+      <g stroke="#141414" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <g id="fLegL" style="transform-origin:-32px -80px"><rect x="-56" y="-84" width="46" height="66" fill="#3d5a80"/><rect x="-66" y="-22" width="60" height="22" rx="9" fill="#2b2b2b"/></g>
+        <g id="fLegR" style="transform-origin:32px -80px"><rect x="10" y="-84" width="46" height="66" fill="#3d5a80"/><rect x="8" y="-22" width="60" height="22" rx="9" fill="#2b2b2b"/></g>
+        <rect x="-104" y="-122" width="208" height="48" rx="10" fill="#3d5a80"/>
+        <g id="fArmL" style="transform-origin:-104px -228px"><path d="M-104 -228 L-150 -150" stroke-width="36"/><path d="M-104 -228 L-150 -150" stroke="#f0a088" stroke-width="26"/><circle cx="-152" cy="-142" r="16" fill="#f0a088"/></g>
+        <ellipse cx="0" cy="-180" rx="126" ry="106" fill="#f4f4f2"/>
+        <ellipse cx="-40" cy="-150" rx="16" ry="11" fill="#e0cf9a" stroke="none"/><ellipse cx="30" cy="-200" rx="12" ry="8" fill="#e0cf9a" stroke="none"/>
+        <path d="M-70 -270 Q-100 -170 -54 -90 M70 -270 Q100 -170 54 -90" fill="none" stroke="#c81e1e" stroke-width="10"/>
+        <path d="M-8 -150 q8 6 0 12" fill="none" stroke-width="4"/>
+        <g id="fArmR" style="transform-origin:104px -228px"><path d="M104 -228 L150 -150" stroke-width="36"/><path d="M104 -228 L150 -150" stroke="#f0a088" stroke-width="26"/><circle cx="152" cy="-142" r="16" fill="#f0a088"/></g>
+        <circle cx="-70" cy="-312" r="14" fill="#f0a088"/><circle cx="70" cy="-312" r="14" fill="#f0a088"/>
+        <circle id="fFace" cx="0" cy="-318" r="72" fill="#f0a088"/>
+        <path d="M-40 -262 Q0 -246 40 -262" fill="none" stroke-width="4"/>
+        <path d="M-40 -388 Q-10 -372 30 -386 M-44 -380 Q-6 -366 40 -378 M-30 -390 Q10 -380 44 -372" fill="none" stroke="#3b2a1c" stroke-width="4"/>
+        <circle cx="-38" cy="-300" r="12" fill="#ff7a6a" opacity="0.6" stroke="none"/><circle cx="38" cy="-300" r="12" fill="#ff7a6a" opacity="0.6" stroke="none"/>
+        <g id="fEyes"><circle cx="-22" cy="-330" r="6" fill="#111" stroke="none"/><circle cx="22" cy="-330" r="6" fill="#111" stroke="none"/></g>
+        <g id="fEyesX" style="display:none" stroke-width="5"><path d="M-30 -338 L-14 -322 M-14 -338 L-30 -322 M14 -338 L30 -322 M30 -338 L14 -322"/></g>
+        <path id="fBrows" d="M-36 -350 L-10 -342 M10 -342 L36 -350" stroke-width="7"/>
+        <ellipse cx="0" cy="-312" rx="14" ry="11" fill="#e8806a" stroke-width="3"/>
+        <path id="fMC" d="M-18 -286 Q0 -282 18 -286" fill="none"/>
+        <ellipse id="fMO" cx="0" cy="-284" rx="16" ry="12" fill="#5a1414" style="display:none"/>
+        <path id="fMad" d="M-60 -400 l-12 -20 M0 -404 v-24 M60 -400 l12 -20" stroke="#c81e1e" stroke-width="6" style="display:none"/>
+      </g>
+    </g></g>
+    <g id="aStW" style="display:none"><g id="aSt"><g class="face"><g class="bob" style="transform-origin:0px 0px">
+      <g stroke="#141414" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+        <g class="legL" style="transform-origin:-24px -170px"><path d="M-24 -120 L-26 -24" stroke-width="34"/><path d="M-24 -120 L-26 -24" stroke="#e8b08a" stroke-width="24"/>
+          <path d="M-58 -30 Q-58 -2 -34 -2 H8 V-30 Z" fill="#1c1c1c"/><path d="M-56 -8 H8" stroke="#dfe3e8" stroke-width="5"/></g>
+        <g class="legR" style="transform-origin:24px -170px"><path d="M24 -120 L26 -24" stroke-width="34"/><path d="M24 -120 L26 -24" stroke="#e8b08a" stroke-width="24"/>
+          <path d="M-4 -30 V-2 H38 Q62 -2 62 -30 Z" fill="#1c1c1c"/><path d="M-4 -8 H62" stroke="#dfe3e8" stroke-width="5"/></g>
+        <path d="M-58 -182 L58 -182 L60 -112 L4 -112 L0 -140 L-4 -112 L-60 -112 Z" fill="#3d6aa8"/>
+        <path class="tent" style="transform-origin:30px -150px; transform:scaleX(0)" d="M30 -172 L118 -152 L30 -128 Z" fill="#3d6aa8"/><path d="M-56 -290 Q-76 -220 -70 -150" fill="none" stroke-width="30"/><path d="M-56 -290 Q-76 -220 -70 -150" fill="none" stroke="#e8b08a" stroke-width="22"/>
+        <path d="M-56 -292 L-70 -250" stroke-width="40"/><path d="M-56 -292 L-70 -250" stroke="#1c1c1c" stroke-width="32"/>
+        <circle cx="-70" cy="-140" r="14" fill="#e8b08a"/>
+        <path d="M-62 -300 Q-70 -230 -60 -160 L60 -160 Q70 -230 62 -300 Q0 -318 -62 -300 Z" fill="#1c1c1c"/>
+        <path d="M-22 -306 Q0 -290 22 -306" fill="none" stroke-width="4"/><path d="M22 -262 Q30 -250 52 -268 Q34 -254 24 -258 Z" fill="#f4f4f2" stroke="none"/>
+        <rect x="-18" y="-318" width="36" height="22" fill="#e8b08a" stroke-width="3"/>
+        <image href="andrzej.png" x="-76.0" y="-456" width="152" height="166"/>
+        <g fill="none" stroke="#141414" stroke-width="3"></g>
+        
+        <g id="aStArm" style="transform-origin:56px -290px">
+          <path d="M56 -290 L56 -150" stroke-width="30"/><path d="M56 -290 L56 -150" stroke="#e8b08a" stroke-width="22"/>
+          <path d="M56 -292 L58 -246" stroke-width="40"/><path d="M56 -292 L58 -246" stroke="#1c1c1c" stroke-width="32"/>
+          <circle cx="56" cy="-140" r="14" fill="#e8b08a"/></g>
+      </g>
+    <ellipse class="flush" cx="0" cy="-373" rx="58" ry="70" fill="#ff2020" opacity="0"/></g></g></g></g>
+    <g id="rStW" style="display:none"><g id="rSt"><g class="face"><g class="bob" style="transform-origin:0px 0px">
+      <g stroke="#141414" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+        <g class="legL" style="transform-origin:-24px -170px"><path d="M-24 -120 L-26 -24" stroke-width="34"/><path d="M-24 -120 L-26 -24" stroke="#e8b08a" stroke-width="24"/>
+          <path d="M-58 -30 Q-58 -2 -34 -2 H8 V-30 Z" fill="#1c1c1c"/><path d="M-56 -8 H8" stroke="#dfe3e8" stroke-width="5"/></g>
+        <g class="legR" style="transform-origin:24px -170px"><path d="M24 -120 L26 -24" stroke-width="34"/><path d="M24 -120 L26 -24" stroke="#e8b08a" stroke-width="24"/>
+          <path d="M-4 -30 V-2 H38 Q62 -2 62 -30 Z" fill="#1c1c1c"/><path d="M-4 -8 H62" stroke="#dfe3e8" stroke-width="5"/></g>
+        <path d="M-58 -182 L58 -182 L60 -112 L4 -112 L0 -140 L-4 -112 L-60 -112 Z" fill="#4a78b0"/>
+        <path class="tent" style="transform-origin:30px -150px; transform:scaleX(0)" d="M30 -172 L118 -152 L30 -128 Z" fill="#4a78b0"/><path d="M-56 -290 Q-76 -220 -70 -150" fill="none" stroke-width="30"/><path d="M-56 -290 Q-76 -220 -70 -150" fill="none" stroke="#e8b08a" stroke-width="22"/>
+        <path d="M-56 -292 L-70 -250" stroke-width="40"/><path d="M-56 -292 L-70 -250" stroke="#1f2a44" stroke-width="32"/>
+        <circle cx="-70" cy="-140" r="14" fill="#e8b08a"/>
+        <path d="M-62 -300 Q-70 -230 -60 -160 L60 -160 Q70 -230 62 -300 Q0 -318 -62 -300 Z" fill="#1f2a44"/>
+        <path d="M-22 -306 Q0 -290 22 -306" fill="none" stroke-width="4"/><path d="M22 -262 Q30 -250 52 -268 Q34 -254 24 -258 Z" fill="#f4f4f2" stroke="none"/>
+        <rect x="-18" y="-318" width="36" height="22" fill="#e8b08a" stroke-width="3"/>
+        <image href="triwet.png" x="-71.0" y="-450" width="142" height="160"/>
+        <g fill="none" stroke="#141414" stroke-width="3"></g>
+        
+        <g id="rStArm" style="transform-origin:56px -290px">
+          <path d="M56 -290 L56 -150" stroke-width="30"/><path d="M56 -290 L56 -150" stroke="#e8b08a" stroke-width="22"/>
+          <path d="M56 -292 L58 -246" stroke-width="40"/><path d="M56 -292 L58 -246" stroke="#1f2a44" stroke-width="32"/>
+          <circle cx="56" cy="-140" r="14" fill="#e8b08a"/></g>
+      </g>
+    <ellipse class="flush" cx="0" cy="-370" rx="54" ry="66" fill="#ff2020" opacity="0"/></g></g></g></g>
+    <g id="sStW" style="display:none"><g id="sSt"><g class="face"><g class="bob" style="transform-origin:0px 0px">
+      <g stroke="#141414" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+        <g class="legL" style="transform-origin:-24px -170px"><path d="M-24 -176 L-26 -24" stroke-width="44"/><path d="M-24 -176 L-26 -24" stroke="#8a7a5a" stroke-width="34"/><rect x="-46" y="-120" width="18" height="26" fill="#8a7a5a" stroke-width="3"/>
+          <path d="M-58 -30 Q-58 -2 -34 -2 H8 V-30 Z" fill="#1c1c1c"/><path d="M-56 -8 H8" stroke="#dfe3e8" stroke-width="5"/></g>
+        <g class="legR" style="transform-origin:24px -170px"><path d="M24 -176 L26 -24" stroke-width="44"/><path d="M24 -176 L26 -24" stroke="#8a7a5a" stroke-width="34"/>
+          <path d="M-4 -30 V-2 H38 Q62 -2 62 -30 Z" fill="#1c1c1c"/><path d="M-4 -8 H62" stroke="#dfe3e8" stroke-width="5"/></g>
+        <path d="M-58 -182 L58 -182 L60 -112 L4 -112 L0 -140 L-4 -112 L-60 -112 Z" fill="#8a7a5a"/>
+        <path class="tent" style="transform-origin:30px -150px; transform:scaleX(0)" d="M30 -172 L118 -152 L30 -128 Z" fill="#8a7a5a"/><path d="M-56 -290 Q-76 -220 -70 -150" fill="none" stroke-width="30"/><path d="M-56 -290 Q-76 -220 -70 -150" fill="none" stroke="#e8b08a" stroke-width="22"/>
+        <path d="M-56 -292 L-70 -250" stroke-width="40"/><path d="M-56 -292 L-70 -250" stroke="#c81e2a" stroke-width="32"/>
+        <circle cx="-70" cy="-140" r="14" fill="#e8b08a"/>
+        <path d="M-62 -300 Q-70 -230 -60 -160 L60 -160 Q70 -230 62 -300 Q0 -318 -62 -300 Z" fill="#c81e2a"/>
+        <path d="M-22 -306 Q0 -290 22 -306" fill="none" stroke-width="4"/><path d="M22 -262 Q30 -250 52 -268 Q34 -254 24 -258 Z" fill="#f4f4f2" stroke="none"/>
+        <rect x="-18" y="-318" width="36" height="22" fill="#e8b08a" stroke-width="3"/>
+        <image href="syket.png" x="-75.0" y="-435" width="150" height="145"/>
+        <g fill="none" stroke="#141414" stroke-width="3"></g>
+        
+        <g id="sStArm" style="transform-origin:56px -290px">
+          <path d="M56 -290 L56 -150" stroke-width="30"/><path d="M56 -290 L56 -150" stroke="#e8b08a" stroke-width="22"/>
+          <path d="M56 -292 L58 -246" stroke-width="40"/><path d="M56 -292 L58 -246" stroke="#c81e2a" stroke-width="32"/>
+          <circle cx="56" cy="-140" r="14" fill="#e8b08a"/></g>
+      </g>
+    <ellipse class="flush" cx="0" cy="-362" rx="64" ry="62" fill="#ff2020" opacity="0"/></g></g></g></g>    <g id="table" style="display:none" stroke="#141414" stroke-width="5" stroke-linejoin="round">
+      <g id="tLegs"><rect class="tl" x="-100" y="0" width="14" height="120" fill="#7a5230" style="transform-origin:-93px 0px"/><rect class="tl" x="-66" y="0" width="14" height="120" fill="#6b4424" style="transform-origin:-59px 0px"/>
+        <rect class="tl" x="52" y="0" width="14" height="120" fill="#6b4424" style="transform-origin:59px 0px"/><rect class="tl" x="86" y="0" width="14" height="120" fill="#7a5230" style="transform-origin:93px 0px"/></g>
+      <rect id="tTop" x="-115" y="-18" width="230" height="22" fill="#a8763e"/>
+    </g>
+    <g id="shaft" style="display:none" stroke="#141414" stroke-width="4">
+      <g id="shL"><rect x="-90" y="-11" width="90" height="22" rx="4" fill="#8a9096"/><path d="M-90 -4 H0" stroke="#dfe3e8" stroke-width="3"/><path d="M-90 -11 v22 M-80 -11 v22 M-70 -11 v22" stroke-width="3"/></g>
+      <g id="shR"><rect x="0" y="-11" width="96" height="22" rx="4" fill="#8a9096"/><path d="M0 -4 H96" stroke="#dfe3e8" stroke-width="3"/><path d="M96 -11 v22 M86 -11 v22 M76 -11 v22" stroke-width="3"/></g>
+      <rect id="seam" x="-6" y="-13" width="12" height="26" fill="#3a3a3a" style="display:none"/>
+    </g>
+    <g id="holder" style="display:none" stroke="#141414" stroke-linecap="round">
+      <path id="hBody" d="" stroke-width="12" stroke="#c81e1e"/><path id="hRod" d="" stroke-width="4" stroke="#9aa3ad"/>
+    </g>
+    <circle id="arc" r="0" fill="#e8f6ff" opacity="0.95"/>
+    <g id="wmask" style="display:none" stroke="#141414" stroke-width="4"><rect x="-58" y="-70" width="116" height="140" rx="26" fill="#2b3a2b"/><rect x="-36" y="-26" width="72" height="26" fill="#0a3a2a"/></g>
+    <g id="phone" style="display:none" stroke="#141414" stroke-width="3"><rect x="-16" y="-28" width="32" height="56" rx="5" fill="#1c1c1c"/><circle id="recD" cx="0" cy="-36" r="7" fill="#ff2a2a" stroke="none"/></g>
+
+    <g id="fx"></g>
+   </g>
+    <g id="bubbles"></g>
+    <g id="pows"></g>
+  </g>
+  <rect id="flash" width="1600" height="900" fill="#fff" opacity="0" pointer-events="none"/>
+  <rect id="fade" width="1600" height="900" fill="#000" opacity="0" pointer-events="none"/>
+</svg>
+
+<div class="overlay" id="startScreen">
+  <h1>NAPRAWA BIZONA</h1>
+  <p>odcinek 13</p>
+  <button class="btn" id="playBtn" autofocus>▶ Odtwórz</button>
+</div>
+<div class="overlay" id="endScreen" hidden>
+  <h1>KONIEC</h1>
+  <button class="btn" id="againBtn">↺ Od nowa</button>
+</div>
+</div>
+
+<script src="intro2.js"></script>
+<script>
+  const $ = id => document.getElementById(id);
+  const NS = "http://www.w3.org/2000/svg";
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+  // ---------- dzwiek (generowany, bez plikow) ----------
+  let actx = null;
+  function ac(){
+    if (!actx) actx = new (window.AudioContext || window.webkitAudioContext)();
+    if (actx.state === "suspended") actx.resume();
+    return actx;
+  }
+  function tone(freq, dur, type = "square", vol = 0.05, glideTo){
+    const a = ac(), t = a.currentTime, o = a.createOscillator(), g = a.createGain();
+    o.type = type; o.frequency.setValueAtTime(freq, t);
+    if (glideTo) o.frequency.exponentialRampToValueAtTime(glideTo, t + dur);
+    g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(a.destination); o.start(t); o.stop(t + dur + 0.02);
+  }
+  function noise(dur, { freq = 1000, q = 1, vol = 0.3, type = "bandpass", sweepTo } = {}){
+    const a = ac(), t = a.currentTime, len = Math.floor(a.sampleRate * dur);
+    const buf = a.createBuffer(1, len, a.sampleRate), d = buf.getChannelData(0);
+    for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+    const s = a.createBufferSource(); s.buffer = buf;
+    const f = a.createBiquadFilter(); f.type = type; f.Q.value = q; f.frequency.setValueAtTime(freq, t);
+    if (sweepTo) f.frequency.exponentialRampToValueAtTime(sweepTo, t + dur);
+    const g = a.createGain(); g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    s.connect(f); f.connect(g); g.connect(a.destination); s.start(t); s.stop(t + dur);
+  }
+  function engine(){
+    const a = ac(), o = a.createOscillator(), f = a.createBiquadFilter(), g = a.createGain();
+    o.type = "sawtooth"; o.frequency.value = 45; f.type = "lowpass"; f.frequency.value = 380; g.gain.value = 0.0001;
+    o.connect(f); f.connect(g); g.connect(a.destination); o.start();
+    return {
+      set(freq, vol, ramp = 0.3){ const t = a.currentTime; o.frequency.linearRampToValueAtTime(freq, t + ramp); g.gain.linearRampToValueAtTime(vol, t + ramp); },
+      stop(ramp = 0.4){ const t = a.currentTime; g.gain.linearRampToValueAtTime(0.0001, t + ramp); o.stop(t + ramp + 0.05); }
+    };
+  }
+  const sfx = {
+    beep(){ tone(1750, 0.07, "square", 0.04); },
+    dig(){ noise(0.18, { freq: 500, type: "lowpass", vol: 0.45 }); noise(0.1, { freq: 3000, q: 3, vol: 0.08 }); },
+    thud(){ tone(110, 0.3, "sine", 0.5, 40); noise(0.2, { freq: 300, type: "lowpass", vol: 0.35 }); },
+    clank(){ tone(620 + Math.random() * 200, 0.25, "triangle", 0.08, 480); noise(0.08, { freq: 4000, q: 2, vol: 0.12 }); },
+    door(){ noise(0.12, { freq: 600, type: "lowpass", vol: 0.4 }); tone(95, 0.12, "square", 0.08, 60); },
+    brake(){ noise(0.5, { freq: 1400, q: 1.5, vol: 0.14 }); },
+    screech(){ noise(1.6, { freq: 2700, q: 9, vol: 0.4, sweepTo: 1700 }); tone(1900, 1.5, "sawtooth", 0.025, 1250); },
+    spit(){ noise(0.16, { freq: 2500, q: 1.2, vol: 0.35, sweepTo: 900 }); },
+    ding(){ tone(1320, 0.5, "sine", 0.1); },
+    dial(){ tone(425, 0.9, "sine", 0.08); },
+    boom(){
+      noise(2.6, { freq: 900, type: "lowpass", vol: 0.9, sweepTo: 80 });
+      tone(90, 1.8, "sine", 0.7, 25); tone(55, 2.2, "sawtooth", 0.15, 20);
+    },
+    voice(pitch){ tone(pitch * (0.8 + Math.random() * 0.45), 0.07, "square", 0.045); }
+  };
+
+  // ---------- animacja ----------
+  const anim = (el, frames, opts) => el.animate(frames, Object.assign({ fill: "forwards" }, opts)).finished.catch(() => {});
+  const busT = (x, y = 494) => `translate(${x}px,${y}px)`;
+
+  function puff(x, y, { r = 26, dur = 1100, dx = 0, dy = -80, color = "#dcdcdc" } = {}){
+    const c = document.createElementNS(NS, "circle");
+    c.setAttribute("cx", x); c.setAttribute("cy", y); c.setAttribute("r", r);
+    c.setAttribute("fill", color); c.setAttribute("stroke", "#141414"); c.setAttribute("stroke-width", "4");
+    c.style.transformOrigin = `${x}px ${y}px`;
+    $("fx").append(c);
+    c.animate([{ transform: "translate(0,0) scale(.3)", opacity: 1 },
+               { transform: `translate(${dx}px,${dy}px) scale(1.6)`, opacity: 0 }],
+              { duration: dur, easing: "ease-out", fill: "forwards" })
+     .finished.then(() => c.remove()).catch(() => {});
+  }
+  // gruda ziemi lecaca po luku
+  function clod(x, y, dx, h){
+    const c = document.createElementNS(NS, "circle");
+    c.setAttribute("cx", x); c.setAttribute("cy", y); c.setAttribute("r", 9 + Math.random() * 8);
+    c.setAttribute("fill", "#6b5230"); c.setAttribute("stroke", "#141414"); c.setAttribute("stroke-width", "3");
+    $("fx").append(c);
+    c.animate([{ transform: "translate(0,0)" }, { transform: `translate(${dx / 2}px,${-h}px)` }, { transform: `translate(${dx}px,20px)`, opacity: 0.2 }],
+              { duration: 700, easing: "ease-out", fill: "forwards" })
+     .finished.then(() => c.remove()).catch(() => {});
+  }
+  function shake(power = 14, dur = 420){
+    return anim($("world"), [
+      { transform: "translate(0,0)" }, { transform: `translate(${-power}px,${power * .6}px)` }, { transform: `translate(${power}px,${-power * .5}px)` },
+      { transform: `translate(${-power * .6}px,${power * .3}px)` }, { transform: `translate(${power * .4}px,0)` }, { transform: "translate(0,0)" }], { duration: dur });
+  }
+  async function fadeTo(fn){
+    await anim($("fade"), [{ opacity: 0 }, { opacity: 1 }], { duration: 450 });
+    fn();
+    await sleep(150);
+    await anim($("fade"), [{ opacity: 1 }, { opacity: 0 }], { duration: 450 });
+  }
+  function scene(id){ ["scYard"].forEach(s => $(s).style.display = s === id ? "" : "none"); }
+
+  // ---------- aktorzy ----------
+  // pozycja stop (x, y), skala; img = postac-obrazek (saperzy), head = wysokosc glowy nad stopami (do dymka)
+  const who = {
+    a: { el: "aSt", img: true, x: 0, y: 0, s: 1, head: 300, pitch: 170, vPitch: 0.8, vRate: 1.5 },
+    r: { el: "rSt", img: true, x: 0, y: 0, s: 1, head: 300, pitch: 210, vPitch: 0.95, vRate: 1.5 },
+    s: { el: "sSt", img: true, x: 0, y: 0, s: 1, head: 300, pitch: 90, vPitch: 0.2, vRate: 1.45 },
+    u: { el: "ubij", x: 0, y: 0, s: 1, head: 300, pitch: 150, vPitch: 0.55, vRate: 1.4, mouthO: "uMouthO", mouthC: "uMouthC" },
+    y: { el: "syn", x: 0, y: 0, s: 1, head: 300, pitch: 230, vPitch: 1.2, vRate: 1.5, mouthO: "synMouthO", mouthC: "synMouthC" },
+    z: { el: "zlom", img: true, x: 0, y: 0, s: 1, head: 200, pitch: 120, vPitch: 0.3, vRate: 1.2 },
+    f: { el: "gruby", x: 0, y: 0, s: 1, head: 260, pitch: 330, vPitch: 1.7, vRate: 1.65, mouthO: "fMO", mouthC: "fMC" },
+    c: { el: "chudy", x: 0, y: 0, s: 1, head: 420, pitch: 100, vPitch: 0.45, vRate: 1.45, mouthO: "cMO", mouthC: "cMC" }
+  };
+
+  const actT = (w, x = w.x, y = w.y) => `translate(${x}px,${y}px) scale(${w.s})`;
+  function place(k, x, y = who[k].y){ const w = who[k]; w.x = x; w.y = y; $(w.el).style.transform = actT(w); $(w.el).style.display = ""; }
+  function hide(k){ $(who[k].el).style.display = "none"; }
+  // saper w busie = jego glowa w oknie
+  function inBus(k, on){ $(k === "s1" ? "busS1" : "busS2").style.display = on ? "" : "none"; if (on) hide(k); }
+
+  // chod: saperzy bujaja sie calym obrazkiem, Mirek macha konczynami
+  const gaits = {};
+  function gait(k, on, step = 0.4){
+    (gaits[k] || []).forEach(a => a.cancel()); gaits[k] = [];
+    if (!on) return;
+    const o = { duration: step * 1000, direction: "alternate", iterations: Infinity, easing: "ease-in-out" };
+    if (who[k].img){
+      gaits[k].push($(who[k].el).querySelector(".bob").animate(
+        [{ transform: "translateY(0) rotate(-3deg)" }, { transform: "translateY(-14px) rotate(3deg)" }], o));
+    } else {
+      const swing = (id, a) => $(id) && gaits[k].push($(id).animate([{ transform: `rotate(${a}deg)` }, { transform: `rotate(${-a}deg)` }], o));
+      swing("zLegR", -24);
+    }
+  }
+  async function walkTo(k, x, dur, step){
+    const w = who[k], from = actT(w);
+    gait(k, true, step);
+    await anim($(w.el), [{ transform: from }, { transform: actT(w, x) }], { duration: dur, easing: "linear" });
+    w.x = x; gait(k, false);
+    $(w.el).style.transform = actT(w);
+  }
+  async function hop(k, h = 60, dur = 380){
+    const w = who[k];
+    await anim($(w.el), [{ transform: actT(w) }, { transform: actT(w, w.x, w.y - h) }, { transform: actT(w) }], { duration: dur, easing: "ease-out" });
+  }
+
+  // ---------- dymki (jak w odc. 1) ----------
+  function makeBubble(tipX, tipY, lines, shift = 0){
+    const g = document.createElementNS(NS, "g");
+    const tail = document.createElementNS(NS, "path");
+    const rect = document.createElementNS(NS, "rect");
+    const patch = document.createElementNS(NS, "path");
+    const text = document.createElementNS(NS, "text");
+    text.setAttribute("font-size", "40"); text.setAttribute("font-weight", "700");
+    text.setAttribute("font-family", '"Comic Sans MS","Chalkboard SE",sans-serif'); text.setAttribute("fill", "#111");
+    g.append(tail, rect, patch, text);
+    g.style.transform = `translate(${tipX}px,${tipY}px) scale(0)`;
+    $("bubbles").append(g);
+
+    const spans = lines.map(() => { const t = document.createElementNS(NS, "tspan"); text.append(t); return t; });
+    let maxW = 0;
+    spans.forEach((s, i) => { s.textContent = lines[i]; maxW = Math.max(maxW, s.getComputedTextLength()); });
+    const lh = 50, padX = 34, padY = 26;
+    const W = maxW + padX * 2, H = lines.length * lh + padY * 2 - 10;
+    let left = Math.max(20, Math.min(1580 - W, tipX + shift - W / 2));
+    const bx = left - tipX, by = -38 - H;
+    const tb = Math.min(Math.max(0, bx + 34), bx + W - 54);
+    Object.entries({ x: bx, y: by, width: W, height: H, rx: 26, fill: "#fff", stroke: "#111", "stroke-width": 5 })
+      .forEach(([k, v]) => rect.setAttribute(k, v));
+    tail.setAttribute("d", `M${tb - 18} -46 L0 0 L${tb + 22} -46 Z`);
+    tail.setAttribute("fill", "#fff"); tail.setAttribute("stroke", "#111"); tail.setAttribute("stroke-width", "5");
+    patch.setAttribute("d", `M${tb - 13} -38 L${tb + 17} -38`); patch.setAttribute("stroke", "#fff"); patch.setAttribute("stroke-width", "7");
+    spans.forEach((s, i) => { s.setAttribute("x", bx + padX); s.setAttribute("y", by + padY + 34 + i * lh); s.textContent = ""; });
+    return { g, spans, lines, tipX, tipY };
+  }
+
+  // ---------- glos (synteza mowy przegladarki, fallback: bla-bla) ----------
+  const tts = window.speechSynthesis;
+  let plVoice = null;
+  function pickVoice(){
+    if (!tts) return;
+    const vs = tts.getVoices().filter(v => /^pl/i.test(v.lang));
+    plVoice = vs.find(v => /zosia|ewa|krzysztof|google/i.test(v.name)) || vs[0] || null;
+  }
+  if (tts){ pickVoice(); tts.addEventListener?.("voiceschanged", pickVoice); }
+  function unlockSpeech(){
+    if (!tts) return;
+    tts.cancel(); pickVoice();
+    const u = new SpeechSynthesisUtterance(" "); u.volume = 0; tts.speak(u);
+  }
+  // nagrane kwestie (kierowca): odtwarzane wolniej i bez zachowania wysokosci = bardzo niski, gruby glos
+  const CLIPS = {};
+
+  const DEEP = 0.55;
+  const clipEls = {};
+  function clipFor(text){
+    const src = CLIPS[text];
+    if (!src) return null;
+    if (!clipEls[src]){
+      const a = new Audio(src); a.preload = "auto";
+      a.preservesPitch = false; a.mozPreservesPitch = false; a.webkitPreservesPitch = false;
+      clipEls[src] = a;
+    }
+    return clipEls[src];
+  }
+  function unlockClips(){
+    Object.keys(CLIPS).forEach(t => { const a = clipFor(t); a.muted = true;
+      a.play().then(() => { a.pause(); a.currentTime = 0; a.muted = false; }).catch(() => { a.muted = false; }); });
+  }
+  function playClip(a){
+    return new Promise(res => {
+      a.currentTime = 0; a.playbackRate = DEEP;
+      a.preservesPitch = false; a.mozPreservesPitch = false; a.webkitPreservesPitch = false;
+      const guard = setTimeout(res, 8000);
+      a.onended = a.onerror = () => { clearTimeout(guard); res(); };
+      a.play().catch(() => { clearTimeout(guard); res(); });
+    });
+  }
+  function speak(text, w, { pitch, rate } = {}){
+    const clip = clipFor(text);
+    if (clip) return playClip(clip);
+    if (!tts || !plVoice) return null;
+    return new Promise(res => {
+      const u = new SpeechSynthesisUtterance(text);
+      u.voice = plVoice; u.lang = plVoice.lang;
+      u.pitch = pitch ?? w.vPitch; u.rate = rate ?? w.vRate;
+      const guard = setTimeout(res, 800 + text.length * 140);
+      u.onend = u.onerror = () => { clearTimeout(guard); res(); };
+      tts.speak(u);
+    });
+  }
+
+  // mowienie: saperzy podskakuja w rytm, rysowani ruszaja ustami
+  function talking(k, on){
+    const w = who[k];
+    if (w.img){
+      if (on) w._talk = $(w.el).querySelector(".bob").animate(
+        [{ transform: "translateY(0) scaleY(1)" }, { transform: "translateY(-8px) scaleY(1.02)" }],
+        { duration: 160, direction: "alternate", iterations: Infinity });
+      else if (w._talk){ w._talk.cancel(); w._talk = null; }
+      return;
+    }
+    clearInterval(w._talk);
+    let open = false;
+    if (on) w._talk = setInterval(() => {
+      open = !open;
+      $(w.mouthO).style.display = open ? "" : "none";
+      $(w.mouthC).style.display = open ? "none" : "";
+    }, 110);
+    else { $(w.mouthO).style.display = "none"; $(w.mouthC).style.display = ""; }
+  }
+
+  async function say(k, lines, shift = 0, { instant = false, pitch, rate } = {}){
+    const w = who[k], tx = w.x, ty = w.y - w.head;
+    const b = makeBubble(tx, ty, lines, shift);
+    await anim(b.g, [{ transform: `translate(${tx}px,${ty}px) scale(0)` }, { transform: `translate(${tx}px,${ty}px) scale(1)` }],
+               { duration: 200, easing: "cubic-bezier(.3,1.6,.6,1)" });
+    if (instant){ b.spans.forEach((s, i) => s.textContent = lines[i]); return b; }
+    talking(k, true);
+    const spoken = speak(lines.join(" "), w, { pitch, rate });
+    for (let i = 0; i < lines.length; i++){
+      for (const ch of lines[i]){
+        b.spans[i].textContent += ch;
+        if (ch !== " " && !spoken) sfx.voice(w.pitch);
+        await sleep(spoken ? 45 : 58);
+      }
+    }
+    if (spoken) await spoken;
+    talking(k, false);
+    return b;
+  }
+  async function unsay(b){
+    await anim(b.g, [{ transform: `translate(${b.tipX}px,${b.tipY}px) scale(1)` }, { transform: `translate(${b.tipX}px,${b.tipY}px) scale(0)` }], { duration: 150 });
+    b.g.remove();
+  }
+  async function line(k, lines, hold = 1600, shift = 0, opts){
+    const b = await say(k, lines, shift, opts);
+    await sleep(hold); await unsay(b); await sleep(250);
+  }
+
+  // ---------- rekwizyty ----------
+  let wheelAnims = [];
+  function spinWheels(dir, period = 0.5){
+    wheelAnims.forEach(a => a.cancel()); wheelAnims = [];
+    if (!dir) return;
+    document.querySelectorAll("#bus .bw").forEach(w => wheelAnims.push(
+      w.animate([{ transform: "rotate(0deg)" }, { transform: `rotate(${dir * 360}deg)` }],
+                { duration: period * 1000, iterations: Infinity })));
+  }
+  let busX = 1750;
+  async function busDrive(x, dur, easing = "cubic-bezier(.2,.7,.35,1)", y = 494){
+    const from = busT(busX, y); busX = x;
+    await anim($("bus"), [{ transform: from }, { transform: busT(x, y) }], { duration: dur, easing });
+  }
+  function exhaust(y = 494){ return setInterval(() => puff(busX + 600, y + 250, { r: 18, dur: 1000, dx: 50, dy: -40, color: "#9a9a9a" }), 140); }
+
+  // wykrywacz: pierscienie przy talerzu wykrywacza + pisk, coraz szybciej
+  async function detector(times){
+    const hx = who.s2.x + 86, hy = who.s2.y - 26;
+    for (let i = 0; i < times; i++){
+      sfx.beep();
+      const c = document.createElementNS(NS, "circle");
+      c.setAttribute("cx", hx); c.setAttribute("cy", hy); c.setAttribute("r", 20);
+      c.setAttribute("fill", "none"); c.setAttribute("stroke", "#ffd23f"); c.setAttribute("stroke-width", "6");
+      c.style.transformOrigin = `${hx}px ${hy}px`;
+      $("detFx").append(c);
+      c.animate([{ transform: "scale(.4)", opacity: 1 }, { transform: "scale(3)", opacity: 0 }], { duration: 600, fill: "forwards" })
+       .finished.then(() => c.remove()).catch(() => {});
+      await sleep(Math.max(90, 520 - i * 38));
+    }
+  }
+
+  // papierosy: czubek wzgledem stop postaci
+  const CIG_TIP = { s1: [32, -252], s2: [16, -285], m: [36, -270] };
+  let cigSmoke = null;
+  function smokeCigs(on, ks = ["s1", "s2"]){
+    clearInterval(cigSmoke);
+    ["s1", "s2", "m"].forEach(k => $(who[k].el).querySelector(".cig").style.display = on && ks.includes(k) ? "" : "none");
+    if (!on) return;
+    cigSmoke = setInterval(() => ks.forEach(k => {
+      const [dx, dy] = CIG_TIP[k];
+      puff(who[k].x + dx, who[k].y + dy - 6, { r: 7, dur: 1600, dx: 10 + Math.random() * 20, dy: -90, color: "#cfcfcf" });
+    }), 380);
+  }
+  function burp(){ const a = ac(), t = a.currentTime;
+    tone(95 + Math.random() * 30, 0.55, "sawtooth", 0.12, 55); noise(0.45, { freq: 260, q: 4, vol: 0.25 }); }
+  function gulp(){ tone(180, 0.09, "sine", 0.15, 90); }
+  // przesuniecie puszki do ust [dx, dy, obrot]: wieczko przy ustach, dno do gory
+  const SIP = { s1: [20, -212, 110], s2: [-40, -194, -110], m: [-21, -186, -110] };
+  async function drink(ks){
+    const up = k => `translate(${SIP[k][0]}px,${SIP[k][1]}px) rotate(${SIP[k][2]}deg)`;
+    const rest = "translate(0,0) rotate(0deg)";
+    await Promise.all(ks.map(k => anim($(who[k].el).querySelector(".can"), [{ transform: rest }, { transform: up(k) }], { duration: 450, easing: "ease-out" })));
+    for (let i = 0; i < 4; i++){ gulp(); await sleep(260); }
+    await Promise.all(ks.map(k => anim($(who[k].el).querySelector(".can"), [{ transform: up(k) }, { transform: rest }], { duration: 400 })));
+  }
+  function lighter(){ noise(0.06, { freq: 5000, q: 2, vol: 0.15 }); tone(300, 0.2, "sine", 0.02); }
+
+  const tween = (ms, f, ease = t => t) => new Promise(res => { const t0 = performance.now();
+    const st = now => { const k = Math.min(1, (now - t0) / ms); f(ease(k)); if (k < 1) requestAnimationFrame(st); else res(); }; requestAnimationFrame(st); });
+  const easeOut = t => 1 - (1 - t) * (1 - t), easeIO = t => t < 0.5 ? 2 * t * t : 1 - 2 * (1 - t) * (1 - t);
+
+  // ---------- kamera (zblizenia) ----------
+  const cam = { x: 800, y: 450, k: 1 };
+  const camT = (x, y, k) => `translate(${800 - k * x}px,${450 - k * y}px) scale(${k})`;
+  function camSet(x = 800, y = 450, k = 1){ Object.assign(cam, { x, y, k }); $("cam").getAnimations().forEach(a => a.cancel()); $("cam").style.transform = camT(x, y, k); }
+  async function camTo(x, y, k, ms){ const f = camT(cam.x, cam.y, cam.k); Object.assign(cam, { x, y, k });
+    await anim($("cam"), [{ transform: f }, { transform: camT(x, y, k) }], { duration: ms, easing: "ease-in-out" }); }
+  async function card(txt, ms = 2600){
+    $("cardTxt").textContent = txt; $("card").style.display = "";
+    await anim($("card"), [{ opacity: 0 }, { opacity: 1 }], { duration: 400 });
+    await sleep(ms);
+    await anim($("card"), [{ opacity: 1 }, { opacity: 0 }], { duration: 400 });
+    $("card").style.display = "none";
+  }
+
+  // ---------- dzwieki ----------
+  function twoStroke(base = 90){
+    const a = ac(), o = a.createOscillator(), lfo = a.createOscillator(), lg = a.createGain(), f = a.createBiquadFilter(), g = a.createGain(), am = a.createGain();
+    o.type = "sawtooth"; o.frequency.value = base; lfo.frequency.value = 30; lg.gain.value = 0.5; am.gain.value = 0.5;
+    f.type = "lowpass"; f.frequency.value = 1200; g.gain.value = 0.0001;
+    lfo.connect(lg); lg.connect(am.gain); o.connect(f); f.connect(am); am.connect(g); g.connect(a.destination); o.start(); lfo.start();
+    return { set(fr, v, r = 0.2){ const t = a.currentTime; o.frequency.linearRampToValueAtTime(fr, t + r); lfo.frequency.linearRampToValueAtTime(fr / 3, t + r); g.gain.linearRampToValueAtTime(v, t + r); },
+             stop(r = 0.3){ const t = a.currentTime; g.gain.linearRampToValueAtTime(0.0001, t + r); o.stop(t + r + 0.05); lfo.stop(t + r + 0.05); } };
+  }
+  function screech(ms){ const d = ms / 1000; noise(d, { freq: 2900, q: 14, vol: 0.45, sweepTo: 2100 }); tone(2200, d, "sawtooth", 0.045, 1600); tone(1900, d, "square", 0.025, 1450); }
+  const chopSnd = () => { noise(0.09, { freq: 700, q: 1.5, vol: 0.7 }); tone(150, 0.14, "sine", 0.3, 70); };
+  const scrape = () => noise(0.22, { freq: 3800, q: 3, vol: 0.18, sweepTo: 2400 });
+  const clang = () => { tone(1400, 0.6, "triangle", 0.09); tone(2130, 0.45, "triangle", 0.05); tone(3170, 0.3, "sine", 0.03); };
+  const plop = () => { tone(260, 0.16, "sine", 0.25, 900); noise(0.12, { freq: 900, q: 2, vol: 0.25 }); };
+  const knock = () => { tone(420, 0.07, "sine", 0.25, 200); noise(0.04, { freq: 1500, q: 2, vol: 0.2 }); };
+  const kickSnd = () => { noise(0.12, { freq: 300, q: 1, vol: 0.5 }); tone(90, 0.15, "sine", 0.2, 50); };
+  function sputter(n){ for (let i = 0; i < n; i++) setTimeout(() => { tone(60 + Math.random() * 20, 0.07, "sawtooth", 0.08, 40); noise(0.05, { freq: 400, q: 1, vol: 0.2 }); }, i * 110); }
+  const bell = () => { tone(2700, 0.5, "sine", 0.08); tone(3400, 0.35, "sine", 0.04); };
+  const cough = () => [0, 260, 520].forEach(t => setTimeout(() => noise(0.16, { freq: 500, q: 1, vol: 0.35 }), t));
+  const wrench = () => [0, 140, 280, 420].forEach(t => setTimeout(() => { tone(1800, 0.05, "square", 0.03); noise(0.04, { freq: 5000, q: 3, vol: 0.12 }); }, t));
+  const sparkle = () => [0, 90, 180].forEach((t, i) => setTimeout(() => tone(1600 + i * 500, 0.25, "sine", 0.05), t));
+
+  // ---------- drobiny ----------
+  function bits(x, y, n, { color = "#dcb47c", dir = 0, spread = 160, up = 160, size = 7, curl = false } = {}){
+    for (let i = 0; i < n; i++){
+      const p = document.createElementNS(NS, "path");
+      const s = size * (0.6 + Math.random() * 0.8);
+      if (curl){ p.setAttribute("d", `M0 0 q${s} ${-s} 0 ${-s * 1.8} q${-s} ${-s * 0.8} ${-s * 1.4} ${s * 0.4}`); p.setAttribute("fill", "none"); p.setAttribute("stroke", color); p.setAttribute("stroke-width", 2.5); }
+      else { p.setAttribute("d", `M${-s} ${-s / 2} L${s} ${-s / 3} L${s * 0.6} ${s / 2} L${-s * 0.8} ${s / 3} Z`); p.setAttribute("fill", color); p.setAttribute("stroke", "#141414"); p.setAttribute("stroke-width", 1.5); }
+      $("fx").append(p);
+      const dx = dir * (30 + Math.random() * spread) + (dir ? 0 : (Math.random() - 0.5) * spread * 2), dy = -(40 + Math.random() * up);
+      p.animate([{ transform: `translate(${x}px,${y}px) rotate(0deg)`, opacity: 1 },
+                 { transform: `translate(${x + dx * 0.6}px,${y + dy}px) rotate(${Math.random() * 400}deg)`, opacity: 1, offset: 0.45 },
+                 { transform: `translate(${x + dx}px,${y + 60 + Math.random() * 40}px) rotate(${Math.random() * 720}deg)`, opacity: 0 }],
+                { duration: 800 + Math.random() * 500, fill: "forwards", easing: "ease-out" }).finished.then(() => p.remove()).catch(() => {});
+    }
+  }
+
+
+  // ---------- komiksowe napisy ----------
+  async function pow(txt, x, y, { size = 110, col = "#ffd23f", rot = -8, hold = 700 } = {}){
+    const t = document.createElementNS(NS, "text");
+    t.textContent = txt; t.setAttribute("text-anchor", "middle");
+    Object.entries({ "font-family": "Impact, 'Arial Black', sans-serif", "font-size": size, fill: col, stroke: "#141414", "stroke-width": 8, "paint-order": "stroke" }).forEach(([k, v]) => t.setAttribute(k, v));
+    $("pows").append(t);
+    t.animate([{ transform: `translate(${x}px,${y}px) rotate(${rot}deg) scale(0.2)` }, { transform: `translate(${x}px,${y}px) rotate(${rot}deg) scale(1.15)`, offset: 0.15 },
+               { transform: `translate(${x}px,${y}px) rotate(${rot}deg) scale(1)`, offset: 0.25 }, { transform: `translate(${x}px,${y}px) rotate(${rot}deg) scale(1)`, opacity: 1, offset: 0.8 },
+               { transform: `translate(${x}px,${y}px) rotate(${rot}deg) scale(1.1)`, opacity: 0 }], { duration: hold + 500, fill: "forwards" }).finished.then(() => t.remove()).catch(() => {});
+  }
+  const brap = () => { tone(70, 0.9, "sawtooth", 0.12, 160); noise(0.6, { freq: 400, q: 1, vol: 0.25 }); };
+  const sting = () => [0, 260, 520].forEach((t, i) => setTimeout(() => { tone([196, 185, 147][i], i === 2 ? 1.2 : 0.3, "sawtooth", 0.08); tone([98, 92, 73][i], i === 2 ? 1.2 : 0.3, "square", 0.05); }, t));
+  const ding = () => { tone(2400, 0.4, "sine", 0.07); tone(3600, 0.3, "sine", 0.04); };
+  const plask = () => { noise(0.35, { freq: 500, q: 0.8, vol: 0.7 }); tone(90, 0.3, "sine", 0.3, 40); };
+  const boing = () => tone(180, 0.6, "sine", 0.18, 700);
+  const pufS = () => { noise(0.2, { freq: 900, q: 1, vol: 0.4 }); tone(300, 0.25, "sine", 0.2, 900); };
+  const whoosh = (d = 1.5) => noise(d, { freq: 600, q: 0.7, vol: 0.25, sweepTo: 200 });
+
+  // ---------- postacie ----------
+  const P = {};   // id -> {x, y, s, f, r}
+  function put(id, x, y, s, f = 1, r = 0){ P[id] = { x, y, s, f, r }; draw(id); $(id + "W") ? $(id + "W").style.display = "" : 0; }
+  function draw(id){ const p = P[id]; const el = $(id + "W") || $(id);
+    el.getAnimations().forEach(a => a.cancel());
+    el.style.transform = `translate(${p.x}px,${p.y}px) rotate(${p.r}deg) scale(${p.s})`; $(id).querySelector(".face").style.transform = `scaleX(${p.f})`; }
+  function hideP(id){ $(id + "W").style.display = "none"; }
+  async function walk(id, x, ms){
+    const g = $(id), legs = [["legL", 18], ["legR", -18]].map(([c, a]) => g.querySelector("." + c).animate([{ transform: `rotate(${a}deg)` }, { transform: `rotate(${-a}deg)` }], { duration: 300, direction: "alternate", iterations: Infinity }));
+    const bob = g.querySelector(".bob").animate([{ transform: "translateY(0)" }, { transform: "translateY(-10px)" }], { duration: 150, direction: "alternate", iterations: Infinity });
+    const x0 = P[id].x; await tween(ms, k => { P[id].x = x0 + (x - x0) * k; draw(id); });
+    legs.forEach(a => a.cancel()); bob.cancel();
+  }
+  const armTo = (id, deg, ms = 250) => anim($(id + "Arm"), [{ transform: getComputedStyle($(id + "Arm")).transform.replace("none", "rotate(0deg)") }, { transform: `rotate(${deg}deg)` }], { duration: ms, easing: "ease-out" });
+  // ustaw mowce: k = a/r/g1/g2, el = id postaci, glowa nad (x, y)
+  function spk(k, el, x, y, head){ Object.assign(who[k], { el, x, y, head }); if (k[0] === "g"){ who[k].mouthO = el + "MO"; who[k].mouthC = el + "MC"; } }
+  function at(k, id, head = 470){ const p = P[id]; spk(k, id, p.x, p.y, head * p.s); }
+  const L = (k, lines, hold = 500, shift = 0, o) => line(k, Array.isArray(lines) ? lines : [lines], hold, shift, o);
+
+
+  // ---------- dzwieki treningu ----------
+  const grunt = (p = 1) => { tone(120 * p, 0.28, "sawtooth", 0.07, 85 * p); noise(0.2, { freq: 500, q: 1, vol: 0.12 }); };
+  const clank = () => { tone(900, 0.25, "triangle", 0.08); tone(1350, 0.2, "triangle", 0.05); noise(0.08, { freq: 3000, q: 2, vol: 0.2 }); };
+  const blub = () => tone(220 + Math.random() * 80, 0.12, "sine", 0.12, 120);
+  const thud = () => { tone(80, 0.3, "sine", 0.4, 40); noise(0.2, { freq: 400, q: 1, vol: 0.4 }); };
+  let gymT = null;
+  function gymBeat(on){
+    clearInterval(gymT); if (!on) return;
+    let i = 0; const b = 60 / 100 * 1000 / 2;
+    gymT = setInterval(() => { const s = i % 8;
+      if (s === 0 || s === 5) tone(150, 0.3, "sine", 0.5, 40);
+      if (s === 2 || s === 6) noise(0.16, { freq: 1800, q: 1, vol: 0.3 });
+      noise(0.04, { type: "highpass", freq: 8000, vol: 0.08 });
+      if (s === 0) tone([55, 65, 49, 58][(i >> 3) % 4], 0.5, "sawtooth", 0.06, [55, 65, 49, 58][(i >> 3) % 4]);
+      i++; }, b);
+  }
+  // ---------- pomocnicze ----------
+  function legs(id, aL, aR, ms = 0){
+    const L = $(id).querySelector(".legL"), R = $(id).querySelector(".legR");
+    if (!ms){ L.getAnimations().forEach(a => a.cancel()); R.getAnimations().forEach(a => a.cancel()); L.style.transform = `rotate(${aL}deg)`; R.style.transform = `rotate(${aR}deg)`; return; }
+    return Promise.all([anim(L, [{ transform: getComputedStyle(L).transform.replace("none", "rotate(0deg)") }, { transform: `rotate(${aL}deg)` }], { duration: ms }),
+                        anim(R, [{ transform: getComputedStyle(R).transform.replace("none", "rotate(0deg)") }, { transform: `rotate(${aR}deg)` }], { duration: ms })]);
+  }
+  const red = (id, v, ms = 400) => anim($(id).querySelector(".flush"), [{ opacity: +getComputedStyle($(id).querySelector(".flush")).opacity }, { opacity: v }], { duration: ms });
+  function sweat(id, n = 3){ const p = P[id]; bits(p.x, p.y - 330 * p.s, n, { color: "#7cd0ff", spread: 60, up: 50, size: 6 }); }
+  const shakeEl = (el, px = 3, ms = 60, n = 20) => el.animate([{ transform: `translate(${-px}px,0)` }, { transform: `translate(${px}px,0)` }], { duration: ms, direction: "alternate", iterations: n });
+  // guma kasjerki
+  let gumT = null;
+  function chew(on){
+    clearInterval(gumT); if (!on) return;
+    let k = 0;
+    gumT = setInterval(async () => {
+      k++;
+      if (k % 14 === 0){
+        const g = $("gum");
+        await anim(g, [{ r: 0 }, { r: 34 }], { duration: 1100, easing: "ease-out" }).catch(() => {});
+        g.setAttribute("r", 34); tone(1200, 0.06, "square", 0.05); noise(0.05, { freq: 3000, q: 2, vol: 0.2 });
+        g.getAnimations().forEach(a => a.cancel()); g.setAttribute("r", 0);
+      } else { const o = k % 2; $("kasMO").style.display = o ? "" : "none"; $("kasMC").style.display = o ? "none" : ""; }
+    }, 230);
+  }
+  // sztanga
+  function plates(n){
+    const mk = (side) => { let s = ""; for (let k = 0; k < n; k++){ const x = side < 0 ? 300 - k * 26 : 630 + k * 26, h = 120 + Math.min(k, 3) * 20;
+      s += `<rect x="${x}" y="${-h / 2}" width="22" height="${h}" rx="4" fill="${["#3a3f48", "#c81e1e", "#2a5ab8", "#2f7a3a", "#3a3f48", "#c81e1e"][k % 6]}"/>`; } return s; };
+    $("platesL").innerHTML = mk(-1); $("platesR").innerHTML = mk(1);
+  }
+  function barAt(y, bend = 0){ $("bar").style.transform = `translate(0px,${y}px)`; $("barRod").setAttribute("d", `M150 ${bend * 0.5} Q476 ${-bend} 800 ${bend * 0.5}`);
+    $("platesL").setAttribute("transform", `translate(0,${bend * 0.35})`); $("platesR").setAttribute("transform", `translate(0,${bend * 0.35})`); }
+
+
+  // ---------- postacie rysowane: polozenie ----------
+  const Q = {};
+  function pl(id, x, y, s, f = 1, r = 0){ Q[id] = { x, y, s, f, r }; const e = $(id); e.style.display = ""; e.style.transform = `translate(${x}px,${y}px) rotate(${r}deg) scale(${f * s},${s})`; }
+  function sp(k, id, head){ const q = Q[id] || P[id]; Object.assign(who[k], { el: id, x: q.x, y: q.y, head: head * q.s }); }
+  const F = (k, id, head, lines, hold = 150, shift = 0, o) => { sp(k, id, head); return L(k, lines, hold, shift, o); };
+  const U = (lines, hold = 150) => F("u", "ubij", 470, lines, hold, -60);
+
+  // ---------- spawanie ----------
+  const crackle = () => { noise(0.05, { freq: 3000 + Math.random() * 3000, q: 1, vol: 0.25 }); if (Math.random() < 0.3) tone(60, 0.05, "sawtooth", 0.05); };
+  function holderAt(x0, y0, x1, y1){ $("holder").style.display = ""; $("hBody").setAttribute("d", `M${x0} ${y0} L${x0 + (x1 - x0) * 0.55} ${y0 + (y1 - y0) * 0.55}`); $("hRod").setAttribute("d", `M${x0 + (x1 - x0) * 0.55} ${y0 + (y1 - y0) * 0.55} L${x1} ${y1}`);
+    $("cable").setAttribute("d", `M1060 800 Q${(x0 + 1060) / 2} 900 ${x0} ${y0}`); }
+  async function weld(x, y, ms, big = 1){
+    const t0 = performance.now(), arc = $("arc");
+    arc.setAttribute("cx", x); arc.setAttribute("cy", y);
+    while (performance.now() - t0 < ms){
+      arc.setAttribute("r", (8 + Math.random() * 14) * big); arc.setAttribute("opacity", 0.6 + Math.random() * 0.4);
+      $("flash").setAttribute("fill", "#dff4ff"); $("flash").style.opacity = (0.05 + Math.random() * 0.12) * big;
+      crackle();
+      if (Math.random() < 0.5) bits(x, y, 2, { color: "#ffd23f", spread: 90 * big, up: 70 * big, size: 3 });
+      await sleep(60);
+    }
+    arc.setAttribute("r", 0); $("flash").style.opacity = 0;
+  }
+  // ---------- stol + walek ----------
+  const T = { x: 910, y: 760 };
+  function tableAt(x, y, r = 0){ T.x = x; T.y = y; $("table").style.display = ""; $("table").style.transform = `translate(${x}px,${y}px) rotate(${r}deg)`; }
+  function shaftAt(x, y, r = 0){ $("shaft").style.display = ""; $("shaft").style.transform = `translate(${x}px,${y}px) rotate(${r}deg)`; }
+  const fat = id => $("fMad").style.display = id ? "" : "none";
+
+  function reset(){
+    if (tts) tts.cancel();
+    document.getAnimations().forEach(a => a.cancel());
+    Object.values(who).forEach(w => { clearInterval(w._talk); w._talk = null; });
+    $("bubbles").innerHTML = ""; $("fx").innerHTML = ""; $("pows").innerHTML = "";
+    scene("scYard"); camSet();
+    ["aStW", "rStW", "sStW", "table", "shaft", "holder", "wmask", "phone", "seam", "fEyesX", "fMad", "uDirt"].forEach(id => $(id) && ($(id).style.display = "none"));
+    $("fEyes").style.display = ""; $("cable").setAttribute("d", ""); $("arc").setAttribute("r", 0);
+    ["shL", "shR", "tTop"].forEach(id => $(id).style.transform = "");
+    document.querySelectorAll("#tLegs .tl").forEach(l => l.style.transform = "");
+    $("knob").style.transform = "rotate(-60deg)";
+    ["aSt", "rSt", "sSt"].forEach(id => { $(id + "Arm").style.transform = ""; legs(id, 0, 0); });
+    document.querySelectorAll(".flush").forEach(f => f.style.opacity = 0);
+    $("flash").style.opacity = 0; $("flash").setAttribute("fill", "#fff"); $("fade").style.opacity = 0;
+  }
+
+  async function play(){
+    reset(); ac();
+    $("startScreen").hidden = true; $("endScreen").hidden = true;
+    const h = location.hash;
+    if (!h) await ziomkiIntro2("NAPRAWA BIZONA", 13, 3, 1);
+
+    // ===== ustawienie postaci =====
+    pl("syn", 130, 812, 0.5);
+    pl("zlom", 470, 872, 0.5, 1, -90);
+    put("sSt", 600, 880, 0.62, 1);
+    put("aSt", 760, 884, 0.62, 1);
+    pl("gruby", 1230, 886, 0.62, -1);
+    pl("chudy", 1350, 862, 0.6, -1);
+    pl("ubij", 1480, 872, 0.56, -1);
+    const smoke = setInterval(() => puff(Q.syn.x + 58 * 0.5, Q.syn.y - 348 * 0.5, { r: 6, dur: 1500, dx: 14, dy: -70, color: "#cfcfcf" }), 400);
+    const drunkBob = $("zlom").querySelector(".bob").animate([{ transform: "rotate(0deg)" }, { transform: "rotate(-3deg)" }], { duration: 900, direction: "alternate", iterations: Infinity });
+    await sleep(500);
+
+    await F("s", "sSt", 470, "No i wałek się urwał.");
+    await U(["To nie zadziała.", "Trzeba wyjąć silnik."]);
+    await F("a", "aSt", 470, "Jaki silnik? Przyspawamy i będzie.");
+
+    // Triwet przynosi stol
+    put("rSt", 1750, 884, 0.62, -1);
+    tableAt(1750, 760 - 290 * 0.62 - 20);
+    const carry = (async () => { await walk("rSt", 1060, 2200); })();
+    const tc = setInterval(() => tableAt(P.rSt.x - 10, 884 - 290 * 0.62 - 150), 30);
+    await carry; clearInterval(tc);
+    await tween(400, k => tableAt(1050 - 140 * k, (884 - 290 * 0.62 - 150) + (760 - (884 - 290 * 0.62 - 150)) * k));
+    thud();
+    await F("r", "rSt", 470, "Stół jest!", 100);
+    // walek na stol
+    clank(); shaftAt(905, 738);
+    await sleep(300);
+
+    // Triwet nagrywa na YT
+    await walk("rSt", 1110, 400);
+    await armTo("rSt", -150, 250);
+    const ph = $("phone"); ph.style.display = ""; ph.style.transform = `translate(${P.rSt.x - 30}px,${884 - 360 * 0.62}px)`;
+    const recB = $("recD").animate([{ opacity: 1 }, { opacity: 0.1 }], { duration: 400, direction: "alternate", iterations: Infinity });
+    await F("r", "rSt", 470, ["Siema, dzisiaj spawamy bizona,", "łapka w górę!"], 100, -40);
+    // gruby sie wkurwia
+    fat(1); $("gruby").querySelector(".bob").animate([{ transform: "translateY(0)" }, { transform: "translateY(-30px)" }, { transform: "translateY(0)" }], { duration: 220, iterations: 3 });
+    await F("f", "gruby", 400, ["Wypierdalaj mnie z tym,", "bo kopa zajebię!"], 100, 60);
+    await anim($("fLegR"), [{ transform: "rotate(0deg)" }, { transform: "rotate(-60deg)" }, { transform: "rotate(0deg)" }], { duration: 350 });
+    thud(); fat(0);
+    await walk("rSt", 1170, 300);
+    // pijany zlomiarz majaczy
+    await F("z", "zlom", 120, ["Brrhm… szszprychy…", "mmmuha… blblbl…"], 150, 120);
+    await U("Mówię wam, trzeba wyjąć silnik.");
+
+    // ===== Andrzej spawa =====
+    const mk = $("wmask"); mk.style.display = ""; mk.style.transform = `translate(${P.aSt.x + 4}px,${884 - 373 * 0.62}px) scale(0.62)`;
+    await armTo("aSt", -70, 250);
+    holderAt(806, 720, 900, 740);
+    $("seam").style.display = "";
+    await weld(902, 740, 2600);
+    mk.style.display = "none"; $("holder").style.display = "none"; $("cable").setAttribute("d", "");
+    armTo("aSt", 0, 200);
+    await F("a", "aSt", 470, "Gotowe. Trzyma jak marzenie.");
+    // podnosi walek... i walek sie urywa
+    await armTo("aSt", -60, 200);
+    await tween(500, k => shaftAt(905, 738 - 70 * k));
+    tone(140, 0.8, "sawtooth", 0.04, 110);
+    await sleep(900);
+    tone(900, 0.06, "square", 0.06); pow("TRZASK!", 905, 560, { size: 70, col: "#fff", hold: 400 });
+    $("seam").style.display = "none";
+    await Promise.all([
+      anim($("shL"), [{ transform: "translate(0,0) rotate(0deg)" }, { transform: "translate(-40px,140px) rotate(-40deg)" }], { duration: 420, easing: "ease-in" }),
+      anim($("shR"), [{ transform: "translate(0,0) rotate(0deg)" }, { transform: "translate(50px,140px) rotate(35deg)" }], { duration: 420, easing: "ease-in" })]);
+    clank(); setTimeout(clank, 90); shake(6, 200);
+    armTo("aSt", 0, 200);
+    await F("s", "sSt", 470, "Ale żeś, kurwa, przyspawał.", 250);
+    await U("Mówiłem. Trzeba wyjąć silnik.");
+
+    // ===== chudy podkreca prad =====
+    $("shL").getAnimations().forEach(a => a.cancel()); $("shR").getAnimations().forEach(a => a.cancel());
+    shaftAt(905, 738); $("seam").style.display = "";
+    await F("c", "chudy", 640, ["Prądu za mało.", "Dajcie, podkręcę na maksa."], 100);
+    await anim($("knob"), [{ transform: "rotate(-60deg)" }, { transform: "rotate(80deg)" }], { duration: 500 });
+    $("knob").style.transform = "rotate(80deg)"; tone(200, 0.5, "sawtooth", 0.05, 600);
+
+    // ===== gruby spawa bez maski =====
+    await F("f", "gruby", 400, "Dawaj, ja to zrobię!");
+    await Promise.all([walk("aSt", 660, 500), walk("sSt", 520, 500)]); P.aSt.f = 1; draw("aSt");
+    const g0 = Q.gruby.x;
+    $("gruby").querySelector(".bob").animate([{ transform: "translateY(0)" }, { transform: "translateY(-14px)" }], { duration: 160, direction: "alternate", iterations: 10 });
+    await tween(1600, k => pl("gruby", g0 + (790 - g0) * k, 886, 0.62, 1));
+    $("fArmR").style.transform = "rotate(-40deg)";
+    holderAt(870, 790, 902, 744);
+    await F("f", "gruby", 400, "To jest sakramencki błysk!", 50);
+    // mega blysk
+    const big = weld(902, 744, 2200, 2.4);
+    await sleep(1500);
+    $("flash").setAttribute("fill", "#fff");
+    await big;
+    $("holder").style.display = "none"; $("cable").setAttribute("d", "");
+    await anim($("flash"), [{ opacity: 1 }, { opacity: 1, offset: 0.4 }, { opacity: 0 }], { duration: 1800 });
+    $("fEyes").style.display = "none"; $("fEyesX").style.display = "";
+    await F("f", "gruby", 400, "Nic nie widzę! Kurwa, nic nie widzę!", 100);
+    await U("A mówiłem, trzeba wyjąć silnik.");
+    // gruby po omacku opiera sie o stol -> stol sie zalamuje
+    $("fArmL").style.transform = "rotate(90deg)"; $("fArmR").style.transform = "rotate(-90deg)";
+    const gx = Q.gruby.x;
+    await tween(900, k => pl("gruby", gx + 60 * k + Math.sin(k * 12) * 8, 886, 0.62, 1));
+    tone(160, 0.6, "sawtooth", 0.05, 90);
+    await sleep(400);
+    const legsT = [...document.querySelectorAll("#tLegs .tl")];
+    pow("KRACH!", 910, 600, { size: 110, col: "#ffb13b" });
+    thud(); clank(); shake(14, 400);
+    await Promise.all([
+      ...legsT.map((l, i) => anim(l, [{ transform: "rotate(0deg)" }, { transform: `rotate(${i < 2 ? 70 : -70}deg)` }], { duration: 300, easing: "ease-in" })),
+      anim($("tTop"), [{ transform: "translate(0,0) rotate(0deg)" }, { transform: "translate(0,100px) rotate(6deg)" }], { duration: 300, easing: "ease-in" }),
+      tween(300, k => { shaftAt(905, 738 + 128 * k, 6 * k); pl("gruby", gx + 60, 886 + 20 * k, 0.62, 1); })
+    ]);
+    bits(910, 870, 10, { color: "#a8763e", spread: 180, up: 120, size: 8 });
+    $("fArmL").style.transform = ""; $("fArmR").style.transform = "";
+    await sleep(500);
+    await U(["No to teraz to już na pewno", "trzeba wyjąć silnik."], 200);
+    await F("y", "syn", 490, ["Na chuj wam ten bizon,", "i tak nie pojedzie."], 150, 120);
+    $("zlom").querySelector(".bob").animate([{ transform: "rotate(0deg)" }, { transform: "rotate(-14deg)" }, { transform: "rotate(0deg)" }], { duration: 700 });
+    await F("z", "zlom", 120, "Nzdrowie… hyyp…", 150, 120);
+    await F("r", "rSt", 470, "Dajcie suba!", 400, -40);
+    clearInterval(smoke); drunkBob.cancel(); recB.cancel();
+    $("fade").animate([{ opacity: 0 }, { opacity: 1 }], { duration: 500, fill: "forwards" });
+    await sleep(600);
+    if (!h) await ziomkiOutro();
+    $("endScreen").hidden = false; $("againBtn").focus();
+  }
+
+  const start = () => { unlockSpeech(); unlockClips(); play(); };
+  $("playBtn").addEventListener("click", start);
+  $("againBtn").addEventListener("click", start);
+</script>
+</body>
+</html>
