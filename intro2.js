@@ -64,6 +64,67 @@
     }
   }
 
+
+  // ================= PODKLADY MUZYCZNE (do wersji 3) =================
+  const N = n => 440 * Math.pow(2, (n - 69) / 12);   // nr nuty MIDI -> Hz
+  function lead(t, f, dur, { type = "square", vol = 0.07, vib = 0, cut = 3000, glideTo } = {}){
+    const a = ctx(), o = a.createOscillator(), lp = a.createBiquadFilter(), g = a.createGain();
+    o.type = type; o.frequency.setValueAtTime(f, t); if (glideTo) o.frequency.exponentialRampToValueAtTime(glideTo, t + dur);
+    if (vib){ const l = a.createOscillator(), lg = a.createGain(); l.frequency.value = 6; lg.gain.value = vib; l.connect(lg); lg.connect(o.frequency); l.start(t); l.stop(t + dur + 0.05); }
+    lp.type = "lowpass"; lp.frequency.value = cut;
+    g.gain.setValueAtTime(0.0001, t); g.gain.linearRampToValueAtTime(vol, t + 0.01); g.gain.setValueAtTime(vol, t + dur * 0.7); g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+    o.connect(lp); lp.connect(g); g.connect(a.destination); o.start(t); o.stop(t + dur + 0.02);
+  }
+  const crash = t => noiseAt(t, 1.2, { freq: 5000, vol: 0.18 });
+  const openHat = t => noiseAt(t, 0.15, { freq: 7000, vol: 0.14 });
+  function acid(t, f, dur, open){
+    const a = ctx(), o = a.createOscillator(), lp = a.createBiquadFilter(), g = a.createGain();
+    o.type = "sawtooth"; o.frequency.value = f; lp.type = "lowpass"; lp.Q.value = 14;
+    lp.frequency.setValueAtTime(open, t); lp.frequency.exponentialRampToValueAtTime(200, t + dur);
+    g.gain.setValueAtTime(0.12, t); g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+    o.connect(lp); lp.connect(g); g.connect(a.destination); o.start(t); o.stop(t + dur + 0.02);
+  }
+  const loop = (T, dur, bpm, fn) => { const b = 60 / bpm; for (let i = 0; T + i * b < T + dur; i++) fn(T + i * b, i, b); };
+  const MUSIC = {
+    // 1. hip-hop + przesterowana gitara (jak dotad)
+    1: (T, dur) => { const beat = 60 / 92; beat2(T, beat, { riff: false });
+      [[0, 82.4], [0.75, 82.4], [1.5, 110], [2.5, 98], [3, 123.5], [4.5, 82.4], [5.5, 110], [6, 146.8], [7, 164.8]].forEach(([x, f]) => guitar(T + x * beat, f, beat * 0.7, 0.15)); },
+    // 2. disco polo: stopa na cztery, hi-hat na "i", skaczacy bas, tandetny klawisz
+    2: (T, dur) => { const mel = [69, 72, 76, 74, 72, 71, 69, 64, 69, 72, 76, 79, 77, 76, 74, 72];
+      loop(T, dur, 128, (t, i, b) => { kick(t); openHat(t + b / 2); if (i % 2) clap(t);
+        const root = [45, 45, 41, 43][Math.floor(i / 4) % 4]; bass(t, N(root), b * 0.45); bass(t + b / 2, N(root + 12), b * 0.45);
+        lead(t, N(mel[i % 16]), b * 0.45, { type: "sawtooth", vol: 0.05, vib: 6, cut: 2500 }); lead(t + b / 2, N(mel[i % 16] + 12), b * 0.3, { type: "square", vol: 0.025 }); }); },
+    // 3. 8-bit jak z Pegasusa
+    3: (T, dur) => { const arp = [0, 4, 7, 12], roots = [60, 60, 65, 67];
+      loop(T, dur, 150, (t, i, b) => { const r = roots[Math.floor(i / 4) % 4];
+        for (let k = 0; k < 4; k++) lead(t + k * b / 4, N(r + arp[k] + 12), b / 4 * 0.9, { type: "square", vol: 0.045 });
+        lead(t, N(r - 12), b * 0.9, { type: "triangle", vol: 0.2 });
+        if (i % 2 === 0) noiseAt(t, 0.05, { type: "lowpass", freq: 300, vol: 0.4 }); else noiseAt(t, 0.08, { freq: 2500, vol: 0.25 }); });
+      lead(T + dur - 0.9, N(84), 0.8, { type: "square", vol: 0.05, glideTo: N(96) }); },
+    // 4. punk rock: szybka perkusja, power-chordy
+    4: (T, dur) => { crash(T);
+      loop(T, dur, 180, (t, i, b) => { kick(t); snare(t + b / 2); hat(t); hat(t + b / 2);
+        const r = [40, 40, 43, 45, 40, 40, 47, 45][Math.floor(i / 2) % 8]; guitar(t, N(r), b * 0.48, 0.16); guitar(t + b / 2, N(r), b * 0.48, 0.16); });
+      crash(T + dur * 0.5); },
+    // 5. techno / rave z kwasnym basem
+    5: (T, dur) => { const seq = [36, 36, 48, 36, 39, 36, 46, 36];
+      loop(T, dur, 135, (t, i, b) => { kick(t); openHat(t + b / 2); if (i % 2) clap(t);
+        for (let k = 0; k < 2; k++) acid(t + k * b / 2, N(seq[(i * 2 + k) % 8]), b * 0.45, 600 + 3000 * ((i * 2 + k) / (dur / b * 2))); }); },
+    // 6. trap: 808 z poslizgiem, rolki hi-hatu
+    6: (T, dur) => { const b = 60 / 140;
+      [0, 2.5, 4, 6.5, 8, 10.5].forEach((x, k) => { if (x * b < dur){ kick(T + x * b); lead(T + x * b, N([33, 33, 31, 36, 33, 28][k]), b * 2.2, { type: "sine", vol: 0.45, cut: 400, glideTo: N([33, 33, 31, 36, 33, 28][k]) * 0.94 }); } });
+      [2, 6, 10].forEach(x => x * b < dur && (snare(T + x * b), clap(T + x * b)));
+      for (let x = 0; x * b < dur; x += 0.5){ hat(T + x * b); if (Math.floor(x) % 4 === 3) [1, 2].forEach(k => hat(T + x * b + k * b / 6)); }
+      [0, 4, 8].forEach(x => lead(T + x * b, N(81), b * 1.5, { type: "triangle", vol: 0.05, vib: 4 })); },
+    // 7. fanfara superbohaterow: tympany i "blacha"
+    7: (T, dur) => { const b = 60 / 110;
+      const brass = (t, notes, d) => notes.forEach(n => lead(t, N(n), d, { type: "sawtooth", vol: 0.045, vib: 3, cut: 1800 }));
+      [[0, [55, 62, 67], 0.5], [0.75, [55, 62, 67], 0.25], [1, [60, 64, 72], 1.5], [3, [58, 65, 70], 0.5], [3.5, [60, 67, 72], 0.5], [4, [62, 69, 74], 2.5]].forEach(([x, n, d]) => brass(T + x * b, n, d * b));
+      [0, 1, 3, 4, 4.25, 4.5, 4.75].forEach(x => osc(T + x * b, 0.5, 70, 50, "sine", 0.7));
+      crash(T + 4 * b); for (let x = 0; x < 9; x++) snare(T + 6 * b + x * b / 6); boom(T + 7.5 * b); }
+  };
+  window.ziomkiMusicNames = { 1: "Hip-hop z gitarą", 2: "Disco polo", 3: "8-bit (Pegasus)", 4: "Punk rock", 5: "Techno / rave", 6: "Trap", 7: "Fanfara superbohaterów" };
+
   // ---------- grafika ----------
   const CH = [
     { name: "ANDRZEJ", img: "andrzej.png", w: 272, h: 300, shirt: "#1c1c1c", bg: "#ffd23f", ray: "#ffb13b", fx: "ZIUU!" },
@@ -185,7 +246,7 @@
   }
 
   // ================= WERSJA 3: paski pop-art ze smugami, blysk okularow, paski sie rozjezdzaja =================
-  async function v3(g, title, num){
+  async function v3(g, title, num, music = 1){
     const S = [[0, 300], [300, 300], [600, 300]];
     let html = `<rect width="1600" height="900" fill="#141414"/>
       <g class="back">${rays(800, 430, 24, "#2b0a0a", 1600)}${burst(800, 420, 330, 470, 16, "#ff3c3c")}${logo(800, 490, 210)}</g>
@@ -206,9 +267,7 @@
     const strips = [...g.querySelectorAll(".strip")], back = g.querySelector(".back"), tt = g.querySelector(".tt");
     strips.forEach(s => s.style.opacity = 0); back.style.opacity = 0; tt.style.opacity = 0;
     const a = ctx(), beat = 60 / 92, T = a.currentTime + 0.1, at = b => (T + b * beat - a.currentTime) * 1000;
-    beat2(T, beat, { riff: false });
-    // riff gitary ostrzej
-    [[0, 82.4], [0.75, 82.4], [1.5, 110], [2.5, 98], [3, 123.5], [4.5, 82.4], [5.5, 110], [6, 146.8], [7, 164.8]].forEach(([x, f]) => guitar(T + x * beat, f, beat * 0.7, 0.15));
+    (MUSIC[music] || MUSIC[1])(T, 8 * beat + 0.3);
     strips.forEach((s, i) => { const left = i !== 1, d = at(i * 1.15);
       swoosh(T + i * 1.15 * beat);
       A(s, [{ opacity: 1, transform: `translateX(${left ? -1700 : 1700}px)` }, { opacity: 1, transform: `translateX(${left ? 40 : -40}px)`, offset: 0.8 }, { opacity: 1, transform: "translateX(0)" }], { duration: 380, delay: d, easing: "ease-out" });
@@ -218,7 +277,7 @@
       A(gl, [{ transform: `${tr} scale(0) rotate(0deg)` }, { transform: `${tr} scale(1.2) rotate(90deg)` }, { transform: `${tr} scale(0) rotate(180deg)` }], { duration: 450, delay: d + 450 });
       glint(T + i * 1.15 * beat + 0.45);
     });
-    scratch(T + 3.5 * beat, 4);
+    if (music === 1) scratch(T + 3.5 * beat, 4);
     // paski sie rozjezdzaja, za nimi logo
     const t4 = at(4.2);
     swoosh(T + 4.2 * beat, 0.5); boom(T + 4.4 * beat);
@@ -229,10 +288,10 @@
     await wait(8 * beat * 1000 + 300);
   }
 
-  window.ziomkiIntro2 = async function(title, num, variant = 1){
+  window.ziomkiIntro2 = async function(title, num, variant = 1, music = 1){
     const stage = document.getElementById("stage");
     const g = document.createElementNS(NS, "g"); stage.appendChild(g);
-    await [v1, v2, v3][variant - 1](g, title, num);
+    await [v1, v2, v3][variant - 1](g, title, num, music);
     await g.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 500, fill: "forwards" }).finished.catch(() => {});
     g.getAnimations({ subtree: true }).forEach(x => x.cancel());
     g.remove();

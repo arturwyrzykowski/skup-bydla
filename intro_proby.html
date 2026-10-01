@@ -18,23 +18,24 @@
 <body>
 <div id="wrap">
   <svg id="stage" viewBox="0 0 1600 900"><rect width="1600" height="900" fill="#111"/>
-    <text id="hint" x="800" y="460" text-anchor="middle" font-size="56" fill="#fff" font-family="'Comic Sans MS',sans-serif">Wybierz wersję poniżej ↓</text></svg>
-  <div class="bar">
-    <button data-v="1" autofocus>Wersja 1: skośne kadry</button>
-    <button data-v="2">Wersja 2: strona komiksu</button>
-    <button data-v="3">Wersja 3: paski pop-art</button>
-  </div>
+    <text id="hint" x="800" y="460" text-anchor="middle" font-size="56" fill="#fff" font-family="'Comic Sans MS',sans-serif">Intro (wersja 3) – wybierz muzykę ↓</text></svg>
+  <div class="bar" id="bar"></div>
   <p>Przyciski działają też z klawiatury: Tab i Enter</p>
 </div>
 <script src="intro2.js"></script>
 <script>
   let busy = false;
-  document.querySelectorAll("button").forEach(b => b.addEventListener("click", async () => {
-    if (busy) return; busy = true;
-    document.getElementById("hint").style.display = "none";
-    await ziomkiIntro2("SKUTEROWY TEST ZAUFANIA", 11, +b.dataset.v);
-    document.getElementById("hint").style.display = ""; busy = false; b.focus();
-  }));
+  const bar = document.getElementById("bar");
+  Object.entries(ziomkiMusicNames).forEach(([m, name], i) => {
+    const b = document.createElement("button"); b.dataset.m = m; b.textContent = `${m}. ${name}`; if (!i) b.autofocus = true; bar.append(b);
+    b.addEventListener("click", async () => {
+      if (busy) return; busy = true;
+      document.getElementById("hint").style.display = "none";
+      await ziomkiIntro2("SKUTEROWY TEST ZAUFANIA", 11, 3, +m);
+      document.getElementById("hint").style.display = ""; busy = false; b.focus();
+    });
+  });
+  bar.querySelector("button").focus();
 </script>
 </body>
 </html>
