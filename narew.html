@@ -351,7 +351,8 @@
           <path d="M-58 -30 Q-58 -2 -34 -2 H8 V-30 Z" fill="#1c1c1c"/><path d="M-56 -8 H8" stroke="#dfe3e8" stroke-width="5"/></g>
         <g class="legR" style="transform-origin:24px -170px"><path d="M24 -120 L26 -24" stroke-width="34"/><path d="M24 -120 L26 -24" stroke="#e8b08a" stroke-width="24"/>
           <path d="M-4 -30 V-2 H38 Q62 -2 62 -30 Z" fill="#1c1c1c"/><path d="M-4 -8 H62" stroke="#dfe3e8" stroke-width="5"/></g>
-        <path d="M-58 -182 L58 -182 L60 -112 L4 -112 L0 -140 L-4 -112 L-60 -112 Z" fill="#3d6aa8"/><path d="M-56 -290 Q-76 -220 -70 -150" fill="none" stroke-width="30"/><path d="M-56 -290 Q-76 -220 -70 -150" fill="none" stroke="#e8b08a" stroke-width="22"/>
+        <path d="M-58 -182 L58 -182 L60 -112 L4 -112 L0 -140 L-4 -112 L-60 -112 Z" fill="#3d6aa8"/>
+        <path class="tent" style="transform-origin:30px -150px; transform:scaleX(0)" d="M30 -172 L118 -152 L30 -128 Z" fill="#3d6aa8"/><path d="M-56 -290 Q-76 -220 -70 -150" fill="none" stroke-width="30"/><path d="M-56 -290 Q-76 -220 -70 -150" fill="none" stroke="#e8b08a" stroke-width="22"/>
         <path d="M-56 -292 L-70 -250" stroke-width="40"/><path d="M-56 -292 L-70 -250" stroke="#1c1c1c" stroke-width="32"/>
         <circle cx="-70" cy="-140" r="14" fill="#e8b08a"/>
         <path d="M-62 -300 Q-70 -230 -60 -160 L60 -160 Q70 -230 62 -300 Q0 -318 -62 -300 Z" fill="#1c1c1c"/>
@@ -375,7 +376,8 @@
           <path d="M-58 -30 Q-58 -2 -34 -2 H8 V-30 Z" fill="#1c1c1c"/><path d="M-56 -8 H8" stroke="#dfe3e8" stroke-width="5"/></g>
         <g class="legR" style="transform-origin:24px -170px"><path d="M24 -120 L26 -24" stroke-width="34"/><path d="M24 -120 L26 -24" stroke="#e8b08a" stroke-width="24"/>
           <path d="M-4 -30 V-2 H38 Q62 -2 62 -30 Z" fill="#1c1c1c"/><path d="M-4 -8 H62" stroke="#dfe3e8" stroke-width="5"/></g>
-        <path d="M-58 -182 L58 -182 L60 -112 L4 -112 L0 -140 L-4 -112 L-60 -112 Z" fill="#4a78b0"/><path d="M-56 -290 Q-76 -220 -70 -150" fill="none" stroke-width="30"/><path d="M-56 -290 Q-76 -220 -70 -150" fill="none" stroke="#e8b08a" stroke-width="22"/>
+        <path d="M-58 -182 L58 -182 L60 -112 L4 -112 L0 -140 L-4 -112 L-60 -112 Z" fill="#4a78b0"/>
+        <path class="tent" style="transform-origin:30px -150px; transform:scaleX(0)" d="M30 -172 L118 -152 L30 -128 Z" fill="#4a78b0"/><path d="M-56 -290 Q-76 -220 -70 -150" fill="none" stroke-width="30"/><path d="M-56 -290 Q-76 -220 -70 -150" fill="none" stroke="#e8b08a" stroke-width="22"/>
         <path d="M-56 -292 L-70 -250" stroke-width="40"/><path d="M-56 -292 L-70 -250" stroke="#1f2a44" stroke-width="32"/>
         <circle cx="-70" cy="-140" r="14" fill="#e8b08a"/>
         <path d="M-62 -300 Q-70 -230 -60 -160 L60 -160 Q70 -230 62 -300 Q0 -318 -62 -300 Z" fill="#1f2a44"/>
@@ -925,6 +927,7 @@
     ["aStW", "rStW", "g1StW", "g2StW", "sandPile", "slowmo", "card"].forEach(id => $(id).style.display = "none");
     $("aSt").querySelector("#aStBump").style.transform = "scale(0)"; $("aStBlood").style.strokeDashoffset = 120;
     ["aSt", "rSt", "g1St", "g2St"].forEach(id => $(id + "Arm").style.transform = "");
+    ["aSt", "rSt"].forEach(id => $(id).querySelector(".tent").style.transform = "scaleX(0)");
     cfg(1); riders("scA", true); riders("scB", true); $("scA").querySelector(".tilt").style.transformOrigin = "0px -60px";
     Object.assign(sc.scA, { x: 820, y: 600, s: 0.45, r: 0 }); Object.assign(sc.scB, { x: 1000, y: 604, s: 0.45, r: 0 }); scDraw("scA"); scDraw("scB");
     riders("scA", false); riders("scB", false);
@@ -965,12 +968,24 @@
     await w3; await w4;
     spk("g1", "g1Chair", 1170, 820, 330); spk("g2", "g2Chair", 1410, 820, 330);
     await L("g1", "Cześć.", 300);
+    // namioty w spodenkach
+    for (const id of ["aSt", "rSt"]){
+      boing();
+      await anim($(id).querySelector(".tent"), [{ transform: "scaleX(0)" }, { transform: "scaleX(1.25)" }, { transform: "scaleX(0.9)" }, { transform: "scaleX(1)" }], { duration: 450, easing: "ease-out" });
+      $(id).querySelector(".tent").style.transform = "scaleX(1)";
+      await sleep(250);
+    }
+    await sleep(400);
     at("a", "aSt"); await L("a", "Cześć.", 300);
     await sleep(400);
     at("a", "aSt"); await L("a", "Fajne drinki.", 300);
     await L("g2", "Działają.", 300);
     at("r", "rSt"); await L("r", "Na co?", 200);
-    await L("g2", "Na poprawę humoru.", 400);
+    { const b1 = await say("g1", ["Na kobyle caco."], -80, { instant: true }), b2 = await say("g2", ["Na kobyle caco."], 80, { instant: true });
+      talking("g1", true); talking("g2", true);
+      await Promise.all([speak("Na kobyle caco.", who.g1) || sleep(1500), speak("Na kobyle caco.", who.g2) || sleep(1500)]);
+      talking("g1", false); talking("g2", false);
+      await sleep(600); unsay(b1); unsay(b2); await sleep(250); }
     $("rSt").querySelector(".bob").animate([{ transform: "translateY(0)" }, { transform: "translateY(8px)" }, { transform: "translateY(0)" }], { duration: 300, iterations: 2 });
     await sleep(500);
     at("r", "rSt"); await L("r", "To może Andrzejowi dwa.", 500);
