@@ -407,7 +407,7 @@
     </g>
 
     <g id="fx"></g>
-    <g id="bubbles"></g>
+    <g id="bubbles" style="display:none"></g>
     <!-- zarowka nad Radkiem (pomysl!) -->
     <g id="bulb" style="display:none" stroke="#141414" stroke-width="4">
       <path d="M-30 -20 Q-44 -70 0 -76 Q44 -70 30 -20 Z" fill="#fff27a"/>
@@ -645,30 +645,29 @@
   };
 
   const DEEP = 0.55;
-  const clipEls = {};
+  const clipEls = {};   // tylko wczytanie z wyprzedzeniem, nigdy nie grane
+  // 3 odtwarzacze na wszystkie kwestie; na starcie odblokowane krotka cisza (bez puszczania nagran)
+  const SILENT = "data:audio/wav;base64,UklGRiYAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQIAAACAgA==";
+  const voices = [new Audio(), new Audio(), new Audio()];
   function clipFor(text){
     const c = CLIPS[text];
     if (!c) return null;
-    // wpis: sciezka (nagranie kierowcy, obnizane) albo { src, rate } (glos ElevenLabs)
     const src = c.src || c, rate = c.rate || DEEP;
-    if (!clipEls[src]){
-      const a = new Audio(src); a.preload = "auto"; a._rate = rate;
-      a.preservesPitch = false; a.mozPreservesPitch = false; a.webkitPreservesPitch = false;
-      clipEls[src] = a;
-    }
-    return clipEls[src];
+    if (!clipEls[src]){ const a = new Audio(); a.preload = "auto"; a.src = src; clipEls[src] = a; }
+    return { src, rate };
   }
   function unlockClips(){
-    Object.keys(CLIPS).forEach(t => { const a = clipFor(t); a.muted = true;
-      a.play().then(() => { a.pause(); a.currentTime = 0; a.muted = false; }).catch(() => { a.muted = false; }); });
+    Object.keys(CLIPS).forEach(clipFor);
+    voices.forEach(v => { v.src = SILENT; v.play().catch(() => {}); });
   }
-  function playClip(a){
+  function playClip(c){
+    const v = voices.find(x => x.paused || x.ended) || voices[0];
     return new Promise(res => {
-      a.currentTime = 0; a.playbackRate = a._rate;
-      a.preservesPitch = false; a.mozPreservesPitch = false; a.webkitPreservesPitch = false;
-      const guard = setTimeout(res, 8000);
-      a.onended = a.onerror = () => { clearTimeout(guard); res(); };
-      a.play().catch(() => { clearTimeout(guard); res(); });
+      v.pause(); v.src = c.src; v.playbackRate = c.rate;
+      v.preservesPitch = v.mozPreservesPitch = v.webkitPreservesPitch = c.rate === 1;
+      const guard = setTimeout(res, 15000);
+      v.onended = v.onerror = () => { clearTimeout(guard); res(); };
+      v.play().catch(() => { clearTimeout(guard); res(); });
     });
   }
   function speak(text, w, { pitch, rate } = {}){
