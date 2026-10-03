@@ -806,15 +806,26 @@
     const u = new SpeechSynthesisUtterance(" "); u.volume = 0; tts.speak(u);
   }
   // nagrane kwestie (kierowca): odtwarzane wolniej i bez zachowania wysokosci = bardzo niski, gruby glos
-  const CLIPS = {};
+  const CLIPS = {
+    "No, zobaczymy, co ci jest.": { src: "glosy/naprawa/01_callum.mp3", rate: 1 },
+    "Tłok zatarty. Do wyjebania.": { src: "glosy/naprawa/02_callum.mp3", rate: 1 },
+    "Dębowy. Lepszy niż fabryczny!": { src: "glosy/naprawa/03_callum.mp3", rate: 1 },
+    "No dawaj, kurwa…": { src: "glosy/naprawa/04_callum.mp3", rate: 1 },
+    "Odpalił!": { src: "glosy/naprawa/05_callum.mp3", rate: 1 },
+    "Daj mu, daj mu!": { src: "glosy/naprawa/06_charlie.mp3", rate: 1 },
+    "O, już naprawiony?": { src: "glosy/naprawa/07_brian.mp3", rate: 1 },
+    "Panie, ale teraz idzie! Nie mogę go utrzymać w rękach!": { src: "glosy/naprawa/08_callum.mp3", rate: 1 }
+  };
 
   const DEEP = 0.55;
   const clipEls = {};
   function clipFor(text){
-    const src = CLIPS[text];
-    if (!src) return null;
+    const c = CLIPS[text];
+    if (!c) return null;
+    // wpis: sciezka (nagranie kierowcy, obnizane) albo { src, rate } (glos ElevenLabs)
+    const src = c.src || c, rate = c.rate || DEEP;
     if (!clipEls[src]){
-      const a = new Audio(src); a.preload = "auto";
+      const a = new Audio(src); a.preload = "auto"; a._rate = rate;
       a.preservesPitch = false; a.mozPreservesPitch = false; a.webkitPreservesPitch = false;
       clipEls[src] = a;
     }
@@ -826,7 +837,7 @@
   }
   function playClip(a){
     return new Promise(res => {
-      a.currentTime = 0; a.playbackRate = DEEP;
+      a.currentTime = 0; a.playbackRate = a._rate;
       a.preservesPitch = false; a.mozPreservesPitch = false; a.webkitPreservesPitch = false;
       const guard = setTimeout(res, 8000);
       a.onended = a.onerror = () => { clearTimeout(guard); res(); };
