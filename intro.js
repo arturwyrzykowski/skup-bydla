@@ -59,9 +59,9 @@
       <polygon points="300,0 520,0 900,900 200,900" fill="#fff" opacity="0.05"/>
       <polygon points="1080,0 1300,0 1400,900 700,900" fill="#fff" opacity="0.05"/>
       <g class="zhs">
-        <image href="glowa1.png" x="560" y="80" width="130" height="160"/>
-        <image href="glowa2.png" x="735" y="96" width="127" height="140"/>
-        <image href="glowa3.png" x="905" y="92" width="134" height="145"/>
+        <image href="andrzej.svg" x="560" y="80" width="130" height="160"/>
+        <image href="triwet.svg" x="735" y="96" width="127" height="140"/>
+        <image href="syket.svg" x="905" y="92" width="134" height="145"/>
       </g>
       <g class="zword">${letters}</g>
       <g class="zgtr" style="transform-origin:1320px 620px" stroke="#141414" stroke-width="5" stroke-linejoin="round">
