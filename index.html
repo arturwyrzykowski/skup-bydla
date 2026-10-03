@@ -426,7 +426,34 @@
     tts.cancel(); pickVoice();
     const u = new SpeechSynthesisUtterance(" "); u.volume = 0; tts.speak(u);
   }
+  // nagrane kwestie (glosy ElevenLabs): tekst -> { src, rate }
+  const CLIPS = {
+    "Panie, dasz mi dobrą cenę?": { src: "glosy/index/01_bill.mp3", rate: 1 },
+    "Dam, ale jebnę cię na kilogramach.": { src: "glosy/index/02_george.mp3", rate: 1 },
+    "Spierdalaj mi stąd, ale już!": { src: "glosy/index/03_bill.mp3", rate: 1 }
+  };
+  const clipEls = {};
+  function clipFor(text){
+    const c = CLIPS[text];
+    if (!c) return null;
+    if (!clipEls[c.src]){ const a = new Audio(c.src); a.preload = "auto"; a._rate = c.rate; clipEls[c.src] = a; }
+    return clipEls[c.src];
+  }
+  function unlockClips(){
+    Object.keys(CLIPS).forEach(t => { const a = clipFor(t); a.muted = true;
+      a.play().then(() => { a.pause(); a.currentTime = 0; a.muted = false; }).catch(() => { a.muted = false; }); });
+  }
+  function playClip(a){
+    return new Promise(res => {
+      a.currentTime = 0; a.playbackRate = a._rate;
+      const guard = setTimeout(res, 8000);
+      a.onended = a.onerror = () => { clearTimeout(guard); res(); };
+      a.play().catch(() => { clearTimeout(guard); res(); });
+    });
+  }
   function speak(text, w, { pitch, rate } = {}){
+    const clip = clipFor(text);
+    if (clip) return playClip(clip);
     if (!tts || !plVoice) return null;
     return new Promise(res => {
       const u = new SpeechSynthesisUtterance(text);
@@ -565,7 +592,7 @@
     $("endScreen").hidden = false; $("againBtn").focus();
   }
 
-  const start = () => { unlockSpeech(); play(); };
+  const start = () => { unlockSpeech(); unlockClips(); play(); };
   $("playBtn").addEventListener("click", start);
   $("againBtn").addEventListener("click", start);
 </script>

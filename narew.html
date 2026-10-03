@@ -653,15 +653,72 @@
     const u = new SpeechSynthesisUtterance(" "); u.volume = 0; tts.speak(u);
   }
   // nagrane kwestie (kierowca): odtwarzane wolniej i bez zachowania wysokosci = bardzo niski, gruby glos
-  const CLIPS = {};
+  const CLIPS = {
+    "Ale tu dzisiaj spokojnie.": { src: "glosy/narew/01_callum.mp3", rate: 1 },
+    "Spokojnie? Jeszcze nie wiesz, co się wydarzy.": { src: "glosy/narew/02_charlie.mp3", rate: 1 },
+    "I właśnie tego się boję.": { src: "glosy/narew/03_callum.mp3", rate: 1 },
+    "Triwet…": { src: "glosy/narew/04_charlie.mp3", rate: 1 },
+    "Co?": { src: "glosy/narew/05_callum.mp3", rate: 1 },
+    "Mamy towarzystwo.": { src: "glosy/narew/06_charlie.mp3", rate: 1 },
+    "Tylko zachowuj się normalnie.": { src: "glosy/narew/07_callum.mp3", rate: 1 },
+    "Przecież zawsze zachowuję się normalnie.": { src: "glosy/narew/08_charlie.mp3", rate: 1 },
+    "Nie.": { src: "glosy/narew/09_callum.mp3", rate: 1 },
+    "Cześć.": { src: "glosy/narew/10_jessica.mp3", rate: 1 },
+    "Fajne drinki.": { src: "glosy/narew/12_charlie.mp3", rate: 1 },
+    "Działają.": { src: "glosy/narew/13_sarah.mp3", rate: 1 },
+    "Na co?": { src: "glosy/narew/14_callum.mp3", rate: 1 },
+    "Na kobyle caco.": { src: "glosy/narew/15_jessica.mp3", rate: 1 },
+    "To może Andrzejowi dwa.": { src: "glosy/narew/17_callum.mp3", rate: 1 },
+    "Bardzo śmieszne.": { src: "glosy/narew/18_charlie.mp3", rate: 1 },
+    "Ha ha ha ha!": { src: "glosy/narew/19_jessica.mp3", rate: 1 },
+    "Hi hi hi hi!": { src: "glosy/narew/20_sarah.mp3", rate: 1 },
+    "Jedziemy?": { src: "glosy/narew/21_jessica.mp3", rate: 1 },
+    "Pewnie!": { src: "glosy/narew/22_charlie.mp3", rate: 1 },
+    "Dokąd?": { src: "glosy/narew/23_callum.mp3", rate: 1 },
+    "Do naszego domku. Jest w lesie.": { src: "glosy/narew/24_sarah.mp3", rate: 1 },
+    "No to jedziemy!": { src: "glosy/narew/25_charlie.mp3", rate: 1 },
+    "Ale fajna droga!": { src: "glosy/narew/26_charlie.mp3", rate: 1 },
+    "Tylko nie przesadzaj z prędkością!": { src: "glosy/narew/27_callum.mp3", rate: 1 },
+    "Spokojnie!": { src: "glosy/narew/28_charlie.mp3", rate: 1 },
+    "Mam świetny pomysł.": { src: "glosy/narew/29_charlie.mp3", rate: 1 },
+    "Jeszcze nawet nie powiedziałem.": { src: "glosy/narew/31_charlie.mp3", rate: 1 },
+    "Ale już wiem.": { src: "glosy/narew/32_callum.mp3", rate: 1 },
+    "Chcesz prowadzić?": { src: "glosy/narew/33_charlie.mp3", rate: 1 },
+    "Serio?": { src: "glosy/narew/34_jessica.mp3", rate: 1 },
+    "Jasne!": { src: "glosy/narew/35_charlie.mp3", rate: 1 },
+    "Andrzej…": { src: "glosy/narew/36_callum.mp3", rate: 1 },
+    "Na pewno?": { src: "glosy/narew/38_callum.mp3", rate: 1 },
+    "Przecież co może pójść nie tak?": { src: "glosy/narew/39_charlie.mp3", rate: 1 },
+    "Właśnie powiedziałeś najgorsze możliwe zdanie.": { src: "glosy/narew/40_callum.mp3", rate: 1 },
+    "Spokojnie. Jedziemy prosto.": { src: "glosy/narew/41_charlie.mp3", rate: 1 },
+    "Dobrze.": { src: "glosy/narew/42_jessica.mp3", rate: 1 },
+    "Tylko delikatnie.": { src: "glosy/narew/43_charlie.mp3", rate: 1 },
+    "Widzisz? Mówiłem, że będzie": { src: "glosy/narew/44_charlie.mp3", rate: 1 },
+    "Czekaj": { src: "glosy/narew/45_charlie.mp3", rate: 1 },
+    "O kur": { src: "glosy/narew/46_jessica.mp3", rate: 1 },
+    "Łoooooooo": { src: "glosy/narew/47_charlie.mp3", rate: 1 },
+    "Andrzeeeej!": { src: "glosy/narew/48_callum.mp3", rate: 1 },
+    "Ja pier": { src: "glosy/narew/49_charlie.mp3", rate: 1 },
+    "Wszystko dobrze?!": { src: "glosy/narew/50_jessica.mp3", rate: 1 },
+    "Andrzej?": { src: "glosy/narew/51_callum.mp3", rate: 1 },
+    "Ała kurwa…": { src: "glosy/narew/52_charlie.mp3", rate: 1 },
+    "No rzeczywiście.": { src: "glosy/narew/53_charlie.mp3", rate: 1 },
+    "Mówiłem.": { src: "glosy/narew/54_callum.mp3", rate: 1 },
+    "Ale trzeba przyznać…": { src: "glosy/narew/55_charlie.mp3", rate: 1 },
+    "…że pomysł był dobry.": { src: "glosy/narew/56_charlie.mp3", rate: 1 },
+    "Nie był.": { src: "glosy/narew/57_callum.mp3", rate: 1 },
+    "Był.": { src: "glosy/narew/58_charlie.mp3", rate: 1 }
+  };
 
   const DEEP = 0.55;
   const clipEls = {};
   function clipFor(text){
-    const src = CLIPS[text];
-    if (!src) return null;
+    const c = CLIPS[text];
+    if (!c) return null;
+    // wpis: sciezka (nagranie kierowcy, obnizane) albo { src, rate } (glos ElevenLabs)
+    const src = c.src || c, rate = c.rate || DEEP;
     if (!clipEls[src]){
-      const a = new Audio(src); a.preload = "auto";
+      const a = new Audio(src); a.preload = "auto"; a._rate = rate;
       a.preservesPitch = false; a.mozPreservesPitch = false; a.webkitPreservesPitch = false;
       clipEls[src] = a;
     }
@@ -673,7 +730,7 @@
   }
   function playClip(a){
     return new Promise(res => {
-      a.currentTime = 0; a.playbackRate = DEEP;
+      a.currentTime = 0; a.playbackRate = a._rate;
       a.preservesPitch = false; a.mozPreservesPitch = false; a.webkitPreservesPitch = false;
       const guard = setTimeout(res, 8000);
       a.onended = a.onerror = () => { clearTimeout(guard); res(); };

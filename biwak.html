@@ -798,15 +798,64 @@
     const u = new SpeechSynthesisUtterance(" "); u.volume = 0; tts.speak(u);
   }
   // nagrane kwestie (kierowca): odtwarzane wolniej i bez zachowania wysokosci = bardzo niski, gruby glos
-  const CLIPS = {};
+  const CLIPS = {
+    "Ósma be ma dzisiaj biwak pod Plewicą.": { src: "glosy/biwak/01_charlie.mp3", rate: 1 },
+    "Przecież nas nie zaprosili.": { src: "glosy/biwak/02_callum.mp3", rate: 1 },
+    "No i? Pole namiotowe jest dla wszystkich.": { src: "glosy/biwak/03_charlie.mp3", rate: 1 },
+    "To trzy wsie stąd. Starczy paliwa?": { src: "glosy/biwak/04_callum.mp3", rate: 1 },
+    "Pół baku. Spokojnie.": { src: "glosy/biwak/05_charlie.mp3", rate: 1 },
+    "Wziąłem jeszcze z kosiarki dziadka. Na wszelki wypadek.": { src: "glosy/biwak/06_callum.mp3", rate: 1 },
+    "Jedziemy!": { src: "glosy/biwak/07_charlie.mp3", rate: 1 },
+    "Andrzej, czemu tak śmierdzi benzyną?": { src: "glosy/biwak/08_callum.mp3", rate: 1 },
+    "Czemu stoimy?": { src: "glosy/biwak/09_callum.mp3", rate: 1 },
+    "Nie wiem. Przecież było pół baku.": { src: "glosy/biwak/10_charlie.mp3", rate: 1 },
+    "Andrzej… ty masz dziurawy bak.": { src: "glosy/biwak/11_callum.mp3", rate: 1 },
+    "Dawaj tę benzynę! Szybko!": { src: "glosy/biwak/12_charlie.mp3", rate: 1 },
+    "Szybciej, bo ucieka!": { src: "glosy/biwak/13_charlie.mp3", rate: 1 },
+    "Jak leje, tak leci!": { src: "glosy/biwak/14_callum.mp3", rate: 1 },
+    "Spokojnie. Mam Turbo.": { src: "glosy/biwak/15_charlie.mp3", rate: 1 },
+    "Trzyma jak spawane.": { src: "glosy/biwak/16_charlie.mp3", rate: 1 },
+    "Obryte… Popławy… daleko jeszcze?": { src: "glosy/biwak/17_callum.mp3", rate: 1 },
+    "Teraz na skróty. Przez pola!": { src: "glosy/biwak/18_charlie.mp3", rate: 1 },
+    "Pusta.": { src: "glosy/biwak/19_callum.mp3", rate: 1 },
+    "Ciągnik! Ciągnik ma paliwo!": { src: "glosy/biwak/20_charlie.mp3", rate: 1 },
+    "To ropa, debilu.": { src: "glosy/biwak/21_callum.mp3", rate: 1 },
+    "Paliwo to paliwo.": { src: "glosy/biwak/22_charlie.mp3", rate: 1 },
+    "PFFFUUU! BLEEE!": { src: "glosy/biwak/23_charlie.mp3", rate: 1 },
+    "Ej! Gówniarze! Ropę mi kradną!": { src: "glosy/biwak/24_bill.mp3", rate: 1 },
+    "Uciekamy!": { src: "glosy/biwak/25_callum.mp3", rate: 1 },
+    "Khe… khe… kurwancka…": { src: "glosy/biwak/26_bill.mp3", rate: 1 },
+    "Plewica! Jest pole namiotowe!": { src: "glosy/biwak/27_callum.mp3", rate: 1 },
+    "A wy tu czego? To biwak ósmej be.": { src: "glosy/biwak/28_jessica.mp3", rate: 1 },
+    "Przejeżdżaliśmy. Tak przypadkiem.": { src: "glosy/biwak/29_charlie.mp3", rate: 1 },
+    "Przez pole? Z Zambsk?": { src: "glosy/biwak/30_sarah.mp3", rate: 1 },
+    "Czemu wy śmierdzicie ropą?": { src: "glosy/biwak/31_alice.mp3", rate: 1 },
+    "To benzyna. Częściowo.": { src: "glosy/biwak/32_callum.mp3", rate: 1 },
+    "Patrzcie, jak chodzi!": { src: "glosy/biwak/33_charlie.mp3", rate: 1 },
+    "SPADAJCIE STĄD!!!": { src: "glosy/biwak/34_jessica.mp3", rate: 1 },
+    "Aaaaa!": { src: "glosy/biwak/35_jessica.mp3", rate: 1 },
+    "Co to jest?!": { src: "glosy/biwak/36_sarah.mp3", rate: 1 },
+    "Duch!": { src: "glosy/biwak/37_alice.mp3", rate: 1 },
+    "Ej… kto go odpalił?": { src: "glosy/biwak/38_charlie.mp3", rate: 1 },
+    "Nikt. On sam!": { src: "glosy/biwak/39_callum.mp3", rate: 1 },
+    "Łap go!": { src: "glosy/biwak/40_charlie.mp3", rate: 1 },
+    "Dogoniliśmy go… dwa kilometry dalej.": { src: "glosy/biwak/41_charlie.mp3", rate: 1 },
+    "Andrzej…": { src: "glosy/biwak/42_callum.mp3", rate: 1 },
+    "No?": { src: "glosy/biwak/43_charlie.mp3", rate: 1 },
+    "Następnym razem jedziemy rowerem.": { src: "glosy/biwak/44_callum.mp3", rate: 1 },
+    "Rower nie ma baku.": { src: "glosy/biwak/45_charlie.mp3", rate: 1 },
+    "No właśnie.": { src: "glosy/biwak/46_callum.mp3", rate: 1 }
+  };
 
   const DEEP = 0.55;
   const clipEls = {};
   function clipFor(text){
-    const src = CLIPS[text];
-    if (!src) return null;
+    const c = CLIPS[text];
+    if (!c) return null;
+    // wpis: sciezka (nagranie kierowcy, obnizane) albo { src, rate } (glos ElevenLabs)
+    const src = c.src || c, rate = c.rate || DEEP;
     if (!clipEls[src]){
-      const a = new Audio(src); a.preload = "auto";
+      const a = new Audio(src); a.preload = "auto"; a._rate = rate;
       a.preservesPitch = false; a.mozPreservesPitch = false; a.webkitPreservesPitch = false;
       clipEls[src] = a;
     }
@@ -818,7 +867,7 @@
   }
   function playClip(a){
     return new Promise(res => {
-      a.currentTime = 0; a.playbackRate = DEEP;
+      a.currentTime = 0; a.playbackRate = a._rate;
       a.preservesPitch = false; a.mozPreservesPitch = false; a.webkitPreservesPitch = false;
       const guard = setTimeout(res, 8000);
       a.onended = a.onerror = () => { clearTimeout(guard); res(); };

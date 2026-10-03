@@ -769,15 +769,48 @@
     const u = new SpeechSynthesisUtterance(" "); u.volume = 0; tts.speak(u);
   }
   // nagrane kwestie (kierowca): odtwarzane wolniej i bez zachowania wysokosci = bardzo niski, gruby glos
-  const CLIPS = {};
+  const CLIPS = {
+    "Siema, Triwet!": { src: "glosy/rzasnik/01_eric.mp3", rate: 1 },
+    "Siema, Pablo. A ty co, na wesele się wystroiłeś?": { src: "glosy/rzasnik/02_callum.mp3", rate: 1 },
+    "Wyrwałem dwie dupki w Rząśniku. Jedziemy na podryw!": { src: "glosy/rzasnik/03_eric.mp3", rate: 1 },
+    "Ja też się wystroiłem. Patrz, muszka.": { src: "glosy/rzasnik/04_callum.mp3", rate: 1 },
+    "No to szybkie piwko i jedziemy.": { src: "glosy/rzasnik/05_eric.mp3", rate: 1 },
+    "Kaski i jazda!": { src: "glosy/rzasnik/06_eric.mp3", rate: 1 },
+    "Patrz, złomowisko w Obrytem!": { src: "glosy/rzasnik/07_eric.mp3", rate: 1 },
+    "Tam kiedyś chłopaki bombę na złom sprzedali.": { src: "glosy/rzasnik/08_callum.mp3", rate: 1 },
+    "Trzeba zatankować.": { src: "glosy/rzasnik/09_eric.mp3", rate: 1 },
+    "Ile wlazło?": { src: "glosy/rzasnik/10_callum.mp3", rate: 1 },
+    "Za dziesięć złotych. Bak jak naparstek.": { src: "glosy/rzasnik/11_eric.mp3", rate: 1 },
+    "Rząśnik! Dupki czekają!": { src: "glosy/rzasnik/12_eric.mp3", rate: 1 },
+    "Wyciągamy po browarze.": { src: "glosy/rzasnik/13_eric.mp3", rate: 1 },
+    "Cześć, Pablo!": { src: "glosy/rzasnik/14_jessica.mp3", rate: 1 },
+    "Siema, dziewczyny! To jest Triwet.": { src: "glosy/rzasnik/15_eric.mp3", rate: 1 },
+    "Masz może mapę? Bo zgubiłem się w twoich oczach.": { src: "glosy/rzasnik/16_callum.mp3", rate: 1 },
+    "Hi hi hi!": { src: "glosy/rzasnik/17_sarah.mp3", rate: 1 },
+    "Może przejedziecie się Hondą?": { src: "glosy/rzasnik/18_eric.mp3", rate: 1 },
+    "Może…": { src: "glosy/rzasnik/19_jessica.mp3", rate: 1 },
+    "Skąd wy jesteście?": { src: "glosy/rzasnik/20_adam.mp3", rate: 1 },
+    "Chuj cię to obchodzi.": { src: "glosy/rzasnik/21_callum.mp3", rate: 1 },
+    "O, wy kurwy!": { src: "glosy/rzasnik/22_daniel.mp3", rate: 1 },
+    "Spierdalamy!": { src: "glosy/rzasnik/23_eric.mp3", rate: 1 },
+    "Pablo, czekaj!": { src: "glosy/rzasnik/24_callum.mp3", rate: 1 },
+    "Łap go!": { src: "glosy/rzasnik/25_adam.mp3", rate: 1 },
+    "Gdzie on jest?!": { src: "glosy/rzasnik/26_adam.mp3", rate: 1 },
+    "Szukaj za blokiem!": { src: "glosy/rzasnik/27_daniel.mp3", rate: 1 },
+    "Nie wydacie mnie?": { src: "glosy/rzasnik/28_callum.mp3", rate: 1 },
+    "Zadzwonić po policję?": { src: "glosy/rzasnik/29_matilda.mp3", rate: 1 },
+    "Nie… ale chwilkę tu posiedzę.": { src: "glosy/rzasnik/30_callum.mp3", rate: 1 }
+  };
 
   const DEEP = 0.55;
   const clipEls = {};
   function clipFor(text){
-    const src = CLIPS[text];
-    if (!src) return null;
+    const c = CLIPS[text];
+    if (!c) return null;
+    // wpis: sciezka (nagranie kierowcy, obnizane) albo { src, rate } (glos ElevenLabs)
+    const src = c.src || c, rate = c.rate || DEEP;
     if (!clipEls[src]){
-      const a = new Audio(src); a.preload = "auto";
+      const a = new Audio(src); a.preload = "auto"; a._rate = rate;
       a.preservesPitch = false; a.mozPreservesPitch = false; a.webkitPreservesPitch = false;
       clipEls[src] = a;
     }
@@ -789,7 +822,7 @@
   }
   function playClip(a){
     return new Promise(res => {
-      a.currentTime = 0; a.playbackRate = DEEP;
+      a.currentTime = 0; a.playbackRate = a._rate;
       a.preservesPitch = false; a.mozPreservesPitch = false; a.webkitPreservesPitch = false;
       const guard = setTimeout(res, 8000);
       a.onended = a.onerror = () => { clearTimeout(guard); res(); };
