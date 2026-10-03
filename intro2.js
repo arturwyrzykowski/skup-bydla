@@ -128,9 +128,9 @@
 
   // ---------- grafika ----------
   const CH = [
-    { name: "ANDRZEJ", img: "andrzej.png", w: 272, h: 300, shirt: "#1c1c1c", bg: "#ffd23f", ray: "#ffb13b", fx: "ZIUU!" },
-    { name: "TRIWET",  img: "triwet.png",  w: 266, h: 300, shirt: "#1f2a44", bg: "#4ab8e8", ray: "#2a8ec8", fx: "BACH!" },
-    { name: "SYKET",   img: "syket.png",   w: 300, h: 290, shirt: "#c81e2a", bg: "#ff5a5a", ray: "#d83a3a", fx: "ŁUP!" }
+    { name: "ANDRZEJ", img: "andrzej.svg", w: 300, h: 320, shirt: "#1c1c1c", bg: "#ffd23f", ray: "#ffb13b", fx: "ZIUU!" },
+    { name: "TRIWET",  img: "triwet.svg",  w: 300, h: 320, shirt: "#1f2a44", bg: "#4ab8e8", ray: "#2a8ec8", fx: "BACH!" },
+    { name: "SYKET",   img: "syket.svg",   w: 300, h: 320, shirt: "#c81e2a", bg: "#ff5a5a", ray: "#d83a3a", fx: "ŁUP!" }
   ];
   const IMPACT = "Impact, 'Arial Black', sans-serif", COMIC = "'Comic Sans MS','Chalkboard SE',sans-serif";
   function rays(cx, cy, n, col, r = 1400){
