@@ -1539,34 +1539,40 @@
   const st = document.getElementById("stage"), W = 506.25, H = 900, FH = 1600 * 16 / 9;
   const FIT = { x: 0, y: 450 - FH / 2, w: 1600, h: FH };
   const cur = { x: 800 - W / 2, y: 0, w: W, h: H };
-  let fit = 0, track = null, fx = 800;
+  let fit = 0, gx = 800, gw = W;
   const lerp = (a, b, t) => a + (b - a) * t;
-  function stageX(el){            // srodek elementu we wspolrzednych sceny 1600x900
-    const r = el.getBoundingClientRect(), sr = st.getBoundingClientRect();
-    if (!r.width) return null;
-    return cur.x + ((r.left + r.width / 2) - sr.left) / sr.width * cur.w;
+  const TRIO = ["aSt", "rSt", "sSt"];
+  function group(){               // poziomy zasieg Andrzeja, Triweta i SYKETA we wspolrzednych sceny
+    const sr = st.getBoundingClientRect(); let lo = Infinity, hi = -Infinity;
+    for (const id of TRIO){
+      const el = document.getElementById(id); if (!el) continue;
+      const hd = el.querySelector(".glowa") || el;   // po glowie, bez promieni czolowek
+      const r = hd.getBoundingClientRect(); if (!r.width) continue;
+      const pad = r.width * 0.6;
+      const a = cur.x + (r.left - pad - sr.left) / sr.width * cur.w, b = cur.x + (r.right + pad - sr.left) / sr.width * cur.w;
+      if (b < -100 || a > 1700) continue;
+      lo = Math.min(lo, a); hi = Math.max(hi, b);
+    }
+    return lo < hi ? [lo, hi] : null;
+  }
+  function target(){
+    if (fit) return FIT;
+    const w = Math.min(1600, Math.max(W, gw)), x = Math.max(0, Math.min(1600 - w, gx - w / 2)), h = w * 16 / 9;
+    return { x, y: 450 - h / 2, w, h };
   }
   function frame(){
-    if (track){ const x = stageX(track); if (x !== null && x > -200 && x < 1800) fx = x; }
-    const cx = Math.max(0, Math.min(1600 - W, fx - W / 2));
-    const t = fit ? FIT : { x: cx, y: 0, w: W, h: H };
-    const k = 0.07;
+    const g = fit ? null : group();
+    if (g){ gx = (g[0] + g[1]) / 2; gw = (g[1] - g[0]) + 40; }
+    const t = target(), k = 0.05;
     cur.x = lerp(cur.x, t.x, k); cur.y = lerp(cur.y, t.y, k);
     cur.w = lerp(cur.w, t.w, k); cur.h = lerp(cur.h, t.h, k);
     st.setAttribute("viewBox", `${cur.x.toFixed(1)} ${cur.y.toFixed(1)} ${cur.w.toFixed(1)} ${cur.h.toFixed(1)}`);
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
-  const snap = () => { const t = fit ? FIT : { x: Math.max(0, Math.min(1600 - W, fx - W / 2)), y: 0, w: W, h: H }; Object.assign(cur, t); };
-  const center = () => { track = null; fx = 800; };
+  const snap = () => Object.assign(cur, target());
+  const center = () => { gx = 800; gw = W; };
 
-  // kto mowi, za tym jedzie kadr
-  const _say = say;
-  say = function(k, ...a){
-    const w = who[k];
-    if (w){ fx = w.x; const el = w.el && document.getElementById(w.el); track = el || null; }
-    return _say.call(this, k, ...a);
-  };
   // pelny kadr: intro, outro, plansze, kasa
   const full = fn => async function(...a){ fit++; snap(); try { return await fn.apply(this, a); } finally { fit--; center(); snap(); } };
   ziomkiIntro2 = full(ziomkiIntro2);
