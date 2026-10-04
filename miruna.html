@@ -50,7 +50,7 @@
       <path d="M1280 600 V900" stroke="#f4f0d0" stroke-width="30" opacity="0.15" stroke-dasharray="20 18"/>
       <path d="M-20 900 L-20 660 Q400 640 760 690 Q900 720 960 900 Z" fill="#1e3a1e" stroke="#0a0a14" stroke-width="4"/>
       <path d="M820 800 q0 -55 -8 -96" stroke="#1a2a12" stroke-width="5" fill="none"/><ellipse cx="824" cy="696" rx="6" ry="16" fill="#4a3020"/><path d="M846 800 q-9 -55 -17 -125" stroke="#1a2a12" stroke-width="5" fill="none"/><ellipse cx="850" cy="696" rx="6" ry="16" fill="#4a3020"/><path d="M872 800 q-5 -55 -10 -125" stroke="#1a2a12" stroke-width="5" fill="none"/><ellipse cx="876" cy="696" rx="6" ry="16" fill="#4a3020"/><path d="M898 800 q10 -55 0 -108" stroke="#1a2a12" stroke-width="5" fill="none"/><ellipse cx="902" cy="696" rx="6" ry="16" fill="#4a3020"/><path d="M924 800 q-3 -55 12 -120" stroke="#1a2a12" stroke-width="5" fill="none"/><ellipse cx="928" cy="696" rx="6" ry="16" fill="#4a3020"/><path d="M950 800 q-7 -55 16 -135" stroke="#1a2a12" stroke-width="5" fill="none"/><ellipse cx="954" cy="696" rx="6" ry="16" fill="#4a3020"/><path d="M976 800 q-8 -55 -12 -137" stroke="#1a2a12" stroke-width="5" fill="none"/><ellipse cx="980" cy="696" rx="6" ry="16" fill="#4a3020"/>
-      <g transform="translate(40,590.28) scale(0.62)">      <g id="busBody" stroke="#141414" stroke-width="5" stroke-linejoin="round">
+      <g transform="translate(40,443.4) scale(1.1)">      <g id="busBody" stroke="#141414" stroke-width="5" stroke-linejoin="round">
         <path d="M0 262 V150 Q4 110 40 100 L108 32 Q118 20 138 20 H560 Q574 20 574 34 V262 Z" fill="#1c1c1f"/>
         <path d="M52 104 L116 42 H170 V112 H52 Z" fill="#9fcfee"/>
         <rect x="184" y="42" width="96" height="70" rx="6" fill="#9fcfee"/>
@@ -1402,7 +1402,7 @@
     if (!inB("aSt")){ inBoat("sSt", 220, 50, 1); inBoat("rSt", -40, 14, 1); inBoat("aSt", -220, 14, -1); }
     $("sSt").querySelector(".vest").style.display = "";
     if (!$("boatFish").children.length) for (let k = 0; k < 6; k++){ const f = document.createElementNS(NS, "g"); f.innerHTML = FISH_SVG; f.setAttribute("transform", `translate(${-60 + k * 28},${-80 - (k % 2) * 10}) rotate(${k % 2 ? 20 : -20}) scale(0.4)`); $("boatFish").append(f); }
-    $("tractor").style.display = ""; $("tractor").style.transform = "translate(260px,830px) scale(0.75)";
+    $("tractor").style.display = ""; $("tractor").style.transform = "translate(70px,830px) scale(1.45)";
     pl("ubij", 680, 840, 0.58, 1);
     await tween(2200, k => { boat.x = 1900 - 520 * k; boatDraw(); }, easeOut);
     noise(0.3, { freq: 400, q: 1, vol: 0.2 });
@@ -1419,7 +1419,7 @@
     const sackAt = (x, y) => sack.setAttribute("transform", `translate(${x},${y}) scale(0.7)`);
     genAt(1240, 780); sackAt(1420, 760);
     await Promise.all([armTo("aSt", -40, 200), armTo("rSt", 40, 200), armTo("sSt", -40, 200)]);
-    const cx = 260 + 300 * 0.75;
+    const cx = 70 + 300 * 1.45;
     await Promise.all([walk("aSt", cx + 80, 2600), walk("rSt", cx + 200, 2600), walk("sSt", cx + 320, 2600),
       tween(2600, k => { genAt(1240 - (1240 - cx - 140) * k, 780 + Math.sin(k * 30) * 4); sackAt(1420 - (1420 - cx - 300) * k, 760); })]);
     await Promise.all([armTo("aSt", 0, 200), armTo("rSt", 0, 200), armTo("sSt", 0, 200)]);
@@ -1435,14 +1435,14 @@
     useTrip("scDawn", "dawnTrip"); camSet(); lamps(false);
     $("fade").animate([{ opacity: 1 }, { opacity: 0 }], { duration: 700, fill: "forwards" });
     $("boat").style.display = "none";
-    $("tractor").style.display = ""; $("tractor").style.transform = "translate(520px,810px) scale(0.8)";
+    $("tractor").style.display = ""; $("tractor").style.transform = "translate(330px,810px) scale(1.25)";
     $("cartLoad").innerHTML = `<g transform="translate(310,-130) scale(0.75)">${GEN_SVG}</g>`;
-    pl("ubij", 690, 700, 0.4, -1);
+    pl("ubij", 540, 612, 0.4, -1);
     rock(true, "tractor", 0.6);
     // SYKET na przyczepie
-    onShore("aSt", 790, 712, -1, 0.48); onShore("rSt", 870, 712, -1, 0.48); onShore("sSt", 950, 712, 1, 0.48);
+    onShore("aSt", 790, 648, -1, 0.48); onShore("rSt", 890, 648, -1, 0.48); onShore("sSt", 990, 648, 1, 0.48);
     const tm = twoStroke(45); tm.set(55, 0.07, 0.4); machines.push(tm);
-    const smk = setInterval(() => puff(520 - 134 * 0.8, 810 - 360 * 0.8, { r: 18, dur: 1400, dx: 120, dy: -80, color: "#3a3a3a" }), 200);
+    const smk = setInterval(() => puff(330 + 72 * 1.25, 810 - 196 * 1.25 - 8, { r: 18, dur: 1400, dx: 120, dy: -80, color: "#3a3a3a" }), 200);
     const drive = sail(2600, 16000);
     await sleep(800);
     await S("s", ["Filetuję po drodze.", "Nikt nie pozna, że z Narwi."], 200);
