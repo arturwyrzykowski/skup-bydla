@@ -258,6 +258,7 @@
       <text x="0" y="0" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="34" fill="#f4f4f2" stroke="#141414" stroke-width="2" paint-order="stroke">NIUNIA</text>
     </g></g>
     <g id="tractor" style="display:none"><g class="rock" style="transform-origin:0px 0px">
+      <g id="cartPeople"></g>
       <g transform="translate(-620,-636)">    <!-- Ursus C330 -->
     <g stroke="#141414" stroke-width="5" stroke-linejoin="round">
       <rect x="686" y="440" width="12" height="70" fill="#4a4f57"/>
@@ -1187,7 +1188,16 @@
     plop(); g.remove();
     const f = document.createElementNS(NS, "g"); f.innerHTML = FISH_SVG; f.setAttribute("transform", `translate(${tx - boat.x},${ty - boat.y}) rotate(${(k % 2 ? 20 : -20)}) scale(0.4)`); $("boatFish").append(f); }
 
+  // Stiven za kierownica, trojka w przyczepie (wspolrzedne traktora, za blotnikiem i burta)
+  let ubijHome = null;
+  function toTractor(on){
+    const u = $("ubij");
+    if (on){ if (!ubijHome) ubijHome = [u.parentNode, u.nextSibling]; $("cartPeople").append(u, $("aStW"), $("rStW"), $("sStW")); return; }
+    if (ubijHome && u.parentNode.id === "cartPeople") ubijHome[0].insertBefore(u, ubijHome[1]);
+    ["aStW", "rStW", "sStW"].forEach(id => { if ($(id).parentNode.id === "cartPeople") $("people").append($(id)); });
+  }
   function reset(){
+    toTractor(false);
     if (tts) tts.cancel();
     motorOff(0.05); zap(false); siren(false); nightSnd(false); prop(false); wake(false); rock(false);
     if (genSnd){ genSnd.stop(0.05); genSnd = null; }
@@ -1436,21 +1446,23 @@
     $("fade").animate([{ opacity: 1 }, { opacity: 0 }], { duration: 700, fill: "forwards" });
     $("boat").style.display = "none";
     $("tractor").style.display = ""; $("tractor").style.transform = "translate(330px,810px) scale(1.25)";
-    $("cartLoad").innerHTML = `<g transform="translate(310,-130) scale(0.75)">${GEN_SVG}</g>`;
-    pl("ubij", 540, 612, 0.4, -1);
+    $("cartLoad").innerHTML = `<g transform="translate(25,-130) scale(0.75)">${GEN_SVG}</g>`;
+    toTractor(true);
+    pl("ubij", 172, -110, 0.32, -1);
     rock(true, "tractor", 0.6);
-    // SYKET na przyczepie
-    onShore("aSt", 790, 648, -1, 0.48); onShore("rSt", 890, 648, -1, 0.48); onShore("sSt", 990, 648, 1, 0.48);
+    // w przyczepie: wystaja glowy i tulowie
+    put("aSt", 455, -74, 0.384, -1); put("rSt", 540, -74, 0.384, -1); put("sSt", 625, -74, 0.384, 1);
+    const sx = 330 + 1.25 * 625, sy = 810 - 1.25 * 74;   // SYKET w ukladzie sceny (sol, wiory)
     const tm = twoStroke(45); tm.set(55, 0.07, 0.4); machines.push(tm);
     const smk = setInterval(() => puff(330 + 72 * 1.25, 810 - 196 * 1.25 - 8, { r: 18, dur: 1400, dx: 120, dy: -80, color: "#3a3a3a" }), 200);
     const drive = sail(2600, 16000);
     await sleep(800);
     await S("s", ["Filetuję po drodze.", "Nikt nie pozna, że z Narwi."], 200);
-    for (let i = 0; i < 6; i++){ await armTo("sSt", -120, 120); await armTo("sSt", -20, 120); chopSnd(); bits(P.sSt.x + 40, P.sSt.y - 100, 3, { color: "#f4ece0", spread: 60, up: 60, size: 7 }); }
+    for (let i = 0; i < 6; i++){ await armTo("sSt", -120, 120); await armTo("sSt", -20, 120); chopSnd(); bits(sx + 40, sy - 100, 3, { color: "#f4ece0", spread: 60, up: 60, size: 7 }); }
     await S("r", "A sól?", 100);
     await S("s", "Cały worek. Mocno natarte.", 100);
-    for (let i = 0; i < 10; i++){ bits(P.sSt.x + 60, P.sSt.y - 140, 6, { color: "#ffffff", spread: 100, up: 80, size: 4 }); noise(0.1, { freq: 6000, q: 1, vol: 0.1 }); await sleep(120); }
-    pow("SÓL!", P.sSt.x + 40, P.sSt.y - 240, { size: 70, col: "#f4f4f2", hold: 700 });
+    for (let i = 0; i < 10; i++){ bits(sx + 60, sy - 140, 6, { color: "#ffffff", spread: 100, up: 80, size: 4 }); noise(0.1, { freq: 6000, q: 1, vol: 0.1 }); await sleep(120); }
+    pow("SÓL!", sx + 40, sy - 240, { size: 70, col: "#f4f4f2", hold: 700 });
     await sleep(600);
     await S("a", ["Na targu mówimy:", "to są morskie miruny."], 200);
     await S("r", "Morskie? Z Narwi?", 100);
@@ -1459,6 +1471,7 @@
     clearInterval(smk); tm.stop(0.6); rock(false);
     $("fade").animate([{ opacity: 0 }, { opacity: 1 }], { duration: 600, fill: "forwards" });
     await sleep(700);
+    toTractor(false);
   }
 
   // ===== 7. targ =====
