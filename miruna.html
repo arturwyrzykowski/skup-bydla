@@ -953,6 +953,14 @@
   function camSet(x = 800, y = 450, k = 1){ Object.assign(cam, { x, y, k }); $("cam").getAnimations().forEach(a => a.cancel()); $("cam").style.transform = camT(x, y, k); }
   async function camTo(x, y, k, ms){ const f = camT(cam.x, cam.y, cam.k); Object.assign(cam, { x, y, k });
     await anim($("cam"), [{ transform: f }, { transform: camT(x, y, k) }], { duration: ms, easing: "ease-in-out" }); }
+  // napis koncowy
+  async function credit(){
+    const t = $("cardTxt"), old = ["font-family", "font-size", "fill", "stroke", "stroke-width", "paint-order"].map(a => [a, t.getAttribute(a)]);
+    Object.entries({ "font-family": "Impact, 'Arial Black', sans-serif", "font-size": 120, fill: "#ffd23f", stroke: "#141414", "stroke-width": 8, "paint-order": "stroke" }).forEach(([a, v]) => t.setAttribute(a, v));
+    $("fade").getAnimations().forEach(a => a.cancel());
+    await card("SiKet produkcja", 2800);
+    old.forEach(([a, v]) => v === null ? t.removeAttribute(a) : t.setAttribute(a, v));
+  }
   async function card(txt, ms = 2600){
     $("cardTxt").textContent = txt; $("card").style.display = "";
     await anim($("card"), [{ opacity: 0 }, { opacity: 1 }], { duration: 400 });
@@ -1518,7 +1526,7 @@
     reset(); ac();
     $("startScreen").hidden = true; $("endScreen").hidden = true;
     const h = location.hash;
-    const only = { "#brzeg": partBank, "#salut": partMotor, "#zatoczka": partBay, "#straz": partChase, "#cmentarz": partCem, "#rano": partDawn, "#targ": partMarket }[h];
+    const only = { "#napis": credit, "#brzeg": partBank, "#salut": partMotor, "#zatoczka": partBay, "#straz": partChase, "#cmentarz": partCem, "#rano": partDawn, "#targ": partMarket }[h];
     if (only){ await only(); }
     else {
       if (h !== "#x") await ziomkiIntro2("MORSKA MIRUNA", 18, 3, 1);
@@ -1536,6 +1544,7 @@
     $("fade").animate([{ opacity: 0 }, { opacity: 1 }], { duration: 700, fill: "forwards" });
     await sleep(900);
     if (!h) await ziomkiOutro();
+    if (h !== "#napis") await credit();
     $("endScreen").hidden = false; $("againBtn").focus();
   }
 
